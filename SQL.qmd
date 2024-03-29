@@ -1,26 +1,45 @@
 ---
-title: "SQL"
-author: "Danny Volkaerts"
+title: "Interactive-sql"
+subtitle: "Run SQL Interactively in Revealjs Presentation Made with Quarto"
+author: Shafayet Khan Shafee
+date: last-modified
+date-format: "DD MMM, YYYY"
 format: revealjs
+databases:
+  - name: hr
+    path: "https://raw.githubusercontent.com/shafayetShafee/interactive-sql/main/hr.sql"
+  - name: hr-not-editable
+    path: "https://raw.githubusercontent.com/shafayetShafee/interactive-sql/main/hr.sql"
+    editable: false
 ---
 
-## Quarto
+## HR sample data
 
-Quarto enables you to weave together content and executable code into a finished presentation. To learn more about Quarto presentations see <https://quarto.org/docs/presentations/>.
+Here we will use a sample Database called HR that manages the HR data of the small businesses which is collected from [www.sqltutorial.org](https://www.sqltutorial.org/sql-sample-database/). And to create the database, a SQLite script file was used when rendering the document. Read the [extension docs](https://github.com/shafayetShafee/interactive-sql#using) for details.
 
-## Bullets
 
-When you click the **Render** button a document will be generated that includes:
+## ERD of HR database
 
--   Content authored with markdown
--   Output from executable code
+The following database diagram illustrates the HR sample database:
 
-## Code
+![ERD of HR database](hr-SQL-Sample-Database-Schema.png){#fig-erd-hr}
 
-When you click the **Render** button a presentation will be generated that includes both content and the output of embedded code. You can embed code like this:
 
-```{r}
-1 + 1
+## Editable Example
+
+And now, you can run all sort of queries from the tables of the HR databases.
+
+```{.sql .interactive .hr}
+select * from regions;
 ```
 
 
+## Not editable example
+
+You can also create "not-editable" code chunk (that is, you simply can run the query but won't be able to edit/modify it) for HR database. And to do this, just use another instance of database under the `database` key in the yaml with a different name and use the option `editable: false`.
+
+## Not editable example
+
+```{.sql .interactive .hr-not-editable}
+select * from employees;
+```

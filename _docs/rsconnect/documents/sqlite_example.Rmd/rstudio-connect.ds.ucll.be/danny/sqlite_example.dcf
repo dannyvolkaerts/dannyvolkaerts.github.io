@@ -1,0 +1,14 @@
+name: sqlite_example
+title: sqlite_example
+username: danny
+account: danny
+server: rstudio-connect.ds.ucll.be
+hostUrl: https://rstudio-connect.ds.ucll.be/__api__
+appId: 41
+bundleId: 203
+url: https://rstudio-connect.ds.ucll.be/content/a879455d-651d-45a7-9b61-51e9a867235b/
+version: 1
+quarto_version: 1.1.189
+quarto_engines: knitr
+asMultiple: FALSE
+asStatic: FALSE

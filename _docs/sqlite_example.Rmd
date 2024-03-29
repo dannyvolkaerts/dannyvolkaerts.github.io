@@ -1,0 +1,51 @@
+---
+title: "SQLite Database Interaction"
+output: 
+  learnr::tutorial:
+    progressive: true
+    allow_skip: true
+runtime: shiny_prerendered
+description: >
+  Get to know the Titanic Dataset before we try to solve the 'business question'.
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(DBI)
+library(RSQLite)
+library(learnr)
+library(gradethis)
+library(DT)
+tutorial_options(exercise.eval = TRUE,exercise.checker = gradethis::grade_learnr())
+# Connecting to the database
+db_path <- "example_db.sqlite"
+con <- dbConnect(RSQLite::SQLite(), dbname = db_path)
+
+```
+
+```{r}
+
+
+# Creating a table
+dbExecute(con, "CREATE TABLE IF NOT EXISTS students (id INTEGER PRIMARY KEY, name TEXT, grade INTEGER);")
+dbExecute(con, "INSERT INTO students (name, grade) VALUES ('Jane Doe', 92), ('John Smith', 85), ('Emily Jones', 78);")
+
+```
+Write your SQL query below. Example: SELECT * FROM students WHERE grade > 80;
+```{sql excode, exercise=TRUE,connection="con",exercise.eval=FALSE}
+
+"SELECT * FROM students WHERE grade > 90;"
+
+```
+
+```{sql excode-check}
+"SELECT * FROM students WHERE grade > 80;"
+```
+
+
+```{r}
+# Querying inserted data
+result <- dbGetQuery(con, "SELECT * FROM students;")
+DT::datatable(result)
+```
+

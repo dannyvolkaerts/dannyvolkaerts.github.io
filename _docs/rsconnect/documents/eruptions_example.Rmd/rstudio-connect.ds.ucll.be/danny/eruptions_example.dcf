@@ -1,0 +1,15 @@
+name: eruptions_example
+title: eruptions_example
+username: danny
+account: danny
+server: rstudio-connect.ds.ucll.be
+hostUrl: https://rstudio-connect.ds.ucll.be/__api__
+appId: 42
+bundleId: 204
+url: https://rstudio-connect.ds.ucll.be/content/12a33b67-02d9-40fb-b9f1-0f6989f6df6a/
+version: 1
+quarto_version: 1.1.189
+quarto_engines: knitr
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: .nojekyll|eruptions_example_data/data_chunks_index.txt|eruptions_example_data/data.RData|eruptions_example.html|example_db.sqlite|index.html|search.json|sqlite_example.html|sqlite_example.Rmd|eruptions_example_files|site_libs|sqlite_example_files
