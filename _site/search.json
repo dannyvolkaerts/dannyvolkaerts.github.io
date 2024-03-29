@@ -1,0 +1,37 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "My Quarto Slide Decks",
+    "section": "",
+    "text": "Here you can find my Quarto presentations:\n\nSlide Deck 1"
+  },
+  {
+    "objectID": "SQL.html",
+    "href": "SQL.html",
+    "title": "SQL",
+    "section": "",
+    "text": "Quarto enables you to weave together content and executable code into a finished presentation. To learn more about Quarto presentations see https://quarto.org/docs/presentations/."
+  },
+  {
+    "objectID": "SQL.html#bullets",
+    "href": "SQL.html#bullets",
+    "title": "SQL",
+    "section": "Bullets",
+    "text": "Bullets\nWhen you click the Render button a document will be generated that includes:\n\nContent authored with markdown\nOutput from executable code"
+  },
+  {
+    "objectID": "SQL.html#code",
+    "href": "SQL.html#code",
+    "title": "SQL",
+    "section": "Code",
+    "text": "Code\nWhen you click the Render button a presentation will be generated that includes both content and the output of embedded code. You can embed code like this:\n\n\n[1] 2"
+  },
+  {
+    "objectID": "SQL.html#quarto",
+    "href": "SQL.html#quarto",
+    "title": "SQL",
+    "section": "Quarto",
+    "text": "Quarto\nQuarto enables you to weave together content and executable code into a finished presentation. To learn more about Quarto presentations see https://quarto.org/docs/presentations/."
+  }
+]
