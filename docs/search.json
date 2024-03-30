@@ -1,12 +1,5 @@
 [
   {
-    "objectID": "sqlite_example.html",
-    "href": "sqlite_example.html",
-    "title": "SQLite Database Interaction",
-    "section": "",
-    "text": "Write your SQL query below. Example: SELECT * FROM students WHERE grade > 80;\n\n\n\n\"SELECT * FROM students WHERE grade > 90;\"\n\n\n\n\n# Querying inserted data\nresult <- dbGetQuery(con, \"SELECT * FROM students;\")\nprint(result)\n\n   id        name grade\n1   1    Jane Doe    92\n2   2    Jane Doe    92\n3   3  John Smith    85\n4   4 Emily Jones    78\n5   5    Jane Doe    92\n6   6  John Smith    85\n7   7 Emily Jones    78\n8   8    Jane Doe    92\n9   9  John Smith    85\n10 10 Emily Jones    78\n11 11    Jane Doe    92\n12 12  John Smith    85\n13 13 Emily Jones    78\n14 14    Jane Doe    92\n15 15  John Smith    85\n16 16 Emily Jones    78\n17 17    Jane Doe    92\n18 18  John Smith    85\n19 19 Emily Jones    78\n20 20    Jane Doe    92\n21 21  John Smith    85\n22 22 Emily Jones    78\n23 23    Jane Doe    92\n24 24  John Smith    85\n25 25 Emily Jones    78"
-  },
-  {
     "objectID": "index.html",
     "href": "index.html",
     "title": "Danny Volkaerts",
