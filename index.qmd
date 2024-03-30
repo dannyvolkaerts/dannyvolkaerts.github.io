@@ -1,37 +1,32 @@
 ---
-title: "Finley Malloc"
+title: "Danny Volkaerts"
 about:
   id: hero-heading
   template: jolla
-  image: profile.jpg
+  image: images/pic_4.png
   links:
-    - icon: twitter
-      text: twitter
-      href: https://twitter.com
+    - icon: linkedin
+      text: LinkedIn
+      href: https://linkedin.com/in/dvolkaerts
     - icon: github
       text: Github
-      href: https://github.com
+      href: https://github.com/dannyvolkaerts
 ---
-
-### This content appears above the formatted about page content.
 
 :::{#hero-heading}
 
-Finley Malloc is the Chief Data Scientist at Wengo Analytics. When not innovating on data platforms, Finley enjoys spending time unicycling and playing with her pet iguana.
+Hi! I love to work with data, making visualizations, data analysis and machine learning. When not getting insights from data, Danny enjoys sharing his expertise by teaching the concepts of data & analytics.
 
 ## Education
 
-University of California, San Diego | San Diego, CA
-PhD in Mathematics | Sept 2011 - June 2015
-
-Macalester College | St. Paul MA
-B.A in Economics | Sept 2007 - June 2011
+Catholic University of Leuven, Leuven | Belgium
+Bio-engineering Sciences
 
 ## Experience
 
-Wengo Analytics | Head Data Scientist | April 2018 - present
+UC Leuven-Limburg Research &  Expertise | Data Scientist | April 2018 - present
 
-GeoScynce | Chief Analyst | Sept 2012 - April 2018
+IMEC | Process Engineer | Sept 2012 - April 2018
 
 :::
 
