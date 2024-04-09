@@ -1,0 +1,58 @@
+[
+  {
+    "objectID": "SQL.html#hr-sample-data",
+    "href": "SQL.html#hr-sample-data",
+    "title": "Interactive-sql",
+    "section": "HR sample data",
+    "text": "HR sample data\nHere we will use a sample Database called HR that manages the HR data of the small businesses which is collected from www.sqltutorial.org. And to create the database, a SQLite script file was used when rendering the document. Read the extension docs for details."
+  },
+  {
+    "objectID": "SQL.html#erd-of-hr-database",
+    "href": "SQL.html#erd-of-hr-database",
+    "title": "Interactive-sql",
+    "section": "ERD of HR database",
+    "text": "ERD of HR database\nThe following database diagram illustrates the HR sample database:\n\nFigure 1: ERD of HR database"
+  },
+  {
+    "objectID": "SQL.html#editable-example",
+    "href": "SQL.html#editable-example",
+    "title": "Interactive-sql",
+    "section": "Editable Example",
+    "text": "Editable Example\nAnd now, you can run all sort of queries from the tables of the HR databases.\n\nselect * from regions;"
+  },
+  {
+    "objectID": "SQL.html#not-editable-example",
+    "href": "SQL.html#not-editable-example",
+    "title": "Interactive-sql",
+    "section": "Not editable example",
+    "text": "Not editable example\nYou can also create “not-editable” code chunk (that is, you simply can run the query but won’t be able to edit/modify it) for HR database. And to do this, just use another instance of database under the database key in the yaml with a different name and use the option editable: false."
+  },
+  {
+    "objectID": "SQL.html#not-editable-example-1",
+    "href": "SQL.html#not-editable-example-1",
+    "title": "Interactive-sql",
+    "section": "Not editable example",
+    "text": "Not editable example\n\nselect * from employees;"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Danny Volkaerts",
+    "section": "",
+    "text": "Hi! I love to work with data, making visualizations, data analysis and machine learning. When not getting insights from data, I enjoy sharing my expertise by teaching the concepts of data & analytics.\n\n\nCatholic University of Leuven, Leuven | Belgium Bio-engineering Sciences\n\n\n\nUC Leuven-Limburg Research & Expertise | Data Scientist | April 2018 - present\nIMEC | Process Engineer | Sept 2012 - April 2018\n\n \n  \n   \n  \n    \n     LinkedIn\n  \n  \n    \n     Github"
+  },
+  {
+    "objectID": "index.html#education",
+    "href": "index.html#education",
+    "title": "Danny Volkaerts",
+    "section": "",
+    "text": "Catholic University of Leuven, Leuven | Belgium Bio-engineering Sciences"
+  },
+  {
+    "objectID": "index.html#experience",
+    "href": "index.html#experience",
+    "title": "Danny Volkaerts",
+    "section": "",
+    "text": "UC Leuven-Limburg Research & Expertise | Data Scientist | April 2018 - present\nIMEC | Process Engineer | Sept 2012 - April 2018"
+  }
+]
