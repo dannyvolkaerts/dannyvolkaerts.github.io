@@ -20,20 +20,20 @@ include-in-header:
       </style>
 ---
 
-
-:::{#hero-heading}
-
+::: {#hero-heading}
 Hi! I love to work with data, making visualizations, data analysis and machine learning. When not getting insights from data, I enjoy sharing my expertise by teaching the concepts of data & analytics.
 
-## Education
+## Education {style="text-align: center;"}
 
-Catholic University of Leuven, Leuven | Belgium
-Bio-engineering Sciences
+::: {style="text-align: center;"}
+Catholic University of Leuven, Leuven \| Belgium Bio-engineering Sciences
+:::
 
-## Experience
+## Experience {style="text-align: center"}
 
-UC Leuven-Limburg Research &  Expertise | Data Scientist | April 2018 - present
+::: {style="text-align: center"}
+UC Leuven-Limburg Research & Expertise \| Data Scientist \| April 2018 - present
 
-IMEC | Process Engineer | Sept 2012 - April 2018
-
+IMEC \| Process Engineer \| Sept 2012 - April 2018
+:::
 :::
