@@ -1,5 +1,7 @@
 # Renders all quarto docs to html
 
+NIET MEER NODIG!!!
+
 quarto_render_move(input = "index.qmd",output_file = "index.html",output_dir= "docs")
 quarto_render_move(input = "sql_course/index_sql.qmd",output_file = "index_sql.html",output_dir= "docs/sql_course")
 quarto_render_move(input = "sql_course/1_introduction.qmd",output_file = "1_introduction.html",output_dir= "docs/sql_course")

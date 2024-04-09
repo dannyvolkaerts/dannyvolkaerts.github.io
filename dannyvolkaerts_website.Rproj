@@ -12,6 +12,6 @@ Encoding: UTF-8
 RnwWeave: Sweave
 LaTeX: pdfLaTeX
 
-PythonType: system
-PythonVersion: 3.10.9
-PythonPath: /opt/python/3.10.9/bin/python3.10
+PythonType: conda
+PythonVersion: 3.8.3
+PythonPath: C:/ProgramData/Miniconda3/python.exe

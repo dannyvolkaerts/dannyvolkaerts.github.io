@@ -1,0 +1,52 @@
+---
+title: "Basics of SQL"
+author: Danny Volkaerts
+date: last-modified
+date-format: "DD MMM, YYYY" 
+format:
+  revealjs: 
+    theme: moon
+filters:
+  - interactive-sql
+databases:
+  - name: hr
+    path: "https://raw.githubusercontent.com/dannyvolkaerts/something/main/hr.sql"
+  - name: hr-not-editable
+    path: "https://raw.githubusercontent.com/dannyvolkaerts/something/main/hr.sql"
+    editable: false
+---
+
+# Chapter 2: Basic SQL Queries
+
+In this chapter, we focus on the foundational skills necessary for querying databases using SQL. You'll learn how to use the SELECT statement to retrieve data and how to use WHERE clauses to filter your results.
+
+## Topics Covered
+
+- Basic structure of SQL queries
+- SELECT statement to retrieve columns from a table
+- Using WHERE clause to filter query results
+- Sorting results with ORDER BY
+- Limiting results with LIMIT
+
+## Learning Objectives
+
+- Write simple SQL queries to retrieve data from a single table
+- Use WHERE clause to filter query results based on specific conditions
+- Sort and limit the results of your queries to find meaningful insights
+
+```{{r}}
+max(c(1,2,3))
+```
+
+## SELECT Statement
+
+The SELECT statement is used to select data from a database. The data returned is stored in a result table, sometimes called the result-set.
+
+``` {{sql}}
+SELECT column1, column2 FROM table_name;
+```
+
+
+```{.sql .interactive .hr}
+select * from regions;
+```
