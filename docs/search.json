@@ -60,7 +60,7 @@
     "href": "sql_course/index_sql.html",
     "title": "SQL Course",
     "section": "",
-    "text": "QUARTO_PROJECT_DIR = \"dannyvolkaerts_website\"\nSQL, or Structured Query Language, is a foundational tool for anyone interested in data science. With the exponential growth of data in today’s digital world, being able to efficiently query, manipulate, and analyze this data is essential. SQL is the standard language for relational database management systems and allows users to interact with databases in a straightforward and efficient manner. Knowledge of SQL enables data profiles to extract meaningful insights from large datasets, perform data analysis, and feed data into their machine learning models. Understanding SQL opens up opportunities in data analysis, data engineering, and beyond, making it a critical skill for any aspiring data profile."
+    "text": "SQL, or Structured Query Language, is a foundational tool for anyone interested in data science. With the exponential growth of data in today’s digital world, being able to efficiently query, manipulate, and analyze this data is essential. SQL is the standard language for relational database management systems and allows users to interact with databases in a straightforward and efficient manner. Knowledge of SQL enables data profiles to extract meaningful insights from large datasets, perform data analysis, and feed data into their machine learning models. Understanding SQL opens up opportunities in data analysis, data engineering, and beyond, making it a critical skill for any aspiring data profile."
   },
   {
     "objectID": "sql_course/index_sql.html#chapters",
@@ -68,5 +68,40 @@
     "title": "SQL Course",
     "section": "Chapters",
     "text": "Chapters\n\nIntroduction to SQL and Databases - Overview of SQL, databases, and how they are used in data science.\nBasic SQL Queries - Learning SELECT statements, filtering data with WHERE clauses.\nWorking with Multiple Tables - Introduction to JOIN operations and their importance.\nAdvanced Data Manipulation - Using GROUP BY, HAVING, and aggregate functions.\nSubqueries and Nested Queries - Enhancing queries with subqueries for complex data retrieval.\nData Definition Language (DDL) - Understanding how to create and modify database structures.\nData Manipulation Language (DML) - Inserting, updating, and deleting data.\nTransactions and Data Integrity - Managing transactions, understanding ACID properties.\nOptimizing SQL Queries - Techniques for improving query performance.\nReal-World SQL Projects - Applying learned skills to solve real-world data problems.\n\nEach chapter is a step on your journey to mastering SQL. Let’s embark on this learning adventure together."
+  },
+  {
+    "objectID": "sql_course/1_introduction.html#hr-sample-data",
+    "href": "sql_course/1_introduction.html#hr-sample-data",
+    "title": "Introduction SQL",
+    "section": "HR sample data",
+    "text": "HR sample data\nHere we will use a sample Database called HR that manages the HR data of the small businesses which is collected from www.sqltutorial.org. And to create the database, a SQLite script file was used when rendering the document. Read the extension docs for details."
+  },
+  {
+    "objectID": "sql_course/1_introduction.html#erd-of-hr-database",
+    "href": "sql_course/1_introduction.html#erd-of-hr-database",
+    "title": "Introduction SQL",
+    "section": "ERD of HR database",
+    "text": "ERD of HR database\nThe following database diagram illustrates the HR sample database:\n\nFigure 1: ERD of HR database"
+  },
+  {
+    "objectID": "sql_course/1_introduction.html#editable-example",
+    "href": "sql_course/1_introduction.html#editable-example",
+    "title": "Introduction SQL",
+    "section": "Editable Example",
+    "text": "Editable Example\nAnd now, you can run all sort of queries from the tables of the HR databases.\n\nselect * from regions;"
+  },
+  {
+    "objectID": "sql_course/1_introduction.html#not-editable-example",
+    "href": "sql_course/1_introduction.html#not-editable-example",
+    "title": "Introduction SQL",
+    "section": "Not editable example",
+    "text": "Not editable example\nYou can also create “not-editable” code chunk (that is, you simply can run the query but won’t be able to edit/modify it) for HR database. And to do this, just use another instance of database under the database key in the yaml with a different name and use the option editable: false."
+  },
+  {
+    "objectID": "sql_course/1_introduction.html#not-editable-example-1",
+    "href": "sql_course/1_introduction.html#not-editable-example-1",
+    "title": "Introduction SQL",
+    "section": "Not editable example",
+    "text": "Not editable example\n\nselect * from employees;"
   }
 ]
