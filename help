@@ -8,6 +8,8 @@ git subtree push --prefix sql_course origin gh-pages
 
 Dan kunnen alle files gewoon renderen in hun specifieke subfolder (naar html).
 
-
-syntax-definitions: 
-  - sql_custom.xml
+git operaties:
+git add --all
+git commit -m "alles"
+git push
+git pull

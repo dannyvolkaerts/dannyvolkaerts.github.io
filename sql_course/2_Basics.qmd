@@ -5,7 +5,7 @@ date: last-modified
 date-format: "DD MMM, YYYY" 
 format:
   revealjs: 
-    theme: moon
+    theme: default
 filters:
   - interactive-sql
 databases:
@@ -22,31 +22,37 @@ In this chapter, we focus on the foundational skills necessary for querying data
 
 ## Topics Covered
 
-- Basic structure of SQL queries
-- SELECT statement to retrieve columns from a table
-- Using WHERE clause to filter query results
-- Sorting results with ORDER BY
-- Limiting results with LIMIT
+-   Basic structure of SQL queries
+-   SELECT statement to retrieve columns from a table
+-   Using WHERE clause to filter query results
+-   Sorting results with ORDER BY
+-   Limiting results with LIMIT
+
+``` {.python filename="matplotlib.py"}
+import matplotlib.pyplot as plt
+plt.plot([1,23,2,4])
+plt.show()
+```
 
 ## Learning Objectives
 
-- Write simple SQL queries to retrieve data from a single table
-- Use WHERE clause to filter query results based on specific conditions
-- Sort and limit the results of your queries to find meaningful insights
+-   Write simple SQL queries to retrieve data from a single table
+-   Use WHERE clause to filter query results based on specific conditions
+-   Sort and limit the results of your queries to find meaningful insights
 
-```{{r}}
-max(c(1,2,3))
+``` r
+library(ggplot2)
+surveys_complete <- read_csv("data/surveys_complete.csv")
 ```
 
 ## SELECT Statement
 
 The SELECT statement is used to select data from a database. The data returned is stored in a result table, sometimes called the result-set.
 
-``` {{sql}}
+``` {.sql style="highlight-style: arrow"}
 SELECT column1, column2 FROM table_name;
 ```
 
-
-```{.sql .interactive .hr}
+``` {.sql .interactive .hr}
 select * from regions;
 ```
