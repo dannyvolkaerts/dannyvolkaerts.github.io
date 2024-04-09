@@ -1,7 +1,0 @@
----
-title: "SQL introduction"
-author: "Danny Volkaerts"
-format: pdf
-editor: visual
----
-

@@ -3,7 +3,7 @@ project:
   output-dir: docs
   render: 
     - "index.qmd"
-    - "SQL.qmd"
+    - "sql_course/index_sql.qmd"
 
 website:
   title: "DV"
@@ -11,8 +11,8 @@ website:
     left:
       - href: index.qmd
         text: Home
-      - href: SQL.qmd
-        text: SQL_course
+      - href: sql_course/index_sql.qmd
+        text: "SQL course"
 
 format:
   html:
