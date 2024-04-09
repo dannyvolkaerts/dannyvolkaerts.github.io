@@ -21,7 +21,7 @@ include-in-header:
 ---
 
 
-:::{.callout-hero-heading}
+:::{#hero-heading}
 
 Hi! I love to work with data, making visualizations, data analysis and machine learning. When not getting insights from data, I enjoy sharing my expertise by teaching the concepts of data & analytics.
 
