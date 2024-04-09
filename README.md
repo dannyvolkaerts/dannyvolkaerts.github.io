@@ -1,2 +1,0 @@
-# dannyvolkaerts.github.io
-website
