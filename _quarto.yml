@@ -11,6 +11,8 @@ website:
     left:
       - href: index.qmd
         text: Home
+      - href: SQL.qmd
+        text: SQL_course
 
 format:
   html:

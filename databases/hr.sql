@@ -9,9 +9,9 @@ filters:
   - interactive-sql
 databases:
   - name: hr
-    path: "https://raw.githubusercontent.com/shafayetShafee/interactive-sql/main/hr.sql"
+    path: "https://raw.githubusercontent.com/dannyvolkaerts/something/main/hr.sql"
   - name: hr-not-editable
-    path: "https://raw.githubusercontent.com/shafayetShafee/interactive-sql/main/hr.sql"
+    path: "https://raw.githubusercontent.com/dannyvolkaerts/something/main/hr.sql"
     editable: false
 ---
 
