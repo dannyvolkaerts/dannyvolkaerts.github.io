@@ -73,15 +73,15 @@
     "objectID": "sql_course/1_introduction.html#hr-sample-data",
     "href": "sql_course/1_introduction.html#hr-sample-data",
     "title": "Introduction SQL",
-    "section": "HR sample data",
-    "text": "HR sample data\nHere we will use a sample Database called HR that manages the HR data of the small businesses which is collected from www.sqltutorial.org. And to create the database, a SQLite script file was used when rendering the document. Read the extension docs for details."
+    "section": "",
+    "text": "Here we will use a sample Database called HR that manages the HR data of the small businesses which is collected from www.sqltutorial.org. And to create the database, a SQLite script file was used when rendering the document. Read the extension docs for details."
   },
   {
     "objectID": "sql_course/1_introduction.html#erd-of-hr-database",
     "href": "sql_course/1_introduction.html#erd-of-hr-database",
     "title": "Introduction SQL",
     "section": "ERD of HR database",
-    "text": "ERD of HR database\nThe following database diagram illustrates the HR sample database:\n\nFigure 1: ERD of HR database"
+    "text": "ERD of HR database\nThe following database diagram illustrates the HR sample database:\n\n\n\nFigure 1: ERD of HR database"
   },
   {
     "objectID": "sql_course/1_introduction.html#editable-example",
@@ -103,5 +103,12 @@
     "title": "Introduction SQL",
     "section": "Not editable example",
     "text": "Not editable example\n\nselect * from employees;"
+  },
+  {
+    "objectID": "sql_course/1_introduction.html",
+    "href": "sql_course/1_introduction.html",
+    "title": "Introduction SQL",
+    "section": "",
+    "text": "Here we will use a sample Database called HR that manages the HR data of the small businesses which is collected from www.sqltutorial.org. And to create the database, a SQLite script file was used when rendering the document. Read the extension docs for details."
   }
 ]
