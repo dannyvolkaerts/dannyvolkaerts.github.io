@@ -1,12 +1,13 @@
 
 This is a help file with some commands to be reminded:
 
+
 To add a new subfolder to the gh-pages website:
 in terminal:
 git add sql_course && git commit -m "Initial sql_course subtree commit
 git subtree push --prefix sql_course origin gh-pages
 
-Dan kunnen alle files gewoon renderen in hun specifieke subfolder (naar html).
+ALWAYS use the quarto::quarto_render function so the html files will be rendered in the correct subfolder of main folder 'docs'
 
 git operaties:
 git add --all

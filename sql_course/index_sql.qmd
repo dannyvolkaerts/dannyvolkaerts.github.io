@@ -9,7 +9,7 @@ SQL, or Structured Query Language, is a foundational tool for anyone interested 
 
 ## Chapters
 
-1. [**Introduction to SQL and Databases**](1_introduction.html) - Overview of SQL, databases, and how they are used in data science.
+1. [**Introduction to SQL and Databases**](1_introduction.html){target="_blank"} - Overview of SQL, databases, and how they are used in data science.
 2. **Basic SQL Queries** - Learning SELECT statements, filtering data with WHERE clauses.
 3. **Working with Multiple Tables** - Introduction to JOIN operations and their importance.
 4. **Advanced Data Manipulation** - Using GROUP BY, HAVING, and aggregate functions.
