@@ -1,23 +1,23 @@
 <!DOCTYPE html>
 <html lang="en"><head>
-<script src="2_basics_files/libs/clipboard/clipboard.min.js"></script>
-<script src="2_basics_files/libs/quarto-html/tabby.min.js"></script>
-<script src="2_basics_files/libs/quarto-html/popper.min.js"></script>
-<script src="2_basics_files/libs/quarto-html/tippy.umd.min.js"></script>
-<link href="2_basics_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="2_basics_files/libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="2_basics_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
-<link href="2_basics_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<link href="2_basics_files/libs/quarto-contrib/interactive-sql-1.0.0/interactive-sql.css" rel="stylesheet"><meta charset="utf-8">
+<script src="3_joins_files/libs/clipboard/clipboard.min.js"></script>
+<script src="3_joins_files/libs/quarto-html/tabby.min.js"></script>
+<script src="3_joins_files/libs/quarto-html/popper.min.js"></script>
+<script src="3_joins_files/libs/quarto-html/tippy.umd.min.js"></script>
+<link href="3_joins_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="3_joins_files/libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="3_joins_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
+<link href="3_joins_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="3_joins_files/libs/quarto-contrib/interactive-sql-1.0.0/interactive-sql.css" rel="stylesheet"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.3.450">
 
   <meta name="author" content="Danny Volkaerts">
-  <title>Basics of SQL</title>
+  <title>JOINs in SQL</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-  <link rel="stylesheet" href="2_basics_files/libs/revealjs/dist/reset.css">
-  <link rel="stylesheet" href="2_basics_files/libs/revealjs/dist/reveal.css">
+  <link rel="stylesheet" href="3_joins_files/libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="3_joins_files/libs/revealjs/dist/reveal.css">
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
@@ -96,11 +96,11 @@
     code span.vs { color: #20794d; } /* VerbatimString */
     code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
-  <link rel="stylesheet" href="2_basics_files/libs/revealjs/dist/theme/quarto.css">
-  <link href="2_basics_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
-  <link href="2_basics_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
-  <link href="2_basics_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
-  <link href="2_basics_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <link rel="stylesheet" href="3_joins_files/libs/revealjs/dist/theme/quarto.css">
+  <link href="3_joins_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="3_joins_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="3_joins_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="3_joins_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
   <style type="text/css">
 
   .callout {
@@ -394,7 +394,7 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Basics of SQL</h1>
+  <h1 class="title">JOINs in SQL</h1>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -404,108 +404,109 @@ Danny Volkaerts
 </div>
 </div>
 
-  <p class="date">10 Apr, 2024</p>
+  <p class="date">11 Apr, 2024</p>
 </section>
 <section class="slide level2">
 
-<h3 id="topics">Topics</h3>
+<h3 id="wat-is-een-join">Wat is een JOIN?</h3>
+<p>Een JOIN in SQL wordt gebruikt om rijen uit twee of meer tabellen te combineren, gebaseerd op een gerelateerde kolom tussen die tabellen.</p>
+<p>Waarom tabellen combineren? REDUNDANCY &amp; CONSISTENCY —</p>
+<h3 id="inner-join">INNER JOIN</h3>
 <ul>
-<li>Basisstructuur SQL queries</li>
-<li>SELECT statement om kolommen te halen van tabellen</li>
-<li>WHERE clausule om rijen te filteren</li>
-<li>Sorteren van het resultaat met ORDER BY</li>
-<li>Limiteren van resultaat met LIMIT</li>
+<li><strong>Definitie</strong>: Geeft alleen rijen terug die een overeenkomst hebben in beide tabellen.</li>
+<li><strong>Gebruik</strong>: Vaak gebruikt wanneer je alleen de data wilt zien die overeenkomt tussen tabellen.</li>
 </ul>
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource sql number-lines code-with-copy"><code class="sourceCode sql"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">SELECT</span> kolommen</span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="kw">FROM</span> tabel1</span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="kw">INNER</span> <span class="kw">JOIN</span> tabel2</span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="kw">ON</span> tabel1.gemeenschappelijke_kolom <span class="op">=</span> tabel2.gemeenschappelijke_kolom;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section class="slide level2">
 
-<h3 id="basisstructuur">Basisstructuur</h3>
-<table style="width:53%;">
-<colgroup>
-<col style="width: 33%">
-<col style="width: 19%">
-</colgroup>
-<thead>
-<tr class="header">
-<th style="text-align: left;">Query</th>
-<th style="text-align: left;">Uitvoering</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;"><strong>SELECT</strong><br>
-FROM<br>
-WHERE<br>
-GROUP BY<br>
-HAVING<br>
-ORDER BY<br>
-LIMIT</td>
-<td style="text-align: left;">FROM<br>
-WHERE<br>
-GROUP BY<br>
-HAVING<br>
-<strong>SELECT</strong><br>
-ORDER BY<br>
-LIMIT</td>
-</tr>
-</tbody>
-</table>
-</section>
-<section class="slide level2">
-
-<h3 id="select-statement">SELECT Statement</h3>
-<p>De SELECT-instructie wordt gebruikt om gegevens uit een database te selecteren. De geretourneerde gegevens worden opgeslagen in een resultatentabel, ook wel de result-set genoemd.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource sql number-lines code-with-copy"><code class="sourceCode sql"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">SELECT</span> column1, column2 </span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="kw">FROM</span> table_name;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section class="slide level2">
-
-<h3 id="select">SELECT *</h3>
-<p>De ‘*’ instructie wordt gebruikt om de volledige inhoud van de tabel te bekijken.</p>
+<h3 id="inner-join---voorbeeld">INNER JOIN - voorbeeld</h3>
+<p>Geef me voor- en achternaam van de werknemers die in het ‘Purchasing’ departement werken.</p>
 <div class="interactive-sql">
-<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource sql interactive hr number-lines code-with-copy"><code class="sourceCode sql"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">SELECT</span> <span class="op">*</span> </span>
-<span id="cb2-2"><a href="#cb2-2"></a><span class="kw">FROM</span> regions;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource sql interactive hr number-lines code-with-copy"><code class="sourceCode sql"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">SELECT</span> first_name, last_name, employees.department_id, departments.department_id, department_name</span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="kw">FROM</span> employees    <span class="kw">INNER</span> <span class="kw">JOIN</span> departments <span class="kw">ON</span> departments.department_id <span class="op">=</span> employees.department_id</span>
+<span id="cb2-3"><a href="#cb2-3"></a><span class="kw">WHERE</span> departments.department_name <span class="op">=</span> <span class="st">'Purchasing'</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section class="slide level2">
 
-<h3 id="where-statement">WHERE Statement</h3>
-<p>De WHERE-statement wordt gebruikt om specifieke rijen te selecteren die voldoen aan één of meerdere voorwaarden.</p>
-<p>Voorbeeld: ik wil de werknemers (employees) met een salaris hoger dan 16000 euro.</p>
+<h3 id="inner-join---voorbeeld-2">INNER JOIN - voorbeeld 2</h3>
+<p>Geef me de verschillende jobtitels van departement ‘Purchasing’.</p>
+
+<img data-src="sql_course_images/inner_join_ex2.png" class="r-stretch quarto-figure-center"><p class="caption">Figure&nbsp;1: ERD of example</p></section>
+<section class="slide level2">
+
+<h3 id="inner-join---voorbeeld-2-1">INNER JOIN - voorbeeld 2</h3>
+<p>Geef me de verschillende jobtitels van departement ‘Purchasing’.</p>
 <div class="interactive-sql">
-<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource sql interactive hr number-lines code-with-copy"><code class="sourceCode sql"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">SELECT</span> first_name <span class="kw">as</span> voornaam, last_name <span class="kw">as</span> achternaam, salary <span class="kw">as</span> salaris </span>
-<span id="cb3-2"><a href="#cb3-2"></a><span class="kw">FROM</span> employees;</span>
-<span id="cb3-3"><a href="#cb3-3"></a><span class="kw">WHERE</span> salary <span class="op">&gt;</span> <span class="dv">16000</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource sql interactive hr number-lines code-with-copy"><code class="sourceCode sql"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">SELECT</span> job_title, department_name</span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="kw">FROM</span> employees e  <span class="kw">INNER</span> <span class="kw">JOIN</span> departments d <span class="kw">ON</span> d.department_id <span class="op">=</span> e.department_id</span>
+<span id="cb3-3"><a href="#cb3-3"></a>                  <span class="kw">INNER</span> <span class="kw">JOIN</span> jobs j <span class="kw">ON</span> j.job_id <span class="op">=</span> e.job_id</span>
+<span id="cb3-4"><a href="#cb3-4"></a><span class="kw">WHERE</span> d.department_name <span class="op">=</span> <span class="st">'Purchasing'</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section class="slide level2">
 
-<h3 id="where-voorbeeld">WHERE voorbeeld</h3>
-<p>Ik wil een overzicht van de werknemers (employees) die werken in het IT departement.</p>
-<div class="interactive-sql">
-<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource sql interactive hr number-lines code-with-copy"><code class="sourceCode sql"><span id="cb4-1"><a href="#cb4-1"></a><span class="op">//</span> we zoeken eerst de code voor het IT<span class="op">-</span>departement</span>
-<span id="cb4-2"><a href="#cb4-2"></a><span class="kw">SELECT</span> <span class="op">*</span></span>
-<span id="cb4-3"><a href="#cb4-3"></a><span class="kw">FROM</span> departments;</span>
-<span id="cb4-4"><a href="#cb4-4"></a><span class="op">//</span> daarna zoeken we de werknemers die binnen dit departement werken</span>
-<span id="cb4-5"><a href="#cb4-5"></a><span class="kw">SELECT</span> first_name, last_name, department_id</span>
-<span id="cb4-6"><a href="#cb4-6"></a><span class="kw">FROM</span> employees</span>
-<span id="cb4-7"><a href="#cb4-7"></a><span class="kw">WHERE</span> department_id <span class="op">=</span> <span class="st">'6'</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
+<h3 id="left-join-right-join">LEFT JOIN (&amp; RIGHT JOIN)</h3>
+<ul>
+<li><strong>Definitie</strong>: Geeft alle rijen uit de linkertabel terug, samen met de overeenkomende rijen uit de rechtertabel. Als er geen overeenkomst is, worden de resultaten voor de rechtertabel NULL.</li>
+<li><strong>Gebruik</strong>: Nuttig om te zien welke rijen in de linkertabel geen overeenkomende rijen in de rechtertabel hebben.</li>
+</ul>
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource sql number-lines code-with-copy"><code class="sourceCode sql"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">SELECT</span> kolommen</span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="kw">FROM</span> tabel1</span>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="kw">LEFT</span> <span class="kw">JOIN</span> tabel2</span>
+<span id="cb4-4"><a href="#cb4-4"></a><span class="kw">ON</span> tabel1.gemeenschappelijke_kolom <span class="op">=</span> tabel2.gemeenschappelijke_kolom;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section class="slide level2">
 
-<h3 id="where---combineren">WHERE - combineren</h3>
-<p>Combineren van filters kan met ‘AND’, ‘OR’, ‘NOT’</p>
-<p>Voorbeeld: Ik zoek de werknemers (employees) die werken in het IT departement EN een salaris hebben lager dan 18000 euro.</p>
-<div class="interactive-sql">
-<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource sql interactive hr number-lines code-with-copy"><code class="sourceCode sql"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw">SELECT</span> first_name, last_name, department_id, salary</span>
-<span id="cb5-2"><a href="#cb5-2"></a><span class="kw">FROM</span> employees</span>
-<span id="cb5-3"><a href="#cb5-3"></a><span class="kw">WHERE</span> department_id <span class="op">=</span> <span class="st">'6'</span> </span>
-<span id="cb5-4"><a href="#cb5-4"></a><span class="kw">AND</span> salary <span class="op">&lt;</span> <span class="dv">18000</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
+<h3 id="left-join-voorbeeld">LEFT JOIN voorbeeld</h3>
+
+<img data-src="sql_course_images/left_join_ex1.png" class="r-stretch quarto-figure-center"><p class="caption">Figure&nbsp;2: ERD of example left join</p></section>
+<section class="slide level2">
+
+<h3 id="left-join-voorbeeld-1">LEFT JOIN voorbeeld</h3>
+<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource sql number-lines code-with-copy"><code class="sourceCode sql"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw">SELECT</span> c.country_name, c.country_id, l.country_id, l.street_address, l.city</span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="kw">FROM</span> countries c <span class="kw">LEFT</span> <span class="kw">JOIN</span> locations l <span class="kw">ON</span> l.country_id <span class="op">=</span> c.country_id</span>
+<span id="cb5-3"><a href="#cb5-3"></a><span class="kw">WHERE</span> c.country_id <span class="kw">IN</span> (<span class="st">'US'</span>, <span class="st">'UK'</span>, <span class="st">'CN'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<aside class="notes">
+<p>Speaker notes go here.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section class="slide level2">
 
+<h3 id="full-outer-join">FULL OUTER JOIN</h3>
+<ul>
+<li><strong>Definitie</strong>: Geeft alle rijen terug wanneer er een overeenkomst is in een van de tabellen.</li>
+<li><strong>Gebruik</strong>: Nuttig om alle overeenkomsten en verschillen tussen twee tabellen te zien.</li>
+</ul>
+<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource sql number-lines code-with-copy"><code class="sourceCode sql"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw">SELECT</span> kolommen</span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="kw">FROM</span> tabel1</span>
+<span id="cb6-3"><a href="#cb6-3"></a><span class="kw">FULL</span> <span class="kw">OUTER</span> <span class="kw">JOIN</span> tabel2</span>
+<span id="cb6-4"><a href="#cb6-4"></a><span class="kw">ON</span> tabel1.gemeenschappelijke_kolom <span class="op">=</span> tabel2.gemeenschappelijke_kolom;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section class="slide level2">
+
+<h3 id="self-join">SELF JOIN</h3>
+<ul>
+<li><strong>Definitie</strong>: Een SELF JOIN is een normale join, maar dan wordt de tabel met zichzelf gejoined, alsof het twee verschillende tabellen waren.</li>
+<li><strong>Gebruik</strong>: Nuttig om relaties binnen dezelfde tabel te vergelijken.</li>
+</ul>
+<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource sql number-lines code-with-copy"><code class="sourceCode sql"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw">SELECT</span> a.kolom_name, b.kolom_name</span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="kw">FROM</span> tabel a, tabel b</span>
+<span id="cb7-3"><a href="#cb7-3"></a><span class="kw">WHERE</span> a.gemeenschappelijke_kolom <span class="op">=</span> b.gemeenschappelijke_kolom <span class="kw">AND</span> voorwaarde;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="footer footer-default">
 
 </div>
@@ -518,19 +519,19 @@ LIMIT</td>
   </div>
 
   <script>window.backupDefine = window.define; window.define = undefined;</script>
-  <script src="2_basics_files/libs/revealjs/dist/reveal.js"></script>
+  <script src="3_joins_files/libs/revealjs/dist/reveal.js"></script>
   <!-- reveal.js plugins -->
-  <script src="2_basics_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
-  <script src="2_basics_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
-  <script src="2_basics_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
-  <script src="2_basics_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
-  <script src="2_basics_files/libs/revealjs/plugin/quarto-support/support.js"></script>
+  <script src="3_joins_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="3_joins_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="3_joins_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="3_joins_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="3_joins_files/libs/revealjs/plugin/quarto-support/support.js"></script>
   
 
-  <script src="2_basics_files/libs/revealjs/plugin/notes/notes.js"></script>
-  <script src="2_basics_files/libs/revealjs/plugin/search/search.js"></script>
-  <script src="2_basics_files/libs/revealjs/plugin/zoom/zoom.js"></script>
-  <script src="2_basics_files/libs/revealjs/plugin/math/math.js"></script>
+  <script src="3_joins_files/libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="3_joins_files/libs/revealjs/plugin/search/search.js"></script>
+  <script src="3_joins_files/libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="3_joins_files/libs/revealjs/plugin/math/math.js"></script>
   <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
 
   <script>
@@ -873,5 +874,5 @@ LIMIT</td>
     </script>
     
 
-<script src="2_basics_files/libs/quarto-contrib/interactive-sql-1.0.0/interactive-sql.js"></script>
+<script src="3_joins_files/libs/quarto-contrib/interactive-sql-1.0.0/interactive-sql.js"></script>
 </body></html>

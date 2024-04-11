@@ -1,0 +1,149 @@
+---
+title: "JOINs in SQL"
+author: Danny Volkaerts
+date: last-modified
+date-format: "DD MMM, YYYY" 
+format:
+  revealjs: 
+    theme: default
+filters:
+  - interactive-sql
+databases:
+  - name: hr
+    path: "https://raw.githubusercontent.com/dannyvolkaerts/something/main/hr.sql"
+  - name: hr-not-editable
+    path: "https://raw.githubusercontent.com/dannyvolkaerts/something/main/hr.sql"
+    editable: false
+---
+
+### Wat is een JOIN?
+
+Een JOIN in SQL wordt gebruikt om rijen uit twee of meer tabellen te combineren, gebaseerd op een gerelateerde kolom tussen die tabellen.
+
+Waarom tabellen combineren? REDUNDANCY & CONSISTENCY ---
+
+### INNER JOIN
+
+-   **Definitie**: Geeft alleen rijen terug die een overeenkomst hebben in beide tabellen.
+-   **Gebruik**: Vaak gebruikt wanneer je alleen de data wilt zien die overeenkomt tussen tabellen.
+
+``` sql
+SELECT kolommen
+FROM tabel1
+INNER JOIN tabel2
+ON tabel1.gemeenschappelijke_kolom = tabel2.gemeenschappelijke_kolom;
+```
+
+------------------------------------------------------------------------
+
+### INNER JOIN - voorbeeld
+
+Geef me voor- en achternaam van de werknemers die in het 'Purchasing' departement werken.
+
+``` {.sql .interactive .hr}
+SELECT first_name, last_name, employees.department_id, departments.department_id, department_name
+FROM employees    INNER JOIN departments ON departments.department_id = employees.department_id
+WHERE departments.department_name = 'Purchasing';
+```
+
+------------------------------------------------------------------------
+
+### INNER JOIN - voorbeeld 2
+
+Geef me de verschillende jobtitels van departement 'Purchasing'.
+
+![ERD of example](sql_course_images/inner_join_ex2.png){#fig-erd-hr}
+
+------------------------------------------------------------------------
+
+### INNER JOIN - voorbeeld 2
+
+Geef me de verschillende jobtitels van departement 'Purchasing'.
+
+``` {.sql .interactive .hr}
+SELECT job_title, department_name
+FROM employees e  INNER JOIN departments d ON d.department_id = e.department_id
+                  INNER JOIN jobs j ON j.job_id = e.job_id
+WHERE d.department_name = 'Purchasing';
+```
+
+------------------------------------------------------------------------
+
+### LEFT JOIN (& RIGHT JOIN)
+
+-   **Definitie**: Geeft alle rijen uit de linkertabel terug, samen met de overeenkomende rijen uit de rechtertabel. Als er geen overeenkomst is, worden de resultaten voor de rechtertabel NULL.
+-   **Gebruik**: Nuttig om te zien welke rijen in de linkertabel geen overeenkomende rijen in de rechtertabel hebben.
+
+``` sql
+SELECT kolommen
+FROM tabel1
+LEFT JOIN tabel2
+ON tabel1.gemeenschappelijke_kolom = tabel2.gemeenschappelijke_kolom;
+```
+
+------------------------------------------------------------------------
+
+### LEFT JOIN voorbeeld
+
+![ERD of example left join](sql_course_images/left_join_ex1.png)
+
+------------------------------------------------------------------------
+
+### LEFT JOIN voorbeeld
+
+``` sql
+SELECT c.country_name, c.country_id, l.country_id, l.street_address, l.city
+FROM countries c LEFT JOIN locations l ON l.country_id = c.country_id
+WHERE c.country_id IN ('US', 'UK', 'CN')
+```
+
+::: notes
+Oefening: lijst alle landen (naam) die geen locatie hebben in de database:
+SELECT country_name
+FROM countries c LEFT JOIN locations l ON l.country_id = c.country_id
+WHERE l.location_id IS NULL
+:::
+
+------------------------------------------------------------------------
+
+### LEFT JOIN voorbeeld 2
+
+![ERD of example left join](sql_course_images/left_join_ex2.png)
+
+------------------------------------------------------------------------
+
+### LEFT JOIN voorbeeld 2
+
+``` sql
+SELECT r.region_name, c.country_name, l.street_address, l.city
+FROM regions r    LEFT JOIN countries c ON c.region_id = r.region_id
+                  LEFT JOIN locations l ON l.country_id = c.country_id
+WHERE c.country_id IN ('US', 'UK', 'CN');
+```
+
+------------------------------------------------------------------------
+
+### FULL OUTER JOIN
+
+-   **Definitie**: Geeft alle rijen terug wanneer er een overeenkomst is in een van de tabellen.
+-   **Gebruik**: Nuttig om alle overeenkomsten en verschillen tussen twee tabellen te zien.
+
+``` sql
+SELECT kolommen
+FROM tabel1
+FULL OUTER JOIN tabel2
+ON tabel1.gemeenschappelijke_kolom = tabel2.gemeenschappelijke_kolom;
+```
+
+------------------------------------------------------------------------
+
+### SELF JOIN
+
+-   **Definitie**: Een SELF JOIN is een normale join, maar dan wordt de tabel met zichzelf gejoined, alsof het twee verschillende tabellen waren.
+-   **Gebruik**: Nuttig om relaties binnen dezelfde tabel te vergelijken.
+
+``` sql
+SELECT a.kolom_name, b.kolom_name
+FROM tabel a, tabel b
+WHERE a.gemeenschappelijke_kolom = b.gemeenschappelijke_kolom AND voorwaarde;
+```

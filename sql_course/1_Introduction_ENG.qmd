@@ -1,0 +1,89 @@
+---
+title: "Introduction SQL"
+author: Danny Volkaerts
+date: last-modified
+date-format: "DD MMM, YYYY" 
+format: revealjs
+filters:
+  - interactive-sql
+databases:
+  - name: hr
+    path: "https://raw.githubusercontent.com/dannyvolkaerts/something/main/hr.sql"
+  - name: hr-not-editable
+    path: "https://raw.githubusercontent.com/dannyvolkaerts/something/main/hr.sql"
+    editable: false
+---
+
+
+```{r eval=FALSE, echo=FALSE}
+# Here we will use a sample Database called HR that manages the HR data of the small businesses which is collected from [www.sqltutorial.org](https://www.sqltutorial.org/sql-sample-database/). And to create the database, a SQLite script file was used when rendering the document. Read the [extension docs](https://github.com/shafayetShafee/interactive-sql#using) for details.
+```
+
+
+## Introduction to SQL and Databases
+
+---
+
+### What is SQL?
+
+SQL (Structured Query Language) is the standard language for dealing with relational databases. It can be used to insert, search, update, and delete database records.
+
+
+- **Data Retrieval:** SQL allows you to query data, even complex datasets, in an efficient manner.
+- **Data Manipulation:** Modify and manage the data as per analysis requirements.
+- **Data Integrity:** Maintain the accuracy and reliability of the database.
+
+---
+
+### Relational Databases
+
+- A relational database stores data in tables (or relations).
+- Data is organized into rows and columns.
+- Examples include MySQL, PostgreSQL, MS SQL and SQLite.
+
+---
+
+### Key Concepts
+
+- **Tables:** Store information in rows and columns.
+- **Queries:** Retrieve or insert data based on specific criteria.
+- **Schemas:** Define the structure of the database.
+
+---
+
+## Some history
+
+---
+
+
+
+## SQL in Action
+
+---
+
+### ERD of Human Resource database
+
+The following database diagram illustrates the HR sample database: [SQL tutorial](https://www.sqltutorial.org/sql-sample-database/){preview-link="true" style="text-align: center"}
+
+![ERD of HR database](sql_course_images/hr-SQL-Sample-Database-Schema.png){#fig-erd-hr}
+
+---
+
+### Query example
+
+```{.sql .interactive .hr-not-editable}
+SELECT *
+FROM regions;
+```
+
+---
+
+### Another Query example
+
+```{.sql .interactive .hr-not-editable}
+SELECT * 
+FROM employees 
+LIMIT 5;
+```
+
+---

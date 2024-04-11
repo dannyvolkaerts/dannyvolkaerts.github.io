@@ -1,6 +1,5 @@
 ---
-title: "Introduction SQL"
-subtitle: "Let's start the journey"
+title: "Introductie SQL"
 author: Danny Volkaerts
 date: last-modified
 date-format: "DD MMM, YYYY" 
@@ -15,33 +14,79 @@ databases:
     editable: false
 ---
 
-## HR sample data
 
-Here we will use a sample Database called HR that manages the HR data of the small businesses which is collected from [www.sqltutorial.org](https://www.sqltutorial.org/sql-sample-database/). And to create the database, a SQLite script file was used when rendering the document. Read the [extension docs](https://github.com/shafayetShafee/interactive-sql#using) for details.
-
-
-## ERD of HR database
-
-The following database diagram illustrates the HR sample database:
-
-![ERD of HR database](sql_course_images/hr-SQL-Sample-Database-Schema.png){#fig-erd-hr}
-
-
-## Editable Example
-
-And now, you can run all sort of queries from the tables of the HR databases.
-
-```{.sql .interactive .hr}
-select * from regions;
+```{r eval=FALSE, echo=FALSE}
+# Here we will use a sample Database called HR that manages the HR data of the small businesses which is collected from [www.sqltutorial.org](https://www.sqltutorial.org/sql-sample-database/). And to create the database, a SQLite script file was used when rendering the document. Read the [extension docs](https://github.com/shafayetShafee/interactive-sql#using) for details.
 ```
 
 
-## Not editable example
+## Inleiding tot SQL and Databases
 
-You can also create "not-editable" code chunk (that is, you simply can run the query but won't be able to edit/modify it) for HR database. And to do this, just use another instance of database under the `database` key in the yaml with a different name and use the option `editable: false`.
+---
 
-## Not editable example
+### Wat is SQL?
+
+SQL (Structured Query Language) is de standaard taal om te communiceren met relationele databases. Ze wordt gebruikt voor insert, search, update en delete functionaliteiten.
+
+
+- **Data opvragen:** SQL laat toe om efficient data op te vragen uit de database.
+- **Data Manipulatie:** Wijzigen van de data
+- **Data Integriteit:** Het onderhouden van de accuraatheid en betrouwbaarheid van de database.
+
+Ontwikkeld door IBM (1974)
+
+---
+
+### Relationele Databases
+
+- Een relationele database slaat gegevens op in tabellen
+- Gegevens worden georganiseerd in rijen en kolommen
+- Voorbeelden zijn MySQL, PostgreSQL, MS SQL en SQLite
+
+---
+
+### Sleutelconcepten
+
+- **Tabellen:** Informatie opslaan in rijen en kolommen
+- **Queries:** Het ophalen of toevoegen van data op basis van specifieke criteria
+- **Schemas:** Weergeven van de structuur van de database
+
+---
+
+### Beroepen gerelateerd aan SQL
+
+- **Data-analist:** gebruikt SQL om databases te doorzoeken en inzichten te extraheren.
+- **Data engineer:** ontwerpt en onderhoudt databasemanagementsystemen, gebruikt SQL om datapijplijnen te creëren.
+- **Data scientist:** gebruikt SQL om gegevens voor te bereiden en op te schonen voor analyse.
+- **Databaseontwikkelaar:** creëert en optimaliseert databases, schrijft stored procedures en complexe queries.
+
+---
+
+## SQL in actie
+
+---
+
+### ERD van Human Resources database
+
+Het volgende database diagram illustreert de HR voorbeeld database: <!-- [SQL tutorial](https://www.sqltutorial.org/sql-sample-database/){preview-link="true" style="text-align: center"} -->
+
+![ERD of HR database](sql_course_images/hr-SQL-Sample-Database-Schema.png){#fig-erd-hr}
+
+---
+
+### Query voorbeeld
 
 ```{.sql .interactive .hr-not-editable}
-select * from employees;
+SELECT *
+FROM regions;
+```
+
+---
+
+### Ander Query voorbeeld
+
+```{.sql .interactive .hr-not-editable}
+SELECT * 
+FROM employees 
+LIMIT 5;
 ```

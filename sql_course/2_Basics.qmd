@@ -16,43 +16,130 @@ databases:
     editable: false
 ---
 
-# Chapter 2: Basic SQL Queries
+### Topics
 
-In this chapter, we focus on the foundational skills necessary for querying databases using SQL. You'll learn how to use the SELECT statement to retrieve data and how to use WHERE clauses to filter your results.
+-   Basisstructuur SQL queries
+-   SELECT statement om kolommen te halen van tabellen
+-   WHERE clausule om rijen te filteren
+-   Sorteren van het resultaat met ORDER BY
+-   Limiteren van resultaat met LIMIT
 
-## Topics Covered
+------------------------------------------------------------------------
 
--   Basic structure of SQL queries
--   SELECT statement to retrieve columns from a table
--   Using WHERE clause to filter query results
--   Sorting results with ORDER BY
--   Limiting results with LIMIT
+### Basisstructuur
 
-``` {.python filename="matplotlib.py"}
-import matplotlib.pyplot as plt
-plt.plot([1,23,2,4])
-plt.show()
++--------------------+--------------+
+| Query              | Uitvoering   |
++:===================+:=============+
+| **SELECT**\        | FROM\        |
+| FROM\              | WHERE\       |
+| WHERE\             | GROUP BY\    |
+| GROUP BY\          | HAVING\      |
+| HAVING\            | **SELECT**\  |
+| ORDER BY\          | ORDER BY\    |
+| LIMIT              | LIMIT        |
++--------------------+--------------+
+
+------------------------------------------------------------------------
+
+### SELECT Statement
+
+De SELECT-instructie wordt gebruikt om gegevens uit een database te selecteren. De geretourneerde gegevens worden opgeslagen in een resultatentabel, ook wel de result-set genoemd.
+
+``` sql
+SELECT column1, column2 
+FROM table_name;
 ```
 
-## Learning Objectives
+------------------------------------------------------------------------
 
--   Write simple SQL queries to retrieve data from a single table
--   Use WHERE clause to filter query results based on specific conditions
--   Sort and limit the results of your queries to find meaningful insights
+### SELECT \*
 
-``` r
-library(ggplot2)
-surveys_complete <- read_csv("data/surveys_complete.csv")
-```
-
-## SELECT Statement
-
-The SELECT statement is used to select data from a database. The data returned is stored in a result table, sometimes called the result-set.
-
-``` {.sql style="highlight-style: arrow"}
-SELECT column1, column2 FROM table_name;
-```
+De '\*' instructie wordt gebruikt om de volledige inhoud van de tabel te bekijken.
 
 ``` {.sql .interactive .hr}
-select * from regions;
+SELECT * 
+FROM regions;
 ```
+
+------------------------------------------------------------------------
+
+### WHERE Statement
+
+De WHERE-statement wordt gebruikt om specifieke rijen te selecteren die voldoen aan één of meerdere voorwaarden.
+
+Voorbeeld: ik wil de werknemers (employees) met een salaris hoger dan 16000 euro.
+
+``` {.sql .interactive .hr}
+SELECT first_name as voornaam, last_name as achternaam, salary as salaris 
+FROM employees
+WHERE salary > 16000;
+```
+
+------------------------------------------------------------------------
+
+### WHERE voorbeeld
+
+Ik wil een overzicht van de werknemers (employees) die werken in het IT departement.
+
+``` {.sql .interactive .hr}
+// we zoeken eerst de code voor het IT-departement
+SELECT *
+FROM departments;
+// daarna zoeken we de werknemers die binnen dit departement werken
+SELECT first_name, last_name, department_id
+FROM employees
+WHERE department_id = '6';
+```
+
+------------------------------------------------------------------------
+
+### WHERE - combineren
+
+Combineren van filters kan met 'AND', 'OR', 'NOT'
+
+Voorbeeld: Ik zoek de werknemers (employees) die werken in het IT departement EN een salaris hebben lager dan 18000 euro.
+
+``` {.sql .interactive .hr}
+SELECT first_name, last_name, department_id, salary
+FROM employees
+WHERE department_id = '6' 
+AND salary < 18000;
+```
+
+------------------------------------------------------------------------
+
+### WHERE - operatoren
+
+= != \>= \> IN LIKE IS NULL IS NOT NULL
+
+``` {.sql .interactive .hr}
+SELECT first_name, last_name, salary
+FROM employees
+WHERE last_name LIKE 'Ma%'
+```
+
+------------------------------------------------------------------------
+
+### SELECT DISTINCT
+
+``` {.sql .interactive .hr}
+SELECT DISTINCT salary
+FROM employees
+```
+
+------------------------------------------------------------------------
+
+### SELECT functies
+
+| Operatie  | Definitie                 |
+|-----------|---------------------------|
+| COUNT     | Aantal lijnen             |
+| AVG       | Gemiddelde van de waarden |
+| SUM       | Som van de waarden        |
+| MIN / MAX | Minimum / Maximum waarde  |
+
+---
+
+### SELECT functies voorbeeld
+

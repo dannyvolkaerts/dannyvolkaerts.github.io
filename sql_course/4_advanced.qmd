@@ -1,0 +1,33 @@
+---
+title: "Advanced Data Manipulation"
+author: Danny Volkaerts
+date: last-modified
+date-format: "DD MMM, YYYY" 
+format:
+  revealjs: 
+    theme: default
+filters:
+  - interactive-sql
+databases:
+  - name: hr
+    path: "https://raw.githubusercontent.com/dannyvolkaerts/something/main/hr.sql"
+  - name: hr-not-editable
+    path: "https://raw.githubusercontent.com/dannyvolkaerts/something/main/hr.sql"
+    editable: false
+---
+
+
+
+### Aggregatie functies
+
+| Operatie  | Definitie                 |
+|-----------|---------------------------|
+| COUNT     | Aantal lijnen             |
+| AVG       | Gemiddelde van de waarden |
+| SUM       | Som van de waarden        |
+| MIN / MAX | Minimum / Maximum waarde  |
+
+---
+
+### SELECT functies voorbeeld
+

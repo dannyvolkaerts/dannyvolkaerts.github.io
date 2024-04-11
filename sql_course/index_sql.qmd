@@ -9,16 +9,57 @@ SQL, or Structured Query Language, is a foundational tool for anyone interested 
 
 ## Chapters
 
-1. [**Introduction to SQL and Databases**](1_introduction.html){target="_blank"} - Overview of SQL, databases, and how they are used in data science.
-2. **Basic SQL Queries** - Learning SELECT statements, filtering data with WHERE clauses.
-3. **Working with Multiple Tables** - Introduction to JOIN operations and their importance.
-4. **Advanced Data Manipulation** - Using GROUP BY, HAVING, and aggregate functions.
-5. **Subqueries and Nested Queries** - Enhancing queries with subqueries for complex data retrieval.
-6. **Data Definition Language (DDL)** - Understanding how to create and modify database structures.
-7. **Data Manipulation Language (DML)** - Inserting, updating, and deleting data.
-8. **Transactions and Data Integrity** - Managing transactions, understanding ACID properties.
-9. **Optimizing SQL Queries** - Techniques for improving query performance.
-10. **Real-World SQL Projects** - Applying learned skills to solve real-world data problems.
+1. [**Introduction to SQL and Databases**](1_introduction.html){target="_blank"}
+   
+   Overview of SQL, databases, and how they are used in data science.
+
+---
+
+2. [**Basic SQL Queries**](2_basic.html){target="_blank"}
+   
+   Learning SELECT statements, filtering data with WHERE clauses.
+
+---
+
+3. [**Working with Multiple Tables**](3_joins.html){target="_blank"} 
+   
+   Introduction to JOIN operations and their importance.
+
+---
+
+4. [**Advanced Data Manipulation**](4_joins.html){target="_blank"} 
+   
+   Using GROUP BY, HAVING, and aggregate functions.
+
+---
+
+5. **Subqueries and Nested Queries**  
+   Enhancing queries with subqueries for complex data retrieval.
+
+---
+
+6. **Data Definition Language (DDL)**  
+   Understanding how to create and modify database structures.
+
+---
+
+7. **Data Manipulation Language (DML)**  
+   Inserting, updating, and deleting data.
+
+---
+
+8. **Transactions and Data Integrity**  
+   Managing transactions, understanding ACID properties.
+
+---
+
+9. **Optimizing SQL Queries**  
+   Techniques for improving query performance.
+
+---
+
+10. **Real-World SQL Projects**  
+    Applying learned skills to solve real-world data problems.
 
 Each chapter is a step on your journey to mastering SQL. Let's embark on this learning adventure together.
 
