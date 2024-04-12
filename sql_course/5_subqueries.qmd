@@ -3,7 +3,6 @@ title: "Subqueries and views"
 author: Danny Volkaerts
 date: last-modified
 date-format: "DD MMM, YYYY" 
-smaller: true
 format:
   revealjs: 
     theme: default

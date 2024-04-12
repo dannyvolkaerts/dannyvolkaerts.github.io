@@ -3,7 +3,6 @@ title: "JOINs in SQL"
 author: Danny Volkaerts
 date: last-modified
 date-format: "DD MMM, YYYY" 
-smaller: true
 format:
   revealjs: 
     theme: default
