@@ -5,6 +5,10 @@ project:
     - "index.qmd"
     - "sql_course/index_sql.qmd"
     - "sql_course/1_introduction.qmd"
+    - "sql_course/2_basics.qmd"
+    - "sql_course/3_joins.qmd"
+    - "sql_course/4_advanced.qmd"
+    - "sql_course/5_subqueries.qmd"
 
 website:
   title: "DV"
