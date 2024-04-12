@@ -1,0 +1,79 @@
+---
+title: "Oefeningen"
+author: Danny Volkaerts
+date: last-modified
+date-format: "DD MMM, YYYY" 
+smaller: true
+format:
+  revealjs: 
+    theme: default
+filters:
+  - interactive-sql
+resources: 
+  - sql_course_docs/sql-server-cheat-sheet-a4.pdf
+databases:
+  - name: tennis
+    path: "https://raw.githubusercontent.com/dannyvolkaerts/something/main/tennis.sql"
+  - name: tennis-not-editable
+    path: "https://raw.githubusercontent.com/dannyvolkaerts/something/main/tennis.sql"
+    editable: false
+---
+
+
+## De Tennisvereniging
+
+![](sql_course_images/tennis_DB.png)
+
+---
+
+### Algemene informatie
+
+Algemene info over dit database schema kan je [hier](Tennis_uitleg.html) vinden.
+
+![Watterson, Calvin and Hobbes](sql_course_images/Calvin_and_Hobbes_playing_Calvinball.jpg){width=50%}
+
+---
+
+### Oefening 1
+
+Toon alle spelers uit Zoetermeer die lid werden van de club vóór 1984). Je moet de kolominhouden en -hoofdingen van de figuur bekomen.
+
+``` {.sql .interactive .tennis}
+
+```
+
+---
+
+### Oefening 2
+
+Maak een lijst van alle teams waarvoor lidnr 27 de kapitein is.
+
+``` {.sql .interactive .tennis}
+
+```
+
+---
+
+### Oefening 3
+
+``` {.sql .interactive .tennis}
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

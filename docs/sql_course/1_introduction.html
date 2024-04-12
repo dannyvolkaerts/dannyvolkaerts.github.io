@@ -12,7 +12,7 @@
   <meta name="generator" content="quarto-1.3.450">
 
   <meta name="author" content="Danny Volkaerts">
-  <title>DV - Introduction SQL</title>
+  <title>DV - Introductie SQL</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -394,8 +394,7 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Introduction SQL</h1>
-  <p class="subtitle">Let’s start the journey</p>
+  <h1 class="title">Introductie SQL</h1>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -405,32 +404,74 @@ Danny Volkaerts
 </div>
 </div>
 
-  <p class="date">09 Apr, 2024</p>
+  <p class="date">12 Apr, 2024</p>
 </section>
-<section id="hr-sample-data" class="slide level2">
-<h2>HR sample data</h2>
-<p>Here we will use a sample Database called HR that manages the HR data of the small businesses which is collected from <a href="https://www.sqltutorial.org/sql-sample-database/">www.sqltutorial.org</a>. And to create the database, a SQLite script file was used when rendering the document. Read the <a href="https://github.com/shafayetShafee/interactive-sql#using">extension docs</a> for details.</p>
+<section id="inleiding-tot-sql-and-databases" class="slide level2">
+<h2>Inleiding tot SQL and Databases</h2>
 </section>
-<section id="erd-of-hr-database" class="slide level2">
-<h2>ERD of HR database</h2>
-<p>The following database diagram illustrates the HR sample database:</p>
+<section class="slide level2">
 
-<img data-src="sql_course_images/hr-SQL-Sample-Database-Schema.png" class="r-stretch quarto-figure-center"><p class="caption">Figure&nbsp;1: ERD of HR database</p></section>
-<section id="editable-example" class="slide level2">
-<h2>Editable Example</h2>
-<p>And now, you can run all sort of queries from the tables of the HR databases.</p>
+<h3 id="wat-is-sql">Wat is SQL?</h3>
+<p>SQL (Structured Query Language) is de standaard taal om te communiceren met relationele databases. Ze wordt gebruikt voor insert, search, update en delete functionaliteiten.</p>
+<ul>
+<li><strong>Data opvragen:</strong> SQL laat toe om efficient data op te vragen uit de database.</li>
+<li><strong>Data Manipulatie:</strong> Wijzigen van de data</li>
+<li><strong>Data Integriteit:</strong> Het onderhouden van de accuraatheid en betrouwbaarheid van de database.</li>
+</ul>
+<p>Ontwikkeld door IBM (1974)</p>
+</section>
+<section class="slide level2">
+
+<h3 id="relationele-databases">Relationele Databases</h3>
+<ul>
+<li>Een relationele database slaat gegevens op in tabellen</li>
+<li>Gegevens worden georganiseerd in rijen en kolommen</li>
+<li>Voorbeelden zijn MySQL, PostgreSQL, MS SQL en SQLite</li>
+</ul>
+</section>
+<section class="slide level2">
+
+<h3 id="sleutelconcepten">Sleutelconcepten</h3>
+<ul>
+<li><strong>Tabellen:</strong> Informatie opslaan in rijen en kolommen</li>
+<li><strong>Queries:</strong> Het ophalen of toevoegen van data op basis van specifieke criteria</li>
+<li><strong>Schemas:</strong> Weergeven van de structuur van de database</li>
+</ul>
+</section>
+<section class="slide level2">
+
+<h3 id="beroepen-gerelateerd-aan-sql">Beroepen gerelateerd aan SQL</h3>
+<ul>
+<li><strong>Data-analist:</strong> gebruikt SQL om databases te doorzoeken en inzichten te extraheren.</li>
+<li><strong>Data engineer:</strong> ontwerpt en onderhoudt databasemanagementsystemen, gebruikt SQL om datapijplijnen te creëren.</li>
+<li><strong>Data scientist:</strong> gebruikt SQL om gegevens voor te bereiden en op te schonen voor analyse.</li>
+<li><strong>Databaseontwikkelaar:</strong> creëert en optimaliseert databases, schrijft stored procedures en complexe queries.</li>
+</ul>
+</section>
+<section id="sql-in-actie" class="slide level2">
+<h2>SQL in actie</h2>
+</section>
+<section class="slide level2">
+
+<h3 id="erd-van-human-resources-database">ERD van Human Resources database</h3>
+<p>Het volgende database diagram illustreert de HR voorbeeld database: <!-- [SQL tutorial](https://www.sqltutorial.org/sql-sample-database/){preview-link="true" style="text-align: center"} --></p>
+
+<img data-src="sql_course_images/hr-SQL-Sample-Database-Schema.png" class="r-stretch quarto-figure-center"><p class="caption">Figure&nbsp;1: ERD van HR database</p></section>
+<section class="slide level2">
+
+<h3 id="query-voorbeeld">Query voorbeeld</h3>
 <div class="interactive-sql">
-<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource sql interactive hr number-lines code-with-copy"><code class="sourceCode sql"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">select</span> <span class="op">*</span> <span class="kw">from</span> regions;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource sql interactive hr-not-editable number-lines code-with-copy"><code class="sourceCode sql"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">SELECT</span> <span class="op">*</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="kw">FROM</span> regions;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="not-editable-example" class="slide level2">
-<h2>Not editable example</h2>
-<p>You can also create “not-editable” code chunk (that is, you simply can run the query but won’t be able to edit/modify it) for HR database. And to do this, just use another instance of database under the <code>database</code> key in the yaml with a different name and use the option <code>editable: false</code>.</p>
-</section>
-<section id="not-editable-example-1" class="slide level2">
-<h2>Not editable example</h2>
+<section class="slide level2">
+
+<h3 id="ander-query-voorbeeld">Ander Query voorbeeld</h3>
 <div class="interactive-sql">
-<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource sql interactive hr-not-editable number-lines code-with-copy"><code class="sourceCode sql"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">select</span> <span class="op">*</span> <span class="kw">from</span> employees;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource sql interactive hr-not-editable number-lines code-with-copy"><code class="sourceCode sql"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">SELECT</span> <span class="op">*</span> </span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="kw">FROM</span> employees </span>
+<span id="cb2-3"><a href="#cb2-3"></a><span class="kw">LIMIT</span> <span class="dv">5</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 <div class="footer footer-default">
@@ -467,13 +508,13 @@ Danny Volkaerts
       Reveal.initialize({
 'controlsAuto': true,
 'previewLinksAuto': false,
-'smaller': false,
+'smaller': true,
 'pdfSeparateFragments': false,
 'autoAnimateEasing': "ease",
 'autoAnimateDuration': 1,
 'autoAnimateUnmatched': true,
 'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
-'smaller': false,
+'smaller': true,
  
         // Display controls in the bottom right corner
         controls: false,
@@ -652,6 +693,44 @@ Danny Volkaerts
         ]
       });
     </script>
+    
+    <script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        // dispatch for htmlwidgets
+        function fireSlideEnter() {
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
+        }
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+          fireSlideEnter();
+
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
+          }
+        }
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
+
+      })();
+    </script>
+
     <script id="quarto-html-after-body" type="application/javascript">
     window.document.addEventListener("DOMContentLoaded", function (event) {
       const toggleBodyColorMode = (bsSheetEl) => {

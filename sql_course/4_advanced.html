@@ -1,23 +1,23 @@
 <!DOCTYPE html>
 <html lang="en"><head>
-<script src="1_Introduction_files/libs/clipboard/clipboard.min.js"></script>
-<script src="1_Introduction_files/libs/quarto-html/tabby.min.js"></script>
-<script src="1_Introduction_files/libs/quarto-html/popper.min.js"></script>
-<script src="1_Introduction_files/libs/quarto-html/tippy.umd.min.js"></script>
-<link href="1_Introduction_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="1_Introduction_files/libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="1_Introduction_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
-<link href="1_Introduction_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<link href="1_Introduction_files/libs/quarto-contrib/interactive-sql-1.0.0/interactive-sql.css" rel="stylesheet"><meta charset="utf-8">
+<script src="4_advanced_files/libs/clipboard/clipboard.min.js"></script>
+<script src="4_advanced_files/libs/quarto-html/tabby.min.js"></script>
+<script src="4_advanced_files/libs/quarto-html/popper.min.js"></script>
+<script src="4_advanced_files/libs/quarto-html/tippy.umd.min.js"></script>
+<link href="4_advanced_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="4_advanced_files/libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="4_advanced_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
+<link href="4_advanced_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="4_advanced_files/libs/quarto-contrib/interactive-sql-1.0.0/interactive-sql.css" rel="stylesheet"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.3.450">
 
   <meta name="author" content="Danny Volkaerts">
-  <title>Introduction SQL</title>
+  <title>Advanced Data Manipulation</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-  <link rel="stylesheet" href="1_Introduction_files/libs/revealjs/dist/reset.css">
-  <link rel="stylesheet" href="1_Introduction_files/libs/revealjs/dist/reveal.css">
+  <link rel="stylesheet" href="4_advanced_files/libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="4_advanced_files/libs/revealjs/dist/reveal.css">
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
@@ -96,11 +96,11 @@
     code span.vs { color: #20794d; } /* VerbatimString */
     code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
-  <link rel="stylesheet" href="1_Introduction_files/libs/revealjs/dist/theme/quarto.css">
-  <link href="1_Introduction_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
-  <link href="1_Introduction_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
-  <link href="1_Introduction_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
-  <link href="1_Introduction_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <link rel="stylesheet" href="4_advanced_files/libs/revealjs/dist/theme/quarto.css">
+  <link href="4_advanced_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="4_advanced_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="4_advanced_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="4_advanced_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
   <style type="text/css">
 
   .callout {
@@ -394,7 +394,7 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Introduction SQL</h1>
+  <h1 class="title">Advanced Data Manipulation</h1>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -404,57 +404,291 @@ Danny Volkaerts
 </div>
 </div>
 
-  <p class="date">10 Apr, 2024</p>
-</section>
-<section id="introduction-to-sql-and-databases" class="slide level2">
-<h2>Introduction to SQL and Databases</h2>
+  <p class="date">12 Apr, 2024</p>
 </section>
 <section class="slide level2">
 
-<h3 id="what-is-sql">What is SQL?</h3>
-<p>SQL (Structured Query Language) is the standard language for dealing with relational databases. It can be used to insert, search, update, and delete database records.</p>
+<h3 id="inhoud">Inhoud</h3>
 <ul>
-<li><strong>Data Retrieval:</strong> SQL allows you to query data, even complex datasets, in an efficient manner.</li>
-<li><strong>Data Manipulation:</strong> Modify and manage the data as per analysis requirements.</li>
-<li><strong>Data Integrity:</strong> Maintain the accuracy and reliability of the database.</li>
+<li>Aggregatie functies<br>
+</li>
+<li>GROUP BY<br>
+</li>
+<li>HAVING<br>
+</li>
+<li>Functies (tekst, numeriek, datum/tijd)<br>
+</li>
 </ul>
 </section>
 <section class="slide level2">
 
-<h3 id="relational-databases">Relational Databases</h3>
-<ul>
-<li>A relational database stores data in tables (or relations).</li>
-<li>Data is organized into rows and columns.</li>
-<li>Examples include MySQL, PostgreSQL, MS SQL and SQLite.</li>
-</ul>
+<h3 id="aggregatie-functies">Aggregatie functies</h3>
+<table>
+<thead>
+<tr class="header">
+<th>Operatie</th>
+<th>Definitie</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>COUNT</td>
+<td>Aantal lijnen</td>
+</tr>
+<tr class="even">
+<td>AVG</td>
+<td>Gemiddelde van de waarden</td>
+</tr>
+<tr class="odd">
+<td>SUM</td>
+<td>Som van de waarden</td>
+</tr>
+<tr class="even">
+<td>MIN / MAX</td>
+<td>Minimum / Maximum waarde</td>
+</tr>
+</tbody>
+</table>
 </section>
 <section class="slide level2">
 
-<h3 id="key-concepts">Key Concepts</h3>
-<ul>
-<li><strong>Tables:</strong> Store information in rows and columns.</li>
-<li><strong>Queries:</strong> Retrieve or insert data based on specific criteria.</li>
-<li><strong>Schemas:</strong> Define the structure of the database.</li>
-</ul>
-</section>
-<section id="sql-in-action" class="slide level2">
-<h2>SQL in Action</h2>
-</section>
-<section class="slide level2">
-
-<h3 id="erd-of-human-resource-database">ERD of Human Resource database</h3>
-<p>The following database diagram illustrates the HR sample database: <a href="https://www.sqltutorial.org/sql-sample-database/" data-preview-link="true" style="text-align: center">SQL tutorial</a></p>
-
-<img data-src="sql_course_images/hr-SQL-Sample-Database-Schema.png" class="r-stretch quarto-figure-center"><p class="caption">Figure&nbsp;1: ERD of HR database</p></section>
-<section class="slide level2">
-
-<h3 id="query-example">Query example</h3>
+<h3 id="aggregatie-functies-voorbeeld">Aggregatie functies voorbeeld</h3>
+<p>Gemiddelde salaris van de werknemers:</p>
 <div class="interactive-sql">
-<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource sql interactive hr-not-editable number-lines code-with-copy"><code class="sourceCode sql"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">select</span> <span class="op">*</span> <span class="kw">from</span> regions;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource sql interactive hr number-lines code-with-copy"><code class="sourceCode sql"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">SELECT</span> <span class="fu">AVG</span>(salary) <span class="kw">as</span> <span class="st">'gemiddelde salaris'</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="kw">FROM</span> employees;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<h3 id="another-query-example">Another Query example</h3>
+<aside class="notes">
+<p>MAX MIN</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2">
+
+<h3 id="group-by">GROUP BY</h3>
+<ul>
+<li><strong>Definitie</strong>: De GROUP BY-clausule is een optionele clausule van de SELECT-instructie. Met de GROUP BY clausule kun je rijen groeperen op basis van de waarden van een of meer kolommen. Voor elke groep wordt één rij geretourneerd.</li>
+<li><strong>Gebruik</strong>: Maken van samenvattingen</li>
+</ul>
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource sql number-lines code-with-copy"><code class="sourceCode sql"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">SELECT</span> column1, column2, aggregate_function(column3)</span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="kw">FROM</span> table_name</span>
+<span id="cb2-3"><a href="#cb2-3"></a><span class="kw">GROUP</span> <span class="kw">BY</span></span>
+<span id="cb2-4"><a href="#cb2-4"></a>  column1,</span>
+<span id="cb2-5"><a href="#cb2-5"></a>    column2;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section class="slide level2">
+
+<h3 id="group-by-voorbeeld">GROUP BY voorbeeld</h3>
+<p>Tellen van het aantal werknemers per departement</p>
 <div class="interactive-sql">
-<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource sql interactive hr-not-editable number-lines code-with-copy"><code class="sourceCode sql"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">select</span> <span class="op">*</span> <span class="kw">from</span> employees <span class="kw">LIMIT</span> <span class="dv">5</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource sql interactive hr number-lines code-with-copy"><code class="sourceCode sql"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">SELECT</span> department_id, <span class="fu">COUNT</span>(employee_id) headcount</span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="kw">FROM</span> employees</span>
+<span id="cb3-3"><a href="#cb3-3"></a><span class="kw">GROUP</span> <span class="kw">BY</span> department_id;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<aside class="notes">
+<p>We willen de departementsnaam erbij:<br>
+SELECT<br>
+department_name,<br>
+COUNT(employee_id) headcount<br>
+FROM<br>
+employees e<br>
+INNER JOIN departments d ON d.department_id = e.department_id<br>
+GROUP BY<br>
+d.department_id;<br>
+</p>
+<p>We willen geordend per headcount:<br>
+ORDER BY headcount DESC;<br>
+</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2">
+
+<h3 id="group-by-voorbeeld-2">GROUP BY voorbeeld 2</h3>
+<p>Groeperen op meerdere kolommen:</p>
+<div class="interactive-sql">
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource sql interactive hr number-lines code-with-copy"><code class="sourceCode sql"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">SELECT</span> department_name, job_title, <span class="fu">COUNT</span>(employee_id)</span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="kw">FROM</span> employees e  <span class="kw">INNER</span> <span class="kw">JOIN</span> departments d <span class="kw">ON</span> d.department_id <span class="op">=</span> e.department_id</span>
+<span id="cb4-3"><a href="#cb4-3"></a>                  <span class="kw">INNER</span> <span class="kw">JOIN</span> jobs j <span class="kw">ON</span> j.job_id <span class="op">=</span> e.job_id</span>
+<span id="cb4-4"><a href="#cb4-4"></a><span class="kw">GROUP</span> <span class="kw">BY</span> department_name, job_title;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<aside class="notes">
+<p>Definieer de vraagstelling van deze query</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2">
+
+<h3 id="having">HAVING</h3>
+<ul>
+<li><strong>Definitie</strong>: HAVING wordt gebruikt om voorwaarden te filteren die op de resultaten van aggregatiefuncties van toepassing zijn. Terwijl de WHERE-clausule wordt gebruikt om rijen te filteren voordat aggregatie plaatsvindt, wordt HAVING gebruikt om rijen te filteren na de aggregatie.</li>
+<li><strong>Gebruik</strong>: Essentieel in gevallen waar je voorwaarden wilt toepassen op groepen van data die door de GROUP BY-clausule zijn verzameld.</li>
+</ul>
+<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource sql number-lines code-with-copy"><code class="sourceCode sql"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw">SELECT</span> column1, column2, AGGREGATE_FUNCTION (column3)</span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="kw">FROM</span> table1</span>
+<span id="cb5-3"><a href="#cb5-3"></a><span class="kw">GROUP</span> <span class="kw">BY</span></span>
+<span id="cb5-4"><a href="#cb5-4"></a>  column1,</span>
+<span id="cb5-5"><a href="#cb5-5"></a>    column2</span>
+<span id="cb5-6"><a href="#cb5-6"></a><span class="kw">HAVING</span></span>
+<span id="cb5-7"><a href="#cb5-7"></a>    group_condition;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section class="slide level2">
+
+<h3 id="having-voorbeeld">HAVING voorbeeld</h3>
+<p>We willen de managers en het aantal werknemer die aan hen direct rapporteren:</p>
+<div class="interactive-sql">
+<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource sql interactive hr number-lines code-with-copy"><code class="sourceCode sql"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw">SELECT</span> manager_id, first_name, last_name, <span class="fu">COUNT</span>(employee_id) direct_reports</span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="kw">FROM</span> employees</span>
+<span id="cb6-3"><a href="#cb6-3"></a><span class="kw">WHERE</span> manager_id <span class="kw">IS</span> <span class="kw">NOT</span> <span class="kw">NULL</span></span>
+<span id="cb6-4"><a href="#cb6-4"></a><span class="kw">GROUP</span> <span class="kw">BY</span> manager_id;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<aside class="notes">
+<p>Managers met minstens 5 werknemers die direct aan hun rapporteren:<br>
+</p>
+<p>HAVING direct_reports &gt;= 5;<br>
+</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2">
+
+<h3 id="having-voorbeeld-2">HAVING voorbeeld 2</h3>
+<p>Totale salaris voor elk departement (met een totale salaris tussen de 20k en 30k): Vul aan!</p>
+<div class="interactive-sql">
+<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource sql interactive hr number-lines code-with-copy"><code class="sourceCode sql"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw">SELECT</span> department_id, <span class="fu">SUM</span>(salary) <span class="kw">as</span> totaal</span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="kw">FROM</span> employees</span>
+<span id="cb7-3"><a href="#cb7-3"></a><span class="kw">GROUP</span> <span class="kw">BY</span> department_id</span>
+<span id="cb7-4"><a href="#cb7-4"></a><span class="kw">ORDER</span> <span class="kw">BY</span> <span class="fu">SUM</span>(salary);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<aside class="notes">
+<p>HAVING SUM(salary) BETWEEN 20000 AND 30000<br>
+ORDER BY SUM(salary);</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2">
+
+<p><br>
+<br>
+<br>
+Jullie kunnen nu een eenvoudige VOLLEDIGE query uitvoeren!</p>
+</section>
+<section class="slide level2">
+
+<h3 id="functies">Functies</h3>
+</section>
+<section class="slide level2">
+
+<h3 id="text-functies">Text functies</h3>
+<p>Let op dialect!</p>
+<p><object data="sql_course_docs/sql-server-cheat-sheet-a4.pdf" type="application/pdf" width="100%" height="500px"><a href="sql_course_docs/sql-server-cheat-sheet-a4.pdf" download="">Download PDF file.</a></object></p>
+</section>
+<section class="slide level2">
+
+<h3 id="text-functies-voorbeeld">Text functies voorbeeld</h3>
+<div class="interactive-sql">
+<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource sql interactive hr number-lines code-with-copy"><code class="sourceCode sql"><span id="cb8-1"><a href="#cb8-1"></a><span class="kw">SELECT</span> <span class="fu">LOWER</span>(department_name)</span>
+<span id="cb8-2"><a href="#cb8-2"></a><span class="kw">FROM</span> departments</span>
+<span id="cb8-3"><a href="#cb8-3"></a><span class="kw">ORDER</span> <span class="kw">BY</span> <span class="fu">LOWER</span>(department_name);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section class="slide level2">
+
+<h3 id="text-functies-voorbeeld-2">Text functies voorbeeld 2</h3>
+<div class="interactive-sql">
+<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource sql interactive hr number-lines code-with-copy"><code class="sourceCode sql"><span id="cb9-1"><a href="#cb9-1"></a><span class="kw">UPDATE</span> employees </span>
+<span id="cb9-2"><a href="#cb9-2"></a><span class="kw">SET</span> email <span class="op">=</span> <span class="fu">UPPER</span>(email);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section class="slide level2">
+
+<h3 id="case-functie">CASE functie</h3>
+<p>Werkverjaardagen:</p>
+<div class="interactive-sql">
+<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource sql interactive hr number-lines code-with-copy"><code class="sourceCode sql"><span id="cb10-1"><a href="#cb10-1"></a><span class="kw">SELECT</span> first_name, last_name, hire_date,</span>
+<span id="cb10-2"><a href="#cb10-2"></a>    <span class="co">--CASE (2000 - YEAR(hire_date))</span></span>
+<span id="cb10-3"><a href="#cb10-3"></a>    <span class="cf">CASE</span> (<span class="dv">2024</span> <span class="op">-</span> strftime(<span class="st">'%Y'</span>,hire_date))</span>
+<span id="cb10-4"><a href="#cb10-4"></a>        <span class="cf">WHEN</span> <span class="dv">1</span> <span class="cf">THEN</span> <span class="st">'1 jaar'</span></span>
+<span id="cb10-5"><a href="#cb10-5"></a>        <span class="cf">WHEN</span> <span class="dv">10</span> <span class="cf">THEN</span> <span class="st">'10 jaar'</span></span>
+<span id="cb10-6"><a href="#cb10-6"></a>        <span class="cf">WHEN</span> <span class="dv">20</span> <span class="cf">THEN</span> <span class="st">'20 jaar'</span></span>
+<span id="cb10-7"><a href="#cb10-7"></a>        <span class="cf">WHEN</span> <span class="dv">30</span> <span class="cf">THEN</span> <span class="st">'30 jaar'</span></span>
+<span id="cb10-8"><a href="#cb10-8"></a>    <span class="cf">END</span> <span class="kw">as</span> verjaardag</span>
+<span id="cb10-9"><a href="#cb10-9"></a><span class="kw">FROM</span></span>
+<span id="cb10-10"><a href="#cb10-10"></a>    employees</span>
+<span id="cb10-11"><a href="#cb10-11"></a><span class="kw">ORDER</span> <span class="kw">BY</span> first_name;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section class="slide level2">
+
+<h3 id="searched-case">SEARCHED CASE</h3>
+<div class="sourceCode" id="cb11"><pre class="sourceCode numberSource sql number-lines code-with-copy"><code class="sourceCode sql"><span id="cb11-1"><a href="#cb11-1"></a><span class="cf">CASE</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a><span class="cf">WHEN</span> boolean_expression_1 <span class="cf">THEN</span></span>
+<span id="cb11-3"><a href="#cb11-3"></a>    result_1</span>
+<span id="cb11-4"><a href="#cb11-4"></a><span class="cf">WHEN</span> boolean_expression_2 <span class="cf">THEN</span></span>
+<span id="cb11-5"><a href="#cb11-5"></a>    result_2</span>
+<span id="cb11-6"><a href="#cb11-6"></a><span class="cf">WHEN</span> boolean_expression_3 <span class="cf">THEN</span></span>
+<span id="cb11-7"><a href="#cb11-7"></a>    result_3</span>
+<span id="cb11-8"><a href="#cb11-8"></a><span class="cf">ELSE</span></span>
+<span id="cb11-9"><a href="#cb11-9"></a>    else_result</span>
+<span id="cb11-10"><a href="#cb11-10"></a><span class="cf">END</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section class="slide level2">
+
+<h3 id="searched-case-voorbeeld">SEARCHED CASE voorbeeld</h3>
+<div class="interactive-sql">
+<div class="sourceCode" id="cb12"><pre class="sourceCode numberSource sql interactive hr number-lines code-with-copy"><code class="sourceCode sql"><span id="cb12-1"><a href="#cb12-1"></a><span class="kw">SELECT</span> first_name, last_name,salary,</span>
+<span id="cb12-2"><a href="#cb12-2"></a>    <span class="cf">CASE</span></span>
+<span id="cb12-3"><a href="#cb12-3"></a>        <span class="cf">WHEN</span> salary <span class="op">&lt;</span> <span class="dv">3000</span> <span class="cf">THEN</span> <span class="st">'Low'</span></span>
+<span id="cb12-4"><a href="#cb12-4"></a>        <span class="cf">WHEN</span> salary <span class="op">&gt;=</span> <span class="dv">3000</span> <span class="kw">AND</span> salary <span class="op">&lt;=</span> <span class="dv">5000</span> <span class="cf">THEN</span> <span class="st">'Average'</span></span>
+<span id="cb12-5"><a href="#cb12-5"></a>        <span class="cf">WHEN</span> salary <span class="op">&gt;</span> <span class="dv">5000</span> <span class="cf">THEN</span> <span class="st">'High'</span></span>
+<span id="cb12-6"><a href="#cb12-6"></a>    <span class="cf">END</span> evaluation</span>
+<span id="cb12-7"><a href="#cb12-7"></a><span class="kw">FROM</span></span>
+<span id="cb12-8"><a href="#cb12-8"></a>    employees;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section class="slide level2">
@@ -471,19 +705,19 @@ Danny Volkaerts
   </div>
 
   <script>window.backupDefine = window.define; window.define = undefined;</script>
-  <script src="1_Introduction_files/libs/revealjs/dist/reveal.js"></script>
+  <script src="4_advanced_files/libs/revealjs/dist/reveal.js"></script>
   <!-- reveal.js plugins -->
-  <script src="1_Introduction_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
-  <script src="1_Introduction_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
-  <script src="1_Introduction_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
-  <script src="1_Introduction_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
-  <script src="1_Introduction_files/libs/revealjs/plugin/quarto-support/support.js"></script>
+  <script src="4_advanced_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="4_advanced_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="4_advanced_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="4_advanced_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="4_advanced_files/libs/revealjs/plugin/quarto-support/support.js"></script>
   
 
-  <script src="1_Introduction_files/libs/revealjs/plugin/notes/notes.js"></script>
-  <script src="1_Introduction_files/libs/revealjs/plugin/search/search.js"></script>
-  <script src="1_Introduction_files/libs/revealjs/plugin/zoom/zoom.js"></script>
-  <script src="1_Introduction_files/libs/revealjs/plugin/math/math.js"></script>
+  <script src="4_advanced_files/libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="4_advanced_files/libs/revealjs/plugin/search/search.js"></script>
+  <script src="4_advanced_files/libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="4_advanced_files/libs/revealjs/plugin/math/math.js"></script>
   <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
 
   <script>
@@ -678,44 +912,6 @@ Danny Volkaerts
         ]
       });
     </script>
-    
-    <script>
-      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
-      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
-      // slide changes (different for each slide format).
-      (function () {
-        // dispatch for htmlwidgets
-        function fireSlideEnter() {
-          const event = window.document.createEvent("Event");
-          event.initEvent("slideenter", true, true);
-          window.document.dispatchEvent(event);
-        }
-
-        function fireSlideChanged(previousSlide, currentSlide) {
-          fireSlideEnter();
-
-          // dispatch for shiny
-          if (window.jQuery) {
-            if (previousSlide) {
-              window.jQuery(previousSlide).trigger("hidden");
-            }
-            if (currentSlide) {
-              window.jQuery(currentSlide).trigger("shown");
-            }
-          }
-        }
-
-        // hookup for slidy
-        if (window.w3c_slidy) {
-          window.w3c_slidy.add_observer(function (slide_num) {
-            // slide_num starts at position 1
-            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
-          });
-        }
-
-      })();
-    </script>
-
     <script id="quarto-html-after-body" type="application/javascript">
     window.document.addEventListener("DOMContentLoaded", function (event) {
       const toggleBodyColorMode = (bsSheetEl) => {
@@ -864,5 +1060,5 @@ Danny Volkaerts
     </script>
     
 
-<script src="1_Introduction_files/libs/quarto-contrib/interactive-sql-1.0.0/interactive-sql.js"></script>
+<script src="4_advanced_files/libs/quarto-contrib/interactive-sql-1.0.0/interactive-sql.js"></script>
 </body></html>

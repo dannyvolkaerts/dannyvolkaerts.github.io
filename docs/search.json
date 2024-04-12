@@ -110,5 +110,19 @@
     "title": "Introduction SQL",
     "section": "",
     "text": "Here we will use a sample Database called HR that manages the HR data of the small businesses which is collected from www.sqltutorial.org. And to create the database, a SQLite script file was used when rendering the document. Read the extension docs for details."
+  },
+  {
+    "objectID": "sql_course/1_introduction.html#inleiding-tot-sql-and-databases",
+    "href": "sql_course/1_introduction.html#inleiding-tot-sql-and-databases",
+    "title": "Introductie SQL",
+    "section": "Inleiding tot SQL and Databases",
+    "text": "Inleiding tot SQL and Databases"
+  },
+  {
+    "objectID": "sql_course/1_introduction.html#sql-in-actie",
+    "href": "sql_course/1_introduction.html#sql-in-actie",
+    "title": "Introductie SQL",
+    "section": "SQL in actie",
+    "text": "SQL in actie"
   }
 ]

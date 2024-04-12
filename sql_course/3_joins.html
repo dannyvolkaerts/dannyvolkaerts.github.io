@@ -404,13 +404,19 @@ Danny Volkaerts
 </div>
 </div>
 
-  <p class="date">11 Apr, 2024</p>
+  <p class="date">12 Apr, 2024</p>
 </section>
 <section class="slide level2">
 
 <h3 id="wat-is-een-join">Wat is een JOIN?</h3>
-<p>Een JOIN in SQL wordt gebruikt om rijen uit twee of meer tabellen te combineren, gebaseerd op een gerelateerde kolom tussen die tabellen.</p>
-<p>Waarom tabellen combineren? REDUNDANCY &amp; CONSISTENCY —</p>
+<p>Een JOIN in SQL wordt gebruikt om rijen uit twee of meer tabellen te combineren, gebaseerd op een gerelateerde kolom tussen die tabellen.<br>
+</p>
+<p>Waarom tabellen combineren?<br>
+<br>
+REDUNDANCY &amp; CONSISTENCY</p>
+</section>
+<section class="slide level2">
+
 <h3 id="inner-join">INNER JOIN</h3>
 <ul>
 <li><strong>Definitie</strong>: Geeft alleen rijen terug die een overeenkomst hebben in beide tabellen.</li>
@@ -426,9 +432,11 @@ Danny Volkaerts
 <h3 id="inner-join---voorbeeld">INNER JOIN - voorbeeld</h3>
 <p>Geef me voor- en achternaam van de werknemers die in het ‘Purchasing’ departement werken.</p>
 <div class="interactive-sql">
-<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource sql interactive hr number-lines code-with-copy"><code class="sourceCode sql"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">SELECT</span> first_name, last_name, employees.department_id, departments.department_id, department_name</span>
-<span id="cb2-2"><a href="#cb2-2"></a><span class="kw">FROM</span> employees    <span class="kw">INNER</span> <span class="kw">JOIN</span> departments <span class="kw">ON</span> departments.department_id <span class="op">=</span> employees.department_id</span>
-<span id="cb2-3"><a href="#cb2-3"></a><span class="kw">WHERE</span> departments.department_name <span class="op">=</span> <span class="st">'Purchasing'</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource sql interactive hr number-lines code-with-copy"><code class="sourceCode sql"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">SELECT</span>    first_name, last_name, employees.department_id, </span>
+<span id="cb2-2"><a href="#cb2-2"></a>          departments.department_id, department_name</span>
+<span id="cb2-3"><a href="#cb2-3"></a><span class="kw">FROM</span> employees    <span class="kw">INNER</span> <span class="kw">JOIN</span> departments </span>
+<span id="cb2-4"><a href="#cb2-4"></a>                  <span class="kw">ON</span> departments.department_id <span class="op">=</span> employees.department_id</span>
+<span id="cb2-5"><a href="#cb2-5"></a><span class="kw">WHERE</span> departments.department_name <span class="op">=</span> <span class="st">'Purchasing'</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section class="slide level2">
@@ -436,7 +444,7 @@ Danny Volkaerts
 <h3 id="inner-join---voorbeeld-2">INNER JOIN - voorbeeld 2</h3>
 <p>Geef me de verschillende jobtitels van departement ‘Purchasing’.</p>
 
-<img data-src="sql_course_images/inner_join_ex2.png" class="r-stretch quarto-figure-center"><p class="caption">Figure&nbsp;1: ERD of example</p></section>
+<img data-src="sql_course_images/inner_join_ex2.png" id="fig-erd-hr" class="r-stretch"></section>
 <section class="slide level2">
 
 <h3 id="inner-join---voorbeeld-2-1">INNER JOIN - voorbeeld 2</h3>
@@ -447,32 +455,8 @@ Danny Volkaerts
 <span id="cb3-3"><a href="#cb3-3"></a>                  <span class="kw">INNER</span> <span class="kw">JOIN</span> jobs j <span class="kw">ON</span> j.job_id <span class="op">=</span> e.job_id</span>
 <span id="cb3-4"><a href="#cb3-4"></a><span class="kw">WHERE</span> d.department_name <span class="op">=</span> <span class="st">'Purchasing'</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section>
-<section class="slide level2">
-
-<h3 id="left-join-right-join">LEFT JOIN (&amp; RIGHT JOIN)</h3>
-<ul>
-<li><strong>Definitie</strong>: Geeft alle rijen uit de linkertabel terug, samen met de overeenkomende rijen uit de rechtertabel. Als er geen overeenkomst is, worden de resultaten voor de rechtertabel NULL.</li>
-<li><strong>Gebruik</strong>: Nuttig om te zien welke rijen in de linkertabel geen overeenkomende rijen in de rechtertabel hebben.</li>
-</ul>
-<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource sql number-lines code-with-copy"><code class="sourceCode sql"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">SELECT</span> kolommen</span>
-<span id="cb4-2"><a href="#cb4-2"></a><span class="kw">FROM</span> tabel1</span>
-<span id="cb4-3"><a href="#cb4-3"></a><span class="kw">LEFT</span> <span class="kw">JOIN</span> tabel2</span>
-<span id="cb4-4"><a href="#cb4-4"></a><span class="kw">ON</span> tabel1.gemeenschappelijke_kolom <span class="op">=</span> tabel2.gemeenschappelijke_kolom;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section class="slide level2">
-
-<h3 id="left-join-voorbeeld">LEFT JOIN voorbeeld</h3>
-
-<img data-src="sql_course_images/left_join_ex1.png" class="r-stretch quarto-figure-center"><p class="caption">Figure&nbsp;2: ERD of example left join</p></section>
-<section class="slide level2">
-
-<h3 id="left-join-voorbeeld-1">LEFT JOIN voorbeeld</h3>
-<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource sql number-lines code-with-copy"><code class="sourceCode sql"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw">SELECT</span> c.country_name, c.country_id, l.country_id, l.street_address, l.city</span>
-<span id="cb5-2"><a href="#cb5-2"></a><span class="kw">FROM</span> countries c <span class="kw">LEFT</span> <span class="kw">JOIN</span> locations l <span class="kw">ON</span> l.country_id <span class="op">=</span> c.country_id</span>
-<span id="cb5-3"><a href="#cb5-3"></a><span class="kw">WHERE</span> c.country_id <span class="kw">IN</span> (<span class="st">'US'</span>, <span class="st">'UK'</span>, <span class="st">'CN'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <aside class="notes">
-<p>Speaker notes go here.</p>
+<p>DISTINCT</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -487,15 +471,136 @@ Danny Volkaerts
 </section>
 <section class="slide level2">
 
+<h3 id="left-join-right-join">LEFT JOIN (&amp; RIGHT JOIN)</h3>
+<ul>
+<li><strong>Definitie</strong>: Geeft alle rijen uit de linkertabel terug, samen met de overeenkomstige rijen uit de rechtertabel. Als er geen overeenkomst is, worden de resultaten voor de rechtertabel NULL.</li>
+<li><strong>Gebruik</strong>: Nuttig om te zien welke rijen in de linkertabel geen overeenkomstige rijen in de rechtertabel hebben.</li>
+</ul>
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource sql number-lines code-with-copy"><code class="sourceCode sql"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">SELECT</span> kolommen</span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="kw">FROM</span> tabel1</span>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="kw">LEFT</span> <span class="kw">JOIN</span> tabel2</span>
+<span id="cb4-4"><a href="#cb4-4"></a><span class="kw">ON</span> tabel1.gemeenschappelijke_kolom <span class="op">=</span> tabel2.gemeenschappelijke_kolom;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section class="slide level2">
+
+<h3 id="left-join-voorbeeld">LEFT JOIN voorbeeld</h3>
+
+<img data-src="sql_course_images/left_join_ex1.png" class="r-stretch"></section>
+<section class="slide level2">
+
+<h3 id="left-join-voorbeeld-1">LEFT JOIN voorbeeld</h3>
+<div class="interactive-sql">
+<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource sql interactive hr number-lines code-with-copy"><code class="sourceCode sql"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw">SELECT</span> c.country_name, c.country_id, l.country_id, l.street_address, l.city</span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="kw">FROM</span> countries c <span class="kw">LEFT</span> <span class="kw">JOIN</span> locations l <span class="kw">ON</span> l.country_id <span class="op">=</span> c.country_id</span>
+<span id="cb5-3"><a href="#cb5-3"></a><span class="kw">WHERE</span> c.country_id <span class="kw">IN</span> (<span class="st">'US'</span>, <span class="st">'UK'</span>, <span class="st">'CN'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<aside class="notes">
+<p>Oefening: lijst alle landen (naam) die geen locatie hebben in de database:<br>
+SELECT country_name<br>
+FROM countries c LEFT JOIN locations l ON l.country_id = c.country_id<br>
+WHERE l.location_id IS NULL</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2">
+
+<h3 id="left-join-voorbeeld-2">LEFT JOIN voorbeeld 2</h3>
+
+<img data-src="sql_course_images/left_join_ex2.png" class="r-stretch"></section>
+<section class="slide level2">
+
+<h3 id="left-join-voorbeeld-2-1">LEFT JOIN voorbeeld 2</h3>
+<div class="interactive-sql">
+<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource sql interactive hr number-lines code-with-copy"><code class="sourceCode sql"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw">SELECT</span> r.region_name, c.country_name, l.street_address, l.city</span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="kw">FROM</span> regions r    <span class="kw">LEFT</span> <span class="kw">JOIN</span> countries c <span class="kw">ON</span> c.region_id <span class="op">=</span> r.region_id</span>
+<span id="cb6-3"><a href="#cb6-3"></a>                  <span class="kw">LEFT</span> <span class="kw">JOIN</span> locations l <span class="kw">ON</span> l.country_id <span class="op">=</span> c.country_id</span>
+<span id="cb6-4"><a href="#cb6-4"></a><span class="kw">WHERE</span> c.country_id <span class="kw">IN</span> (<span class="st">'US'</span>, <span class="st">'UK'</span>, <span class="st">'CN'</span>);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section class="slide level2">
+
 <h3 id="full-outer-join">FULL OUTER JOIN</h3>
 <ul>
-<li><strong>Definitie</strong>: Geeft alle rijen terug wanneer er een overeenkomst is in een van de tabellen.</li>
+<li><strong>Definitie</strong>: Geeft alle rijen terug van beide tabellen, ook wanneer er geen overeenkomst is in een van de tabellen.</li>
 <li><strong>Gebruik</strong>: Nuttig om alle overeenkomsten en verschillen tussen twee tabellen te zien.</li>
 </ul>
-<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource sql number-lines code-with-copy"><code class="sourceCode sql"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw">SELECT</span> kolommen</span>
-<span id="cb6-2"><a href="#cb6-2"></a><span class="kw">FROM</span> tabel1</span>
-<span id="cb6-3"><a href="#cb6-3"></a><span class="kw">FULL</span> <span class="kw">OUTER</span> <span class="kw">JOIN</span> tabel2</span>
-<span id="cb6-4"><a href="#cb6-4"></a><span class="kw">ON</span> tabel1.gemeenschappelijke_kolom <span class="op">=</span> tabel2.gemeenschappelijke_kolom;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource sql number-lines code-with-copy"><code class="sourceCode sql"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw">SELECT</span> kolommen</span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="kw">FROM</span> tabel1</span>
+<span id="cb7-3"><a href="#cb7-3"></a><span class="kw">FULL</span> <span class="kw">OUTER</span> <span class="kw">JOIN</span> tabel2</span>
+<span id="cb7-4"><a href="#cb7-4"></a><span class="kw">ON</span> tabel1.gemeenschappelijke_kolom <span class="op">=</span> tabel2.gemeenschappelijke_kolom;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section class="slide level2">
+
+<h3 id="full-outer-join-voorbeeld">FULL OUTER JOIN voorbeeld</h3>
+<p>We maken enkele tabellen aan om dit voorbeeld uit te werken: We creëren de tabel ‘mand’ en tabel ‘fruit’, waarbij we willen bijhouden welk stuk fruit in welke mand zit.</p>
+<div class="interactive-sql">
+<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource sql interactive hr number-lines code-with-copy"><code class="sourceCode sql"></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<aside class="notes">
+<p>CREATE TABLE mand (<br>
+mand_id INTEGER PRIMARY KEY,<br>
+mand_naam VARCHAR (255) NOT NULL<br>
+);<br>
+</p>
+<p>CREATE TABLE fruit (<br>
+fruit_id INTEGER PRIMARY KEY,<br>
+fruit_naam VARCHAR (255) NOT NULL,<br>
+mand_id INTEGER<br>
+);<br>
+</p>
+<p>INSERT INTO mand (mand_id, mand_naam)<br>
+VALUES<br>
+(1, ‘A’),<br>
+(2, ‘B’),<br>
+(3, ‘C’);<br>
+</p>
+<p>INSERT INTO fruit (<br>
+fruit_id,<br>
+fruit_naam,<br>
+mand_id<br>
+)<br>
+VALUES<br>
+(1, ‘Appel’, 1),<br>
+(2, ‘Sinaasappel’, 1),<br>
+(3, ‘Banaan’, 2),<br>
+(4, ‘Aardbei’, NULL);<br>
+</p>
+<p>Alle manden met fruit, fruit dat niet in een mand zit en manden zonder fruit -&gt; FULL OUTER<br>
+SELECT<br>
+mand_naam,<br>
+fruit_naam<br>
+FROM fruit FULL OUTER JOIN mand ON mand.mand_id = fruit.mand_id;<br>
+</p>
+<p>Lege mand die geen fruit heeft:<br>
+SELECT<br>
+mand_naam,<br>
+fruit_naam<br>
+FROM<br>
+fruit<br>
+FULL OUTER JOIN mand ON mand.mand_id = fruit.mand_id<br>
+WHERE<br>
+fruit_naam IS NULL;<br>
+</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section class="slide level2">
 
@@ -504,9 +609,61 @@ Danny Volkaerts
 <li><strong>Definitie</strong>: Een SELF JOIN is een normale join, maar dan wordt de tabel met zichzelf gejoined, alsof het twee verschillende tabellen waren.</li>
 <li><strong>Gebruik</strong>: Nuttig om relaties binnen dezelfde tabel te vergelijken.</li>
 </ul>
-<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource sql number-lines code-with-copy"><code class="sourceCode sql"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw">SELECT</span> a.kolom_name, b.kolom_name</span>
-<span id="cb7-2"><a href="#cb7-2"></a><span class="kw">FROM</span> tabel a, tabel b</span>
-<span id="cb7-3"><a href="#cb7-3"></a><span class="kw">WHERE</span> a.gemeenschappelijke_kolom <span class="op">=</span> b.gemeenschappelijke_kolom <span class="kw">AND</span> voorwaarde;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource sql number-lines code-with-copy"><code class="sourceCode sql"><span id="cb9-1"><a href="#cb9-1"></a><span class="kw">SELECT</span> a.kolom_name, b.kolom_name</span>
+<span id="cb9-2"><a href="#cb9-2"></a><span class="kw">FROM</span> tabel a, tabel b</span>
+<span id="cb9-3"><a href="#cb9-3"></a><span class="kw">WHERE</span> a.gemeenschappelijke_kolom <span class="op">=</span> b.gemeenschappelijke_kolom <span class="kw">AND</span> voorwaarde;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section class="slide level2">
+
+<h3 id="self-join-voorbeeld">SELF JOIN voorbeeld</h3>
+<p>We kijken na welke employee aan welke manager rapporteert:</p>
+
+<img data-src="sql_course_images/hr-SQL-Sample-Database-Schema.png" id="fig-erd-hr" class="r-stretch"></section>
+<section class="slide level2">
+
+<h3 id="self-join-voorbeeld-1">SELF JOIN voorbeeld</h3>
+<p>We kijken na welke employee aan welke manager rapporteert:</p>
+<div class="interactive-sql">
+<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource sql interactive hr number-lines code-with-copy"><code class="sourceCode sql"><span id="cb10-1"><a href="#cb10-1"></a><span class="kw">SELECT</span>  e.first_name <span class="op">||</span> <span class="st">' '</span> <span class="op">||</span> e.last_name <span class="kw">AS</span> employee, </span>
+<span id="cb10-2"><a href="#cb10-2"></a>        m.first_name <span class="op">||</span> <span class="st">' '</span> <span class="op">||</span> m.last_name <span class="kw">AS</span> manager</span>
+<span id="cb10-3"><a href="#cb10-3"></a><span class="kw">FROM</span> employees e <span class="kw">INNER</span> <span class="kw">JOIN</span> employees m <span class="kw">ON</span> m.employee_id <span class="op">=</span> e.manager_id</span>
+<span id="cb10-4"><a href="#cb10-4"></a><span class="kw">ORDER</span> <span class="kw">BY</span> manager;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section class="slide level2">
+
+<h3 id="self-join-voorbeeld-2">SELF JOIN voorbeeld</h3>
+<p>De CEO heeft geen manager maar deze willen we ook graag in het resultaat. Hoe doen we dit?</p>
+<div class="interactive-sql">
+<div class="sourceCode" id="cb11"><pre class="sourceCode numberSource sql interactive hr number-lines code-with-copy"><code class="sourceCode sql"><span id="cb11-1"><a href="#cb11-1"></a><span class="kw">SELECT</span>  e.first_name <span class="op">||</span> <span class="st">' '</span> <span class="op">||</span> e.last_name <span class="kw">AS</span> employee,</span>
+<span id="cb11-2"><a href="#cb11-2"></a>        m.first_name <span class="op">||</span> <span class="st">' '</span> <span class="op">||</span> m.last_name <span class="kw">AS</span> manager</span>
+<span id="cb11-3"><a href="#cb11-3"></a><span class="kw">FROM</span> employees e <span class="op">..</span>.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<aside class="notes">
+<p>SELECT<br>
+e.first_name || ’ ’ || e.last_name AS employee,<br>
+m.first_name || ’ ’ || m.last_name AS manager<br>
+FROM<br>
+employees e<br>
+LEFT JOIN<br>
+employees m ON m.employee_id = e.manager_id<br>
+ORDER BY manager;<br>
+</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2">
+
+<h3 id="oefeningen">Oefeningen</h3>
 <div class="footer footer-default">
 
 </div>
@@ -541,13 +698,13 @@ Danny Volkaerts
       Reveal.initialize({
 'controlsAuto': true,
 'previewLinksAuto': false,
-'smaller': false,
+'smaller': true,
 'pdfSeparateFragments': false,
 'autoAnimateEasing': "ease",
 'autoAnimateDuration': 1,
 'autoAnimateUnmatched': true,
 'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
-'smaller': false,
+'smaller': true,
  
         // Display controls in the bottom right corner
         controls: false,

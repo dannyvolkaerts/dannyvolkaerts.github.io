@@ -8,6 +8,8 @@ format:
     theme: default
 filters:
   - interactive-sql
+resources: 
+  - sql_course_docs/sql-server-cheat-sheet-a4.pdf
 databases:
   - name: hr
     path: "https://raw.githubusercontent.com/dannyvolkaerts/something/main/hr.sql"
@@ -16,7 +18,14 @@ databases:
     editable: false
 ---
 
+### Inhoud
 
+-   Aggregatie functies\
+-   GROUP BY\
+-   HAVING\
+-   Functies (tekst, numeriek, datum/tijd)\
+
+---
 
 ### Aggregatie functies
 
@@ -29,5 +38,233 @@ databases:
 
 ---
 
-### SELECT functies voorbeeld
+### Aggregatie functies voorbeeld
+
+Gemiddelde salaris van de werknemers: 
+
+```{.sql .interactive .hr}
+SELECT AVG(salary) as 'gemiddelde salaris'
+FROM employees;
+```
+
+:::{.notes}
+MAX
+MIN
+:::
+
+--- 
+
+### GROUP BY
+
+-   **Definitie**: De GROUP BY-clausule is een optionele clausule van de SELECT-instructie. Met de GROUP BY clausule kun je rijen groeperen op basis van de waarden van een of meer kolommen. Voor elke groep wordt één rij geretourneerd.
+-   **Gebruik**: Maken van samenvattingen
+
+```sql
+SELECT column1, column2, aggregate_function(column3)
+FROM table_name
+GROUP BY
+  column1,
+	column2;
+```
+
+---
+
+### GROUP BY voorbeeld
+
+Tellen van het aantal werknemers per departement
+```{.sql .interactive .hr}
+SELECT department_id, COUNT(employee_id) headcount
+FROM employees
+GROUP BY department_id;
+```
+
+:::{.notes}
+We willen de departementsnaam erbij:\
+SELECT\
+	department_name,\
+	COUNT(employee_id) headcount\
+FROM\
+	employees e\
+INNER JOIN departments d ON d.department_id = e.department_id\
+GROUP BY\
+        d.department_id;\
+        
+We willen geordend per headcount:\
+ORDER BY headcount DESC;\
+:::
+
+---
+
+### GROUP BY voorbeeld 2
+
+Groeperen op meerdere kolommen:
+
+```{.sql .interactive .hr}
+SELECT department_name, job_title, COUNT(employee_id)
+FROM employees e  INNER JOIN departments d ON d.department_id = e.department_id
+                  INNER JOIN jobs j ON j.job_id = e.job_id
+GROUP BY department_name, job_title;
+```
+
+:::{.notes}
+Definieer de vraagstelling van deze query
+:::
+
+---
+
+### HAVING
+
+-   **Definitie**: HAVING wordt gebruikt om voorwaarden te filteren die op de resultaten van aggregatiefuncties van toepassing zijn. Terwijl de WHERE-clausule wordt gebruikt om rijen te filteren voordat aggregatie plaatsvindt, wordt HAVING gebruikt om rijen te filteren na de aggregatie.
+-   **Gebruik**: Essentieel in gevallen waar je voorwaarden wilt toepassen op groepen van data die door de GROUP BY-clausule zijn verzameld.
+
+```{.sql}
+SELECT column1, column2, AGGREGATE_FUNCTION (column3)
+FROM table1
+GROUP BY
+  column1,
+	column2
+HAVING
+	group_condition;
+```
+
+
+---
+
+### HAVING voorbeeld
+
+We willen de managers en het aantal werknemer die aan hen direct rapporteren:
+```{.sql .interactive .hr}
+SELECT manager_id, first_name, last_name, COUNT(employee_id) direct_reports
+FROM employees
+WHERE manager_id IS NOT NULL
+GROUP BY manager_id;
+```
+
+:::{.notes}
+Managers met minstens 5 werknemers die direct aan hun rapporteren:\
+
+HAVING direct_reports >= 5;\
+:::
+---
+
+### HAVING voorbeeld 2
+
+Totale salaris voor elk departement (met een totale salaris tussen de 20k en 30k):
+Vul aan!
+
+```{.sql .interactive .hr}
+SELECT department_id, SUM(salary) as totaal
+FROM employees
+GROUP BY department_id
+ORDER BY SUM(salary);
+```
+
+:::{.notes}
+HAVING SUM(salary) BETWEEN 20000 AND 30000\
+ORDER BY SUM(salary);
+:::
+
+---
+
+\
+\
+\
+Jullie kunnen nu een eenvoudige VOLLEDIGE query uitvoeren!
+
+---
+
+### Functies
+
+---
+
+### Text functies
+
+Let op dialect!
+
+{{< pdf sql_course_docs/sql-server-cheat-sheet-a4.pdf width=100% height=500px >}}
+
+---
+
+### Text functies voorbeeld
+
+```{.sql .interactive .hr}
+SELECT LOWER(department_name)
+FROM departments
+ORDER BY LOWER(department_name);
+```
+
+---
+
+### Text functies voorbeeld 2
+
+```{.sql .interactive .hr}
+UPDATE employees 
+SET email = UPPER(email);
+```
+
+---
+
+### CASE functie
+
+Werkverjaardagen:
+
+```{.sql .interactive .hr}
+SELECT first_name, last_name, hire_date,
+    --CASE (2000 - YEAR(hire_date))
+    CASE (2024 - strftime('%Y',hire_date))
+        WHEN 1 THEN '1 jaar'
+        WHEN 10 THEN '10 jaar'
+        WHEN 20 THEN '20 jaar'
+        WHEN 30 THEN '30 jaar'
+    END as verjaardag
+FROM
+    employees
+ORDER BY first_name;
+```
+
+---
+
+### SEARCHED CASE
+
+```{.sql}
+CASE
+WHEN boolean_expression_1 THEN
+	result_1
+WHEN boolean_expression_2 THEN
+	result_2
+WHEN boolean_expression_3 THEN
+	result_3
+ELSE
+	else_result
+END;
+```
+
+---
+
+### SEARCHED CASE voorbeeld
+
+```{.sql .interactive .hr}
+SELECT first_name, last_name,salary,
+    CASE
+        WHEN salary < 3000 THEN 'Low'
+        WHEN salary >= 3000 AND salary <= 5000 THEN 'Average'
+        WHEN salary > 5000 THEN 'High'
+    END evaluation
+FROM
+    employees;
+```
+
+---
+
+
+
+
+
+
+
+
+
+
+
+
 

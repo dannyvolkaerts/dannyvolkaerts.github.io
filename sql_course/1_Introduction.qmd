@@ -3,6 +3,7 @@ title: "Introductie SQL"
 author: Danny Volkaerts
 date: last-modified
 date-format: "DD MMM, YYYY" 
+smaller: true
 format: revealjs
 filters:
   - interactive-sql
@@ -70,7 +71,7 @@ Ontwikkeld door IBM (1974)
 
 Het volgende database diagram illustreert de HR voorbeeld database: <!-- [SQL tutorial](https://www.sqltutorial.org/sql-sample-database/){preview-link="true" style="text-align: center"} -->
 
-![ERD of HR database](sql_course_images/hr-SQL-Sample-Database-Schema.png){#fig-erd-hr}
+![ERD van HR database](sql_course_images/hr-SQL-Sample-Database-Schema.png){#fig-erd-hr}
 
 ---
 

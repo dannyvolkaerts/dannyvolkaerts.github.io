@@ -103,8 +103,8 @@
 }
 
 .reveal .sqlime-example div:nth-child(2) {
-  max-height: 8em;
-  max-width: 30em;
+  max-height: 15em;
+  max-width: 40em;
   overflow: auto;
 }
 
