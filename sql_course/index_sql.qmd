@@ -5,11 +5,11 @@ format:
     embed-resources: true
 ---
 
-SQL, of Structured Query Language, is een fundamenteel hulpmiddel voor iedereen die geïnteresseerd is in data science. Met de exponentiële groei van gegevens in de huidige digitale wereld is het essentieel om deze gegevens efficiënt te kunnen bevragen, manipuleren en analyseren. SQL is de standaardtaal voor relationele databasemanagementsystemen en stelt gebruikers in staat om op een eenvoudige en efficiënte manier met databases om te gaan. Kennis van SQL stelt dataprofielen in staat om zinvolle inzichten te halen uit grote datasets, gegevensanalyses uit te voeren en gegevens in te voeren in hun modellen voor machine learning. Inzicht in SQL opent mogelijkheden in data-analyse, data-engineering en daarbuiten, waardoor het een essentiële vaardigheid is voor elk aspirant-dataprofiel.
+SQL, of Structured Query Language, is een fundamenteel hulpmiddel voor iedereen die geïnteresseerd is in opslag, verwerking of data analyse. Met de exponentiële groei van gegevens in de huidige digitale wereld is het essentieel om deze gegevens efficiënt te kunnen bevragen, manipuleren en analyseren. SQL is de standaardtaal voor relationele databasemanagementsystemen en stelt gebruikers in staat om op een eenvoudige en efficiënte manier met databases om te gaan. Kennis van SQL stelt dataprofielen in staat om zinvolle inzichten te halen uit grote datasets, gegevensanalyses uit te voeren en gegevens in te voeren in hun modellen voor machine learning. Inzicht in SQL opent mogelijkheden in data-analyse, data-engineering en daarbuiten, waardoor het een essentiële vaardigheid is voor elk aspirant-dataprofiel.
 
 ## Hoofdstukken
 
-1. [**Inleiding tot SQL en databasess**](1_introduction.html){target="_blank"}\
+1. [**Inleiding tot SQL en databases**](1_introduction.html){target="_blank"}\
 Overzicht van SQL, databases en hoe ze worden gebruikt in data science.
 
 ---
@@ -25,7 +25,7 @@ Introductie tot JOIN operaties en hun belang.
 ---
 
 4. [**Geavanceerde Data Manipulatie**](4_advanced.html){target="_blank"}\
-Gebruik van GROUP BY, HAVING, and aggregatiefuncties.
+Gebruik van GROUP BY, HAVING en aggregatiefuncties.
 
 ---
 
