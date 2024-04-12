@@ -17,7 +17,7 @@ website:
       - href: index.qmd
         text: Home
       - href: sql_course/index_sql.qmd
-        text: "SQL course"
+        text: "SQL cursus"
 
 format:
   html:
