@@ -8,9 +8,9 @@ about:
     - icon: linkedin
       text: LinkedIn
       href: https://linkedin.com/in/dvolkaerts
-    - icon: github
-      text: Github
-      href: https://github.com/dannyvolkaerts
+//    - icon: github
+//      text: Github
+//      href: https://github.com/dannyvolkaerts
 include-in-header:
   - text: |
       <style>
