@@ -14,7 +14,7 @@ Overview of SQL, databases, and how they are used in data science.
 
 ---
 
-2. [**Basic SQL Queries**](2_basic.html){target="_blank"}\
+2. [**Basic SQL Queries**](2_basics.html){target="_blank"}\
 Learning SELECT statements, filtering data with WHERE clauses.
 
 ---
