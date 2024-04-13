@@ -12,7 +12,7 @@
   <meta name="generator" content="quarto-1.3.450">
 
   <meta name="author" content="Danny Volkaerts">
-  <title>DV - Subqueries and views</title>
+  <title>Subqueries and views</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -404,37 +404,94 @@ Danny Volkaerts
 </div>
 </div>
 
-  <p class="date">12 Apr, 2024</p>
+  <p class="date">13 Apr, 2024</p>
 </section>
 <section class="slide level2">
 
-<h3 id="wat-is-een-subquery">Wat is een subquery?</h3>
-<div class="interactive-sql">
-<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource sql interactive hr number-lines code-with-copy"><code class="sourceCode sql"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">SELECT</span>    first_name, last_name, employees.department_id, </span>
-<span id="cb1-2"><a href="#cb1-2"></a>          departments.department_id, department_name</span>
-<span id="cb1-3"><a href="#cb1-3"></a><span class="kw">FROM</span> employees    <span class="kw">INNER</span> <span class="kw">JOIN</span> departments </span>
-<span id="cb1-4"><a href="#cb1-4"></a>                  <span class="kw">ON</span> departments.department_id <span class="op">=</span> employees.department_id</span>
-<span id="cb1-5"><a href="#cb1-5"></a><span class="kw">WHERE</span> departments.department_name <span class="op">=</span> <span class="st">'Purchasing'</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section class="slide level2">
-
-<h3 id="subquery---voorbeeld-1">subquery - voorbeeld 1</h3>
-<p>Geef me de verschillende jobtitels van departement ‘Purchasing’.</p>
+<h3 id="subquery">Subquery</h3>
+<p>Per definitie is een subquery een query die in een andere query wordt genest.<br>
+</p>
+<p>Stel dat je alle werknemers moet vinden die zich bevinden op de locatie met id 1700.</p>
 
 <img data-src="sql_course_images/subqueries_ex1.png" id="fig-erd-hr" class="r-stretch"></section>
 <section class="slide level2">
 
+<h3 id="subquery-1">Subquery</h3>
+<p>Dan zoeken we eerst alle departementen op locatie 1700:</p>
+<div class="interactive-sql">
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource sql interactive hr number-lines code-with-copy"><code class="sourceCode sql"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">SELECT</span> <span class="op">*</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="kw">FROM</span> departments</span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="kw">WHERE</span> location_id <span class="op">=</span> <span class="dv">1700</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section class="slide level2">
+
+<h3 id="subquery-2">Subquery</h3>
+<p>Dan gebruiken we deze lijst om de werknemers te vinden:</p>
+<div class="interactive-sql">
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource sql interactive hr number-lines code-with-copy"><code class="sourceCode sql"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">SELECT</span> employee_id, first_name, last_name</span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="kw">FROM</span> employees</span>
+<span id="cb2-3"><a href="#cb2-3"></a><span class="kw">WHERE</span> department_id <span class="kw">IN</span> (<span class="dv">1</span> , <span class="dv">3</span>, <span class="dv">9</span>, <span class="dv">10</span>, <span class="dv">11</span>)</span>
+<span id="cb2-4"><a href="#cb2-4"></a><span class="kw">ORDER</span> <span class="kw">BY</span> first_name , last_name;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section class="slide level2">
+
+<h3 id="subquery-3">Subquery</h3>
+<ul>
+<li>Probleem: lijst met department_id’s kan heel lang zijn<br>
+</li>
+<li>Probleem 2: omslachtig wanneer we werknemers uit ander departement willen</li>
+</ul>
+</section>
+<section class="slide level2">
+
+<h3 id="subquery-4">Subquery</h3>
+<div class="interactive-sql">
+<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource sql interactive hr number-lines code-with-copy"><code class="sourceCode sql"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">SELECT</span> employee_id, first_name, last_name</span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="kw">FROM</span> employees</span>
+<span id="cb3-3"><a href="#cb3-3"></a><span class="kw">WHERE</span> department_id <span class="kw">IN</span> (</span>
+<span id="cb3-4"><a href="#cb3-4"></a>        <span class="kw">SELECT</span> department_id</span>
+<span id="cb3-5"><a href="#cb3-5"></a>        <span class="kw">FROM</span> departments</span>
+<span id="cb3-6"><a href="#cb3-6"></a>        <span class="kw">WHERE</span> location_id <span class="op">=</span> <span class="dv">1700</span>)</span>
+<span id="cb3-7"><a href="#cb3-7"></a><span class="kw">ORDER</span> <span class="kw">BY</span> first_name , last_name;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<aside class="notes">
+<p>De query tussen haakjes wordt een subquery genoemd. Het wordt ook wel een inner query of inner select genoemd.<br>
+De query die de subquery bevat, wordt een outer query of outer select genoemd.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2">
+
 <h3 id="subquery-voorbeeld-1">Subquery voorbeeld 1</h3>
-<p>Geef me de verschillende jobtitels van departement ‘Purchasing’.</p>
+<p>Vind de werknemers met het hoogste salaris:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource sql number-lines code-with-copy"><code class="sourceCode sql"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">SELECT</span> employee_id, first_name, last_name, salary</span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="kw">FROM</span> employees</span>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="kw">WHERE</span> salary <span class="op">=</span> (<span class="kw">SELECT</span> <span class="fu">MAX</span>(salary) <span class="kw">FROM</span> employees)</span>
+<span id="cb4-4"><a href="#cb4-4"></a><span class="kw">ORDER</span> <span class="kw">BY</span> first_name , last_name;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section class="slide level2">
+
+<h3 id="subquery-voorbeeld-2">Subquery voorbeeld 2</h3>
+<p>Wat is de vraagstelling bij volgende query?</p>
 <div class="interactive-sql">
-<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource sql interactive hr number-lines code-with-copy"><code class="sourceCode sql"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">SELECT</span> job_title, department_name</span>
-<span id="cb2-2"><a href="#cb2-2"></a><span class="kw">FROM</span> employees e  <span class="kw">INNER</span> <span class="kw">JOIN</span> departments d <span class="kw">ON</span> d.department_id <span class="op">=</span> e.department_id</span>
-<span id="cb2-3"><a href="#cb2-3"></a>                  <span class="kw">INNER</span> <span class="kw">JOIN</span> jobs j <span class="kw">ON</span> j.job_id <span class="op">=</span> e.job_id</span>
-<span id="cb2-4"><a href="#cb2-4"></a><span class="kw">WHERE</span> d.department_name <span class="op">=</span> <span class="st">'Purchasing'</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource sql interactive hr number-lines code-with-copy"><code class="sourceCode sql"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw">SELECT</span> employee_id, first_name, last_name, salary</span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="kw">FROM</span> employees</span>
+<span id="cb5-3"><a href="#cb5-3"></a><span class="kw">WHERE</span> salary <span class="op">&gt;=</span> <span class="kw">ALL</span> (<span class="kw">SELECT</span> <span class="fu">MIN</span>(salary) <span class="kw">FROM</span> employees <span class="kw">GROUP</span> <span class="kw">BY</span> department_id)</span>
+<span id="cb5-4"><a href="#cb5-4"></a><span class="kw">ORDER</span> <span class="kw">BY</span> first_name , last_name;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <aside class="notes">
-<p>DISTINCT</p>
+
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -449,34 +506,31 @@ Danny Volkaerts
 </section>
 <section class="slide level2">
 
-<h3 id="left-join-right-join">LEFT JOIN (&amp; RIGHT JOIN)</h3>
-<ul>
-<li><strong>Definitie</strong>: Geeft alle rijen uit de linkertabel terug, samen met de overeenkomstige rijen uit de rechtertabel. Als er geen overeenkomst is, worden de resultaten voor de rechtertabel NULL.</li>
-<li><strong>Gebruik</strong>: Nuttig om te zien welke rijen in de linkertabel geen overeenkomstige rijen in de rechtertabel hebben.</li>
-</ul>
-<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource sql number-lines code-with-copy"><code class="sourceCode sql"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">SELECT</span> kolommen</span>
-<span id="cb3-2"><a href="#cb3-2"></a><span class="kw">FROM</span> tabel1</span>
-<span id="cb3-3"><a href="#cb3-3"></a><span class="kw">LEFT</span> <span class="kw">JOIN</span> tabel2</span>
-<span id="cb3-4"><a href="#cb3-4"></a><span class="kw">ON</span> tabel1.gemeenschappelijke_kolom <span class="op">=</span> tabel2.gemeenschappelijke_kolom;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<h3 id="views">VIEWs</h3>
+<p>Een view is als een virtuele tabel die geproduceerd wordt door het uitvoeren van een query. Het relationele databasebeheersysteem (RDBMS) slaat een view op als een SELECT met naam in de databasecatalogus.<br>
+Telkens wanneer je een SELECT opdracht geeft die een view naam bevat, voert de RDBMS de view-definiërende query uit om de virtuele tabel te creëren. Die virtuele tabel wordt dan gebruikt als brontabel van de query.</p>
 </section>
 <section class="slide level2">
 
-<h3 id="left-join-voorbeeld">LEFT JOIN voorbeeld</h3>
-
-<img data-src="sql_course_images/left_join_ex1.png" class="r-stretch"></section>
+<h3 id="views-1">VIEWs</h3>
+<p>** Gebruik: Views helpen je om de gegevens voor een specifieke groep gebruikers in te pakken. Je kunt bijvoorbeeld een overzicht maken van salarisgegevens voor de medewerkers van de afdeling Financiën.<br>
+Views helpen databasebeveiliging te handhaven. In plaats van gebruikers toegang te geven tot databasetabellen, maak je een view om alleen noodzakelijke gegevens te onthullen en geef je gebruikers toegang tot de view.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource sql number-lines code-with-copy"><code class="sourceCode sql"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw">CREATE</span> <span class="kw">VIEW</span> view_name </span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="kw">AS</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a><span class="kw">SELECT</span><span class="op">-</span>statement</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
 <section class="slide level2">
 
-<h3 id="left-join-voorbeeld-1">LEFT JOIN voorbeeld</h3>
+<h3 id="views-voorbeeld">VIEWs voorbeeld</h3>
 <div class="interactive-sql">
-<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource sql interactive hr number-lines code-with-copy"><code class="sourceCode sql"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">SELECT</span> c.country_name, c.country_id, l.country_id, l.street_address, l.city</span>
-<span id="cb4-2"><a href="#cb4-2"></a><span class="kw">FROM</span> countries c <span class="kw">LEFT</span> <span class="kw">JOIN</span> locations l <span class="kw">ON</span> l.country_id <span class="op">=</span> c.country_id</span>
-<span id="cb4-3"><a href="#cb4-3"></a><span class="kw">WHERE</span> c.country_id <span class="kw">IN</span> (<span class="st">'US'</span>, <span class="st">'UK'</span>, <span class="st">'CN'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource sql interactive hr number-lines code-with-copy"><code class="sourceCode sql"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw">CREATE</span> <span class="kw">VIEW</span> employee_contacts <span class="kw">AS</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a>    <span class="kw">SELECT</span> first_name, last_name, email, phone_number, department_name</span>
+<span id="cb7-3"><a href="#cb7-3"></a>    <span class="kw">FROM</span> employees e <span class="kw">INNER</span> <span class="kw">JOIN</span></span>
+<span id="cb7-4"><a href="#cb7-4"></a>        departments d <span class="kw">ON</span> d.department_id <span class="op">=</span> e.department_id</span>
+<span id="cb7-5"><a href="#cb7-5"></a>    <span class="kw">ORDER</span> <span class="kw">BY</span> first_name;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <aside class="notes">
-<p>Oefening: lijst alle landen (naam) die geen locatie hebben in de database:<br>
-SELECT country_name<br>
-FROM countries c LEFT JOIN locations l ON l.country_id = c.country_id<br>
-WHERE l.location_id IS NULL</p>
+<p>SELECT * FROM employee_contacts;</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -491,141 +545,28 @@ WHERE l.location_id IS NULL</p>
 </section>
 <section class="slide level2">
 
-<h3 id="left-join-voorbeeld-2">LEFT JOIN voorbeeld 2</h3>
-
-<img data-src="sql_course_images/left_join_ex2.png" class="r-stretch"></section>
-<section class="slide level2">
-
-<h3 id="left-join-voorbeeld-2-1">LEFT JOIN voorbeeld 2</h3>
+<h3 id="views-voorbeeld-2">VIEWs voorbeeld 2</h3>
 <div class="interactive-sql">
-<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource sql interactive hr number-lines code-with-copy"><code class="sourceCode sql"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw">SELECT</span> r.region_name, c.country_name, l.street_address, l.city</span>
-<span id="cb5-2"><a href="#cb5-2"></a><span class="kw">FROM</span> regions r    <span class="kw">LEFT</span> <span class="kw">JOIN</span> countries c <span class="kw">ON</span> c.region_id <span class="op">=</span> r.region_id</span>
-<span id="cb5-3"><a href="#cb5-3"></a>                  <span class="kw">LEFT</span> <span class="kw">JOIN</span> locations l <span class="kw">ON</span> l.country_id <span class="op">=</span> c.country_id</span>
-<span id="cb5-4"><a href="#cb5-4"></a><span class="kw">WHERE</span> c.country_id <span class="kw">IN</span> (<span class="st">'US'</span>, <span class="st">'UK'</span>, <span class="st">'CN'</span>);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section class="slide level2">
-
-<h3 id="full-outer-join">FULL OUTER JOIN</h3>
-<ul>
-<li><strong>Definitie</strong>: Geeft alle rijen terug van beide tabellen, ook wanneer er geen overeenkomst is in een van de tabellen.</li>
-<li><strong>Gebruik</strong>: Nuttig om alle overeenkomsten en verschillen tussen twee tabellen te zien.</li>
-</ul>
-<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource sql number-lines code-with-copy"><code class="sourceCode sql"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw">SELECT</span> kolommen</span>
-<span id="cb6-2"><a href="#cb6-2"></a><span class="kw">FROM</span> tabel1</span>
-<span id="cb6-3"><a href="#cb6-3"></a><span class="kw">FULL</span> <span class="kw">OUTER</span> <span class="kw">JOIN</span> tabel2</span>
-<span id="cb6-4"><a href="#cb6-4"></a><span class="kw">ON</span> tabel1.gemeenschappelijke_kolom <span class="op">=</span> tabel2.gemeenschappelijke_kolom;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section class="slide level2">
-
-<h3 id="full-outer-join-voorbeeld">FULL OUTER JOIN voorbeeld</h3>
-<p>We maken enkele tabellen aan om dit voorbeeld uit te werken: We creëren de tabel ‘mand’ en tabel ‘fruit’, waarbij we willen bijhouden welk stuk fruit in welke mand zit.</p>
-<div class="interactive-sql">
-<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource sql interactive hr number-lines code-with-copy"><code class="sourceCode sql"></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<aside class="notes">
-<p>CREATE TABLE mand (<br>
-mand_id INTEGER PRIMARY KEY,<br>
-mand_naam VARCHAR (255) NOT NULL<br>
-);<br>
-</p>
-<p>CREATE TABLE fruit (<br>
-fruit_id INTEGER PRIMARY KEY,<br>
-fruit_naam VARCHAR (255) NOT NULL,<br>
-mand_id INTEGER<br>
-);<br>
-</p>
-<p>INSERT INTO mand (mand_id, mand_naam)<br>
-VALUES<br>
-(1, ‘A’),<br>
-(2, ‘B’),<br>
-(3, ‘C’);<br>
-</p>
-<p>INSERT INTO fruit (<br>
-fruit_id,<br>
-fruit_naam,<br>
-mand_id<br>
-)<br>
-VALUES<br>
-(1, ‘Appel’, 1),<br>
-(2, ‘Sinaasappel’, 1),<br>
-(3, ‘Banaan’, 2),<br>
-(4, ‘Aardbei’, NULL);<br>
-</p>
-<p>Alle manden met fruit, fruit dat niet in een mand zit en manden zonder fruit -&gt; FULL OUTER<br>
-SELECT<br>
-mand_naam,<br>
-fruit_naam<br>
-FROM fruit FULL OUTER JOIN mand ON mand.mand_id = fruit.mand_id;<br>
-</p>
-<p>Lege mand die geen fruit heeft:<br>
-SELECT<br>
-mand_naam,<br>
-fruit_naam<br>
-FROM<br>
-fruit<br>
-FULL OUTER JOIN mand ON mand.mand_id = fruit.mand_id<br>
-WHERE<br>
-fruit_naam IS NULL;<br>
-</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section class="slide level2">
-
-<h3 id="self-join">SELF JOIN</h3>
-<ul>
-<li><strong>Definitie</strong>: Een SELF JOIN is een normale join, maar dan wordt de tabel met zichzelf gejoined, alsof het twee verschillende tabellen waren.</li>
-<li><strong>Gebruik</strong>: Nuttig om relaties binnen dezelfde tabel te vergelijken.</li>
-</ul>
-<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource sql number-lines code-with-copy"><code class="sourceCode sql"><span id="cb8-1"><a href="#cb8-1"></a><span class="kw">SELECT</span> a.kolom_name, b.kolom_name</span>
-<span id="cb8-2"><a href="#cb8-2"></a><span class="kw">FROM</span> tabel a, tabel b</span>
-<span id="cb8-3"><a href="#cb8-3"></a><span class="kw">WHERE</span> a.gemeenschappelijke_kolom <span class="op">=</span> b.gemeenschappelijke_kolom <span class="kw">AND</span> voorwaarde;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section class="slide level2">
-
-<h3 id="self-join-voorbeeld">SELF JOIN voorbeeld</h3>
-<p>We kijken na welke employee aan welke manager rapporteert:</p>
-
-<img data-src="sql_course_images/hr-SQL-Sample-Database-Schema.png" id="fig-erd-hr" class="r-stretch"></section>
-<section class="slide level2">
-
-<h3 id="self-join-voorbeeld-1">SELF JOIN voorbeeld</h3>
-<p>We kijken na welke employee aan welke manager rapporteert:</p>
-<div class="interactive-sql">
-<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource sql interactive hr number-lines code-with-copy"><code class="sourceCode sql"><span id="cb9-1"><a href="#cb9-1"></a><span class="kw">SELECT</span>  e.first_name <span class="op">||</span> <span class="st">' '</span> <span class="op">||</span> e.last_name <span class="kw">AS</span> employee, </span>
-<span id="cb9-2"><a href="#cb9-2"></a>        m.first_name <span class="op">||</span> <span class="st">' '</span> <span class="op">||</span> m.last_name <span class="kw">AS</span> manager</span>
-<span id="cb9-3"><a href="#cb9-3"></a><span class="kw">FROM</span> employees e <span class="kw">INNER</span> <span class="kw">JOIN</span> employees m <span class="kw">ON</span> m.employee_id <span class="op">=</span> e.manager_id</span>
-<span id="cb9-4"><a href="#cb9-4"></a><span class="kw">ORDER</span> <span class="kw">BY</span> manager;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section class="slide level2">
-
-<h3 id="self-join-voorbeeld-2">SELF JOIN voorbeeld</h3>
-<p>De CEO heeft geen manager maar deze willen we ook graag in het resultaat. Hoe doen we dit?</p>
-<div class="interactive-sql">
-<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource sql interactive hr number-lines code-with-copy"><code class="sourceCode sql"><span id="cb10-1"><a href="#cb10-1"></a><span class="kw">SELECT</span>  e.first_name <span class="op">||</span> <span class="st">' '</span> <span class="op">||</span> e.last_name <span class="kw">AS</span> employee,</span>
-<span id="cb10-2"><a href="#cb10-2"></a>        m.first_name <span class="op">||</span> <span class="st">' '</span> <span class="op">||</span> m.last_name <span class="kw">AS</span> manager</span>
-<span id="cb10-3"><a href="#cb10-3"></a><span class="kw">FROM</span> employees e <span class="op">..</span>.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource sql interactive hr number-lines code-with-copy"><code class="sourceCode sql"><span id="cb8-1"><a href="#cb8-1"></a><span class="kw">CREATE</span> <span class="kw">VIEW</span> payroll (first_name , last_name , job, compensation) <span class="kw">AS</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a>    <span class="kw">SELECT</span> </span>
+<span id="cb8-3"><a href="#cb8-3"></a>        first_name, last_name, job_title, salary</span>
+<span id="cb8-4"><a href="#cb8-4"></a>    <span class="kw">FROM</span></span>
+<span id="cb8-5"><a href="#cb8-5"></a>        employees e</span>
+<span id="cb8-6"><a href="#cb8-6"></a>            <span class="kw">INNER</span> <span class="kw">JOIN</span></span>
+<span id="cb8-7"><a href="#cb8-7"></a>        jobs j <span class="kw">ON</span> j.job_id<span class="op">=</span> e.job_id</span>
+<span id="cb8-8"><a href="#cb8-8"></a>    <span class="kw">ORDER</span> <span class="kw">BY</span> first_name;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <aside class="notes">
 <p>SELECT<br>
-e.first_name || ’ ’ || e.last_name AS employee,<br>
-m.first_name || ’ ’ || m.last_name AS manager<br>
+job,<br>
+MIN(compensation),<br>
+MAX(compensation),<br>
+AVG(compensation)<br>
 FROM<br>
-employees e<br>
-LEFT JOIN<br>
-employees m ON m.employee_id = e.manager_id<br>
-ORDER BY manager;<br>
+payroll<br>
+WHERE<br>
+job LIKE ‘A%’<br>
+GROUP BY job;<br>
 </p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -641,7 +582,8 @@ ORDER BY manager;<br>
 </section>
 <section class="slide level2">
 
-<h3 id="oefeningen">Oefeningen</h3>
+<h3 id="drop-view">drop VIEW</h3>
+<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource sql number-lines code-with-copy"><code class="sourceCode sql"><span id="cb9-1"><a href="#cb9-1"></a><span class="kw">DROP</span> <span class="kw">VIEW</span> view_name;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 <div class="footer footer-default">
 
