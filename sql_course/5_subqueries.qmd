@@ -94,7 +94,7 @@ ORDER BY first_name , last_name;
 
 Wat is de vraagstelling bij volgende query?
 
-``` {.sql .interactive .hr}}
+``` {.sql .interactive .hr}
 SELECT employee_id, first_name, last_name, salary
 FROM employees
 WHERE salary >= (
@@ -120,7 +120,7 @@ In tegenstelling tot een gewone subquery, is een gecorreleerde subquery een subq
 
 De volgende query vindt alle werknemers waarvan het salaris hoger is dan het gemiddelde salaris van de werknemers in hun afdeling
 
-``` {.sql .interactive .hr}}
+``` {.sql .interactive .hr}
 SELECT employee_id, first_name, last_name, salary, department_id
 FROM employees e
 WHERE salary > (    SELECT AVG(salary)
@@ -135,7 +135,7 @@ ORDER BY department_id, first_name, last_name;
 
 De volgende query geeft de werknemers en het gemiddelde salaris van alle werknemers in hun afdelingen:
 
-``` {.sql .interactive .hr}}
+``` {.sql .interactive .hr}
 SELECT employee_id, first_name, last_name, department_name,salary,
     (SELECT ROUND(AVG(salary),0) FROM employees
      WHERE department_id = e.department_id) avg_salary_in_department

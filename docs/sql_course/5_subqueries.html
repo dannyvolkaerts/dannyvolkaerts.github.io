@@ -475,10 +475,12 @@ De query die de subquery bevat, wordt een outer query of outer select genoemd.</
 
 <h3 id="subquery-voorbeeld-1">Subquery voorbeeld 1</h3>
 <p>Vind de werknemers met het hoogste salaris:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource sql number-lines code-with-copy"><code class="sourceCode sql"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">SELECT</span> employee_id, first_name, last_name, salary</span>
+<div class="interactive-sql">
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource sql interactive hr number-lines code-with-copy"><code class="sourceCode sql"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">SELECT</span> employee_id, first_name, last_name, salary</span>
 <span id="cb4-2"><a href="#cb4-2"></a><span class="kw">FROM</span> employees</span>
 <span id="cb4-3"><a href="#cb4-3"></a><span class="kw">WHERE</span> salary <span class="op">=</span> (<span class="kw">SELECT</span> <span class="fu">MAX</span>(salary) <span class="kw">FROM</span> employees)</span>
 <span id="cb4-4"><a href="#cb4-4"></a><span class="kw">ORDER</span> <span class="kw">BY</span> first_name , last_name;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section>
 <section class="slide level2">
 
@@ -487,11 +489,14 @@ De query die de subquery bevat, wordt een outer query of outer select genoemd.</
 <div class="interactive-sql">
 <div class="sourceCode" id="cb5"><pre class="sourceCode numberSource sql interactive hr number-lines code-with-copy"><code class="sourceCode sql"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw">SELECT</span> employee_id, first_name, last_name, salary</span>
 <span id="cb5-2"><a href="#cb5-2"></a><span class="kw">FROM</span> employees</span>
-<span id="cb5-3"><a href="#cb5-3"></a><span class="kw">WHERE</span> salary <span class="op">&gt;=</span> <span class="kw">ALL</span> (<span class="kw">SELECT</span> <span class="fu">MIN</span>(salary) <span class="kw">FROM</span> employees <span class="kw">GROUP</span> <span class="kw">BY</span> department_id)</span>
-<span id="cb5-4"><a href="#cb5-4"></a><span class="kw">ORDER</span> <span class="kw">BY</span> first_name , last_name;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-3"><a href="#cb5-3"></a><span class="kw">WHERE</span> salary <span class="op">&gt;=</span> (</span>
+<span id="cb5-4"><a href="#cb5-4"></a>  <span class="kw">SELECT</span> <span class="fu">MAX</span>(<span class="fu">min</span>) <span class="kw">FROM</span> (</span>
+<span id="cb5-5"><a href="#cb5-5"></a>    <span class="kw">SELECT</span> <span class="fu">MIN</span>(salary) <span class="kw">as</span> <span class="fu">min</span> </span>
+<span id="cb5-6"><a href="#cb5-6"></a>    <span class="kw">FROM</span> employees <span class="kw">GROUP</span> <span class="kw">BY</span> department_id))</span>
+<span id="cb5-7"><a href="#cb5-7"></a><span class="kw">ORDER</span> <span class="kw">BY</span> first_name , last_name;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <aside class="notes">
-
+<p>Geef me de werknemers die een salaris hebben gelijk aan of hoger dan het hoogste minimum van een van de departementen.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -506,6 +511,36 @@ De query die de subquery bevat, wordt een outer query of outer select genoemd.</
 </section>
 <section class="slide level2">
 
+<h3 id="correlated-subquery">Correlated subquery</h3>
+<p>In tegenstelling tot een gewone subquery, is een gecorreleerde subquery een subquery die de waarden van de buitenste query gebruikt. Een gecorreleerde subquery kan ook één keer geëvalueerd worden voor elke rij die geselecteerd wordt door de buitenste query. Hierdoor kan een query die een gecorreleerde subquery gebruikt traag zijn.</p>
+</section>
+<section class="slide level2">
+
+<h3 id="correlated-subquery-voorbeeld">Correlated subquery voorbeeld</h3>
+<p>De volgende query vindt alle werknemers waarvan het salaris hoger is dan het gemiddelde salaris van de werknemers in hun afdeling</p>
+<div class="interactive-sql">
+<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource sql interactive hr number-lines code-with-copy"><code class="sourceCode sql"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw">SELECT</span> employee_id, first_name, last_name, salary, department_id</span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="kw">FROM</span> employees e</span>
+<span id="cb6-3"><a href="#cb6-3"></a><span class="kw">WHERE</span> salary <span class="op">&gt;</span> (    <span class="kw">SELECT</span> <span class="fu">AVG</span>(salary)</span>
+<span id="cb6-4"><a href="#cb6-4"></a>                    <span class="kw">FROM</span> employees</span>
+<span id="cb6-5"><a href="#cb6-5"></a>                    <span class="kw">WHERE</span> department_id <span class="op">=</span> e.department_id)</span>
+<span id="cb6-6"><a href="#cb6-6"></a><span class="kw">ORDER</span> <span class="kw">BY</span> department_id, first_name, last_name;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section class="slide level2">
+
+<h3 id="correlated-subquery-voorbeeld-1">Correlated subquery voorbeeld</h3>
+<p>De volgende query geeft de werknemers en het gemiddelde salaris van alle werknemers in hun afdelingen:</p>
+<div class="interactive-sql">
+<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource sql interactive hr number-lines code-with-copy"><code class="sourceCode sql"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw">SELECT</span> employee_id, first_name, last_name, department_name,salary,</span>
+<span id="cb7-2"><a href="#cb7-2"></a>    (<span class="kw">SELECT</span> <span class="fu">ROUND</span>(<span class="fu">AVG</span>(salary),<span class="dv">0</span>) <span class="kw">FROM</span> employees</span>
+<span id="cb7-3"><a href="#cb7-3"></a>     <span class="kw">WHERE</span> department_id <span class="op">=</span> e.department_id) avg_salary_in_department</span>
+<span id="cb7-4"><a href="#cb7-4"></a><span class="kw">FROM</span> employees e <span class="kw">INNER</span> <span class="kw">JOIN</span> departments d <span class="kw">ON</span> d.department_id <span class="op">=</span> e.department_id</span>
+<span id="cb7-5"><a href="#cb7-5"></a><span class="kw">ORDER</span> <span class="kw">BY</span> department_name, first_name, last_name;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section class="slide level2">
+
 <h3 id="views">VIEWs</h3>
 <p>Een view is als een virtuele tabel die geproduceerd wordt door het uitvoeren van een query. Het relationele databasebeheersysteem (RDBMS) slaat een view op als een SELECT met naam in de databasecatalogus.<br>
 Telkens wanneer je een SELECT opdracht geeft die een view naam bevat, voert de RDBMS de view-definiërende query uit om de virtuele tabel te creëren. Die virtuele tabel wordt dan gebruikt als brontabel van de query.</p>
@@ -513,21 +548,21 @@ Telkens wanneer je een SELECT opdracht geeft die een view naam bevat, voert de R
 <section class="slide level2">
 
 <h3 id="views-1">VIEWs</h3>
-<p>** Gebruik: Views helpen je om de gegevens voor een specifieke groep gebruikers in te pakken. Je kunt bijvoorbeeld een overzicht maken van salarisgegevens voor de medewerkers van de afdeling Financiën.<br>
+<p><strong>Gebruik</strong>: Views helpen je om de gegevens voor een specifieke groep gebruikers in te pakken. Je kunt bijvoorbeeld een overzicht maken van salarisgegevens voor de medewerkers van de afdeling Financiën.<br>
 Views helpen databasebeveiliging te handhaven. In plaats van gebruikers toegang te geven tot databasetabellen, maak je een view om alleen noodzakelijke gegevens te onthullen en geef je gebruikers toegang tot de view.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource sql number-lines code-with-copy"><code class="sourceCode sql"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw">CREATE</span> <span class="kw">VIEW</span> view_name </span>
-<span id="cb6-2"><a href="#cb6-2"></a><span class="kw">AS</span></span>
-<span id="cb6-3"><a href="#cb6-3"></a><span class="kw">SELECT</span><span class="op">-</span>statement</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource sql number-lines code-with-copy"><code class="sourceCode sql"><span id="cb8-1"><a href="#cb8-1"></a><span class="kw">CREATE</span> <span class="kw">VIEW</span> view_name </span>
+<span id="cb8-2"><a href="#cb8-2"></a><span class="kw">AS</span></span>
+<span id="cb8-3"><a href="#cb8-3"></a><span class="kw">SELECT</span><span class="op">-</span>statement</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section class="slide level2">
 
 <h3 id="views-voorbeeld">VIEWs voorbeeld</h3>
 <div class="interactive-sql">
-<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource sql interactive hr number-lines code-with-copy"><code class="sourceCode sql"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw">CREATE</span> <span class="kw">VIEW</span> employee_contacts <span class="kw">AS</span></span>
-<span id="cb7-2"><a href="#cb7-2"></a>    <span class="kw">SELECT</span> first_name, last_name, email, phone_number, department_name</span>
-<span id="cb7-3"><a href="#cb7-3"></a>    <span class="kw">FROM</span> employees e <span class="kw">INNER</span> <span class="kw">JOIN</span></span>
-<span id="cb7-4"><a href="#cb7-4"></a>        departments d <span class="kw">ON</span> d.department_id <span class="op">=</span> e.department_id</span>
-<span id="cb7-5"><a href="#cb7-5"></a>    <span class="kw">ORDER</span> <span class="kw">BY</span> first_name;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource sql interactive hr number-lines code-with-copy"><code class="sourceCode sql"><span id="cb9-1"><a href="#cb9-1"></a><span class="kw">CREATE</span> <span class="kw">VIEW</span> employee_contacts <span class="kw">AS</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a>    <span class="kw">SELECT</span> first_name, last_name, email, phone_number, department_name</span>
+<span id="cb9-3"><a href="#cb9-3"></a>    <span class="kw">FROM</span> employees e <span class="kw">INNER</span> <span class="kw">JOIN</span></span>
+<span id="cb9-4"><a href="#cb9-4"></a>        departments d <span class="kw">ON</span> d.department_id <span class="op">=</span> e.department_id</span>
+<span id="cb9-5"><a href="#cb9-5"></a>    <span class="kw">ORDER</span> <span class="kw">BY</span> first_name;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <aside class="notes">
 <p>SELECT * FROM employee_contacts;</p>
@@ -547,14 +582,14 @@ Views helpen databasebeveiliging te handhaven. In plaats van gebruikers toegang 
 
 <h3 id="views-voorbeeld-2">VIEWs voorbeeld 2</h3>
 <div class="interactive-sql">
-<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource sql interactive hr number-lines code-with-copy"><code class="sourceCode sql"><span id="cb8-1"><a href="#cb8-1"></a><span class="kw">CREATE</span> <span class="kw">VIEW</span> payroll (first_name , last_name , job, compensation) <span class="kw">AS</span></span>
-<span id="cb8-2"><a href="#cb8-2"></a>    <span class="kw">SELECT</span> </span>
-<span id="cb8-3"><a href="#cb8-3"></a>        first_name, last_name, job_title, salary</span>
-<span id="cb8-4"><a href="#cb8-4"></a>    <span class="kw">FROM</span></span>
-<span id="cb8-5"><a href="#cb8-5"></a>        employees e</span>
-<span id="cb8-6"><a href="#cb8-6"></a>            <span class="kw">INNER</span> <span class="kw">JOIN</span></span>
-<span id="cb8-7"><a href="#cb8-7"></a>        jobs j <span class="kw">ON</span> j.job_id<span class="op">=</span> e.job_id</span>
-<span id="cb8-8"><a href="#cb8-8"></a>    <span class="kw">ORDER</span> <span class="kw">BY</span> first_name;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource sql interactive hr number-lines code-with-copy"><code class="sourceCode sql"><span id="cb10-1"><a href="#cb10-1"></a><span class="kw">CREATE</span> <span class="kw">VIEW</span> payroll (first_name , last_name , job, compensation) <span class="kw">AS</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a>    <span class="kw">SELECT</span> </span>
+<span id="cb10-3"><a href="#cb10-3"></a>        first_name, last_name, job_title, salary</span>
+<span id="cb10-4"><a href="#cb10-4"></a>    <span class="kw">FROM</span></span>
+<span id="cb10-5"><a href="#cb10-5"></a>        employees e</span>
+<span id="cb10-6"><a href="#cb10-6"></a>            <span class="kw">INNER</span> <span class="kw">JOIN</span></span>
+<span id="cb10-7"><a href="#cb10-7"></a>        jobs j <span class="kw">ON</span> j.job_id<span class="op">=</span> e.job_id</span>
+<span id="cb10-8"><a href="#cb10-8"></a>    <span class="kw">ORDER</span> <span class="kw">BY</span> first_name;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <aside class="notes">
 <p>SELECT<br>
@@ -583,7 +618,7 @@ GROUP BY job;<br>
 <section class="slide level2">
 
 <h3 id="drop-view">drop VIEW</h3>
-<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource sql number-lines code-with-copy"><code class="sourceCode sql"><span id="cb9-1"><a href="#cb9-1"></a><span class="kw">DROP</span> <span class="kw">VIEW</span> view_name;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode numberSource sql number-lines code-with-copy"><code class="sourceCode sql"><span id="cb11-1"><a href="#cb11-1"></a><span class="kw">DROP</span> <span class="kw">VIEW</span> view_name;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 <div class="footer footer-default">
 
