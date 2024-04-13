@@ -22,9 +22,9 @@ include-in-header:
 
 ::: {#hero-heading}
 ::: {style="text-align: center;"}
-Hi! Welcome to my digital space! As a data enthousiast I'm fueled by curiosity and driven by the desire to turn data into actionable insights. Whether it's through Machine Learning, data analysis, or data visualizations, I explore data in all its forms to unlock opportunities and drive innovation./
+Hi! Welcome to my digital space! As a data enthousiast I'm fueled by curiosity and motivated by the goal of turning data into actionable insights. Whether it's through Machine Learning, data analysis, or data visualizations, I explore data in all its forms to unlock opportunities and drive innovation.
 
-Here, I share my experiences, discoveries, and the lessons learned along the way with companies and fellow data enthusiasts. Dive into my courses, read through case studies, or reach out directly if you have any data related question!
+Here, as a work in progress, I share my experiences, discoveries, and the lessons learned along the way with companies and fellow data enthusiasts. Dive into my courses, read through case studies, or reach out directly if you have any data related question!
 
 :::
 
