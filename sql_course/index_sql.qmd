@@ -30,21 +30,21 @@ Gebruik van GROUP BY, HAVING en aggregatiefuncties.
 ---
 
 5. [**Subqueries, geneste Queries en Views**](5_subqueries.html){target="_blank"}\
-Utbreiding van queries met subqueries voor complexere data opvraging.
+Uitbreiding van queries met subqueries voor complexere data opvraging.
 
 ---
 
-<!--6. **Data Definition Language (DDL)**  
-   Understanding how to create and modify database structures.
+6. [**Data Definition Language (DDL) & Data Manipulation Language (DML)**](6_DDL.html){target="_blank"}\  
+Begrijpen hoe een databank gemaakt wordt en nvoegen, updaten en deleten van data in de databank.
 
 ---
 
-7. **Data Manipulation Language (DML)**  
-   Inserting, updating, and deleting data.
+7. [**SQL en PowerBI**](7_powerbi.html){target="_blank"}\ 
+Kennis halen uit data door het bundelen van de kracht van SQL met PowerBI.
 
----
+--
 
-8. **Transactions and Data Integrity**  
+<!-- 8. **Transactions and Data Integrity**  
    Managing transactions, understanding ACID properties.
 
 ---

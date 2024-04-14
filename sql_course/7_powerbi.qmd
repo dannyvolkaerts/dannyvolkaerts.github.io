@@ -1,0 +1,57 @@
+---
+title: "Integratie van SQL in PowerBI"
+author: "Danny Volkaerts"
+format: revealjs
+editor: visual
+---
+
+## Waarom PowerBI en SQL? - Belang van Data-intelligentie
+
+---
+
+### PowerBI en SQL
+
+PowerBI en SQL vormen een krachtige combinatie voor data-analyse en business intelligence.\
+PowerBI stelt gebruikers in staat om data vanuit SQL visueel te verkennen en interactieve rapporten te creëren.\
+
+---
+
+### PowerBI
+
+Samen stellen ze organisaties in staat om:
+
+- **Diepgaande Inzichten te Verkrijgen**: Gebruik SQL voor complexe dataverwerking en -analyse voordat je deze visualiseert in PowerBI.
+- **Snellere Besluitvorming**: Door realtime toegang tot bijgewerkte data-analyses en rapportages.
+- **Verbeterde Data Governance**: SQL helpt bij het structureren van data terwijl PowerBI zorgt voor de compliance en veiligheid bij het delen van rapporten.
+
+---
+
+## Concept en Werkwijze
+
+---
+
+Integratie van SQL in PowerBI gebeurt typisch via DirectQuery of door het importeren van data. Dit stelt gebruikers in staat om:
+
+- **DirectQuery**: Verbind direct met SQL-databases voor realtime updates. Wijzigingen in de database worden onmiddellijk weerspiegeld in PowerBI-rapporten.
+- **Data Importeren**: Haal data uit SQL-databases naar PowerBI, waar het kan worden getransformeerd, gemodelleerd, en geanalyseerd.
+
+---
+
+## Voorbeelden van PowerBI en SQL
+
+---
+
+### Case Studie 1: Verkoopanalyse
+
+- **SQL Query**: Selecteer maandelijkse verkoopcijfers per productcategorie.
+- **PowerBI Dashboard**: Visualiseer trends en patronen in verkoop over tijd met interactieve grafieken.
+
+---
+
+### Case Studie 2: Klantgedrag Analyse
+
+- **SQL Query**: Analyseer klantinteracties en koopgedrag.
+- **PowerBI Rapport**: Maak segmentatie van klanten en analyseer de effectiviteit van marketingcampagnes.
+
+Deze voorbeelden tonen aan hoe SQL-query's geïntegreerd in PowerBI kunnen leiden tot krachtige business intelligence oplossingen die organisaties helpen strategische besluiten te nemen op basis van data.
+

@@ -1,0 +1,146 @@
+---
+title: "Data Definition Language"
+author: Danny Volkaerts
+date: last-modified
+date-format: "DD MMM, YYYY" 
+format:
+  revealjs: 
+    theme: default
+filters:
+  - interactive-sql
+databases:
+  - name: hr
+    path: "https://raw.githubusercontent.com/dannyvolkaerts/something/main/hr.sql"
+  - name: hr-not-editable
+    path: "https://raw.githubusercontent.com/dannyvolkaerts/something/main/hr.sql"
+    editable: false
+---
+
+### DDL
+
+```{.sql}
+CREATE TABLE table_name(
+     column_name_1 data_type default value column_constraint,
+     column_name_2 data_type default value column_constraint,
+     ...,
+     table_constraint
+);
+```
+
+
+---
+
+### CREATE example
+
+<img src="sql_course_images/DDL_courses.png" alt="drawing" width="50"/>
+
+``` {.sql .interactive .hr}
+CREATE TABLE courses (
+    course_id INTEGER PRIMARY KEY,
+    course_name VARCHAR(50) NOT NULL
+);
+```
+
+---
+
+### CREATE example 2
+
+<img src="sql_course_images/DDL_trainings.png" alt="drawing" width="50"/>
+``` {.sql .interactive .hr}
+CREATE TABLE trainings (
+    employee_id INT,
+    course_id INT,
+    taken_date DATE,
+    PRIMARY KEY (employee_id , course_id)
+);
+```
+
+------------------------------------------------------------------------
+
+### Create - data types
+
+{{< pdf sql_course_docs/sql-data-type.pdf width=100% height=600 >}}
+
+
+------------------------------------------------------------------------
+
+### Identity
+
+SQL identiteitskolom is een kolom waarvan de waarden automatisch worden gegenereerd wanneer je een nieuwe rij toevoegt aan de tabel.
+
+```sql
+CREATE TABLE leave_requests (
+    request_id INT IDENTITY(1,1),
+    employee_id INT NOT NULL,
+    start_date DATE NOT NULL,
+    end_date DATE NOT NULL,
+    leave_type INT NOT NULL,
+    PRIMARY KEY(request_id)
+);
+```
+---
+
+### Primaire sleutel
+
+Een tabel bestaat uit kolommen en rijen. Typisch heeft een tabel een kolom of een set kolommen waarvan de waarden elke rij in de tabel op een unieke manier identificeren. Deze kolom of verzameling kolommen wordt de **primaire sleutel** genoemd.\
+De primaire sleutel die bestaat uit twee of meer kolommen wordt ook wel de **samengestelde primaire sleutel** genoemd.\
+Elke tabel heeft één en slechts één primaire sleutel. De primaire sleutel accepteert geen NULL of dubbele waarden.\
+
+---
+
+### Other constraints
+
+* Unique
+* Foreign key
+
+{{< pdf sql_course_docs/sql-server-cheat-sheet-a4.pdf width=100% height=400 >}}
+
+:::{.notes}
+UNIQUE constraint: Sometimes, you want to make sure that the values in a column or a set of columns are not duplicate. For example, duplicate emails in the employees table are not acceptable.
+:::
+
+---
+
+### INSERT data
+Remember:
+``` {.sql}
+CREATE TABLE courses (
+    course_id INTEGER PRIMARY KEY,
+    course_name VARCHAR(50) NOT NULL
+);
+```
+
+Insert:
+``` {.sql .interactive .hr}
+INSERT INTO courses VALUES
+(null,'SQL basics');
+```
+
+:::{.notes}
+INSERT INTO courses (course_name) VALUES ('SQL advanced')
+
+:::
+
+---
+
+### Aanpassingen - DML
+
+* aan data: UPDATE\
+* aan tabel: EXEC \
+* aan kolom: ALTER\
+
+{{< pdf sql_course_docs/sql-server-cheat-sheet-a4.pdf width=100% height=400 >}}
+
+------------------------------------------------------------------------
+
+### tabel verwijderen
+
+```{.sql .interactive .hr}
+DROP TABLE courses
+```
+
+:::{.notes}
+then try to select it
+:::
+------------------------------------------------------------------------
+
