@@ -118,7 +118,6 @@ INSERT INTO courses VALUES
 
 :::{.notes}
 INSERT INTO courses (course_name) VALUES ('SQL advanced')
-
 :::
 
 ---

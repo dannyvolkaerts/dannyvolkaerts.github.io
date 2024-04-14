@@ -9,6 +9,8 @@ project:
     - "sql_course/3_joins.qmd"
     - "sql_course/4_advanced.qmd"
     - "sql_course/5_subqueries.qmd"
+    - "sql_course/6_DLL.qmd"
+    - "sql_course/7_powerbi.qmd"
 
 website:
   title: ""
