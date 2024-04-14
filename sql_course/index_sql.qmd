@@ -44,10 +44,13 @@ Kennis halen uit data door het bundelen van de kracht van SQL met PowerBI.
 
 ---
 
-<!-- 8. **Transactions and Data Integrity**  
-   Managing transactions, understanding ACID properties.
+8. [**Oefeningen**](8_exercises.html){target="_blank"}\
+Oefeningen mbt hoofstuk 1-7.
 
 ---
+
+<!-- 8. **Transactions and Data Integrity**  
+Managing transactions, understanding ACID properties.
 
 9. **Optimizing SQL Queries**  
    Techniques for improving query performance.

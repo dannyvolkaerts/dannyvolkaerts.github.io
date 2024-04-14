@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Danny Volkaerts">
+
+<title>De Tennisvereniging</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="Tennis_uitleg_files/libs/clipboard/clipboard.min.js"></script>
+<script src="Tennis_uitleg_files/libs/quarto-html/quarto.js"></script>
+<script src="Tennis_uitleg_files/libs/quarto-html/popper.min.js"></script>
+<script src="Tennis_uitleg_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="Tennis_uitleg_files/libs/quarto-html/anchor.min.js"></script>
+<link href="Tennis_uitleg_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="Tennis_uitleg_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="Tennis_uitleg_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="Tennis_uitleg_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="Tennis_uitleg_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="fullcontent">
+
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">De Tennisvereniging</h1>
+                      </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Danny Volkaerts </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">12 Apr, 2024</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+<section id="database-schema" class="level3">
+<h3 class="anchored" data-anchor-id="database-schema">Database schema</h3>
+<p><img src="sql_course_images/tennis_DB.png" class="img-fluid"></p>
+</section>
+<section id="belangrijke-informatie-bij-de-tennis-database" class="level3">
+<h3 class="anchored" data-anchor-id="belangrijke-informatie-bij-de-tennis-database">Belangrijke informatie bij de tennis database</h3>
+<p>De tennisvereniging is opgericht in 1970 en vanaf het begin wordt een aantal administratieve gegevens in een database opgeslagen. Deze database bestaat uit de volgende tabellen: spelers, teams, wedstrijden, boetes en bestuursleden.<br>
+</p>
+<p>De spelerstabel bevat gegevens over spelers die lid zijn van de tennisvereniging, zoals namen, adressen en geboortedatums. Toetreding tot de vereniging vindt altijd plaats op 1 januari van een bepaald jaar. Spelers kunnen dus niet midden in een jaar lid worden. De spelerstabel bevat geen historische gegevens. Als een speler zijn of haar lidmaatschap opzegt, verdwijnt hij of zij uit de tabel. Ook bij eventuele verhuizingen wordt het oude adres overschreven met het nieuwe adres, het oude adres wordt dus nergens bewaard.<br>
+</p>
+<p>De tennisvereniging kent twee soorten leden: recreatiespelers en wedstrijdspelers. De eerste groep speelt alleen onderlinge wedstrijden, dus geen wedstrijden tegen spelers van andere verenigingen. De resultaten van de onderlinge wedstrijden worden niet geregistreerd. Wedstrijdspelers spelen in teamverband tegen spelers van andere verenigingen. De resultaten van deze wedstrijden worden wel bijgehouden. Elke speler heeft een uniek nummer, ongeacht of deze wedstrijdspeler is of niet. Dit spelersnummer wordt door de vereniging uitgedeeld. Het is verplicht dat elke wedstrijdspeler bij de tennisbond geregistreerd staat.<br>
+</p>
+<p>De bond, die een nationaal instituut is, geeft elke wedstrijdspeler een uniek bondsnummer. Dit bondsnummer bestaat meestal uit cijfers, maar kan ook letters bevatten. Als een wedstrijdspeler geen wedstrijden meer speelt, maar recreatiespeler wordt, vervalt het bondsnummer. Let wel, recreatiespelers hebben dus geen bondsnummer, maar wel een spelersnummer.<br>
+</p>
+<p>De tennisvereniging heeft een aantal teams dat meedoet in competities. Voor elk team worden de aanvoerder en de divisie waarin het team op dat moment uitkomt, geregistreerd. De aanvoerder hoeft geen wedstrijden voor het team gespeeld te hebben. Het zou kunnen dat een bepaalde speler op een bepaald moment aanvoerder van twee of meer teams is. Ook in deze tabel wordt geen historie bijgehouden. Bij promotie of degradatie van een team naar een andere divisie wordt de geregistreerde divisie eenvoudigweg overschreven. Hetzelfde geldt voor de aanvoerder van een team: bij wisseling wordt het nummer van de oude aanvoerder overschreven.<br>
+</p>
+<p>Een team bestaat uit een aantal spelers. Als een team tegen een team van een andere vereniging speelt, speelt elke speler van dat team een wedstrijd tegen een speler van het andere team (we gaan voor het gemak ervan uit dat wedstrijden waarbij koppels tegen elkaar spelen niet voorkomen). Het team waarvan de meeste spelers hun wedstrijd winnen is winnaar.<br>
+</p>
+<p>Een team bestaat niet altijd uit dezelfde groep spelers. Bij ziekte of vakanties zijn soms invallers nodig. Een speler kan dus voor meerdere teams uitkomen. Als we spreken over ‘de spelers van een team’, dan bedoelen we dus de spelers die minstens één wedstrijd voor het team gespeeld hebben. Nogmaals, alleen spelers met een bondsnummer mogen officiële wedstrijden spelen.<br>
+</p>
+<p>Een tenniswedstrijd is opgebouwd uit een aantal sets. Degene die de meeste sets heeft gewonnen is winnaar. Voor elke wedstrijd wordt vooraf bepaald bij hoeveel gewonnen sets de wedstrijd gewonnen is. Over het algemeen wordt de wedstrijd gestopt als een van de twee spelers twee of drie sets gewonnen heeft. Mogelijke eindstanden van een tenniswedstrijd zijn dus 2-1 of 2-0 als gespeeld wordt totdat een van de spelers twee sets gewonnen heeft (best of three), of 3-2, 3-1 of 3-0 als gespeeld wordt tot drie gewonnen sets (best of five). Een speler kan zijn of haar wedstrijd winnen of verliezen, gelijkspel is niet mogelijk. In de wedstrijdentabel wordt voor elke wedstrijd apart bijgehouden welke speler de wedstrijd heeft gespeeld en voor welk team. Tevens wordt geregistreerd hoeveel sets de speler heeft gewonnen en verloren. Hieruit is af te leiden of hij of zij de wedstrijd gewonnen heeft.<br>
+</p>
+<p>Voor onreglementair gedrag van spelers (te late opkomst, agressief gedrag of niet verschijnen) worden door de bond boetes opgelegd. Boetes worden door de vereniging betaald. Na betaling worden ze in de boetestabel geregistreerd. Zolang een speler wedstrijden speelt, blijven alle boetes bewaard die voor hem of haar opgelegd en betaald zijn.<br>
+</p>
+<p>Als een speler de vereniging verlaat, worden al zijn of haar gegevens in de vijf tabellen vernietigd. Als de vereniging een team terugtrekt, worden alle gegevens over dat team uit de teams- en wedstrijdentabel verwijderd. Als een wedstrijdspeler stopt met het spelen van wedstrijden en hij of zij dus weer recreant wordt, worden alle wedstrijd- en boetegegevens uit de desbetreffende tabellen verwijderd.<br>
+</p>
+<p>Sinds 1 januari 1990 wordt in de bestuursledentabel bijgehouden wie er in het bestuur zitten. Vier functies worden onderscheiden: voorzitter, penningmeester, secretaris en algemeen lid. Elk jaar op 1 januari wordt een nieuw bestuur gekozen. Wanneer een speler een bestuursfunctie bekleedt, worden de begin- en einddatum hiervan geregistreerd. Als iemand nog actief is, wordt er geen einddatum ingevuld.<br>
+</p>
+</section>
+<section id="enkele-aandachtspunten" class="level3">
+<h3 class="anchored" data-anchor-id="enkele-aandachtspunten">Enkele aandachtspunten</h3>
+<p>In het database schema willen we even wijzen op enkele punten:</p>
+<ul>
+<li>Merk op dat het spelersnummer een centrale rol in het schema heeft. Het is in één tabel de primaire sleutel en in de vier andere tabellen de externe sleutel (‘foreign key’).<br>
+</li>
+<li>De bestuursledentabel heeft een samengestelde primaire sleutel. In de figuur zie je dat aan de twee sleutelicoontjes, in de code staan er twee kolommen in de PRIMARY KEY.<br>
+</li>
+<li>Een veelgemaakte fout is geen rekening houden met het feit dat het spelersnummer in de teamstabel het nummer is van de kapitein van een team. Om te weten wie effectief wedstrijden gespeeld heeft, moet je in de wedstrijdentabel het spelersnummer gebruiken.<br>
+</li>
+</ul>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

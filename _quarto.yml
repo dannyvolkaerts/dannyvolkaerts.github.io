@@ -11,6 +11,7 @@ project:
     - "sql_course/5_subqueries.qmd"
     - "sql_course/6_DDL.qmd"
     - "sql_course/7_powerbi.qmd"
+    - "sql_course/8_exercises.qmd"
 
 website:
   title: ""
