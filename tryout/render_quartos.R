@@ -9,6 +9,7 @@ quarto::quarto_render(input="sql_course/3_joins.qmd",output_file = "sql_course")
 quarto::quarto_render(input="sql_course/4_advanced.qmd",output_file = "sql_course")
 quarto::quarto_render(input="sql_course/5_subqueries.qmd")
 quarto::quarto_render(input="sql_course/6_DDL.qmd",output_file = "sql_course")
+quarto::quarto_render(input="sql_course/7_powerbi.qmd",output_file = "sql_course")
 
 
 
@@ -16,7 +17,7 @@ quarto::quarto_render(input="sql_course/6_DDL.qmd",output_file = "sql_course")
 ### HIERONDER NIET MEER NODIG!!!
 
 quarto_render_move(input = "index.qmd",output_file = "index.html",output_dir= "docs")
-quarto_render_move(input = "sql_course/index_sql.qmd",output_file = "index_sql.html",output_dir= "docs/sql_course")
+quarto_render_move(input = "sql_course/6_DDL.qmd",output_file = "6_DDL.html",output_dir= "docs/sql_course")
 quarto_render_move(input = "sql_course/1_introduction.qmd",output_file = "1_introduction.html",output_dir= "docs/sql_course")
 
 
