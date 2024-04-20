@@ -1,5 +1,5 @@
 ---
-title: "Basics of SQL"
+title: "Basis van SQL"
 author: Danny Volkaerts
 date: last-modified
 date-format: "DD MMM, YYYY" 
@@ -22,23 +22,22 @@ databases:
 -   SELECT statement om kolommen te halen van tabellen
 -   WHERE clausule om rijen te filteren
 -   Sorteren van het resultaat met ORDER BY
--   Limiteren van resultaat met LIMIT
+
 
 ------------------------------------------------------------------------
 
 ### Basisstructuur
 
-+--------------------+--------------+
-| Query              | Uitvoering   |
-+:===================+:=============+
-| **SELECT**\        | FROM\        |
-| FROM\              | WHERE\       |
-| WHERE\             | GROUP BY\    |
-| GROUP BY\          | HAVING\      |
-| HAVING\            | **SELECT**\  |
-| ORDER BY\          | ORDER BY\    |
-| LIMIT              | LIMIT        |
-+--------------------+--------------+
++------------------+---------------+
+| Query            | Uitvoering    |
++:=================+:==============+
+| **SELECT**\      | FROM\         |
+| FROM\            | WHERE\        |
+| WHERE\           | GROUP BY\     |
+| GROUP BY\        | HAVING\       |
+| HAVING\          | **SELECT**\   |
+| ORDER BY\        | ORDER BY\     |
++------------------+---------------+
 
 ------------------------------------------------------------------------
 
@@ -66,15 +65,19 @@ FROM regions;
 
 ### WHERE Statement
 
-De WHERE-statement wordt gebruikt om specifieke rijen te selecteren die voldoen aan één of meerdere voorwaarden.
+De WHERE-statement wordt gebruikt om specifieke rijen te selecteren die voldoen aan één of meerdere voorwaarden.\
 
 Voorbeeld: ik wil de werknemers (employees) met een salaris hoger dan 16000 euro.
 
 ``` {.sql .interactive .hr}
-SELECT first_name as voornaam, last_name as achternaam, salary as salaris 
+SELECT * 
 FROM employees
 WHERE salary > 16000;
 ```
+
+::: notes
+first_name as voornaam, last_name as achternaam, salary as salaris
+:::
 
 ------------------------------------------------------------------------
 
@@ -83,10 +86,10 @@ WHERE salary > 16000;
 Ik wil een overzicht van de werknemers (employees) die werken in het IT departement.
 
 ``` {.sql .interactive .hr}
-// we zoeken eerst de code voor het IT-departement
+-- we zoeken eerst de code voor het IT-departement
 SELECT *
 FROM departments;
-// daarna zoeken we de werknemers die binnen dit departement werken
+-- daarna zoeken we de werknemers die binnen dit departement werken
 SELECT first_name, last_name, department_id
 FROM employees
 WHERE department_id = '6';
@@ -111,7 +114,8 @@ AND salary < 18000;
 
 ### WHERE - operatoren
 
-= != \>= \> IN LIKE IS NULL IS NOT NULL
+=  !=   \>=   \>\
+IN    LIKE    IS NULL    IS NOT NULL\
 
 ``` {.sql .interactive .hr}
 SELECT first_name, last_name, salary
@@ -119,6 +123,12 @@ FROM employees
 WHERE last_name LIKE 'Ma%'
 ```
 
+
+:::{.notes}
+SELECT *\
+FROM employees\
+WHERE phone_number IS NULL\
+:::
 ------------------------------------------------------------------------
 
 ### SELECT DISTINCT
@@ -139,7 +149,29 @@ FROM employees
 | SUM       | Som van de waarden        |
 | MIN / MAX | Minimum / Maximum waarde  |
 
----
+------------------------------------------------------------------------
 
 ### SELECT functies voorbeeld
 
+Hoeveel werknemers in het IT departement?
+
+``` {.sql .interactive .hr}
+SELECT department_id, count(*)
+FROM employees
+WHERE department_id = '6' 
+```
+
+:::{.notes}
+
+SELECT department_id\
+FROM employees\
+WHERE department_id = '6'\
+
+SELECT department_id, count(*) as aantal\
+FROM employees\
+WHERE department_id = '6'\
+:::
+
+---
+
+### Oefeningen

@@ -38,6 +38,13 @@ INNER JOIN tabel2
 ON tabel1.gemeenschappelijke_kolom = tabel2.gemeenschappelijke_kolom;
 ```
 
+---
+
+### INNER JOIN
+
+![](sql_course_images/joins_vis_inner.png){}
+
+
 ------------------------------------------------------------------------
 
 ### INNER JOIN - voorbeeld
@@ -90,6 +97,12 @@ FROM tabel1
 LEFT JOIN tabel2
 ON tabel1.gemeenschappelijke_kolom = tabel2.gemeenschappelijke_kolom;
 ```
+
+---
+
+### LEFT JOIN (& RIGHT JOIN)
+
+![](sql_course_images/joins_vis_left_right.png)
 
 ------------------------------------------------------------------------
 
@@ -144,6 +157,12 @@ FROM tabel1
 FULL OUTER JOIN tabel2
 ON tabel1.gemeenschappelijke_kolom = tabel2.gemeenschappelijke_kolom;
 ```
+
+---
+
+### FULL OUTER JOIN
+
+![](sql_course_images/joins_vis_full_outer.png)
 
 ------------------------------------------------------------------------
 
@@ -247,7 +266,8 @@ Hoe doen we dit?
 ``` {.sql .interactive .hr}
 SELECT  e.first_name || ' ' || e.last_name AS employee,
         m.first_name || ' ' || m.last_name AS manager
-FROM employees e ...
+FROM employees e 
+-- verder aan te vullen
 ```
 
 :::{.notes}

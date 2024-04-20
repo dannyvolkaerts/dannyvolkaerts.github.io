@@ -3,7 +3,6 @@ title: "Introductie SQL"
 author: Danny Volkaerts
 date: last-modified
 date-format: "DD MMM, YYYY" 
-smaller: true
 format: revealjs
 filters:
   - interactive-sql
@@ -22,6 +21,33 @@ databases:
 
 
 ## Inleiding tot SQL and Databases
+
+:::{.notes}
+
+https://dannyvolkaerts.github.io/
+
+Manier van werken:
+1. EERD graag afdrukken of naast je houden op ander scherm
+2. Interactie via Wooclap -> ik ben mee met het verhaal of niet, eventueel enkele tussenvragen om te pijlen hoe ze mee zijn
+
+Oefeningen via Azure Data Studio:
+New connection - Microsoft SQL Server
+
+I created two databases `DV_first_group` and `DV_second_group` in the database. Here are the login details :\
+server url : 34.155.20.3\
+port : 1433\
+username : student\
+password : ipL@7~@;Tn3n".Eu\
+database : either `DV_first_group` or `DV_second_group` \
+
+For the admin connection, you can use :\
+username : sqlserver\
+password : 2NzIxYmz414v\
+
+
+Extentions links - MySQL -> installeren
+
+:::
 
 ---
 
@@ -43,6 +69,13 @@ Ontwikkeld door IBM (1974)
 - Een relationele database slaat gegevens op in tabellen
 - Gegevens worden georganiseerd in rijen en kolommen
 - Voorbeelden zijn MySQL, PostgreSQL, MS SQL en SQLite
+
+:::{.notes}
+verschil tussen database zelf en clients
+Azure Data Studio = client
+MySQL workbench = client
+PG Admin = client
+:::
 
 ---
 
@@ -69,9 +102,31 @@ Ontwikkeld door IBM (1974)
 
 ### ERD van Human Resources database
 
-Het volgende database diagram illustreert de HR voorbeeld database: <!-- [SQL tutorial](https://www.sqltutorial.org/sql-sample-database/){preview-link="true" style="text-align: center"} -->
+Database diagram: HR voorbeeld [database](sql_course_images/hr-SQL-Sample-Database-Schema.pdf): <!-- [SQL tutorial](https://www.sqltutorial.org/sql-sample-database/){preview-link="true" style="text-align: center"} -->
 
 ![ERD van HR database](sql_course_images/hr-SQL-Sample-Database-Schema.png){#fig-erd-hr}
+
+:::{.notes}
+ERD: Entity-relationship diagram
+
+* Entiteit: object/iets waarvan gegevens verzameld worden in 1 tabel\
+* Primaire sleutel: veld of groep velden die uniek zijn voor elk record\
+* Relatietypes (kardinaliteit): het maximaal aantal keren dat een instantie in één entiteit kan relateren met instanties in een andere entiteit\
+* Vreemde sleutel (foreign key): een verzameling velden van een tabel die dient als verwijzing naar een andere tabel\
+
+:::
+
+---
+
+### ERD concept
+
+* Entiteit: object/iets waarvan gegevens verzameld worden in 1 tabel
+* Primaire sleutel: veld of groep velden die uniek zijn voor elk record
+* Relatietypes (kardinaliteit): het maximaal aantal keren dat een instantie in één entiteit kan relateren met instanties in een andere entiteit
+* Vreemde sleutel (foreign key): een verzameling velden van een tabel die dient als verwijzing naar een andere tabel
+
+---
+
 
 ---
 
@@ -91,3 +146,9 @@ SELECT *
 FROM employees 
 LIMIT 5;
 ```
+
+:::{.notes}
+LIMIT is al een soort dialect -> bijvoorbeeld in sql server: SELECT TOP(5) * FROM
+:::
+
+---

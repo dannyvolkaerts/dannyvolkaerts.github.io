@@ -12,7 +12,7 @@
   <meta name="generator" content="quarto-1.3.450">
 
   <meta name="author" content="Danny Volkaerts">
-  <title>DV - Basics of SQL</title>
+  <title>Basis van SQL</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -394,7 +394,7 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Basics of SQL</h1>
+  <h1 class="title">Basis van SQL</h1>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -404,7 +404,7 @@ Danny Volkaerts
 </div>
 </div>
 
-  <p class="date">12 Apr, 2024</p>
+  <p class="date">20 Apr, 2024</p>
 </section>
 <section class="slide level2">
 
@@ -414,16 +414,15 @@ Danny Volkaerts
 <li>SELECT statement om kolommen te halen van tabellen</li>
 <li>WHERE clausule om rijen te filteren</li>
 <li>Sorteren van het resultaat met ORDER BY</li>
-<li>Limiteren van resultaat met LIMIT</li>
 </ul>
 </section>
 <section class="slide level2">
 
 <h3 id="basisstructuur">Basisstructuur</h3>
-<table style="width:50%;">
+<table style="width:49%;">
 <colgroup>
-<col style="width: 29%">
-<col style="width: 20%">
+<col style="width: 26%">
+<col style="width: 22%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -439,14 +438,14 @@ WHERE<br>
 GROUP BY<br>
 HAVING<br>
 ORDER BY<br>
-LIMIT</td>
+</td>
 <td style="text-align: left;">FROM<br>
 WHERE<br>
 GROUP BY<br>
 HAVING<br>
 <strong>SELECT</strong><br>
 ORDER BY<br>
-LIMIT</td>
+</td>
 </tr>
 </tbody>
 </table>
@@ -470,23 +469,37 @@ LIMIT</td>
 <section class="slide level2">
 
 <h3 id="where-statement">WHERE Statement</h3>
-<p>De WHERE-statement wordt gebruikt om specifieke rijen te selecteren die voldoen aan één of meerdere voorwaarden.</p>
+<p>De WHERE-statement wordt gebruikt om specifieke rijen te selecteren die voldoen aan één of meerdere voorwaarden.<br>
+</p>
 <p>Voorbeeld: ik wil de werknemers (employees) met een salaris hoger dan 16000 euro.</p>
 <div class="interactive-sql">
-<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource sql interactive hr number-lines code-with-copy"><code class="sourceCode sql"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">SELECT</span> first_name <span class="kw">as</span> voornaam, last_name <span class="kw">as</span> achternaam, salary <span class="kw">as</span> salaris </span>
+<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource sql interactive hr number-lines code-with-copy"><code class="sourceCode sql"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">SELECT</span> <span class="op">*</span> </span>
 <span id="cb3-2"><a href="#cb3-2"></a><span class="kw">FROM</span> employees</span>
 <span id="cb3-3"><a href="#cb3-3"></a><span class="kw">WHERE</span> salary <span class="op">&gt;</span> <span class="dv">16000</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<aside class="notes">
+<p>first_name as voornaam, last_name as achternaam, salary as salaris</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section class="slide level2">
 
 <h3 id="where-voorbeeld">WHERE voorbeeld</h3>
 <p>Ik wil een overzicht van de werknemers (employees) die werken in het IT departement.</p>
 <div class="interactive-sql">
-<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource sql interactive hr number-lines code-with-copy"><code class="sourceCode sql"><span id="cb4-1"><a href="#cb4-1"></a><span class="op">//</span> we zoeken eerst de code voor het IT<span class="op">-</span>departement</span>
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource sql interactive hr number-lines code-with-copy"><code class="sourceCode sql"><span id="cb4-1"><a href="#cb4-1"></a><span class="co">-- we zoeken eerst de code voor het IT-departement</span></span>
 <span id="cb4-2"><a href="#cb4-2"></a><span class="kw">SELECT</span> <span class="op">*</span></span>
 <span id="cb4-3"><a href="#cb4-3"></a><span class="kw">FROM</span> departments;</span>
-<span id="cb4-4"><a href="#cb4-4"></a><span class="op">//</span> daarna zoeken we de werknemers die binnen dit departement werken</span>
+<span id="cb4-4"><a href="#cb4-4"></a><span class="co">-- daarna zoeken we de werknemers die binnen dit departement werken</span></span>
 <span id="cb4-5"><a href="#cb4-5"></a><span class="kw">SELECT</span> first_name, last_name, department_id</span>
 <span id="cb4-6"><a href="#cb4-6"></a><span class="kw">FROM</span> employees</span>
 <span id="cb4-7"><a href="#cb4-7"></a><span class="kw">WHERE</span> department_id <span class="op">=</span> <span class="st">'6'</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -507,12 +520,30 @@ LIMIT</td>
 <section class="slide level2">
 
 <h3 id="where---operatoren">WHERE - operatoren</h3>
-<p>= != &gt;= &gt; IN LIKE IS NULL IS NOT NULL</p>
+<p>= != &gt;= &gt;<br>
+IN LIKE IS NULL IS NOT NULL<br>
+</p>
 <div class="interactive-sql">
 <div class="sourceCode" id="cb6"><pre class="sourceCode numberSource sql interactive hr number-lines code-with-copy"><code class="sourceCode sql"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw">SELECT</span> first_name, last_name, salary</span>
 <span id="cb6-2"><a href="#cb6-2"></a><span class="kw">FROM</span> employees</span>
 <span id="cb6-3"><a href="#cb6-3"></a><span class="kw">WHERE</span> last_name <span class="kw">LIKE</span> <span class="st">'Ma%'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<aside class="notes">
+<p>SELECT *<br>
+FROM employees<br>
+WHERE phone_number IS NULL<br>
+</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section class="slide level2">
 
@@ -555,6 +586,32 @@ LIMIT</td>
 <section class="slide level2">
 
 <h3 id="select-functies-voorbeeld">SELECT functies voorbeeld</h3>
+<p>Hoeveel werknemers in het IT departement?</p>
+<div class="interactive-sql">
+<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource sql interactive hr number-lines code-with-copy"><code class="sourceCode sql"><span id="cb8-1"><a href="#cb8-1"></a><span class="kw">SELECT</span> department_id, <span class="fu">count</span>(<span class="op">*</span>)</span>
+<span id="cb8-2"><a href="#cb8-2"></a><span class="kw">FROM</span> employees</span>
+<span id="cb8-3"><a href="#cb8-3"></a><span class="kw">WHERE</span> department_id <span class="op">=</span> <span class="st">'6'</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<aside class="notes">
+<p>SELECT department_id<br>
+FROM employees<br>
+WHERE department_id = ‘6’<br>
+</p>
+<p>SELECT department_id, count(*) as aantal<br>
+FROM employees<br>
+WHERE department_id = ‘6’<br>
+</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 
 <div class="footer footer-default">
 

@@ -181,7 +181,17 @@ Jullie kunnen nu een eenvoudige VOLLEDIGE query uitvoeren!
 
 Let op dialect!
 
+Sql server:
 {{< pdf sql_course_docs/sql-server-cheat-sheet-a4.pdf width=100% height=500px >}}
+
+---
+
+### Text functies
+
+Let op dialect!
+
+MySQL:
+{{< pdf sql_course_docs/mysql-cheat-sheet-a4.pdf width=100% height=500px >}}
 
 ---
 
@@ -255,6 +265,8 @@ FROM
 ```
 
 ---
+
+### Oefeningen
 
 
 

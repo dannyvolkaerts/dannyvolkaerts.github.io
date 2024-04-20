@@ -59,10 +59,17 @@ CREATE TABLE trainings (
 
 ### Create - data types
 
-{{< pdf sql_course_docs/sql-data-type.pdf width=100% height=600 >}}
+{{< pdf sql_course_docs/sqlserver-data-type.pdf width=100% height=600 >}}
 
 
 ------------------------------------------------------------------------
+
+### Create - data types
+
+{{< pdf sql_course_docs/mysql-data-type.pdf width=100% height=600 >}}
+
+
+---
 
 ### Identity
 
