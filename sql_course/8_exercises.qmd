@@ -14,9 +14,8 @@ resources:
 databases:
   - name: tennis
     path: "https://raw.githubusercontent.com/dannyvolkaerts/something/main/tennis.sql"
-  - name: tennis-not-editable
-    path: "https://raw.githubusercontent.com/dannyvolkaerts/something/main/tennis.sql"
-    editable: false
+  - name: ruimte
+    path: "https://raw.githubusercontent.com/dannyvolkaerts/something/main/ruimtereizen.sqlite"
 ---
 
 
@@ -54,9 +53,9 @@ Maak een lijst van alle teams waarvoor lidnr 27 de kapitein is.
 
 ---
 
-### Oefening 3
+### Oefening 3 Ruimte
 
-``` {.sql .interactive .tennis}
+``` {.sql .interactive .ruimte}
 
 ```
 

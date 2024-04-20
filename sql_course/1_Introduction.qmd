@@ -34,15 +34,6 @@ Oefeningen via Azure Data Studio:
 New connection - Microsoft SQL Server
 
 I created two databases `DV_first_group` and `DV_second_group` in the database. Here are the login details :\
-server url : 34.155.20.3\
-port : 1433\
-username : student\
-password : ipL@7~@;Tn3n".Eu\
-database : either `DV_first_group` or `DV_second_group` \
-
-For the admin connection, you can use :\
-username : sqlserver\
-password : 2NzIxYmz414v\
 
 
 Extentions links - MySQL -> installeren
