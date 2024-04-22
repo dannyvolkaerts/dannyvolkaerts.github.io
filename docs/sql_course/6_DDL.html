@@ -454,7 +454,9 @@ Danny Volkaerts
 <section class="slide level2">
 
 <h3 id="identity">Identity</h3>
-<p>SQL identiteitskolom is een kolom waarvan de waarden automatisch worden gegenereerd wanneer je een nieuwe rij toevoegt aan de tabel.</p>
+<p>SQL identiteitskolom is een kolom waarvan de waarden automatisch worden gegenereerd wanneer je een nieuwe rij toevoegt aan de tabel.<br>
+SQL server:<br>
+</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode numberSource sql number-lines code-with-copy"><code class="sourceCode sql"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> leave_requests (</span>
 <span id="cb4-2"><a href="#cb4-2"></a>    request_id <span class="dt">INT</span> IDENTITY(<span class="dv">1</span>,<span class="dv">1</span>),</span>
 <span id="cb4-3"><a href="#cb4-3"></a>    employee_id <span class="dt">INT</span> <span class="kw">NOT</span> <span class="kw">NULL</span>,</span>
@@ -533,6 +535,22 @@ Elke tabel heeft één en slechts één primaire sleutel. De primaire sleutel ac
 </li>
 </ul>
 <p><object data="sql_course_docs/sql-server-cheat-sheet-a4.pdf" type="application/pdf" width="100%" height="400"><a href="sql_course_docs/sql-server-cheat-sheet-a4.pdf" download="">Download PDF file.</a></object></p>
+<aside class="notes">
+<p>UPDATE courses<br>
+SET course_name = ‘SQL’<br>
+WHERE course_id &gt; 0<br>
+</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section class="slide level2">
 
@@ -556,6 +574,24 @@ Elke tabel heeft één en slechts één primaire sleutel. De primaire sleutel ac
 </section>
 <section class="slide level2">
 
+<h3 id="oefeningen">Oefeningen</h3>
+<p>Maak enkele tabellen aan (database: ‘DV_second_group’)</p>
+<aside class="notes">
+<p>Countries - Datacamp -&gt; Zie downloads ‘Countries’</p>
+<p>GRANT CREATE TABLE TO student;<br>
+GO</p>
+<p>Voorbeeld zien van de tennis database: eerst DROP SPELERS -&gt; werkt niet owv de cascade!</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 
 <div class="footer footer-default">
 

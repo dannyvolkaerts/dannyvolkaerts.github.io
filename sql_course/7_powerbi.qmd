@@ -53,5 +53,9 @@ Integratie van SQL in PowerBI gebeurt typisch via DirectQuery of door het import
 - **SQL Query**: Analyseer klantinteracties en koopgedrag.
 - **PowerBI Rapport**: Maak segmentatie van klanten en analyseer de effectiviteit van marketingcampagnes.
 
-Deze voorbeelden tonen aan hoe SQL-query's geïntegreerd in PowerBI kunnen leiden tot krachtige business intelligence oplossingen die organisaties helpen strategische besluiten te nemen op basis van data.
+---
+
+### Demo
+
+
 

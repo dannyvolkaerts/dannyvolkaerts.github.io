@@ -404,7 +404,7 @@ Danny Volkaerts
 </div>
 </div>
 
-  <p class="date">20 Apr, 2024</p>
+  <p class="date">21 Apr, 2024</p>
 </section>
 <section class="slide level2">
 
@@ -523,7 +523,7 @@ ORDER BY headcount DESC;<br>
 <section class="slide level2">
 
 <h3 id="group-by-voorbeeld-2">GROUP BY voorbeeld 2</h3>
-<p>Groeperen op meerdere kolommen:</p>
+<p>Definieer de vraagstelling van deze query:</p>
 <div class="interactive-sql">
 <div class="sourceCode" id="cb4"><pre class="sourceCode numberSource sql interactive hr number-lines code-with-copy"><code class="sourceCode sql"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">SELECT</span> department_name, job_title, <span class="fu">COUNT</span>(employee_id)</span>
 <span id="cb4-2"><a href="#cb4-2"></a><span class="kw">FROM</span> employees e  <span class="kw">INNER</span> <span class="kw">JOIN</span> departments d <span class="kw">ON</span> d.department_id <span class="op">=</span> e.department_id</span>
@@ -531,7 +531,7 @@ ORDER BY headcount DESC;<br>
 <span id="cb4-4"><a href="#cb4-4"></a><span class="kw">GROUP</span> <span class="kw">BY</span> department_name, job_title;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <aside class="notes">
-<p>Definieer de vraagstelling van deze query</p>
+<p>Het aantal werknemers per job per departement:</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -548,21 +548,18 @@ ORDER BY headcount DESC;<br>
 
 <h3 id="having">HAVING</h3>
 <ul>
-<li><strong>Definitie</strong>: HAVING wordt gebruikt om voorwaarden te filteren die op de resultaten van aggregatiefuncties van toepassing zijn. Terwijl de WHERE-clausule wordt gebruikt om rijen te filteren voordat aggregatie plaatsvindt, wordt HAVING gebruikt om rijen te filteren na de aggregatie.</li>
+<li><strong>Definitie</strong>: voorwaarden te filteren die op de resultaten van aggregatiefuncties van toepassing zijn. Terwijl de WHERE-clausule wordt gebruikt om rijen te filteren voordat aggregatie plaatsvindt, wordt HAVING gebruikt om rijen te filteren na de aggregatie.</li>
 <li><strong>Gebruik</strong>: Essentieel in gevallen waar je voorwaarden wilt toepassen op groepen van data die door de GROUP BY-clausule zijn verzameld.</li>
 </ul>
 <div class="sourceCode" id="cb5"><pre class="sourceCode numberSource sql number-lines code-with-copy"><code class="sourceCode sql"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw">SELECT</span> column1, column2, AGGREGATE_FUNCTION (column3)</span>
 <span id="cb5-2"><a href="#cb5-2"></a><span class="kw">FROM</span> table1</span>
-<span id="cb5-3"><a href="#cb5-3"></a><span class="kw">GROUP</span> <span class="kw">BY</span></span>
-<span id="cb5-4"><a href="#cb5-4"></a>  column1,</span>
-<span id="cb5-5"><a href="#cb5-5"></a>    column2</span>
-<span id="cb5-6"><a href="#cb5-6"></a><span class="kw">HAVING</span></span>
-<span id="cb5-7"><a href="#cb5-7"></a>    group_condition;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-3"><a href="#cb5-3"></a><span class="kw">GROUP</span> <span class="kw">BY</span> column1, column2</span>
+<span id="cb5-4"><a href="#cb5-4"></a><span class="kw">HAVING</span> group_condition;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section class="slide level2">
 
 <h3 id="having-voorbeeld">HAVING voorbeeld</h3>
-<p>We willen de managers en het aantal werknemer die aan hen direct rapporteren:</p>
+<p>We willen de managers en het aantal werknemers die aan hen direct rapporteren:</p>
 <div class="interactive-sql">
 <div class="sourceCode" id="cb6"><pre class="sourceCode numberSource sql interactive hr number-lines code-with-copy"><code class="sourceCode sql"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw">SELECT</span> manager_id, first_name, last_name, <span class="fu">COUNT</span>(employee_id) direct_reports</span>
 <span id="cb6-2"><a href="#cb6-2"></a><span class="kw">FROM</span> employees</span>
@@ -572,7 +569,8 @@ ORDER BY headcount DESC;<br>
 <aside class="notes">
 <p>Managers met minstens 5 werknemers die direct aan hun rapporteren:<br>
 </p>
-<p>HAVING direct_reports &gt;= 5;<br>
+<p>HAVING count(employee_id)&gt;5<br>
+HAVING direct_reports &gt;= 5;<br>
 </p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -684,6 +682,19 @@ Jullie kunnen nu een eenvoudige VOLLEDIGE query uitvoeren!</p>
 <span id="cb11-8"><a href="#cb11-8"></a><span class="cf">ELSE</span></span>
 <span id="cb11-9"><a href="#cb11-9"></a>    else_result</span>
 <span id="cb11-10"><a href="#cb11-10"></a><span class="cf">END</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<aside class="notes">
+<p>boolean = True or False</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section class="slide level2">
 
