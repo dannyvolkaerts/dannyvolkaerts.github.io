@@ -222,3 +222,8 @@ GROUP BY job;\
 ``` sql
 DROP VIEW view_name;
 ```
+
+---
+
+### Oefeningen
+

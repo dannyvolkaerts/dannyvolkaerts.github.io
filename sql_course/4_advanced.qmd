@@ -1,5 +1,5 @@
 ---
-title: "Advanced Data Manipulation"
+title: "Advanced Data Manipulatie"
 author: Danny Volkaerts
 date: last-modified
 date-format: "DD MMM, YYYY" 
@@ -97,7 +97,7 @@ ORDER BY headcount DESC;\
 
 ### GROUP BY voorbeeld 2
 
-Groeperen op meerdere kolommen:
+Definieer de vraagstelling van deze query:
 
 ```{.sql .interactive .hr}
 SELECT department_name, job_title, COUNT(employee_id)
@@ -107,32 +107,29 @@ GROUP BY department_name, job_title;
 ```
 
 :::{.notes}
-Definieer de vraagstelling van deze query
+Het aantal werknemers per job per departement:
 :::
 
 ---
 
 ### HAVING
 
--   **Definitie**: HAVING wordt gebruikt om voorwaarden te filteren die op de resultaten van aggregatiefuncties van toepassing zijn. Terwijl de WHERE-clausule wordt gebruikt om rijen te filteren voordat aggregatie plaatsvindt, wordt HAVING gebruikt om rijen te filteren na de aggregatie.
+-   **Definitie**: voorwaarden te filteren die op de resultaten van aggregatiefuncties van toepassing zijn. Terwijl de WHERE-clausule wordt gebruikt om rijen te filteren voordat aggregatie plaatsvindt, wordt HAVING gebruikt om rijen te filteren na de aggregatie.
 -   **Gebruik**: Essentieel in gevallen waar je voorwaarden wilt toepassen op groepen van data die door de GROUP BY-clausule zijn verzameld.
 
 ```{.sql}
 SELECT column1, column2, AGGREGATE_FUNCTION (column3)
 FROM table1
-GROUP BY
-  column1,
-	column2
-HAVING
-	group_condition;
+GROUP BY column1, column2
+HAVING group_condition;
 ```
-
 
 ---
 
 ### HAVING voorbeeld
 
-We willen de managers en het aantal werknemer die aan hen direct rapporteren:
+We willen de managers en het aantal werknemers die aan hen direct rapporteren:
+
 ```{.sql .interactive .hr}
 SELECT manager_id, first_name, last_name, COUNT(employee_id) direct_reports
 FROM employees
@@ -143,6 +140,7 @@ GROUP BY manager_id;
 :::{.notes}
 Managers met minstens 5 werknemers die direct aan hun rapporteren:\
 
+HAVING count(employee_id)>5\
 HAVING direct_reports >= 5;\
 :::
 ---
@@ -248,6 +246,11 @@ ELSE
 	else_result
 END;
 ```
+
+:::{.notes}
+boolean = True or False
+
+:::
 
 ---
 

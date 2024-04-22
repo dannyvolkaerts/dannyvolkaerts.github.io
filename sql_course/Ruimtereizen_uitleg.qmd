@@ -1,0 +1,74 @@
+---
+title-block-banner: true
+title: "Ruimtereizen"
+author: Danny Volkaerts 
+date: last-modified
+date-format: "DD MMM, YYYY" 
+format: html
+
+---
+
+### Database schema
+
+![](sql_course_images/ruimtereizen_DB.png)
+
+
+### Belangrijke informatie bij de ruimtereizen database
+
+Het Ruimtereisbureau D&V is gespecialiseerd in reizen buiten de aardse dampkring; tochtjes rond de aarde met een ruimteveer, korte maanreizen of interplanetaire reizen. Sommige reizen hebben één reisdoel, andere leiden langs verschillende hemellichamen van ons zonnestelsel.\
+
+Het reisbureau richt zich op de kapitaalkrachtige particulier die uitgekeken is op safari's en poolreizen.\
+
+Men houdt volgende gegevens bij:\
+
+REIZEN:\
+- Reisnr (x)\
+- Vertrekdatum (x)\
+- Reisduur (x)\
+- Prijs: in miljoen euro\
+
+KLANTEN:\
+- klantnr (x)\
+- naam (x)\
+- voornaam (x)\
+- geboortedatum (x)\
+
+DEELNAMES (een bepaalde klant neemt deel aan een bepaalde reis):\
+- reisnr (x)\
+- klantnr (x)\
+
+HEMELOBJECTEN:\
+- objectnaam (x)\
+- satellietVan\
+- afstand\
+- diameter\
+
+BEZOEKEN:\
+- Reisnr(x)
+- Volgnr(x): aangezien een hemelobject per reis meerdere keren bezocht kan worden, maakt volgnr eveneens deel uit van de sleuten\
+- Objectnaam (x)\
+- Verblijfsduur(x): tijd in dagen dat men rond een hemelobject verblijft. Indien men enkel naast het hemelobject passeert, dan spreekt men van een passage (verblijfsduur = 0)\
+
+(x) betekent dat dit een verplicht veld is, m.a.w. deze kolom moet steeds voor elke rij een concrete waarde hebben.
+
+
+
+
+
+### Enkele aandachtspunten
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,5 +1,5 @@
 ---
-title: "Data Definition Language"
+title: "DDL & DML"
 author: Danny Volkaerts
 date: last-modified
 date-format: "DD MMM, YYYY" 
@@ -17,6 +17,8 @@ databases:
 ---
 
 ### DDL
+
+Data Definition Language
 
 ```{.sql}
 CREATE TABLE table_name(
@@ -73,8 +75,8 @@ CREATE TABLE trainings (
 
 ### Identity
 
-SQL identiteitskolom is een kolom waarvan de waarden automatisch worden gegenereerd wanneer je een nieuwe rij toevoegt aan de tabel.
-
+SQL identiteitskolom is een kolom waarvan de waarden automatisch worden gegenereerd wanneer je een nieuwe rij toevoegt aan de tabel.\
+SQL server:\
 ```sql
 CREATE TABLE leave_requests (
     request_id INT IDENTITY(1,1),
@@ -125,6 +127,7 @@ INSERT INTO courses VALUES
 
 :::{.notes}
 INSERT INTO courses (course_name) VALUES ('SQL advanced')
+
 :::
 
 ---
@@ -136,6 +139,12 @@ INSERT INTO courses (course_name) VALUES ('SQL advanced')
 * aan kolom: ALTER\
 
 {{< pdf sql_course_docs/sql-server-cheat-sheet-a4.pdf width=100% height=400 >}}
+
+:::{.notes}
+UPDATE courses\
+SET course_name = 'SQL' \
+WHERE course_id > 0 \
+:::
 
 ------------------------------------------------------------------------
 
@@ -149,4 +158,19 @@ DROP TABLE courses
 then try to select it
 :::
 ------------------------------------------------------------------------
+
+### Oefeningen
+
+Maak enkele tabellen aan (database: 'DV_second_group')
+
+:::{.notes}
+Countries - Datacamp -> Zie downloads 'Countries'
+
+GRANT CREATE TABLE TO student;\
+GO
+
+Voorbeeld zien van de tennis database: eerst DROP SPELERS -> werkt niet owv de cascade!
+:::
+
+
 
