@@ -1,23 +1,23 @@
 <!DOCTYPE html>
 <html lang="en"><head>
-<script src="../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../site_libs/quarto-html/tabby.min.js"></script>
-<script src="../site_libs/quarto-html/popper.min.js"></script>
-<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
-<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-contrib/interactive-sql-1.0.0/interactive-sql.css" rel="stylesheet"><meta charset="utf-8">
+<script src="10_exercises_advanced_files/libs/clipboard/clipboard.min.js"></script>
+<script src="10_exercises_advanced_files/libs/quarto-html/tabby.min.js"></script>
+<script src="10_exercises_advanced_files/libs/quarto-html/popper.min.js"></script>
+<script src="10_exercises_advanced_files/libs/quarto-html/tippy.umd.min.js"></script>
+<link href="10_exercises_advanced_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="10_exercises_advanced_files/libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="10_exercises_advanced_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
+<link href="10_exercises_advanced_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="10_exercises_advanced_files/libs/quarto-contrib/interactive-sql-1.0.0/interactive-sql.css" rel="stylesheet"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.3.450">
 
   <meta name="author" content="Danny Volkaerts">
-  <title>Oefeningen tennis</title>
+  <title>Oefeningen subqueries</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-  <link rel="stylesheet" href="../site_libs/revealjs/dist/reset.css">
-  <link rel="stylesheet" href="../site_libs/revealjs/dist/reveal.css">
+  <link rel="stylesheet" href="10_exercises_advanced_files/libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="10_exercises_advanced_files/libs/revealjs/dist/reveal.css">
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
@@ -96,11 +96,11 @@
     code span.vs { color: #20794d; } /* VerbatimString */
     code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
-  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto.css">
-  <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
-  <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
-  <link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
-  <link href="../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <link rel="stylesheet" href="10_exercises_advanced_files/libs/revealjs/dist/theme/quarto.css">
+  <link href="10_exercises_advanced_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="10_exercises_advanced_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="10_exercises_advanced_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="10_exercises_advanced_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
   <style type="text/css">
 
   .callout {
@@ -394,7 +394,7 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Oefeningen tennis</h1>
+  <h1 class="title">Oefeningen subqueries</h1>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -416,20 +416,23 @@ Danny Volkaerts
 <p>Algemene info over dit database schema kan je <a href="Tennis_uitleg.html">hier</a> vinden.</p>
 
 <img data-src="sql_course_images/Calvin_and_Hobbes_playing_Calvinball.jpg" style="width:50.0%" class="r-stretch quarto-figure-center"><p class="caption">Watterson, Calvin and Hobbes</p></section>
-<section id="basis-h1h2" class="slide level2">
-<h2>BASIS (H1,H2)</h2>
+<section id="subqueries-h5" class="slide level2">
+<h2>SUBQUERIES (H5)</h2>
 </section>
 <section class="slide level2">
 
 <h3 id="oefening-1">Oefening 1</h3>
-<p>Toon alle spelers uit Zoetermeer die lid werden van de club vóór 1984).</p>
+<p>Geef van elke speler waarvan het nummer kleiner is dan 60 het aantal jaren dat ligt tussen het jaar van toetreding van die speler en dan van speler 100.</p>
 <div class="interactive-sql">
 <div class="sourceCode" id="cb1"><pre class="sourceCode numberSource sql interactive tennis number-lines code-with-copy"><code class="sourceCode sql"></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <aside class="notes">
-<p>SELECT spelersnr, naam || ’ ’ || voorletters AS naam, jaartoe<br>
+<p>SELECT spelersnr, jaartoe -<br>
+(SELECT jaartoe<br>
+from spelers<br>
+where spelersnr = 100)<br>
 FROM spelers<br>
-WHERE plaats = ‘Zoetermeer’ AND jaartoe &lt; 1984<br>
+where spelersnr &lt; 60<br>
 </p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -446,14 +449,17 @@ WHERE plaats = ‘Zoetermeer’ AND jaartoe &lt; 1984<br>
 <section class="slide level2">
 
 <h3 id="oefening-2">Oefening 2</h3>
-<p>Maak een lijst van alle teams waarvoor lid nr 27 de kapitein is.</p>
+<p>Geef de nummers van de spelers die in hetzelfde jaar geboren zijn als speler 27</p>
 <div class="interactive-sql">
 <div class="sourceCode" id="cb2"><pre class="sourceCode numberSource sql interactive tennis number-lines code-with-copy"><code class="sourceCode sql"></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <aside class="notes">
-<p>SELECT *<br>
-FROM teams<br>
-WHERE spelersnr = 27<br>
+<p>SELECT spelersnr<br>
+FROM spelers<br>
+WHERE YEAR(geb_datum) =<br>
+(select YEAR(geb_datum)<br>
+from spelers<br>
+where spelersnr = 27)<br>
 </p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -470,14 +476,16 @@ WHERE spelersnr = 27<br>
 <section class="slide level2">
 
 <h3 id="oefening-3">Oefening 3</h3>
-<p>Geef een overzicht van alle gewonnen tenniswedstrijden.</p>
+<p>DOORDENKER: Geef de nummers van de spelers die hetzelfde geslacht hebben en in dezelfde plaats wonen als speler 100.</p>
 <div class="interactive-sql">
 <div class="sourceCode" id="cb3"><pre class="sourceCode numberSource sql interactive tennis number-lines code-with-copy"><code class="sourceCode sql"></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <aside class="notes">
-<p>SELECT *<br>
-FROM wedstrijden<br>
-WHERE gewonnen &gt; verloren<br>
+<p>SELECT spelersnr<br>
+from spelers<br>
+where (geslacht, plaats) = (select geslacht, plaats<br>
+from spelers<br>
+where spelersnr = 100)<br>
 </p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -494,13 +502,19 @@ WHERE gewonnen &gt; verloren<br>
 <section class="slide level2">
 
 <h3 id="oefening-4">Oefening 4</h3>
-<p>Geef een overzicht van alle wedstrijden die speler 112 gespeeld heeft. Bereken voor elke van deze wedstrijden met hoeveel sets deze speler gewonnen of verloren heeft.</p>
+<p>Geef de nummers van de teams waarvan de speler met naam Permentier en voorletter R aanvoerder is; we gaan er in deze opgave van uit dat er geen twee spelers zijn met dezelfde naam en voorletters.</p>
 <div class="interactive-sql">
 <div class="sourceCode" id="cb4"><pre class="sourceCode numberSource sql interactive tennis number-lines code-with-copy"><code class="sourceCode sql"></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <aside class="notes">
-<p>SELECT wedstrijdnr, spelersnr, abs(gewonnen - verloren) AS verschil<br>
-FROM wedstrijden WHERE spelersnr = 112</p>
+<p>SELECT teamnr<br>
+FROM teams<br>
+WHERE spelersnr =<br>
+(select spelersnr<br>
+from spelers<br>
+where naam = ‘Permentier’<br>
+and voorletters = ‘R’)<br>
+</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -516,13 +530,20 @@ FROM wedstrijden WHERE spelersnr = 112</p>
 <section class="slide level2">
 
 <h3 id="oefening-5">Oefening 5</h3>
-<p>Maak een lijst van alle betaalde boetes.</p>
+<p>DOORDOORDENKER: Geef de naam van de speler die aanvoerder is van het team waartoe wedstrijd 6 behoort.</p>
 <div class="interactive-sql">
 <div class="sourceCode" id="cb5"><pre class="sourceCode numberSource sql interactive tennis number-lines code-with-copy"><code class="sourceCode sql"></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <aside class="notes">
-<p>SELECT *<br>
-FROM boetes<br>
+<p>SELECT naam<br>
+FROM spelers<br>
+WHERE spelersnr =<br>
+(select spelersnr<br>
+from teams<br>
+where teamnr =<br>
+(select teamnr<br>
+from wedstrijden<br>
+where wedstrijdnr = 6))<br>
 </p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -539,12 +560,12 @@ FROM boetes<br>
 <section class="slide level2">
 
 <h3 id="oefening-6">Oefening 6</h3>
-<p>Geef het kleinste en grootste boetebedrag.</p>
+<p>Geef de nummers van de boetes die hoger zijn dan de boete met betalingsnr 4</p>
 <div class="interactive-sql">
 <div class="sourceCode" id="cb6"><pre class="sourceCode numberSource sql interactive tennis number-lines code-with-copy"><code class="sourceCode sql"></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <aside class="notes">
-<p>SELECT min(bedrag) AS min, max(bedrag) AS max FROM boetes</p>
+<p>SELECT betalingsnr FROM boetes WHERE bedrag &gt; (SELECT bedrag FROM boetes WHERE betalingsnr = 4)</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -560,15 +581,12 @@ FROM boetes<br>
 <section class="slide level2">
 
 <h3 id="oefening-7">Oefening 7</h3>
-<p>Maak een lijst van alle vrouwelijke spelers die niet in Leiden wonen.</p>
+<p>Geef de nummers van de spelers die op dezelfde weekdag zijn geboren als speler 2</p>
 <div class="interactive-sql">
 <div class="sourceCode" id="cb7"><pre class="sourceCode numberSource sql interactive tennis number-lines code-with-copy"><code class="sourceCode sql"></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <aside class="notes">
-<p>SELECT spelersnr, naam, plaats, geslacht<br>
-FROM spelers<br>
-WHERE geslacht = ‘V’ AND plaats != ‘Leiden’<br>
-</p>
+<p>SELECT spelersnr FROM spelers WHERE DAYNAME(geb_datum) = (select DAYNAME(geb_datum) FROM SPELERS WHERE spelersnr = 2)</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -584,14 +602,12 @@ WHERE geslacht = ‘V’ AND plaats != ‘Leiden’<br>
 <section class="slide level2">
 
 <h3 id="oefening-8">Oefening 8</h3>
-<p>Wat is het gemiddelde boetebedrag? Hoeveel boetes werden al betaald? Geef bij deze laatste de kolomnaam “Aantal boetes”</p>
+<p>Geef de nummers van de bestuursleden die een functie zijn begonnen en diezelfde functie weer hebben neergelegd op dezelfde datums als waarop speler 8 de functie van penningmeester heeft geaccepteerd en weer heeft neergelegd. Speler 8 mag zelf niet in het eindresultaat voorkomen.</p>
 <div class="interactive-sql">
 <div class="sourceCode" id="cb8"><pre class="sourceCode numberSource sql interactive tennis number-lines code-with-copy"><code class="sourceCode sql"></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <aside class="notes">
-<p>SELECT round(avg(bedrag)) AS average, count(bedrag) AS “number of fines”<br>
-FROM boetes<br>
-</p>
+<p>SELECT spelersnr FROM bestuursleden WHERE (begin_datum,eind_datum) = (select begin_datum,eind_datum from bestuursleden where spelersnr = 8 and functie = ‘Penningmeester’) AND spelersnr &lt;&gt; 8</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -607,15 +623,12 @@ FROM boetes<br>
 <section class="slide level2">
 
 <h3 id="oefening-9">Oefening 9</h3>
-<p>Geef lijst van alle spelers die een boete van meer dan € 30 kregen. We willen enkel een lijst van spelers en geen lijst van boetes. -Een speler die meer dan één boete kreeg (e.g.&nbsp;Cools heeft een boete van zowel € 75 als € 100) mag maar één keer voorkomen in deze lijst.</p>
+<p>Geef de divisies van teams 1 en 2 en plaats deze naast elkaar in het resultaat</p>
 <div class="interactive-sql">
 <div class="sourceCode" id="cb9"><pre class="sourceCode numberSource sql interactive tennis number-lines code-with-copy"><code class="sourceCode sql"></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <aside class="notes">
-<p>SELECT DISTINCT spelersnr<br>
-FROM boetes<br>
-WHERE bedrag &gt; 30<br>
-</p>
+<p>SELECT (select divisie from teams where teamnr = 1),(select divisie from teams where teamnr = 2)</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1272,7 +1285,6 @@ ORDER BY plaats;<br>
 </section>
 <section class="slide level2">
 
-
 <div class="footer footer-default">
 
 </div>
@@ -1285,19 +1297,19 @@ ORDER BY plaats;<br>
   </div>
 
   <script>window.backupDefine = window.define; window.define = undefined;</script>
-  <script src="../site_libs/revealjs/dist/reveal.js"></script>
+  <script src="10_exercises_advanced_files/libs/revealjs/dist/reveal.js"></script>
   <!-- reveal.js plugins -->
-  <script src="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
-  <script src="../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
-  <script src="../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
-  <script src="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
-  <script src="../site_libs/revealjs/plugin/quarto-support/support.js"></script>
+  <script src="10_exercises_advanced_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="10_exercises_advanced_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="10_exercises_advanced_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="10_exercises_advanced_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="10_exercises_advanced_files/libs/revealjs/plugin/quarto-support/support.js"></script>
   
 
-  <script src="../site_libs/revealjs/plugin/notes/notes.js"></script>
-  <script src="../site_libs/revealjs/plugin/search/search.js"></script>
-  <script src="../site_libs/revealjs/plugin/zoom/zoom.js"></script>
-  <script src="../site_libs/revealjs/plugin/math/math.js"></script>
+  <script src="10_exercises_advanced_files/libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="10_exercises_advanced_files/libs/revealjs/plugin/search/search.js"></script>
+  <script src="10_exercises_advanced_files/libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="10_exercises_advanced_files/libs/revealjs/plugin/math/math.js"></script>
   <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
 
   <script>
@@ -1640,5 +1652,5 @@ ORDER BY plaats;<br>
     </script>
     
 
-<script src="../site_libs/quarto-contrib/interactive-sql-1.0.0/interactive-sql.js"></script>
+<script src="10_exercises_advanced_files/libs/quarto-contrib/interactive-sql-1.0.0/interactive-sql.js"></script>
 </body></html>

@@ -118,9 +118,6 @@ ERD: Entity-relationship diagram
 
 ---
 
-
----
-
 ### Query voorbeeld
 
 ```{.sql .interactive .hr-not-editable}
@@ -142,4 +139,3 @@ LIMIT 5;
 LIMIT is al een soort dialect -> bijvoorbeeld in sql server: SELECT TOP(5) * FROM
 :::
 
----

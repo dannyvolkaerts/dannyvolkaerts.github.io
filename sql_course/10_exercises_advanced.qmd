@@ -1,5 +1,5 @@
 ---
-title: "Oefeningen tennis"
+title: "Oefeningen subqueries"
 author: Danny Volkaerts
 date: last-modified
 date-format: "DD MMM, YYYY" 
@@ -33,185 +33,217 @@ Algemene info over dit database schema kan je [hier](Tennis_uitleg.html) vinden.
 
 ---
 
-## BASIS (H1,H2)
+## SUBQUERIES (H5)
 
 ---
 
 ### Oefening 1
 
-Toon alle spelers uit Zoetermeer die lid werden van de club vóór 1984).
+Geef van elke speler waarvan het nummer kleiner is dan 60 het aantal jaren dat ligt tussen het jaar van toetreding van die speler en dan van speler 100.
 
 ``` {.sql .interactive .tennis}
 
 ```
 
 :::{.notes}
-SELECT spelersnr, naam || ' ' || voorletters AS naam, jaartoe\
+SELECT spelersnr, jaartoe - \
+  (SELECT jaartoe\
+  from spelers\
+  where spelersnr = 100)\
 FROM spelers\
-WHERE plaats = 'Zoetermeer' AND jaartoe < 1984\
+where spelersnr < 60\
 :::
 
 ---
 
 ### Oefening 2
 
-Maak een lijst van alle teams waarvoor lid nr 27 de kapitein is.
+Geef de nummers van de spelers die in hetzelfde jaar geboren zijn als speler 27
 
 ``` {.sql .interactive .tennis}
 
 ```
 
 :::{.notes}
-SELECT *\
-FROM teams\
-WHERE spelersnr = 27\
+SELECT spelersnr\
+FROM spelers\
+WHERE YEAR(geb_datum) = \
+(select YEAR(geb_datum)\
+from spelers\
+where spelersnr = 27)\
 :::
 
 ---
 
 ### Oefening 3
 
-Geef een overzicht van alle gewonnen tenniswedstrijden.
+DOORDENKER: Geef de nummers van de spelers die hetzelfde geslacht hebben en in dezelfde plaats wonen als speler 100.
 
 ``` {.sql .interactive .tennis}
 
 ```
 
 :::{.notes}
-SELECT *\
-FROM wedstrijden\
-WHERE gewonnen > verloren\
+SELECT spelersnr\
+from spelers\
+where (geslacht, plaats) = (select geslacht, plaats\
+                            from spelers\
+                            where spelersnr = 100)\
 :::
 
 ---
 
 ### Oefening 4
 
-Geef een overzicht van alle wedstrijden die speler 112 gespeeld heeft. Bereken voor elke van deze wedstrijden met hoeveel sets deze speler gewonnen of verloren heeft.
-
+Geef de nummers van de teams waarvan de speler met naam Permentier en voorletter R aanvoerder is; we gaan er in deze opgave van uit dat er geen twee spelers zijn met dezelfde naam en voorletters.
 ``` {.sql .interactive .tennis}
 
 ```
 
 :::{.notes}
-SELECT wedstrijdnr, spelersnr, abs(gewonnen - verloren) AS verschil\
-FROM wedstrijden
-WHERE spelersnr = 112
+SELECT teamnr\
+FROM teams\
+WHERE spelersnr =\
+    (select spelersnr\
+    from spelers\
+    where naam = 'Permentier'\
+    and voorletters = 'R')\
 :::
 
 ---
 
 ### Oefening 5
 
-Maak een lijst van alle betaalde boetes.
+DOORDOORDENKER: Geef de naam van de speler die aanvoerder is van het team waartoe wedstrijd 6 behoort.
 
 ``` {.sql .interactive .tennis}
 
 ```
 
 :::{.notes}
-SELECT *\
-FROM boetes\
+SELECT naam\
+FROM spelers\
+WHERE spelersnr =\
+  (select spelersnr\
+  from teams\
+  where teamnr =\
+      (select teamnr\
+      from wedstrijden\
+      where wedstrijdnr = 6))\
 :::
 
 ---
 
 ### Oefening 6
 
-Geef het kleinste en grootste boetebedrag.
+Geef de nummers van de boetes die hoger zijn dan de boete met betalingsnr 4
 
 ``` {.sql .interactive .tennis}
 
 ```
 
 :::{.notes}
-SELECT min(bedrag) AS min, max(bedrag) AS max
+SELECT betalingsnr
 FROM boetes
+WHERE bedrag >
+  (SELECT bedrag
+  FROM boetes
+  WHERE betalingsnr = 4)
 :::
 
 ---
 
 ### Oefening 7
 
-Maak een lijst van alle vrouwelijke spelers die niet in Leiden wonen.
+Geef de nummers van de spelers die op dezelfde weekdag zijn geboren als speler 2
 
 ``` {.sql .interactive .tennis}
 
 ```
 
 :::{.notes}
-SELECT spelersnr, naam, plaats, geslacht\
-FROM spelers\
-WHERE geslacht = 'V' AND plaats != 'Leiden'\
+SELECT spelersnr
+FROM spelers
+WHERE DAYNAME(geb_datum) = 
+      (select DAYNAME(geb_datum)
+      FROM SPELERS
+      WHERE spelersnr = 2)
 :::
 
 ---
 
 ### Oefening 8
 
-Wat is het gemiddelde boetebedrag? Hoeveel boetes werden al betaald? Geef bij deze laatste de kolomnaam "Aantal boetes"
-
+Geef de nummers van de bestuursleden die een functie zijn begonnen en diezelfde functie weer hebben neergelegd op dezelfde datums als waarop speler 8 de functie van penningmeester heeft geaccepteerd en weer heeft neergelegd. Speler 8 mag zelf niet in het eindresultaat voorkomen.
 ``` {.sql .interactive .tennis}
 
 ```
 
 :::{.notes}
-SELECT round(avg(bedrag)) AS average, count(bedrag) AS "number of fines"\
-FROM boetes\
+SELECT spelersnr
+FROM bestuursleden
+WHERE (begin_datum,eind_datum) = 
+  (select begin_datum,eind_datum
+  from bestuursleden
+  where spelersnr = 8
+  and functie = 'Penningmeester')
+AND spelersnr <> 8
 :::
 
 ---
 
 ### Oefening 9
 
-Geef lijst van alle spelers die een boete van meer dan € 30 kregen. We willen enkel een lijst van spelers en geen lijst van boetes. -Een speler die meer dan één boete kreeg (e.g. Cools heeft een boete van zowel € 75 als € 100) mag maar één keer voorkomen in deze lijst.
+Geef de divisies van teams 1 en 2 en plaats deze naast elkaar in het resultaat
 
 ``` {.sql .interactive .tennis}
 
 ```
 
 :::{.notes}
-SELECT DISTINCT spelersnr\
-FROM boetes\
-WHERE bedrag > 30\
+SELECT (select divisie from teams where teamnr = 1),(select divisie from teams where teamnr = 2)
 :::
 
 ---
 
 ### Oefening 10
 
-Genereer een lijst van alle competitiespelers. Niet alle spelers van onze club spelen in een competitie, maar zij die wel in officiële wedstrijden spelen moeten lid zijn van de nationale bond
+Geef de nummers van de wedstrijden gespeeld door spelers die in Rijswijk wonen. Probeer met een subquery
 
 ``` {.sql .interactive .tennis}
 
 ```
 
 :::{.notes}
-SELECT spelersnr, naam\
-FROM spelers\
-WHERE bondsnr IS NOT null\
+select wedstrijdnr from wedstrijden w inner join spelers s on w.spelersnr=s.spelersnr where s.plaats = 'Rijswijk'\
+OF\
+select wedstrijdnr\
+from wedstrijden\
+where 'Rijswijk' = \
+(select plaats\
+from spelers\
+where spelers.spelersnr = wedstrijden.spelersnr)\
 :::
 
----
-
-### MOEILIJKER
 
 ---
 
 ### Oefening 11
 
-Maak een overzicht waarbij je per woonplaats die minstens één letter ‘o’ (hoofdletter of kleine letter allebei OK) aangeeft hoeveel spelers er wonen in die gemeente. Sorteer op plaats.
+Geef de wedstrijdnummers, spelersnummers en de teamnummers van alle wedstrijden gespeeld door een speler die tevens de aanvoerder van dat team is.
+Probeer met een subquery
 
 ``` {.sql .interactive .tennis}
 
 ```
 
 :::{.notes}
-SELECT plaats, COUNT(*) AS aantal\
-FROM spelers\
-GROUP BY plaats\
-HAVING LOWER(plaats) LIKE '%o%'\
-ORDER BY plaats;\
+SELECT wedstrijdnr, spelersnr, teamnr\
+FROM wedstrijden\
+WHERE spelersnr = \
+  (select spelersnr\
+  from teams\
+  where team.spelersnr = wedstrijden.spelersnr)\
 :::
 
 ---

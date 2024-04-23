@@ -1,16 +1,16 @@
 # Renders all quarto docs to html
 
 # Use functions below to render to correct folder:
-quarto::quarto_render(input = "index.qmd",output_file = "index.html")
-quarto::quarto_render(input="sql_course/index_sql.qmd",output_file = "sql_course")
-quarto::quarto_render(input="sql_course/1_introduction.qmd",output_file = "sql_course")
-quarto::quarto_render(input="sql_course/2_basics.qmd",output_file = "sql_course")
-quarto::quarto_render(input="sql_course/3_joins.qmd",output_file = "sql_course")
-quarto::quarto_render(input="sql_course/4_advanced.qmd",output_file = "sql_course")
+quarto::quarto_render(input = "index.qmd")
+quarto::quarto_render(input="sql_course/index_sql.qmd")
+quarto::quarto_render(input="sql_course/1_introduction.qmd")
+quarto::quarto_render(input="sql_course/2_basics.qmd")
+quarto::quarto_render(input="sql_course/3_joins.qmd")
+quarto::quarto_render(input="sql_course/4_advanced.qmd")
 quarto::quarto_render(input="sql_course/5_subqueries.qmd")
-quarto::quarto_render(input="sql_course/6_DDL.qmd",output_file = "sql_course")
-quarto::quarto_render(input="sql_course/7_powerbi.qmd",output_file = "sql_course")
-
+quarto::quarto_render(input="sql_course/6_DDL.qmd")
+quarto::quarto_render(input="sql_course/7_powerbi.qmd")
+quarto::quarto_render(input="sql_course/8_exercises.qmd")
 
 
 

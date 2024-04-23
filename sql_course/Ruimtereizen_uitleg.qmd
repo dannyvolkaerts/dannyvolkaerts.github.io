@@ -10,7 +10,7 @@ format: html
 
 ### Database schema
 
-![](sql_course_images/ruimtereizen_DB.png)
+![](sql_course_images/ruimtereizen_schema.png)
 
 
 ### Belangrijke informatie bij de ruimtereizen database
@@ -52,10 +52,7 @@ BEZOEKEN:\
 (x) betekent dat dit een verplicht veld is, m.a.w. deze kolom moet steeds voor elke rij een concrete waarde hebben.
 
 
-
-
-
-### Enkele aandachtspunten
+### Exploreer de database om ze beter te begrijpen
 
 
 

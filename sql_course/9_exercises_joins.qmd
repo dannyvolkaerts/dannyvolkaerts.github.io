@@ -1,5 +1,5 @@
 ---
-title: "Oefeningen tennis"
+title: "Oefeningen tennis joins"
 author: Danny Volkaerts
 date: last-modified
 date-format: "DD MMM, YYYY" 
@@ -33,38 +33,181 @@ Algemene info over dit database schema kan je [hier](Tennis_uitleg.html) vinden.
 
 ---
 
-## BASIS (H1,H2)
+## JOINS (H3)
 
 ---
 
 ### Oefening 1
 
-Toon alle spelers uit Zoetermeer die lid werden van de club vóór 1984).
+Maak een lijst van alle boetes en voeg de naam van de speler toe (naam en eerste letter(s) in één kolom).
 
 ``` {.sql .interactive .tennis}
 
 ```
 
 :::{.notes}
-SELECT spelersnr, naam || ' ' || voorletters AS naam, jaartoe\
-FROM spelers\
-WHERE plaats = 'Zoetermeer' AND jaartoe < 1984\
+SELECT b.betalingsnr, b.spelersnr, s.naam || ' ' || s.voorletters AS naam, b.datum, b.bedrag\
+FROM boetes b INNER JOIN spelers s ON b.spelersnr = s.spelersnr\
 :::
 
 ---
 
 ### Oefening 2
 
-Maak een lijst van alle teams waarvoor lid nr 27 de kapitein is.
+Geef een overzicht van alle bestuursleden die nu in functie zijn. Toon hun functie. Geef ook hun namen (naam en voorletters in één kolom).
 
 ``` {.sql .interactive .tennis}
 
 ```
 
 :::{.notes}
-SELECT *\
-FROM teams\
-WHERE spelersnr = 27\
+SELECT b.spelersnr, s.naam || ' ' || s.voorletters AS naam, b.begin_datum, b.functie\
+FROM bestuursleden b INNER JOIN spelers s ON b.spelersnr = s.spelersnr\
+WHERE eind_datum IS null\
+:::
+
+---
+
+### Oefening 3
+
+Geef een overzicht van alle boetes groter dan € 30. Toon het bedrag in eurocent. Geef ook het spelersnummer en de naam van de speler die de boete kreeg.
+
+``` {.sql .interactive .tennis}
+
+```
+
+:::{.notes}
+SELECT b.spelersnr, s.naam, round(bedrag*100) AS "bedrag in centen"\
+FROM boetes b INNER JOIN spelers s ON b.spelersnr = s.spelersnr AND bedrag > 30\
+:::
+
+---
+
+### Oefening 4
+
+Maak een lijst van alle gewonnen wedstrijden gespeeld door leden van team 2. Toon het spelersnr van de winnende speler en ook het nummer van de kapitein van het team.
+
+``` {.sql .interactive .tennis}
+
+```
+
+:::{.notes}
+SELECT w.wedstrijdnr, w.spelersnr, w.teamnr, t.spelersnr AS captain\
+FROM wedstrijden w INNER JOIN teams t ON w.teamnr = t.teamnr\
+WHERE w.teamnr = 2 AND gewonnen-verloren > 0\
+:::
+
+---
+
+### Oefening 5
+
+Toon naam en voorletters (in 1 kolom), team en divisie van de kapitein van elk team.
+
+``` {.sql .interactive .tennis}
+
+```
+
+:::{.notes}
+SELECT t.teamnr,t.spelersnr, s.naam || ' ' || s.voorletters AS kapitein, t.divisie
+FROM teams t INNER JOIN spelers s ON t.spelersnr = s.spelersnr
+:::
+
+---
+
+### MOEILIJKER
+
+---
+
+### Oefening 6
+
+Geef een lijst met het spelersnummer, de naam van de speler, de datum van de boete en het bedrag van de boete van al de spelers die een boete gekregen hebben met een bedrag groter dan € 45,50 en in Rijswijk wonen. Sorteer op spelersnr en het volgnummer van de boete.
+
+``` {.sql .interactive .tennis}
+
+```
+
+:::{.notes}
+SELECT spelers.spelersnr, spelers.naam, boetes.datum, boetes.bedrag\
+FROM spelers INNER JOIN boetes ON spelers.spelersnr = boetes.spelersnr\
+WHERE boetes.bedrag > 45.50 AND spelers.plaats = 'Rijswijk'\
+ORDER BY spelers.spelersnr, boetes.betalingsnr;\
+:::
+
+---
+
+### Oefening 7
+
+Geef voor elke wedstrijd het wedstrijdnummer en de volledige naam van de aanvoerder van het team waarvoor de wedstrijd werd gespeeld. Sorteer je resultaat volgens het wedstrijdnummer in oplopende volgorde. TIP: je zal hier een JOIN moeten doen met meer dan twee tabellen.
+
+``` {.sql .interactive .tennis}
+
+```
+
+:::{.notes}
+SELECT W.wedstrijdnr, T.spelersnr, naam, voorletters\
+FROM wedstrijden W INNER JOIN teams T on W.teamnr = T.teamnr\
+  INNER JOIN spelers S on T.spelersnr = S.spelersnr\
+ORDER BY 1\
+:::
+
+---
+
+### Oefening 8
+
+Geef het gemiddeld boetebedrag per speler, afgerond op twee cijfers na de komma. Spelers zonder boete krijgen als waarde ‘geen boetes’. Sorteer op spelersnaam.
+
+``` {.sql .interactive .tennis}
+
+```
+
+:::{.notes}
+SELECT spelers.naam,\
+  CASE\
+    WHEN AVG(boetes.bedrag) IS NULL THEN 'geen boetes'\
+    ELSE CAST(ROUND(AVG(boetes.bedrag), 2) AS varchar(8))\
+  END AS gemiddeld\
+FROM spelers LEFT OUTER JOIN boetes ON spelers.spelersnr = boetes.spelersnr\
+GROUP BY spelers.spelersnr, spelers.naam\
+ORDER BY 1\
+:::
+
+---
+
+### Oefening 9
+
+Geef het gemiddeld aantal gewonnen en verloren sets per geboortejaar. Rond telkens af op twee cijfers na de komma. Sorteer op geboortejaar zodat de gegevens van de jongste spelers bovenaan staan.
+
+``` {.sql .interactive .tennis}
+
+```
+
+:::{.notes}
+SELECT EXTRACT(YEAR FROM geb_datum) AS geboortejaar, ROUND(AVG(gewonnen),2) AS gewonnen,\
+  ROUND(AVG(verloren),2) AS verloren\
+FROM wedstrijden W INNER JOIN spelers S ON W.spelersnr = S.spelersnr\
+GROUP BY EXTRACT(YEAR FROM geb_datum)\
+ORDER BY geboortejaar DESC; \
+:::
+
+---
+
+### Oefening 10
+
+Geef voor de actieve bestuursleden zonder boete hun laatste gespeelde wedstrijd (die met het hoogste wedstrijdnummer). Sorteer aflopend op spelersnr.
+
+``` {.sql .interactive .tennis}
+
+```
+
+:::{.notes}
+SELECT bestuursleden.spelersnr, MAX(wedstrijden.wedstrijdnr) AS laatstewedstrijd\
+FROM bestuursleden\
+  INNER JOIN wedstrijden ON bestuursleden.spelersnr = wedstrijden.spelersnr AND\
+        bestuursleden.eind_datum IS NULL\
+  LEFT OUTER JOIN boetes ON bestuursleden.spelersnr = boetes.spelersnr\
+WHERE boetes.spelersnr IS NULL\
+GROUP BY bestuursleden.spelersnr\
+ORDER BY spelersnr DESC; \
 :::
 
 ---
@@ -78,140 +221,7 @@ Geef een overzicht van alle gewonnen tenniswedstrijden.
 ```
 
 :::{.notes}
-SELECT *\
-FROM wedstrijden\
-WHERE gewonnen > verloren\
-:::
 
----
-
-### Oefening 4
-
-Geef een overzicht van alle wedstrijden die speler 112 gespeeld heeft. Bereken voor elke van deze wedstrijden met hoeveel sets deze speler gewonnen of verloren heeft.
-
-``` {.sql .interactive .tennis}
-
-```
-
-:::{.notes}
-SELECT wedstrijdnr, spelersnr, abs(gewonnen - verloren) AS verschil\
-FROM wedstrijden
-WHERE spelersnr = 112
-:::
-
----
-
-### Oefening 5
-
-Maak een lijst van alle betaalde boetes.
-
-``` {.sql .interactive .tennis}
-
-```
-
-:::{.notes}
-SELECT *\
-FROM boetes\
-:::
-
----
-
-### Oefening 6
-
-Geef het kleinste en grootste boetebedrag.
-
-``` {.sql .interactive .tennis}
-
-```
-
-:::{.notes}
-SELECT min(bedrag) AS min, max(bedrag) AS max
-FROM boetes
-:::
-
----
-
-### Oefening 7
-
-Maak een lijst van alle vrouwelijke spelers die niet in Leiden wonen.
-
-``` {.sql .interactive .tennis}
-
-```
-
-:::{.notes}
-SELECT spelersnr, naam, plaats, geslacht\
-FROM spelers\
-WHERE geslacht = 'V' AND plaats != 'Leiden'\
-:::
-
----
-
-### Oefening 8
-
-Wat is het gemiddelde boetebedrag? Hoeveel boetes werden al betaald? Geef bij deze laatste de kolomnaam "Aantal boetes"
-
-``` {.sql .interactive .tennis}
-
-```
-
-:::{.notes}
-SELECT round(avg(bedrag)) AS average, count(bedrag) AS "number of fines"\
-FROM boetes\
-:::
-
----
-
-### Oefening 9
-
-Geef lijst van alle spelers die een boete van meer dan € 30 kregen. We willen enkel een lijst van spelers en geen lijst van boetes. -Een speler die meer dan één boete kreeg (e.g. Cools heeft een boete van zowel € 75 als € 100) mag maar één keer voorkomen in deze lijst.
-
-``` {.sql .interactive .tennis}
-
-```
-
-:::{.notes}
-SELECT DISTINCT spelersnr\
-FROM boetes\
-WHERE bedrag > 30\
-:::
-
----
-
-### Oefening 10
-
-Genereer een lijst van alle competitiespelers. Niet alle spelers van onze club spelen in een competitie, maar zij die wel in officiële wedstrijden spelen moeten lid zijn van de nationale bond
-
-``` {.sql .interactive .tennis}
-
-```
-
-:::{.notes}
-SELECT spelersnr, naam\
-FROM spelers\
-WHERE bondsnr IS NOT null\
-:::
-
----
-
-### MOEILIJKER
-
----
-
-### Oefening 11
-
-Maak een overzicht waarbij je per woonplaats die minstens één letter ‘o’ (hoofdletter of kleine letter allebei OK) aangeeft hoeveel spelers er wonen in die gemeente. Sorteer op plaats.
-
-``` {.sql .interactive .tennis}
-
-```
-
-:::{.notes}
-SELECT plaats, COUNT(*) AS aantal\
-FROM spelers\
-GROUP BY plaats\
-HAVING LOWER(plaats) LIKE '%o%'\
-ORDER BY plaats;\
 :::
 
 ---
