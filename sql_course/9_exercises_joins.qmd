@@ -293,7 +293,7 @@ AND AANV.SPELERSNR = T.SPELERSNR\
 
 ### Oefening 15
 
-Geef de nummers van de boetes die qua boetebedraag gelijk zijn aan een boetebedrag behorende bij speler 44. Het resultaat dient niet de boetes van speler 44 te bevatten.
+Geef de nummers van de boetes die qua boetebedrag gelijk zijn aan een boetebedrag behorende bij speler 44. Het resultaat dient niet de boetes van speler 44 te bevatten.
 
 ``` {.sql .interactive .tennis}
 
@@ -320,12 +320,12 @@ Geef van elke speler geboren na juni 1920 het spelersnummer, de naam en de boete
 :::{.notes}
 SELECT spelers.spelersnr, naam, bedrag\
 FROM spelers, boetes\
-WHERE spleers.spelersnr = boetes.spelersnr\
+WHERE spelers.spelersnr = boetes.spelersnr\
 AND geb_datum > '1920-06-30'\
 
 EXPLICIET:\
 SELECT spelers.spelersnr, naam, bedrag\
-FROM selers INNER JOIN boetes on spelers.spelersnr = boetes.spelersnr\
+FROM spelers INNER JOIN boetes on spelers.spelersnr = boetes.spelersnr\
 WHERE geb_datum > '1920-06-30'\
 :::
 
@@ -356,7 +356,7 @@ Geef van elke speler geboren in Rijswijk het spelersnr, de naam , de lijst met b
 ```
 
 :::{.notes}
-SELECT s.spelersnr, naam, bedraag, teamnr\
+SELECT s.spelersnr, naam, bedrag, teamnr\
 FROM spelers s LEFT OUTER JOIN boetes b USING(spelersnr)\
               LEFT OUTER JOIN wedstrijden w on s.spelersnr = w.spelersnr\
 WHERE plaats = 'Rijswijk'\

@@ -780,7 +780,7 @@ AND AANV.SPELERSNR = T.SPELERSNR<br>
 <section class="slide level2">
 
 <h3 id="oefening-15">Oefening 15</h3>
-<p>Geef de nummers van de boetes die qua boetebedraag gelijk zijn aan een boetebedrag behorende bij speler 44. Het resultaat dient niet de boetes van speler 44 te bevatten.</p>
+<p>Geef de nummers van de boetes die qua boetebedrag gelijk zijn aan een boetebedrag behorende bij speler 44. Het resultaat dient niet de boetes van speler 44 te bevatten.</p>
 <div class="interactive-sql">
 <div class="sourceCode" id="cb15"><pre class="sourceCode numberSource sql interactive tennis number-lines code-with-copy"><code class="sourceCode sql"></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -813,12 +813,12 @@ AND B1.SPELERSNR &lt;&gt; 44<br>
 <aside class="notes">
 <p>SELECT spelers.spelersnr, naam, bedrag<br>
 FROM spelers, boetes<br>
-WHERE spleers.spelersnr = boetes.spelersnr<br>
+WHERE spelers.spelersnr = boetes.spelersnr<br>
 AND geb_datum &gt; ‘1920-06-30’<br>
 </p>
 <p>EXPLICIET:<br>
 SELECT spelers.spelersnr, naam, bedrag<br>
-FROM selers INNER JOIN boetes on spelers.spelersnr = boetes.spelersnr<br>
+FROM spelers INNER JOIN boetes on spelers.spelersnr = boetes.spelersnr<br>
 WHERE geb_datum &gt; ‘1920-06-30’<br>
 </p>
 <style type="text/css">
@@ -863,7 +863,7 @@ FROM spelers s LEFT OUTER JOIN boetes b ON s.spelersnr = b.spelersnr ORDER BY 1<
 <div class="sourceCode" id="cb18"><pre class="sourceCode numberSource sql interactive tennis number-lines code-with-copy"><code class="sourceCode sql"></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <aside class="notes">
-<p>SELECT s.spelersnr, naam, bedraag, teamnr<br>
+<p>SELECT s.spelersnr, naam, bedrag, teamnr<br>
 FROM spelers s LEFT OUTER JOIN boetes b USING(spelersnr)<br>
 LEFT OUTER JOIN wedstrijden w on s.spelersnr = w.spelersnr<br>
 WHERE plaats = ‘Rijswijk’<br>
