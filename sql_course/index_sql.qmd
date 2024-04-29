@@ -47,8 +47,13 @@ Kennis halen uit data door het bundelen van de kracht van SQL met PowerBI.
 
 ---
 
-8. [**Oefeningen**](8_exercises.html){target="_blank"}\
-Oefeningen mbt hoofstuk 1-7.
+8. [**Oefeningen H1 en H2**](8_exercises.html){target="_blank"}\
+Oefeningen hoofstuk 1 en 2.
+
+---
+
+9. [**Oefeningen H3**](8_exercises.html){target="_blank"}\
+Oefeningen hoofstuk 3 - joins.
 
 ---
 
