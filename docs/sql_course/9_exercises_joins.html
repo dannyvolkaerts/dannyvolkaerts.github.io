@@ -12,7 +12,7 @@
   <meta name="generator" content="quarto-1.3.450">
 
   <meta name="author" content="Danny Volkaerts">
-  <title>Oefeningen hoofdstuk 1 en 2: tennis</title>
+  <title>Oefeningen hoofdstuk 3: tennis joins</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -394,7 +394,7 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Oefeningen hoofdstuk 1 en 2: tennis</h1>
+  <h1 class="title">Oefeningen hoofdstuk 3: tennis joins</h1>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -416,21 +416,22 @@ Danny Volkaerts
 <p>Algemene info over dit database schema kan je <a href="Tennis_uitleg.html">hier</a> vinden.</p>
 
 <img data-src="sql_course_images/Calvin_and_Hobbes_playing_Calvinball.jpg" style="width:50.0%" class="r-stretch quarto-figure-center"><p class="caption">Watterson, Calvin and Hobbes</p></section>
-<section id="basis-h1h2" class="slide level2">
-<h2>BASIS (H1,H2)</h2>
+<section id="joins-h3" class="slide level2">
+<h2>JOINS (H3)</h2>
 </section>
 <section class="slide level2">
 
 <h3 id="oefening-1">Oefening 1</h3>
-<p>Toon alle spelers uit Zoetermeer die lid werden van de club vóór 1984).</p>
+<p>Maak een lijst van alle boetes en voeg de naam van de speler toe (naam en eerste letter(s) in één kolom).</p>
 <div class="interactive-sql">
 <div class="sourceCode" id="cb1"><pre class="sourceCode numberSource sql interactive tennis number-lines code-with-copy"><code class="sourceCode sql"></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <aside class="notes">
-<p>SELECT spelersnr, naam || ’ ’ || voorletters AS naam, jaartoe<br>
-FROM spelers<br>
-WHERE plaats = ‘Zoetermeer’ AND jaartoe &lt; 1984<br>
+<p>SELECT b.betalingsnr, b.spelersnr, s.naam || ’ ’ || s.voorletters AS naam, b.datum, b.bedrag<br>
+FROM boetes b INNER JOIN spelers s ON b.spelersnr = s.spelersnr<br>
 </p>
+<p>INDIEN namen van de join-kolommen gelijk zijn mag ook USING gebruikt worden:<br>
+FROM boetes b INNER JOIN spelers s USING(spelersnr)</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -446,14 +447,14 @@ WHERE plaats = ‘Zoetermeer’ AND jaartoe &lt; 1984<br>
 <section class="slide level2">
 
 <h3 id="oefening-2">Oefening 2</h3>
-<p>Maak een lijst van alle teams waarvoor lid nr 27 de kapitein is.</p>
+<p>Geef een overzicht van alle bestuursleden die nu in functie zijn. Toon hun functie. Geef ook hun namen (naam en voorletters in één kolom).</p>
 <div class="interactive-sql">
 <div class="sourceCode" id="cb2"><pre class="sourceCode numberSource sql interactive tennis number-lines code-with-copy"><code class="sourceCode sql"></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <aside class="notes">
-<p>SELECT *<br>
-FROM teams<br>
-WHERE spelersnr = 27<br>
+<p>SELECT b.spelersnr, s.naam || ’ ’ || s.voorletters AS naam, b.begin_datum, b.functie<br>
+FROM bestuursleden b INNER JOIN spelers s ON b.spelersnr = s.spelersnr<br>
+WHERE eind_datum IS null<br>
 </p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -470,14 +471,13 @@ WHERE spelersnr = 27<br>
 <section class="slide level2">
 
 <h3 id="oefening-3">Oefening 3</h3>
-<p>Geef een overzicht van alle gewonnen tenniswedstrijden.</p>
+<p>Geef een overzicht van alle boetes groter dan € 30. Toon het bedrag in eurocent. Geef ook het spelersnummer en de naam van de speler die de boete kreeg.</p>
 <div class="interactive-sql">
 <div class="sourceCode" id="cb3"><pre class="sourceCode numberSource sql interactive tennis number-lines code-with-copy"><code class="sourceCode sql"></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <aside class="notes">
-<p>SELECT *<br>
-FROM wedstrijden<br>
-WHERE gewonnen &gt; verloren<br>
+<p>SELECT b.spelersnr, s.naam, round(bedrag*100) AS “bedrag in centen”<br>
+FROM boetes b INNER JOIN spelers s ON b.spelersnr = s.spelersnr AND bedrag &gt; 30<br>
 </p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -494,13 +494,15 @@ WHERE gewonnen &gt; verloren<br>
 <section class="slide level2">
 
 <h3 id="oefening-4">Oefening 4</h3>
-<p>Geef een overzicht van alle wedstrijden die speler 112 gespeeld heeft. Bereken voor elke van deze wedstrijden met hoeveel sets deze speler gewonnen of verloren heeft.</p>
+<p>Maak een lijst van alle gewonnen wedstrijden gespeeld door leden van team 2. Toon het spelersnr van de winnende speler en ook het nummer van de kapitein van het team.</p>
 <div class="interactive-sql">
 <div class="sourceCode" id="cb4"><pre class="sourceCode numberSource sql interactive tennis number-lines code-with-copy"><code class="sourceCode sql"></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <aside class="notes">
-<p>SELECT wedstrijdnr, spelersnr, abs(gewonnen - verloren) AS verschil<br>
-FROM wedstrijden WHERE spelersnr = 112</p>
+<p>SELECT w.wedstrijdnr, w.spelersnr, w.teamnr, t.spelersnr AS captain<br>
+FROM wedstrijden w INNER JOIN teams t ON w.teamnr = t.teamnr<br>
+WHERE w.teamnr = 2 AND gewonnen-verloren &gt; 0<br>
+</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -516,130 +518,12 @@ FROM wedstrijden WHERE spelersnr = 112</p>
 <section class="slide level2">
 
 <h3 id="oefening-5">Oefening 5</h3>
-<p>Maak een lijst van alle betaalde boetes.</p>
+<p>Toon naam en voorletters (in 1 kolom), team en divisie van de kapitein van elk team.</p>
 <div class="interactive-sql">
 <div class="sourceCode" id="cb5"><pre class="sourceCode numberSource sql interactive tennis number-lines code-with-copy"><code class="sourceCode sql"></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <aside class="notes">
-<p>SELECT *<br>
-FROM boetes<br>
-</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section class="slide level2">
-
-<h3 id="oefening-6">Oefening 6</h3>
-<p>Geef het kleinste en grootste boetebedrag.</p>
-<div class="interactive-sql">
-<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource sql interactive tennis number-lines code-with-copy"><code class="sourceCode sql"></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<aside class="notes">
-<p>SELECT min(bedrag) AS min, max(bedrag) AS max FROM boetes</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section class="slide level2">
-
-<h3 id="oefening-7">Oefening 7</h3>
-<p>Maak een lijst van alle vrouwelijke spelers die niet in Leiden wonen.</p>
-<div class="interactive-sql">
-<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource sql interactive tennis number-lines code-with-copy"><code class="sourceCode sql"></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<aside class="notes">
-<p>SELECT spelersnr, naam, plaats, geslacht<br>
-FROM spelers<br>
-WHERE geslacht = ‘V’ AND plaats != ‘Leiden’<br>
-</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section class="slide level2">
-
-<h3 id="oefening-8">Oefening 8</h3>
-<p>Wat is het gemiddelde boetebedrag? Hoeveel boetes werden al betaald? Geef bij deze laatste de kolomnaam “Aantal boetes”</p>
-<div class="interactive-sql">
-<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource sql interactive tennis number-lines code-with-copy"><code class="sourceCode sql"></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<aside class="notes">
-<p>SELECT round(avg(bedrag)) AS average, count(bedrag) AS “number of fines”<br>
-FROM boetes<br>
-</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section class="slide level2">
-
-<h3 id="oefening-9">Oefening 9</h3>
-<p>Geef lijst van alle spelers die een boete van meer dan € 30 kregen. We willen enkel een lijst van spelers en geen lijst van boetes. -Een speler die meer dan één boete kreeg (e.g.&nbsp;Cools heeft een boete van zowel € 75 als € 100) mag maar één keer voorkomen in deze lijst.</p>
-<div class="interactive-sql">
-<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource sql interactive tennis number-lines code-with-copy"><code class="sourceCode sql"></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<aside class="notes">
-<p>SELECT DISTINCT spelersnr<br>
-FROM boetes<br>
-WHERE bedrag &gt; 30<br>
-</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section class="slide level2">
-
-<h3 id="oefening-10">Oefening 10</h3>
-<p>Genereer een lijst van alle competitiespelers. Niet alle spelers van onze club spelen in een competitie, maar zij die wel in officiële wedstrijden spelen moeten lid zijn van de nationale bond</p>
-<div class="interactive-sql">
-<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource sql interactive tennis number-lines code-with-copy"><code class="sourceCode sql"></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<aside class="notes">
-<p>SELECT spelersnr, naam<br>
-FROM spelers<br>
-WHERE bondsnr IS NOT null<br>
-</p>
+<p>SELECT t.teamnr,t.spelersnr, s.naam || ’ ’ || s.voorletters AS kapitein, t.divisie FROM teams t INNER JOIN spelers s ON t.spelersnr = s.spelersnr</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -658,17 +542,331 @@ WHERE bondsnr IS NOT null<br>
 </section>
 <section class="slide level2">
 
+<h3 id="oefening-6">Oefening 6</h3>
+<p>Geef een lijst met het spelersnummer, de naam van de speler, de datum van de boete en het bedrag van de boete van al de spelers die een boete gekregen hebben met een bedrag groter dan € 45,50 en in Rijswijk wonen. Sorteer op spelersnr en het volgnummer van de boete.</p>
+<div class="interactive-sql">
+<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource sql interactive tennis number-lines code-with-copy"><code class="sourceCode sql"></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<aside class="notes">
+<p>SELECT spelers.spelersnr, spelers.naam, boetes.datum, boetes.bedrag<br>
+FROM spelers INNER JOIN boetes ON spelers.spelersnr = boetes.spelersnr<br>
+WHERE boetes.bedrag &gt; 45.50 AND spelers.plaats = ‘Rijswijk’<br>
+ORDER BY spelers.spelersnr, boetes.betalingsnr;<br>
+</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2">
+
+<h3 id="oefening-7">Oefening 7</h3>
+<p>Geef voor elke wedstrijd het wedstrijdnummer en de volledige naam van de aanvoerder van het team waarvoor de wedstrijd werd gespeeld. Sorteer je resultaat volgens het wedstrijdnummer in oplopende volgorde. TIP: je zal hier een JOIN moeten doen met meer dan twee tabellen.</p>
+<div class="interactive-sql">
+<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource sql interactive tennis number-lines code-with-copy"><code class="sourceCode sql"></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<aside class="notes">
+<p>SELECT W.wedstrijdnr, T.spelersnr, naam, voorletters<br>
+FROM wedstrijden W INNER JOIN teams T on W.teamnr = T.teamnr<br>
+INNER JOIN spelers S on T.spelersnr = S.spelersnr<br>
+ORDER BY 1<br>
+</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2">
+
+<h3 id="oefening-8">Oefening 8</h3>
+<p>Geef de nummers van de aanvoerders voor wie minstens één boete is betaald.</p>
+<div class="interactive-sql">
+<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource sql interactive tennis number-lines code-with-copy"><code class="sourceCode sql"></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<aside class="notes">
+<p>SELECT t.spelersnr<br>
+FROM teams as t, boetes as bt<br>
+WHERE t.spelersnr = bt.spelersnr<br>
+</p>
+<p>Ook eens uitvoeren met SELECT spelersnr -&gt; amubiguous<br>
+</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2">
+
+<h3 id="oefening-9">Oefening 9</h3>
+<p>Geef van elke wedstrijd het spelersnrummer, het teamnummer, de naam van de speler en de divisie van het team.</p>
+<div class="interactive-sql">
+<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource sql interactive tennis number-lines code-with-copy"><code class="sourceCode sql"></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<aside class="notes">
+<p>SELECT DISTINCT w.spelersnr, w.teamnr, s.naam, t.divisie<br>
+FROM wedstrijden as w, spelers as s, teams t<br>
+WHERE w.spelersnr = s.spelersnr AND w.teamnr = t.teamnr</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2">
+
+<h3 id="oefening-10">Oefening 10</h3>
+<p>Geef het betalingsnr, spelersnr en de datum van elke boete die betaald is in het jaar waarin de betrokken speler tot de tennisvereniging is toegetreden.</p>
+<div class="interactive-sql">
+<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource sql interactive tennis number-lines code-with-copy"><code class="sourceCode sql"></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<aside class="notes">
+<p>SQLite:<br>
+SELECT b.betalingsnr, b.spelersnr, b.datum<br>
+FROM boetes as b, spelers as s on b.spelersnr=s.spelersnr<br>
+WHERE strftime(‘%Y’,b.datum) = s.jaartoe<br>
+</p>
+<p>SQL server:<br>
+SELECT b.betalingsnr, b.spelersnr, b.datum<br>
+FROM boetes as b, spelers as s on b.spelersnr=s.spelersnr<br>
+WHERE YEAR(b.datum) = s.jaartoe<br>
+</p>
+<p>DUS niet per se enkel join op basis van de sleutelkolom maar kan ook bijkomende conditie zijn.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2">
+
 <h3 id="oefening-11">Oefening 11</h3>
-<p>Maak een overzicht waarbij je per woonplaats die minstens één letter ‘o’ (hoofdletter of kleine letter allebei OK) aangeeft hoeveel spelers er wonen in die gemeente. Sorteer op plaats.</p>
+<p>Geef het nummer van elke speler waarvoor op dezelfde dag dat hij bestuurslid is geworden een boete betaald is.</p>
 <div class="interactive-sql">
 <div class="sourceCode" id="cb11"><pre class="sourceCode numberSource sql interactive tennis number-lines code-with-copy"><code class="sourceCode sql"></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <aside class="notes">
-<p>SELECT plaats, COUNT(*) AS aantal<br>
-FROM spelers<br>
-GROUP BY plaats<br>
-HAVING LOWER(plaats) LIKE ‘%o%’<br>
-ORDER BY plaats;<br>
+<p>SELECT DISTINCT bl.spelersnr<br>
+FROM bestuursleden as bl, boetes as b<br>
+WHERE bl.spelersnr = b.spelersnr<br>
+AND bl.begin_datum = b.datum<br>
+</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2">
+
+<h3 id="oefening-12">Oefening 12</h3>
+<p>Geef de nummers van de spelers die ouder zijn dan R.Permentier</p>
+<div class="interactive-sql">
+<div class="sourceCode" id="cb12"><pre class="sourceCode numberSource sql interactive tennis number-lines code-with-copy"><code class="sourceCode sql"></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<aside class="notes">
+<p>SELECT s.spelersnr<br>
+FROM spelers as s, spelers as p WHERE p.naam = ‘Permentier’<br>
+AND p.voorletters = ‘R’<br>
+AND s.geb_datum &lt; p.geb_datum</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2">
+
+<h3 id="oefening-13">Oefening 13</h3>
+<p>Geef de nummers en de namen van de spelers die in dezelfde plaats wonen als de speler met nummer 27. Speler 27 behoort zelf in het eindresultaat voor te komen.</p>
+<div class="interactive-sql">
+<div class="sourceCode" id="cb13"><pre class="sourceCode numberSource sql interactive tennis number-lines code-with-copy"><code class="sourceCode sql"></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<aside class="notes">
+<p>SELECT s.spelersnr, s.naam<br>
+FROM spelers as s, spelers as s27<br>
+WHERE s.Plaats = s27.plaats<br>
+AND s27.spelersnr = 27<br>
+</p>
+<p>INDIEN speler 27 niet in resultaat mag voorkomen: AND s.spelersnr &lt;&gt; 27<br>
+</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2">
+
+<h3 id="oefening-14">Oefening 14</h3>
+<p>Geef het nummer en de naam van elke wedstrijdspeler alsmede het nummer en de naam van de aanvoerder van elk team waarvoor die speler ooit gespeeld heeft; het resultaat mag geen wedstrijdspelers bevatten die zelf aanvoerder zijn van een team.</p>
+<div class="interactive-sql">
+<div class="sourceCode" id="cb14"><pre class="sourceCode numberSource sql interactive tennis number-lines code-with-copy"><code class="sourceCode sql"></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<aside class="notes">
+<p>SELECT DISTINCT S.SPELERSNR AS SPELERS_SPELERSNR,<br>
+S.NAAM AS SPELERS_NAAM,<br>
+AANV.SPELERSNR AS AANVOERDER_SPELERSNR,<br>
+AANV.NAAM AS AANVOERDER_NAAM<br>
+FROM SPELERS AS S, SPELERS AS AANV,<br>
+WEDSTRIJDEN AS W, TEAMS AS T<br>
+WHERE W.SPELERSNR = S.SPELERSNR<br>
+AND T.TEAMNR = W.TEAMNR<br>
+AND W.SPELERSNR &lt;&gt; T.SPELERSNR<br>
+AND AANV.SPELERSNR = T.SPELERSNR<br>
+</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2">
+
+<h3 id="oefening-15">Oefening 15</h3>
+<p>Geef de nummers van de boetes die qua boetebedraag gelijk zijn aan een boetebedrag behorende bij speler 44. Het resultaat dient niet de boetes van speler 44 te bevatten.</p>
+<div class="interactive-sql">
+<div class="sourceCode" id="cb15"><pre class="sourceCode numberSource sql interactive tennis number-lines code-with-copy"><code class="sourceCode sql"></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<aside class="notes">
+<p>SELECT B1.BETALINGSNR, B1.SPELERSNR<br>
+FROM BOETES AS B1, BOETES AS B2<br>
+WHERE B1.BEDRAG = B2.BEDRAG<br>
+AND B2.SPELERSNR = 44<br>
+AND B1.SPELERSNR &lt;&gt; 44<br>
+</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2">
+
+<h3 id="oefening-16">Oefening 16</h3>
+<p>Geef van elke speler geboren na juni 1920 het spelersnummer, de naam en de boetebedragen die voor hem of haar betaald zijn.</p>
+<div class="interactive-sql">
+<div class="sourceCode" id="cb16"><pre class="sourceCode numberSource sql interactive tennis number-lines code-with-copy"><code class="sourceCode sql"></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<aside class="notes">
+<p>SELECT spelers.spelersnr, naam, bedrag<br>
+FROM spelers, boetes<br>
+WHERE spleers.spelersnr = boetes.spelersnr<br>
+AND geb_datum &gt; ‘1920-06-30’<br>
+</p>
+<p>EXPLICIET:<br>
+SELECT spelers.spelersnr, naam, bedrag<br>
+FROM selers INNER JOIN boetes on spelers.spelersnr = boetes.spelersnr<br>
+WHERE geb_datum &gt; ‘1920-06-30’<br>
+</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2">
+
+<h3 id="oefening-17">Oefening 17</h3>
+<p>Geef voor alle spelers het spelersnr, de naam en de evetuele boetebedragen die voor hem of haar betaald zijn; sorteer op spelersnr.</p>
+<div class="interactive-sql">
+<div class="sourceCode" id="cb17"><pre class="sourceCode numberSource sql interactive tennis number-lines code-with-copy"><code class="sourceCode sql"></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<aside class="notes">
+<p>SELECT s.spelersnr, s.naam, b.bedrag<br>
+FROM spelers s LEFT OUTER JOIN boetes b ON s.spelersnr = b.spelersnr ORDER BY 1</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2">
+
+<h3 id="oefening-18">Oefening 18</h3>
+<p>Geef van elke speler geboren in Rijswijk het spelersnr, de naam , de lijst met boetebedragen en de lijst met teams waarvoor hij of zij een wedstrijd heeft gespeeld.</p>
+<div class="interactive-sql">
+<div class="sourceCode" id="cb18"><pre class="sourceCode numberSource sql interactive tennis number-lines code-with-copy"><code class="sourceCode sql"></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<aside class="notes">
+<p>SELECT s.spelersnr, naam, bedraag, teamnr<br>
+FROM spelers s LEFT OUTER JOIN boetes b USING(spelersnr)<br>
+LEFT OUTER JOIN wedstrijden w on s.spelersnr = w.spelersnr<br>
+WHERE plaats = ‘Rijswijk’<br>
 </p>
 <style type="text/css">
         span.MJX_Assistive_MathML {

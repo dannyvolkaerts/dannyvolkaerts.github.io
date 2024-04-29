@@ -108,6 +108,52 @@ ORDER BY first_name , last_name;
 Geef me de werknemers die een salaris hebben gelijk aan of hoger dan het hoogste minimum van een van de departementen.
 :::
 
+---
+
+### Opgelet!
+
+De `ALL` operator vergelijkt een waarde met elke waarde van de resultaattabel.
+
+Geef alle spelers van Rijswijk die een bondsnr hebben dat kleiner is dan het kleinste bondsnr van de spelers van Den Haag:
+``` {.sql .interactive .hr}
+-- onderstaande werkt niet in deze browser! -> uit te voeren in SQL server
+select *
+from SPELERS
+where PLAATS = 'Rijswijk' AND BONDSNR < ALL(
+select BONDSNR from spelers
+where PLAATS = 'Den Haag'
+)
+```
+
+:::{.notes}
+select naam, plaats, bondsnr\
+from SPELERS\
+where PLAATS = 'Rijswijk'\
+
+select naam, plaats, bondsnr\
+from SPELERS\
+where PLAATS = 'Den Haag'\
+
+in sqlite moet het via:\
+select MIN(BONDSNR)\
+from SPELERS\
+where PLAATS = 'Den Haag'\
+
+in subquery moet het zijn:\
+select bondsnr\
+from SPELERS\
+where PLAATS = 'Den Haag'\
+AND BONDSNR IS NOT NULL\
+
+Wat als ik ALL verander in ANY?\
+De ANY operator vergelijkt een waarde met elke waarde in een tabel en is voldaan als de vergelijking minstens voor één waarde uit de tabel geldt.\
+select *\
+from SPELERS\
+where PLAATS = 'Rijswijk' AND BONDSNR < ANY(\
+select BONDSNR from spelers\
+where PLAATS = 'Den Haag'\
+)\
+:::
 ------------------------------------------------------------------------
 
 ### Correlated subquery

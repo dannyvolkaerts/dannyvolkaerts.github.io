@@ -1,5 +1,5 @@
 ---
-title: "Oefeningen tennis"
+title: "Oefeningen hoofdstuk 1 en 2: tennis"
 author: Danny Volkaerts
 date: last-modified
 date-format: "DD MMM, YYYY" 

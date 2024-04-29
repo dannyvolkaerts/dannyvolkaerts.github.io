@@ -13,6 +13,7 @@ project:
     - "sql_course/7_powerbi.qmd"
     - "sql_course/8_exercises.qmd"
     - "sql_course/Tennis_uitleg.qmd"
+    - "sql_course/9_exercises_joins.qmd"
 
 website:
   title: ""

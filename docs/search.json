@@ -177,7 +177,7 @@
   {
     "objectID": "sql_course/8_exercises.html#de-tennisvereniging",
     "href": "sql_course/8_exercises.html#de-tennisvereniging",
-    "title": "Oefeningen tennis",
+    "title": "Oefeningen hoofdstuk 1 en 2: tennis",
     "section": "De Tennisvereniging",
     "text": "De Tennisvereniging"
   },
@@ -191,8 +191,22 @@
   {
     "objectID": "sql_course/8_exercises.html#basis-h1h2",
     "href": "sql_course/8_exercises.html#basis-h1h2",
-    "title": "Oefeningen tennis",
+    "title": "Oefeningen hoofdstuk 1 en 2: tennis",
     "section": "BASIS (H1,H2)",
     "text": "BASIS (H1,H2)"
+  },
+  {
+    "objectID": "sql_course/9_exercises_joins.html#de-tennisvereniging",
+    "href": "sql_course/9_exercises_joins.html#de-tennisvereniging",
+    "title": "Oefeningen hoofdstuk 3: tennis joins",
+    "section": "De Tennisvereniging",
+    "text": "De Tennisvereniging"
+  },
+  {
+    "objectID": "sql_course/9_exercises_joins.html#joins-h3",
+    "href": "sql_course/9_exercises_joins.html#joins-h3",
+    "title": "Oefeningen hoofdstuk 3: tennis joins",
+    "section": "JOINS (H3)",
+    "text": "JOINS (H3)"
   }
 ]
