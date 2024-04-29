@@ -24,6 +24,11 @@ Waarom tabellen combineren?\
 \
 REDUNDANCY & CONSISTENCY 
 
+:::{.notes}
+redundantie = overtolligheid = gegeven dat op meerfdere plekken in een database voorkomt.\
+Consistency = requirement dat elke transactie alleen data kan wijzigen in de aanagegeven toegelaten manieren (DDL).
+
+:::
 ---
 
 ### INNER JOIN
@@ -44,7 +49,10 @@ ON tabel1.gemeenschappelijke_kolom = tabel2.gemeenschappelijke_kolom;
 
 ![](sql_course_images/joins_vis_inner.png){}
 
-
+:::{.notes}
+kleur van tabel = gemmenschappelijke sleutel\
+X = kolom van tabel 1, y = kolom van tabel 2\
+:::
 ------------------------------------------------------------------------
 
 ### INNER JOIN - voorbeeld
@@ -59,6 +67,24 @@ FROM employees    INNER JOIN departments
 WHERE departments.department_name = 'Purchasing';
 ```
 
+:::{.notes}
+Herinner: IT departement: eerst IT = id 6, daarna where depart_id = 6.\
+
+SQLITE: duplicate column toont deze niet, wel in SQL server.
+
+Dit is op zich omslachtig -> tabellen AS e and as d\
+
+Volgend punt: USING\
+SELECT    first_name, last_name, employees.department_id, \
+          departments.department_id, department_name\
+FROM employees    INNER JOIN departments USING(department_id)\
+WHERE departments.department_name = 'Purchasing';\
+Dit KAN in SQLITE maar NIET in SQLSERVER:\
+Voorbeeld: SELECT s.spelersnr, b.spelersnr,b.bedrag\
+FROM spelers s inner join boetes b on(s.spelersnr=b.spelersnr)\
+
+:::
+
 ------------------------------------------------------------------------
 
 ### INNER JOIN - voorbeeld 2
@@ -67,6 +93,9 @@ Geef me de verschillende jobtitels van departement 'Purchasing'.
 
 ![](sql_course_images/inner_join_ex2.png){#fig-erd-hr}
 
+:::{.notes}
+Nuance: de jobs die effectief uitgevoerd worden!
+:::
 ------------------------------------------------------------------------
 
 ### INNER JOIN - voorbeeld 2
@@ -81,7 +110,7 @@ WHERE d.department_name = 'Purchasing';
 ```
 
 :::{.notes}
-DISTINCT
+SELECT DISTINCT job_title...
 :::
 
 ------------------------------------------------------------------------
@@ -108,8 +137,12 @@ ON tabel1.gemeenschappelijke_kolom = tabel2.gemeenschappelijke_kolom;
 
 ### LEFT JOIN voorbeeld
 
+Geef me alle landen en hun eventuele locaties.
 ![](sql_course_images/left_join_ex1.png)
 
+:::{.notes}
+Let op de kardinaliteit: 0 ... N -> niet elk land hoeft een locatie te hebben!
+:::
 ------------------------------------------------------------------------
 
 ### LEFT JOIN voorbeeld
@@ -186,11 +219,15 @@ CREATE TABLE fruit (\
 	mand_id INTEGER\
 );\
 
+Hoe ziet het schema eruit?\
+
 INSERT INTO mand (mand_id, mand_naam)\
 VALUES\
 	(1, 'A'),\
 	(2, 'B'),\
 	(3, 'C');\
+	
+Runnen en nog eens proberen te runnen -> UNIQUE CONSTRAINT!\
 	
 INSERT INTO fruit (\
 	fruit_id,\
@@ -218,6 +255,14 @@ FROM\
 FULL OUTER JOIN mand ON mand.mand_id = fruit.mand_id\
 WHERE\
 	fruit_naam IS NULL;\
+	
+DELETE FROM TABLE fruits \
+WHERE fruit_id >0;\
+
+DROP TABLE fruits;\
+
+Let op! Verschil lege tabel en geen tabel! (empty vs error)\
+
 :::
 
 
@@ -271,6 +316,8 @@ FROM employees e
 ```
 
 :::{.notes}
+Moeten we in dit geval een employee toevoegen of een manager?\
+=> Steven King als employee want heeft geen manager!\
 SELECT \
     e.first_name || ' ' || e.last_name AS employee,\
     m.first_name || ' ' || m.last_name AS manager\

@@ -404,7 +404,7 @@ Danny Volkaerts
 </div>
 </div>
 
-  <p class="date">20 Apr, 2024</p>
+  <p class="date">29 Apr, 2024</p>
 </section>
 <section class="slide level2">
 
@@ -414,6 +414,20 @@ Danny Volkaerts
 <p>Waarom tabellen combineren?<br>
 <br>
 REDUNDANCY &amp; CONSISTENCY</p>
+<aside class="notes">
+<p>redundantie = overtolligheid = gegeven dat op meerfdere plekken in een database voorkomt.<br>
+Consistency = requirement dat elke transactie alleen data kan wijzigen in de aanagegeven toegelaten manieren (DDL).</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section class="slide level2">
 
@@ -431,7 +445,22 @@ REDUNDANCY &amp; CONSISTENCY</p>
 
 <h3 id="inner-join-1">INNER JOIN</h3>
 
-<img data-src="sql_course_images/joins_vis_inner.png" class="r-stretch"></section>
+<img data-src="sql_course_images/joins_vis_inner.png" class="r-stretch"><aside class="notes">
+<p>kleur van tabel = gemmenschappelijke sleutel<br>
+X = kolom van tabel 1, y = kolom van tabel 2<br>
+</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
 <section class="slide level2">
 
 <h3 id="inner-join---voorbeeld">INNER JOIN - voorbeeld</h3>
@@ -443,13 +472,52 @@ REDUNDANCY &amp; CONSISTENCY</p>
 <span id="cb2-4"><a href="#cb2-4"></a>                  <span class="kw">ON</span> departments.department_id <span class="op">=</span> employees.department_id</span>
 <span id="cb2-5"><a href="#cb2-5"></a><span class="kw">WHERE</span> departments.department_name <span class="op">=</span> <span class="st">'Purchasing'</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<aside class="notes">
+<p>Herinner: IT departement: eerst IT = id 6, daarna where depart_id = 6.<br>
+</p>
+<p>SQLITE: duplicate column toont deze niet, wel in SQL server.</p>
+<p>Dit is op zich omslachtig -&gt; tabellen AS e and as d<br>
+</p>
+<p>Volgend punt: USING<br>
+SELECT first_name, last_name, employees.department_id,<br>
+departments.department_id, department_name<br>
+FROM employees INNER JOIN departments USING(department_id)<br>
+WHERE departments.department_name = ‘Purchasing’;<br>
+Dit KAN in SQLITE maar NIET in SQLSERVER:<br>
+Voorbeeld: SELECT s.spelersnr, b.spelersnr,b.bedrag<br>
+FROM spelers s inner join boetes b on(s.spelersnr=b.spelersnr)<br>
+</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section class="slide level2">
 
 <h3 id="inner-join---voorbeeld-2">INNER JOIN - voorbeeld 2</h3>
 <p>Geef me de verschillende jobtitels van departement ‘Purchasing’.</p>
 
-<img data-src="sql_course_images/inner_join_ex2.png" id="fig-erd-hr" class="r-stretch"></section>
+<img data-src="sql_course_images/inner_join_ex2.png" id="fig-erd-hr" class="r-stretch"><aside class="notes">
+<p>Nuance: de jobs die effectief uitgevoerd worden!</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
 <section class="slide level2">
 
 <h3 id="inner-join---voorbeeld-2-1">INNER JOIN - voorbeeld 2</h3>
@@ -461,7 +529,7 @@ REDUNDANCY &amp; CONSISTENCY</p>
 <span id="cb3-4"><a href="#cb3-4"></a><span class="kw">WHERE</span> d.department_name <span class="op">=</span> <span class="st">'Purchasing'</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <aside class="notes">
-<p>DISTINCT</p>
+<p>SELECT DISTINCT job_title…</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -494,8 +562,21 @@ REDUNDANCY &amp; CONSISTENCY</p>
 <section class="slide level2">
 
 <h3 id="left-join-voorbeeld">LEFT JOIN voorbeeld</h3>
-
-<img data-src="sql_course_images/left_join_ex1.png" class="r-stretch"></section>
+<p>Geef me alle landen en hun eventuele locaties. <img data-src="sql_course_images/left_join_ex1.png"></p>
+<aside class="notes">
+<p>Let op de kardinaliteit: 0 … N -&gt; niet elk land hoeft een locatie te hebben!</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
 <section class="slide level2">
 
 <h3 id="left-join-voorbeeld-1">LEFT JOIN voorbeeld</h3>
@@ -572,11 +653,15 @@ fruit_naam VARCHAR (255) NOT NULL,<br>
 mand_id INTEGER<br>
 );<br>
 </p>
+<p>Hoe ziet het schema eruit?<br>
+</p>
 <p>INSERT INTO mand (mand_id, mand_naam)<br>
 VALUES<br>
 (1, ‘A’),<br>
 (2, ‘B’),<br>
 (3, ‘C’);<br>
+</p>
+<p>Runnen en nog eens proberen te runnen -&gt; UNIQUE CONSTRAINT!<br>
 </p>
 <p>INSERT INTO fruit (<br>
 fruit_id,<br>
@@ -604,6 +689,13 @@ fruit<br>
 FULL OUTER JOIN mand ON mand.mand_id = fruit.mand_id<br>
 WHERE<br>
 fruit_naam IS NULL;<br>
+</p>
+<p>DELETE FROM TABLE fruits<br>
+WHERE fruit_id &gt;0;<br>
+</p>
+<p>DROP TABLE fruits;<br>
+</p>
+<p>Let op! Verschil lege tabel en geen tabel! (empty vs error)<br>
 </p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -656,7 +748,9 @@ fruit_naam IS NULL;<br>
 <span id="cb11-4"><a href="#cb11-4"></a><span class="co">-- verder aan te vullen</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <aside class="notes">
-<p>SELECT<br>
+<p>Moeten we in dit geval een employee toevoegen of een manager?<br>
+=&gt; Steven King als employee want heeft geen manager!<br>
+SELECT<br>
 e.first_name || ’ ’ || e.last_name AS employee,<br>
 m.first_name || ’ ’ || m.last_name AS manager<br>
 FROM<br>

@@ -52,7 +52,7 @@ Oefeningen hoofstuk 1 en 2.
 
 ---
 
-9. [**Oefeningen H3**](8_exercises.html){target="_blank"}\
+9. [**Oefeningen H3**](9_exercises_joins.html){target="_blank"}\
 Oefeningen hoofstuk 3 - joins.
 
 ---
