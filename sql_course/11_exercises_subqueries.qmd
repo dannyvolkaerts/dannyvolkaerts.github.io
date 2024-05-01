@@ -1,0 +1,719 @@
+---
+title: "Oefeningen subqueries"
+author: Danny Volkaerts
+date: last-modified
+date-format: "DD MMM, YYYY" 
+smaller: true
+format:
+  revealjs: 
+    theme: default
+filters:
+  - interactive-sql
+resources: 
+  - sql_course_docs/sql-server-cheat-sheet-a4.pdf
+databases:
+  - name: tennis
+    path: "https://raw.githubusercontent.com/dannyvolkaerts/something/main/tennis.sql"
+  - name: ruimte
+    path: "https://raw.githubusercontent.com/dannyvolkaerts/something/main/ruimtereizen.sqlite"
+---
+
+
+## De Tennisvereniging
+
+![](sql_course_images/tennis_DB.png)
+
+---
+
+### Algemene informatie
+
+Algemene info over dit database schema kan je [hier](Tennis_uitleg.html) vinden.
+
+![Watterson, Calvin and Hobbes](sql_course_images/Calvin_and_Hobbes_playing_Calvinball.jpg){width=50%}
+
+---
+
+## SUBQUERIES (H5)
+
+---
+
+### Oefening 1
+
+Geef van elke speler waarvan het nummer kleiner is dan 60 het aantal jaren dat ligt tussen het jaar van toetreding van die speler en dan van speler 100.
+
+``` {.sql .interactive .tennis}
+
+```
+
+:::{.notes}
+SELECT spelersnr, jaartoe - \
+  (SELECT jaartoe\
+  from spelers\
+  where spelersnr = 100)\
+FROM spelers\
+where spelersnr < 60\
+:::
+
+---
+
+### Oefening 2
+
+Geef de nummers van de spelers die in hetzelfde jaar geboren zijn als speler 27
+
+``` {.sql .interactive .tennis}
+
+```
+
+:::{.notes}
+SELECT spelersnr\
+FROM spelers\
+WHERE YEAR(geb_datum) = \
+(select YEAR(geb_datum)\
+from spelers\
+where spelersnr = 27)\
+:::
+
+---
+
+### Oefening 3
+
+DOORDENKER: Geef de nummers van de spelers die hetzelfde geslacht hebben en in dezelfde plaats wonen als speler 100.
+
+``` {.sql .interactive .tennis}
+
+```
+
+:::{.notes}
+SELECT spelersnr\
+from spelers\
+where (geslacht, plaats) = (select geslacht, plaats\
+                            from spelers\
+                            where spelersnr = 100)\
+:::
+
+---
+
+### Oefening 4
+
+Geef de nummers van de teams waarvan de speler met naam Permentier en voorletter R aanvoerder is; we gaan er in deze opgave van uit dat er geen twee spelers zijn met dezelfde naam en voorletters.
+``` {.sql .interactive .tennis}
+
+```
+
+:::{.notes}
+SELECT teamnr\
+FROM teams\
+WHERE spelersnr =\
+    (select spelersnr\
+    from spelers\
+    where naam = 'Permentier'\
+    and voorletters = 'R')\
+:::
+
+---
+
+### Oefening 5
+
+DOORDOORDENKER: Geef de naam van de speler die aanvoerder is van het team waartoe wedstrijd 6 behoort.
+
+``` {.sql .interactive .tennis}
+
+```
+
+:::{.notes}
+SELECT naam\
+FROM spelers\
+WHERE spelersnr =\
+  (select spelersnr\
+  from teams\
+  where teamnr =\
+      (select teamnr\
+      from wedstrijden\
+      where wedstrijdnr = 6))\
+:::
+
+---
+
+### Oefening 6
+
+Geef de nummers van de boetes die hoger zijn dan de boete met betalingsnr 4
+
+``` {.sql .interactive .tennis}
+
+```
+
+:::{.notes}
+SELECT betalingsnr
+FROM boetes
+WHERE bedrag >
+  (SELECT bedrag
+  FROM boetes
+  WHERE betalingsnr = 4)
+:::
+
+---
+
+### Oefening 7
+
+Geef de nummers van de spelers die op dezelfde weekdag zijn geboren als speler 2
+
+``` {.sql .interactive .tennis}
+
+```
+
+:::{.notes}
+SELECT spelersnr
+FROM spelers
+WHERE DAYNAME(geb_datum) = 
+      (select DAYNAME(geb_datum)
+      FROM SPELERS
+      WHERE spelersnr = 2)
+:::
+
+---
+
+### Oefening 8
+
+Geef de nummers van de bestuursleden die een functie zijn begonnen en diezelfde functie weer hebben neergelegd op dezelfde datums als waarop speler 8 de functie van penningmeester heeft geaccepteerd en weer heeft neergelegd. Speler 8 mag zelf niet in het eindresultaat voorkomen.
+``` {.sql .interactive .tennis}
+
+```
+
+:::{.notes}
+SELECT spelersnr
+FROM bestuursleden
+WHERE (begin_datum,eind_datum) = 
+  (select begin_datum,eind_datum
+  from bestuursleden
+  where spelersnr = 8
+  and functie = 'Penningmeester')
+AND spelersnr <> 8
+:::
+
+---
+
+### Oefening 9
+
+Geef de divisies van teams 1 en 2 en plaats deze naast elkaar in het resultaat
+
+``` {.sql .interactive .tennis}
+
+```
+
+:::{.notes}
+SELECT (select divisie from teams where teamnr = 1),(select divisie from teams where teamnr = 2)
+:::
+
+---
+
+### Oefening 10
+
+Geef de nummers van de wedstrijden gespeeld door spelers die in Rijswijk wonen. Probeer met een subquery
+
+``` {.sql .interactive .tennis}
+
+```
+
+:::{.notes}
+select wedstrijdnr from wedstrijden w inner join spelers s on w.spelersnr=s.spelersnr where s.plaats = 'Rijswijk'\
+OF\
+select wedstrijdnr\
+from wedstrijden\
+where 'Rijswijk' = \
+(select plaats\
+from spelers\
+where spelers.spelersnr = wedstrijden.spelersnr)\
+:::
+
+
+---
+
+### Oefening 11
+
+Geef de wedstrijdnummers, spelersnummers en de teamnummers van alle wedstrijden gespeeld door een speler die tevens de aanvoerder van dat team is.
+Probeer met een subquery
+
+``` {.sql .interactive .tennis}
+
+```
+
+:::{.notes}
+SELECT wedstrijdnr, spelersnr, teamnr\
+FROM wedstrijden\
+WHERE spelersnr = \
+  (select spelersnr\
+  from teams\
+  where team.spelersnr = wedstrijden.spelersnr)\
+:::
+
+---
+
+### Oefening 12
+
+Geef de nummers en de naam van de aanvoerders voor wie minstens twee boetes zijn betaald.
+
+``` {.sql .interactive .tennis}
+
+```
+
+:::{.notes}
+
+:::
+
+---
+
+
+### Oefening 8
+
+Geef het gemiddeld boetebedrag per speler, afgerond op twee cijfers na de komma. Spelers zonder boete krijgen als waarde ‘geen boetes’. Sorteer op spelersnaam.
+
+``` {.sql .interactive .tennis}
+
+```
+
+:::{.notes}
+SELECT spelers.naam,\
+  CASE\
+    WHEN AVG(boetes.bedrag) IS NULL THEN 'geen boetes'\
+    ELSE CAST(ROUND(AVG(boetes.bedrag), 2) AS varchar(8))\
+  END AS gemiddeld\
+FROM spelers LEFT OUTER JOIN boetes ON spelers.spelersnr = boetes.spelersnr\
+GROUP BY spelers.spelersnr, spelers.naam\
+ORDER BY 1\
+:::
+
+---
+
+### Oefening 9
+
+Geef het gemiddeld aantal gewonnen en verloren sets per geboortejaar. Rond telkens af op twee cijfers na de komma. Sorteer op geboortejaar zodat de gegevens van de jongste spelers bovenaan staan.
+
+``` {.sql .interactive .tennis}
+
+```
+
+:::{.notes}
+SELECT EXTRACT(YEAR FROM geb_datum) AS geboortejaar, ROUND(AVG(gewonnen),2) AS gewonnen,\
+  ROUND(AVG(verloren),2) AS verloren\
+FROM wedstrijden W INNER JOIN spelers S ON W.spelersnr = S.spelersnr\
+GROUP BY EXTRACT(YEAR FROM geb_datum)\
+ORDER BY geboortejaar DESC; \
+:::
+
+---
+
+### Oefening 10
+
+Geef voor de actieve bestuursleden zonder boete hun laatste gespeelde wedstrijd (die met het hoogste wedstrijdnummer). Sorteer aflopend op spelersnr.
+
+``` {.sql .interactive .tennis}
+
+```
+
+:::{.notes}
+SELECT bestuursleden.spelersnr, MAX(wedstrijden.wedstrijdnr) AS laatstewedstrijd\
+FROM bestuursleden\
+  INNER JOIN wedstrijden ON bestuursleden.spelersnr = wedstrijden.spelersnr AND\
+        bestuursleden.eind_datum IS NULL\
+  LEFT OUTER JOIN boetes ON bestuursleden.spelersnr = boetes.spelersnr\
+WHERE boetes.spelersnr IS NULL\
+GROUP BY bestuursleden.spelersnr\
+ORDER BY spelersnr DESC; \
+:::
+
+---
+
+### Oefening 3
+
+Geef een overzicht van alle gewonnen tenniswedstrijden.
+
+``` {.sql .interactive .tennis}
+
+```
+
+:::{.notes}
+
+:::
+
+---
+
+### Oefening 3
+
+Geef een overzicht van alle gewonnen tenniswedstrijden.
+
+``` {.sql .interactive .tennis}
+
+```
+
+:::{.notes}
+
+:::
+
+---
+
+### Oefening 3
+
+Geef een overzicht van alle gewonnen tenniswedstrijden.
+
+``` {.sql .interactive .tennis}
+
+```
+
+:::{.notes}
+
+:::
+
+---
+
+### Oefening 3
+
+Geef een overzicht van alle gewonnen tenniswedstrijden.
+
+``` {.sql .interactive .tennis}
+
+```
+
+:::{.notes}
+
+:::
+
+---
+
+### Oefening 3
+
+Geef een overzicht van alle gewonnen tenniswedstrijden.
+
+``` {.sql .interactive .tennis}
+
+```
+
+:::{.notes}
+
+:::
+
+---
+
+### Oefening 3
+
+Geef een overzicht van alle gewonnen tenniswedstrijden.
+
+``` {.sql .interactive .tennis}
+
+```
+
+:::{.notes}
+
+:::
+
+---
+
+### Oefening 3
+
+Geef een overzicht van alle gewonnen tenniswedstrijden.
+
+``` {.sql .interactive .tennis}
+
+```
+
+:::{.notes}
+
+:::
+
+---
+
+### Oefening 3
+
+Geef een overzicht van alle gewonnen tenniswedstrijden.
+
+``` {.sql .interactive .tennis}
+
+```
+
+:::{.notes}
+
+:::
+
+---
+
+### Oefening 3
+
+Geef een overzicht van alle gewonnen tenniswedstrijden.
+
+``` {.sql .interactive .tennis}
+
+```
+
+:::{.notes}
+
+:::
+
+---
+
+### Oefening 3
+
+Geef een overzicht van alle gewonnen tenniswedstrijden.
+
+``` {.sql .interactive .tennis}
+
+```
+
+:::{.notes}
+
+:::
+
+---
+
+### Oefening 3
+
+Geef een overzicht van alle gewonnen tenniswedstrijden.
+
+``` {.sql .interactive .tennis}
+
+```
+
+:::{.notes}
+
+:::
+
+---
+
+### Oefening 3
+
+Geef een overzicht van alle gewonnen tenniswedstrijden.
+
+``` {.sql .interactive .tennis}
+
+```
+
+:::{.notes}
+
+:::
+
+---
+
+### Oefening 3
+
+Geef een overzicht van alle gewonnen tenniswedstrijden.
+
+``` {.sql .interactive .tennis}
+
+```
+
+:::{.notes}
+
+:::
+
+---
+
+### Oefening 3
+
+Geef een overzicht van alle gewonnen tenniswedstrijden.
+
+``` {.sql .interactive .tennis}
+
+```
+
+:::{.notes}
+
+:::
+
+---
+
+### Oefening 3
+
+Geef een overzicht van alle gewonnen tenniswedstrijden.
+
+``` {.sql .interactive .tennis}
+
+```
+
+:::{.notes}
+
+:::
+
+---
+
+### Oefening 3
+
+Geef een overzicht van alle gewonnen tenniswedstrijden.
+
+``` {.sql .interactive .tennis}
+
+```
+
+:::{.notes}
+
+:::
+
+---
+
+### Oefening 3
+
+Geef een overzicht van alle gewonnen tenniswedstrijden.
+
+``` {.sql .interactive .tennis}
+
+```
+
+:::{.notes}
+
+:::
+
+---
+
+### Oefening 3
+
+Geef een overzicht van alle gewonnen tenniswedstrijden.
+
+``` {.sql .interactive .tennis}
+
+```
+
+:::{.notes}
+
+:::
+
+---
+
+### Oefening 3
+
+Geef een overzicht van alle gewonnen tenniswedstrijden.
+
+``` {.sql .interactive .tennis}
+
+```
+
+:::{.notes}
+
+:::
+
+---
+
+### Oefening 3
+
+Geef een overzicht van alle gewonnen tenniswedstrijden.
+
+``` {.sql .interactive .tennis}
+
+```
+
+:::{.notes}
+
+:::
+
+---
+
+### Oefening 3
+
+Geef een overzicht van alle gewonnen tenniswedstrijden.
+
+``` {.sql .interactive .tennis}
+
+```
+
+:::{.notes}
+
+:::
+
+---
+
+### Oefening 3
+
+Geef een overzicht van alle gewonnen tenniswedstrijden.
+
+``` {.sql .interactive .tennis}
+
+```
+
+:::{.notes}
+
+:::
+
+---
+
+### Oefening 3
+
+Geef een overzicht van alle gewonnen tenniswedstrijden.
+
+``` {.sql .interactive .tennis}
+
+```
+
+:::{.notes}
+
+:::
+
+---
+
+### Oefening 3
+
+Geef een overzicht van alle gewonnen tenniswedstrijden.
+
+``` {.sql .interactive .tennis}
+
+```
+
+:::{.notes}
+
+:::
+
+---
+
+### Oefening 3
+
+Geef een overzicht van alle gewonnen tenniswedstrijden.
+
+``` {.sql .interactive .tennis}
+
+```
+
+:::{.notes}
+
+:::
+
+---
+
+### Oefening 3
+
+Geef een overzicht van alle gewonnen tenniswedstrijden.
+
+``` {.sql .interactive .tennis}
+
+```
+
+:::{.notes}
+
+:::
+
+---
+
+### Oefening 3
+
+Geef een overzicht van alle gewonnen tenniswedstrijden.
+
+``` {.sql .interactive .tennis}
+
+```
+
+:::{.notes}
+
+:::
+
+---
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

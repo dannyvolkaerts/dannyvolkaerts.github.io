@@ -12,6 +12,7 @@ quarto::quarto_render(input="sql_course/6_DDL.qmd")
 quarto::quarto_render(input="sql_course/7_powerbi.qmd")
 quarto::quarto_render(input="sql_course/8_exercises.qmd")
 quarto::quarto_render(input="sql_course/9_exercises_joins.qmd")
+quarto::quarto_render(input="sql_course/10_exercises_advanced.qmd")
 
 
 ### HIERONDER NIET MEER NODIG!!!
