@@ -58,7 +58,7 @@ Oefeningen hoofstuk 3 - joins.
 ---
 
 10. [**Oefeningen H4**](10_exercises_advanced.html){target="_blank"}\
-Oefeningen hoofstuk 3 - joins.
+Oefeningen hoofstuk 4 - GROUP BY, HAVING,...
 
 
 <!-- 8. **Transactions and Data Integrity**  
