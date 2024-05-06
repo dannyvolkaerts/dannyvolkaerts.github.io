@@ -15,6 +15,7 @@ project:
     - "sql_course/Tennis_uitleg.qmd"
     - "sql_course/9_exercises_joins.qmd"
     - "sql_course/10_exercises_advanced.qmd"
+    - "sql_course/11_exercises_subqueries.qmd"
     
 
 website:

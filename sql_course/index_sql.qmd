@@ -60,7 +60,10 @@ Oefeningen hoofstuk 3 - joins.
 10. [**Oefeningen H4**](10_exercises_advanced.html){target="_blank"}\
 Oefeningen hoofstuk 4 - GROUP BY, HAVING,...
 
+---
 
+11. [**Oefeningen H5**](11_exercises_subqueries.html){target="_blank"}\
+Oefeningen hoofstuk 5 - subqueries
 <!-- 8. **Transactions and Data Integrity**  
 Managing transactions, understanding ACID properties.
 
