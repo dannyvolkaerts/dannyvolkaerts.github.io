@@ -151,7 +151,7 @@
     "href": "sql_course/index_sql.html#hoofdstukken",
     "title": "SQL Cursus",
     "section": "Hoofdstukken",
-    "text": "Hoofdstukken\n\nInleiding tot SQL en databases\nOverzicht van SQL, databases en hoe ze worden gebruikt in data science.\n\n\n\nBasis SQL Queries\nLeren van SELECT statements en filteren van data met WHERE clauses.\n\n\n\nWerken met combineren van tabellen\nIntroductie tot JOIN operaties en hun belang.\n\n\n\nGeavanceerde Data Manipulatie\nGebruik van GROUP BY, HAVING en aggregatiefuncties.\n\n\n\nSubqueries, geneste Queries en Views\nUitbreiding van queries met subqueries voor complexere data opvraging.\n\n\n\nData Definition Language (DDL) & Data Manipulation Language (DML)\nBegrijpen hoe een databank gemaakt wordt en invoegen, updaten en deleten van data in de databank.\n\n\n\nSQL en PowerBI\nKennis halen uit data door het bundelen van de kracht van SQL met PowerBI.\n\n\n\nOefeningen H1 en H2\nOefeningen hoofstuk 1 en 2.\n\n\n\nOefeningen H3\nOefeningen hoofstuk 3 - joins.\n\n\n\nOefeningen H4\nOefeningen hoofstuk 4 - GROUP BY, HAVING,…\n\n\n\nOefeningen H5\nOefeningen hoofstuk 5 - subqueries \n\nEach chapter is a step on your journey to mastering SQL. Let’s embark on this learning adventure together."
+    "text": "Hoofdstukken\n\nInleiding tot SQL en databases\nOverzicht van SQL, databases en hoe ze worden gebruikt in data science.\n\n\n\nBasis SQL Queries\nLeren van SELECT statements en filteren van data met WHERE clauses.\n\n\n\nWerken met combineren van tabellen\nIntroductie tot JOIN operaties en hun belang.\n\n\n\nGeavanceerde Data Manipulatie\nGebruik van GROUP BY, HAVING en aggregatiefuncties.\n\n\n\nSubqueries, geneste Queries en Views\nUitbreiding van queries met subqueries voor complexere data opvraging.\n\n\n\nData Definition Language (DDL) & Data Manipulation Language (DML)\nBegrijpen hoe een databank gemaakt wordt en invoegen, updaten en deleten van data in de databank.\n\n\n\nSQL en PowerBI\nKennis halen uit data door het bundelen van de kracht van SQL met PowerBI.\n\n\n\nOefeningen H1 en H2\nOefeningen hoofstuk 1 en 2.\n\n\n\nOefeningen H3\nOefeningen hoofstuk 3 - joins.\n\n\n\nOefeningen H4\nOefeningen hoofstuk 4 - GROUP BY, HAVING,…\n\n\n\nOefeningen H5\nOefeningen hoofstuk 5 - subqueries\n\n\n\nOefeningen H6\nOefeningen DDL - de fietswinkel\n\n\nEach chapter is a step on your journey to mastering SQL. Let’s embark on this learning adventure together."
   },
   {
     "objectID": "sql_course/7_powerbi.html#waarom-powerbi-en-sql---belang-van-data-intelligentie",
@@ -229,5 +229,26 @@
     "title": "Oefeningen subqueries",
     "section": "SUBQUERIES (H5)",
     "text": "SUBQUERIES (H5)"
+  },
+  {
+    "objectID": "sql_course/12_exercise_DDL.html#de-fietsenwinkel",
+    "href": "sql_course/12_exercise_DDL.html#de-fietsenwinkel",
+    "title": "Oefeningen DDL - Fietsenwinkel",
+    "section": "De fietsenwinkel",
+    "text": "De fietsenwinkel"
+  },
+  {
+    "objectID": "sql_course/12_exercise_DDL.html#ddl",
+    "href": "sql_course/12_exercise_DDL.html#ddl",
+    "title": "Oefeningen DDL - Fietsenwinkel",
+    "section": "DDL",
+    "text": "DDL"
+  },
+  {
+    "objectID": "sql_course/Bikestore_uitleg.html",
+    "href": "sql_course/Bikestore_uitleg.html",
+    "title": "De Bikestore",
+    "section": "",
+    "text": "Database schema\n\n\n\nBelangrijke informatie bij de bike store database\nZoals je in het diagram kunt zien, heeft de BikeStores voorbeeld database twee schema’s: verkoop en productie, en deze schema’s hebben negen tabellen. De tabel sales.stores bevat de winkelinformatie. Elke winkel heeft een winkelnaam, contactinformatie zoals telefoon en e-mail, en een adres inclusief straat, stad, staat en postcode. In de tabel sales.staffs wordt de essentiële informatie van het personeel opgeslagen, waaronder de voornaam en achternaam. Het bevat ook de communicatie-informatie zoals e-mail en telefoon.\nEen medewerker werkt in een winkel die wordt gespecificeerd door de waarde in de store_id kolom. Een winkel kan een of meer medewerkers hebben.\nEen medewerker rapporteert aan een filiaalmanager die gespecificeerd wordt door de waarde in de manager_id kolom. Als de waarde in de manager_id nul is, dan is het personeel de topmanager.\nAls een medewerker niet langer voor een winkel werkt, wordt de waarde in de kolom actief op nul gezet.\nDe tabel production.categories slaat de fietscategorieën op, zoals kinderfietsen, comfortfietsen en elektrische fietsen. De tabel production.brands slaat de merkinformatie van fietsen op, bijvoorbeeld Electra, Haro en Heller. De tabel production.products slaat productinformatie op, zoals naam, merk, categorie, modeljaar en catalogusprijs.\nElk product behoort tot een merk dat wordt gespecificeerd door de kolom brand_id. Een merk kan dus nul of veel producten hebben.\nElk product behoort ook tot een categorie die wordt gespecificeerd door de categorie_id kolom. Elke categorie kan ook nul of veel producten hebben. De tabel sales.customers slaat klantgegevens op, waaronder voornaam, achternaam, telefoon, e-mail, straat, stad, staat en postcode. In de tabel sales.orders worden de hoofdgegevens van de verkooporder opgeslagen, waaronder de klant, de status van de order, de besteldatum, de vereiste datum en de verzenddatum.\nDe tabel slaat ook de informatie op over waar de verkooptransactie is aangemaakt (winkel) en wie deze heeft aangemaakt (personeel). In de tabel sales.order_items worden de regelitems van een verkooporder opgeslagen. Elk regelitem hoort bij een verkooporder die wordt gespecificeerd door de order_id kolom.\nEen regelitem van een verkooporder bevat het product, de bestelhoeveelheid, de catalogusprijs en de korting.\nElke verkooporder heeft een rij in de tabel verkooporders. Een verkooporder heeft een of meer regelitems die zijn opgeslagen in de tabel sales.order_items.\nDe tabel production.stocks slaat de voorraadinformatie op, d.w.z. de hoeveelheid van een bepaald product in een specifieke winkel."
   }
 ]

@@ -1,0 +1,68 @@
+---
+title: "Oefeningen DDL - Fietsenwinkel"
+author: Danny Volkaerts
+date: last-modified
+date-format: "DD MMM, YYYY" 
+smaller: true
+format:
+  revealjs: 
+    theme: default
+filters:
+  - interactive-sql
+resources: 
+  - sql_course_docs/sql-server-cheat-sheet-a4.pdf
+databases:
+  - name: tennis
+    path: "https://raw.githubusercontent.com/dannyvolkaerts/something/main/tennis.sql"
+  - name: ruimte
+    path: "https://raw.githubusercontent.com/dannyvolkaerts/something/main/ruimtereizen.sqlite"
+---
+
+
+## De fietsenwinkel
+
+![](sql_course_images/bike_store_schema.png)
+
+---
+
+### Algemene informatie
+
+Algemene info over dit database schema kan je [hier](Bikestore_uitleg.html) vinden.
+
+![Fietsenwinkel](sql_course_images/bikestore.png){width=50%}
+
+---
+
+## DDL
+
+---
+
+### Oefening 1
+
+De database is reeds gecreëerd volgens de aangegeven schema's in de figuur.
+Maak jezelf klant in de database (INSERT statement) door een fiets te kopen (althans door dit in de databank toe te voegen).
+
+:::{.notes}
+
+
+:::
+
+---
+
+### Oefening 2
+
+Toon de voornaam, achternaam, productnaam, heoveelheid, prijs en korting van de producten die je zelf hebt gekocht.
+
+---
+
+### Oefening 3
+
+Kijk naar je order_id(s).
+Verwijder jezelf terug uit de databank. Wat gebeurt er met de order(s) die jij gemaakt had in de winkel?
+
+---
+
+### Oefening 4
+
+Verzin een vraagstelling en een bijhorende query die horen bij de fietswinkel database.
+

@@ -14,6 +14,8 @@ quarto::quarto_render(input="sql_course/8_exercises.qmd")
 quarto::quarto_render(input="sql_course/9_exercises_joins.qmd")
 quarto::quarto_render(input="sql_course/10_exercises_advanced.qmd")
 quarto::quarto_render(input="sql_course/11_exercises_subqueries.qmd")
+quarto::quarto_render(input="sql_course/12_exercise_DDL.qmd")
+quarto::quarto_render(input="sql_course/Bikestore_uitleg.qmd")
 
 ### HIERONDER NIET MEER NODIG!!!
 

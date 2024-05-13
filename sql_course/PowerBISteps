@@ -1,0 +1,52 @@
+
+ALLE TABELLEN MET KLEINE LETTERS
+Transform data
+Alle tabellen met kleine letters
+
+TABEL MET ALLEEN HUIDIGE BESTUURSLEDEN
+Tabel bestuursleden kopieren -> huidigebestuursleden (kolom eind_datum -> selecteer alleen NULL)
+
+SPELEROVERZICHT
+'speler eigenschappen' = multi card
+Daar spelersvelden in slepen
+
+CREATE NEW TABLE BEREKENINGEN
+Create new table
+gewoon laten als 'table'
+In report view -> rechter klik op table - Rename
+
+TOTAAL BOETEBEDRAG
+Berekeningen rechter klik - New Measure
+TotaalBoetebedrag = CALCULATE(SUM(boetes[BEDRAG]))
+Dit is "BLANK" voor geen waarden
+-> Daarom bij formatting: callout values - color fx - format style 'rules' - if blank then 
+
+WEDSTRIJDTABEL nieuwe kolom: resultaat
+Table view
+Bij tabel wedstrijden: new column
+Resultaat = IF(wedstrijden[GEWONNEN]>wedstrijden[VERLOREN],"gewonnen","verloren")
+
+WEDSTRIJDTABEL als TABEL in rapport -> gebruik deze als hulptabel
+Table - alle kolommen van wedstrijden - SUM OF veranderen naar NO summarize
+
+KAART PERC GEWONNEN WEDSTRIJDEN
+Bij 'berekeningen' -> new measure perc_gew_wed
+perc_gew_wed = DIVIDE(COUNTROWS(FILTER(wedstrijden,wedstrijden[Resultaat] = "gewonnen")),COUNTROWS(wedstrijden))
+Dit geeft BLANK wanneer gewonnen blank is
+DUS +0 bij teller -> voor verloren wedstrijden geeft dit dan een 0 maar voor geen wedstrijden geeft dit dan (blank)
+Dan in model view -> bij deze berekening: format as percentage
+
+CREATE VIEW in SQL server -> import dan deze view
+Check in modelview hoe deze tabel erbij staat -> Dan relatie maken met spelers op basis van de view eigenschap
+-> indien met spelerstabel: 1:1 Dan beide richtingen nemen en checken in rapport door filter toe te passen
+-> indien we view maken met meerdere spelers in: let op de kardinaliteit
+
+
+
+
+INSERT DATA INTO SQL SERVER DATABASE
+https://www.youtube.com/watch?v=88hJnbQ7D5s
+
+INSERT DATA FROM SQLITE FILE
+
+

@@ -1,0 +1,65 @@
+---
+title-block-banner: true
+title: "De Bikestore"
+author: Danny Volkaerts 
+date: last-modified
+date-format: "DD MMM, YYYY" 
+format: html
+
+---
+
+### Database schema
+
+![](sql_course_images/bike_store_schema.png)
+
+
+### Belangrijke informatie bij de bike store database
+
+
+Zoals je in het diagram kunt zien, heeft de BikeStores voorbeeld database twee schema's: verkoop en productie, en deze schema's hebben negen tabellen. 
+De tabel `sales.stores` bevat de winkelinformatie. Elke winkel heeft een winkelnaam, contactinformatie zoals telefoon en e-mail, en een adres inclusief straat, stad, staat en postcode.
+In de tabel `sales.staffs` wordt de essentiële informatie van het personeel opgeslagen, waaronder de voornaam en achternaam. Het bevat ook de communicatie-informatie zoals e-mail en telefoon.
+
+Een medewerker werkt in een winkel die wordt gespecificeerd door de waarde in de `store_id` kolom. Een winkel kan een of meer medewerkers hebben.
+
+Een medewerker rapporteert aan een filiaalmanager die gespecificeerd wordt door de waarde in de `manager_id` kolom. Als de waarde in de `manager_id` nul is, dan is het personeel de topmanager.
+
+Als een medewerker niet langer voor een winkel werkt, wordt de waarde in de kolom actief op nul gezet.
+
+De tabel `production.categories` slaat de fietscategorieën op, zoals kinderfietsen, comfortfietsen en elektrische fietsen.
+De tabel `production.brands` slaat de merkinformatie van fietsen op, bijvoorbeeld Electra, Haro en Heller.
+De tabel `production.products` slaat productinformatie op, zoals naam, merk, categorie, modeljaar en catalogusprijs.
+
+Elk product behoort tot een merk dat wordt gespecificeerd door de kolom `brand_id`. Een merk kan dus nul of veel producten hebben.
+
+Elk product behoort ook tot een categorie die wordt gespecificeerd door de `categorie_id` kolom. Elke categorie kan ook nul of veel producten hebben.
+De tabel `sales.customers` slaat klantgegevens op, waaronder voornaam, achternaam, telefoon, e-mail, straat, stad, staat en postcode.
+In de tabel `sales.orders` worden de hoofdgegevens van de verkooporder opgeslagen, waaronder de klant, de status van de order, de besteldatum, de vereiste datum en de verzenddatum.
+
+De tabel slaat ook de informatie op over waar de verkooptransactie is aangemaakt (winkel) en wie deze heeft aangemaakt (personeel).
+In de tabel `sales.order_items` worden de regelitems van een verkooporder opgeslagen. Elk regelitem hoort bij een verkooporder die wordt gespecificeerd door de `order_id` kolom.
+
+Een regelitem van een verkooporder bevat het product, de bestelhoeveelheid, de catalogusprijs en de korting.
+
+Elke verkooporder heeft een rij in de tabel verkooporders. Een verkooporder heeft een of meer regelitems die zijn opgeslagen in de tabel `sales.order_items`.
+
+De tabel `production.stocks` slaat de voorraadinformatie op, d.w.z. de hoeveelheid van een bepaald product in een specifieke winkel.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

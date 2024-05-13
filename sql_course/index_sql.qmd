@@ -64,6 +64,13 @@ Oefeningen hoofstuk 4 - GROUP BY, HAVING,...
 
 11. [**Oefeningen H5**](11_exercises_subqueries.html){target="_blank"}\
 Oefeningen hoofstuk 5 - subqueries
+
+--- 
+
+12. [**Oefeningen H6**](12_exercise_DDL.html){target="_blank"}\
+Oefeningen DDL - de fietswinkel
+
+
 <!-- 8. **Transactions and Data Integrity**  
 Managing transactions, understanding ACID properties.
 
