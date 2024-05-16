@@ -1,19 +1,23 @@
+Tennis Database:
+
+Database: 34.155.20.3-- DV_first_group
 
 ALLE TABELLEN MET KLEINE LETTERS
 Transform data
 Alle tabellen met kleine letters
 
+Transform data
 TABEL MET ALLEEN HUIDIGE BESTUURSLEDEN
 Tabel bestuursleden kopieren -> huidigebestuursleden (kolom eind_datum -> selecteer alleen NULL)
+In Model view -> spelers - huidige bestuursleden: 1:1 aangezien elke speler slechts 1 functie tegelijkertijd kan opnemen
+
 
 SPELEROVERZICHT
 'speler eigenschappen' = multi card
 Daar spelersvelden in slepen
 
 CREATE NEW TABLE BEREKENINGEN
-Create new table
-gewoon laten als 'table'
-In report view -> rechter klik op table - Rename
+Create new table: in editor field: 'Berekeningen = '
 
 TOTAAL BOETEBEDRAG
 Berekeningen rechter klik - New Measure
@@ -21,6 +25,7 @@ TotaalBoetebedrag = CALCULATE(SUM(boetes[BEDRAG]))
 Dit is "BLANK" voor geen waarden
 -> Daarom bij formatting: callout values - color fx - format style 'rules' - if blank then 
 
+In table view:
 WEDSTRIJDTABEL nieuwe kolom: resultaat
 Table view
 Bij tabel wedstrijden: new column
@@ -35,6 +40,14 @@ perc_gew_wed = DIVIDE(COUNTROWS(FILTER(wedstrijden,wedstrijden[Resultaat] = "gew
 Dit geeft BLANK wanneer gewonnen blank is
 DUS +0 bij teller -> voor verloren wedstrijden geeft dit dan een 0 maar voor geen wedstrijden geeft dit dan (blank)
 Dan in model view -> bij deze berekening: format as percentage
+
+Stacked COLUMN CHART
+x-axis wedstrijdnr
+y-axis: SUM of VERLOREN
+Sum of GEWONNEN
+
+
+Denk eens na over een resultaattabel die relevant kan zijn als view (geef hiervoor de gepaste query)
 
 CREATE VIEW in SQL server -> import dan deze view
 Check in modelview hoe deze tabel erbij staat -> Dan relatie maken met spelers op basis van de view eigenschap

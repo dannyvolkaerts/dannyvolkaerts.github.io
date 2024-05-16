@@ -34,7 +34,7 @@ CREATE TABLE table_name(
 
 ### CREATE example
 
-<img src="sql_course_images/DDL_courses.png" alt="drawing" width="50"/>
+<img src="sql_course_images/DDL_courses.png" alt="drawing" width="20"/>
 
 ``` {.sql .interactive .hr}
 CREATE TABLE courses (
@@ -50,10 +50,11 @@ CREATE TABLE courses (
 <img src="sql_course_images/DDL_trainings.png" alt="drawing" width="50"/>
 ``` {.sql .interactive .hr}
 CREATE TABLE trainings (
-    employee_id INT,
+    training_id INT,
     course_id INT,
     taken_date DATE,
-    PRIMARY KEY (employee_id , course_id)
+    PRIMARY KEY (training_id),
+    FOREIGN KEY (course_id) REFERENCES courses (course_id) ON DELETE CASCADE
 );
 ```
 
@@ -127,7 +128,8 @@ INSERT INTO courses VALUES
 
 :::{.notes}
 INSERT INTO courses (course_name) VALUES ('SQL advanced')
-
+INSERT INTO trainings VALUES (1,1,'2024-05-01');
+DELETE FROM courses WHERE course_id = 1;
 :::
 
 ---

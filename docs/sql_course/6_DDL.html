@@ -404,7 +404,7 @@ Danny Volkaerts
 </div>
 </div>
 
-  <p class="date">21 Apr, 2024</p>
+  <p class="date">13 May, 2024</p>
 </section>
 <section class="slide level2">
 
@@ -421,7 +421,7 @@ Danny Volkaerts
 
 <h3 id="create-example">CREATE example</h3>
 
-<img src="sql_course_images/DDL_courses.png" alt="drawing" width="50" class="r-stretch"><div class="interactive-sql">
+<img src="sql_course_images/DDL_courses.png" alt="drawing" width="20" class="r-stretch"><div class="interactive-sql">
 <div class="sourceCode" id="cb2"><pre class="sourceCode numberSource sql interactive hr number-lines code-with-copy"><code class="sourceCode sql"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> courses (</span>
 <span id="cb2-2"><a href="#cb2-2"></a>    course_id <span class="dt">INTEGER</span> <span class="kw">PRIMARY</span> <span class="kw">KEY</span>,</span>
 <span id="cb2-3"><a href="#cb2-3"></a>    course_name <span class="dt">VARCHAR</span>(<span class="dv">50</span>) <span class="kw">NOT</span> <span class="kw">NULL</span></span>
@@ -434,11 +434,12 @@ Danny Volkaerts
 
 <img src="sql_course_images/DDL_trainings.png" alt="drawing" width="50" class="r-stretch"><div class="interactive-sql">
 <div class="sourceCode" id="cb3"><pre class="sourceCode numberSource sql interactive hr number-lines code-with-copy"><code class="sourceCode sql"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> trainings (</span>
-<span id="cb3-2"><a href="#cb3-2"></a>    employee_id <span class="dt">INT</span>,</span>
+<span id="cb3-2"><a href="#cb3-2"></a>    training_id <span class="dt">INT</span>,</span>
 <span id="cb3-3"><a href="#cb3-3"></a>    course_id <span class="dt">INT</span>,</span>
 <span id="cb3-4"><a href="#cb3-4"></a>    taken_date <span class="dt">DATE</span>,</span>
-<span id="cb3-5"><a href="#cb3-5"></a>    <span class="kw">PRIMARY</span> <span class="kw">KEY</span> (employee_id , course_id)</span>
-<span id="cb3-6"><a href="#cb3-6"></a>);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-5"><a href="#cb3-5"></a>    <span class="kw">PRIMARY</span> <span class="kw">KEY</span> (training_id),</span>
+<span id="cb3-6"><a href="#cb3-6"></a>    <span class="kw">FOREIGN</span> <span class="kw">KEY</span> (course_id) <span class="kw">REFERENCES</span> courses (course_id) <span class="kw">ON</span> <span class="kw">DELETE</span> <span class="kw">CASCADE</span></span>
+<span id="cb3-7"><a href="#cb3-7"></a>);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section class="slide level2">
@@ -510,7 +511,7 @@ Elke tabel heeft één en slechts één primaire sleutel. De primaire sleutel ac
 <span id="cb6-2"><a href="#cb6-2"></a>(<span class="kw">null</span>,<span class="st">'SQL basics'</span>);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <aside class="notes">
-<p>INSERT INTO courses (course_name) VALUES (‘SQL advanced’)</p>
+<p>INSERT INTO courses (course_name) VALUES (‘SQL advanced’) INSERT INTO trainings VALUES (1,1,‘2024-05-01’); DELETE FROM courses WHERE course_id = 1;</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;

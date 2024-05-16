@@ -238,12 +238,12 @@ Probeer met een subquery
 ```
 
 :::{.notes}
-SELECT wedstrijdnr, spelersnr, teamnr\
-FROM wedstrijden\
-WHERE spelersnr = \
-  (select spelersnr\
-  from teams\
-  where team.spelersnr = wedstrijden.spelersnr)\
+--SELECT wedstrijdnr,spelersnr,teamnr
+--FROM wedstrijden w
+--WHERE spelersnr IN (select spelersnr from teams     WHERE wedstrijden.teamnr = teams.teamnr )
+
+SELECT w.wedstrijdnr, t.spelersnr AS t_spelersnr, w.spelersnr AS w_spelersnr, t.teamnr AS t_teamnr, w.teamnr AS w_teamnr
+FROM wedstrijden w INNER JOIN teams t ON(w.spelersnr = t.spelersnr AND w.teamnr = t.teamnr)
 :::
 
 ---
@@ -257,10 +257,19 @@ Geef de nummers en de naam van de aanvoerders voor wie minstens twee boetes zijn
 ```
 
 :::{.notes}
-SELECT *\
-FROM spelers\
-WHERE spelersnr IN \
-(SELECT spelersnr FROM BOETES GROUP BY spelersnr HAVING COUNT(*)>2)\
+--SELECT s.spelersnr, s.naam
+--FROM spelers s INNER JOIN teams t ON (s.spelersnr = t.spelersnr)
+--WHERE s.spelersnr IN
+--(SELECT b.spelersnr
+--FROM boetes b
+--GROUP BY b.spelersnr
+--HAVING count(betalingsnr)>=2);
+
+SELECT s.spelersnr, s.naam, COUNT(betalingsnr) AS aantal_boetes
+FROM spelers s INNER JOIN boetes b ON (s.spelersnr = b.spelersnr) 
+INNER JOIN teams t ON (s.spelersnr = t.spelersnr)
+GROUP BY s.spelersnr
+HAVING COUNT(betalingsnr)>=2
 :::
 
 ---
