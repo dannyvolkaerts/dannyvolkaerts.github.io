@@ -3,6 +3,7 @@ project:
   output-dir: docs
   render: 
     - "index.qmd"
+    - "posts_main.qmd"
     - "sql_course/index_sql.qmd"
     - "sql_course/1_introduction.qmd"
     - "sql_course/2_basics.qmd"
@@ -18,7 +19,7 @@ project:
     - "sql_course/11_exercises_subqueries.qmd"
     - "sql_course/12_exercise_DDL.qmd"
     - "sql_course/Bikestore_uitleg.qmd"
-    
+    - "posts_main/2024_05_18_My_first_blog/index.qmd"
 
 website:
   title: ""
@@ -28,7 +29,8 @@ website:
         text: Home
       - href: sql_course/index_sql.qmd
         text: "SQL cursus"
-
+      - href: posts_main.qmd
+        text: "Blog"
 format:
   html:
     theme: cosmo

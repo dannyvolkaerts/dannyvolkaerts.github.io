@@ -1,0 +1,8 @@
+---
+title: "My Blog"
+listing: 
+  contents: posts_main # all Quarto docs in the `posts` directory will be included on your listing page
+  type: grid # or `default` or `table`; each type has its own set of yaml options to include
+  sort: "date"
+  categories: true
+---

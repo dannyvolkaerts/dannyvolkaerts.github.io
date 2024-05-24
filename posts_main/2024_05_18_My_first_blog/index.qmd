@@ -1,0 +1,15 @@
+---
+title: "My first blog"
+description: "blog post description (appears underneath the title in smaller text) which is included on the listing page"
+author:
+  - name: Danny Volkaerts
+    url: https://dannyvolkaerts.github.io/
+    affiliation: Master of Bio-engineering Sciences
+    affiliation-url: https://ucll.be
+date: 18-05-2024
+categories: [Quarto, R, Data Science] # self-defined categories
+citation: 
+  url: https://dannyvolkaerts.github.io/posts/2022-10-24-my-blog-post/ 
+image: https://picsum.photos/200/300
+draft: false # setting this to `true` will prevent your post from appearing on your listing page until you're ready!
+---
