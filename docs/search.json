@@ -151,7 +151,7 @@
     "href": "sql_course/index_sql.html#hoofdstukken",
     "title": "SQL Cursus",
     "section": "Hoofdstukken",
-    "text": "Hoofdstukken\n\nInleiding tot SQL en databases\nOverzicht van SQL, databases en hoe ze worden gebruikt in data science.\n\n\n\nBasis SQL Queries\nLeren van SELECT statements en filteren van data met WHERE clauses.\n\n\n\nWerken met combineren van tabellen\nIntroductie tot JOIN operaties en hun belang.\n\n\n\nGeavanceerde Data Manipulatie\nGebruik van GROUP BY, HAVING en aggregatiefuncties.\n\n\n\nSubqueries, geneste Queries en Views\nUitbreiding van queries met subqueries voor complexere data opvraging.\n\n\n\nData Definition Language (DDL) & Data Manipulation Language (DML)\nBegrijpen hoe een databank gemaakt wordt en invoegen, updaten en deleten van data in de databank.\n\n\n\nSQL en PowerBI\nKennis halen uit data door het bundelen van de kracht van SQL met PowerBI.\n\n\n\nOefeningen H1 en H2\nOefeningen hoofstuk 1 en 2.\n\n\n\nOefeningen H3\nOefeningen hoofstuk 3 - joins.\n\n\n\nOefeningen H4\nOefeningen hoofstuk 4 - GROUP BY, HAVING,…\n\n\n\nOefeningen H5\nOefeningen hoofstuk 5 - subqueries\n\n\n\nOefeningen H6\nOefeningen DDL - de fietswinkel\n\n\nEach chapter is a step on your journey to mastering SQL. Let’s embark on this learning adventure together."
+    "text": "Hoofdstukken\n\nInleiding tot SQL en databases\nOverzicht van SQL, databases en hoe ze worden gebruikt in data science.\n\n\n\nBasis SQL Queries\nLeren van SELECT statements en filteren van data met WHERE clauses.\n\n\n\nWerken met combineren van tabellen\nIntroductie tot JOIN operaties en hun belang.\n\n\n\nGeavanceerde Data Manipulatie\nGebruik van GROUP BY, HAVING en aggregatiefuncties.\n\n\n\nSubqueries, geneste Queries en Views\nUitbreiding van queries met subqueries voor complexere data opvraging.\n\n\n\nData Definition Language (DDL) & Data Manipulation Language (DML)\nBegrijpen hoe een databank gemaakt wordt en invoegen, updaten en deleten van data in de databank.\n\n\n\nSQL en PowerBI\nKennis halen uit data door het bundelen van de kracht van SQL met PowerBI.\n\n\n\nOefeningen H1 en H2\nOefeningen hoofstuk 1 en 2.\n\n\n\nOefeningen H3\nOefeningen hoofstuk 3 - joins.\n\n\n\nOefeningen H4\nOefeningen hoofstuk 4 - GROUP BY, HAVING,…\n\n\n\nOefeningen H5\nOefeningen hoofstuk 5 - subqueries\n\n\n\nOefeningen H6\nOefeningen DDL - de fietswinkel"
   },
   {
     "objectID": "sql_course/7_powerbi.html#waarom-powerbi-en-sql---belang-van-data-intelligentie",
@@ -264,5 +264,12 @@
     "title": "My Blog",
     "section": "",
     "text": "My first blog\n\n\n\nQuarto\n\n\nR\n\n\nData Science\n\n\n\nblog post description (appears underneath the title in smaller text) which is included on the listing page\n\n\n\nDanny Volkaerts\n\n\nJun 5, 2025\n\n\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "posts_main/2024_05_18_My_first_blog/index.html",
+    "href": "posts_main/2024_05_18_My_first_blog/index.html",
+    "title": "My first blog",
+    "section": "",
+    "text": "CitationBibTeX citation:@online{volkaerts2025,\n  author = {Volkaerts, Danny},\n  title = {My First Blog},\n  date = {2025-06-05},\n  url = {https://dannyvolkaerts.github.io/posts/2022-10-24-my-blog-post/},\n  langid = {en}\n}\nFor attribution, please cite this work as:\nVolkaerts, Danny. 2025. “My First Blog.” June 5, 2025. https://dannyvolkaerts.github.io/posts/2022-10-24-my-blog-post/."
   }
 ]

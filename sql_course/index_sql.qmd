@@ -81,6 +81,3 @@ Managing transactions, understanding ACID properties.
 
 10. **Real-World SQL Projects**  
     Applying learned skills to solve real-world data problems. -->
-
-Each chapter is a step on your journey to mastering SQL. Let's embark on this learning adventure together.
-
