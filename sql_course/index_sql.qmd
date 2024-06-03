@@ -17,57 +17,57 @@ Overzicht van SQL, databases en hoe ze worden gebruikt in data science.
 
 ---
 
-2. [**Basis SQL Queries**](2_basics.html){target="_blank"}\
+2. [**Basis SQL Queries**](2_basics.html){target="_blank"}\ 
 Leren van SELECT statements en filteren van data met WHERE clauses.
 
 ---
 
-3. [**Werken met combineren van tabellen**](3_joins.html){target="_blank"} \
+3. [**Werken met combineren van tabellen**]<!--(3_joins.html){target="_blank"}--> \
 Introductie tot JOIN operaties en hun belang.
 
 ---
 
-4. [**Geavanceerde Data Manipulatie**](4_advanced.html){target="_blank"}\
+4. [**Geavanceerde Data Manipulatie**]<!--(4_advanced.html){target="_blank"}-->\
 Gebruik van GROUP BY, HAVING en aggregatiefuncties.
 
 ---
 
-5. [**Subqueries, geneste Queries en Views**](5_subqueries.html){target="_blank"}\
+5. [**Subqueries, geneste Queries en Views**]<!--(5_subqueries.html){target="_blank"}-->\
 Uitbreiding van queries met subqueries voor complexere data opvraging.
 
 ---
 
-6. [**Data Definition Language (DDL) & Data Manipulation Language (DML)**](6_DDL.html){target="_blank"}\
+6. [**Data Definition Language (DDL) & Data Manipulation Language (DML)**]<!--(6_DDL.html){target="_blank"}-->\
 Begrijpen hoe een databank gemaakt wordt en invoegen, updaten en deleten van data in de databank.
 
 ---
 
-7. [**SQL en PowerBI**](7_powerbi.html){target="_blank"}\
+7. [**SQL en PowerBI**]<!--(7_powerbi.html){target="_blank"}-->\
 Kennis halen uit data door het bundelen van de kracht van SQL met PowerBI.
 
 ---
 
-8. [**Oefeningen H1 en H2**](8_exercises.html){target="_blank"}\
+8. [**Oefeningen H1 en H2**]<!--(8_exercises.html){target="_blank"}-->\
 Oefeningen hoofstuk 1 en 2.
 
 ---
 
-9. [**Oefeningen H3**](9_exercises_joins.html){target="_blank"}\
+9. [**Oefeningen H3**]<!--(9_exercises_joins.html){target="_blank"}-->\
 Oefeningen hoofstuk 3 - joins.
 
 ---
 
-10. [**Oefeningen H4**](10_exercises_advanced.html){target="_blank"}\
+10. [**Oefeningen H4**]<!--(10_exercises_advanced.html){target="_blank"}-->\
 Oefeningen hoofstuk 4 - GROUP BY, HAVING,...
 
 ---
 
-11. [**Oefeningen H5**](11_exercises_subqueries.html){target="_blank"}\
+11. [**Oefeningen H5**]<!--(11_exercises_subqueries.html){target="_blank"}-->\
 Oefeningen hoofstuk 5 - subqueries
 
 --- 
 
-12. [**Oefeningen H6**](12_exercise_DDL.html){target="_blank"}\
+12. [**Oefeningen H6**]<!--(12_exercise_DDL.html){target="_blank"}-->\
 Oefeningen DDL - de fietswinkel
 
 
