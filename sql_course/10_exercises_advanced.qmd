@@ -123,13 +123,12 @@ Sorteer op teamnr.
 ```
 
 :::{.notes}
-SELECT teams.teamnr, teams.divisie,\
-ROUND(AVG(gewonnen),2) AS gewonnen,\
-ROUND(AVG(verloren),2) AS verloren\
-FROM teams, wedstrijden\
-WHERE teams.teamnr = wedstrijden.teamnr\
-GROUP BY teams.teamnr, teams.divisie\
-ORDER BY teams.teamnr;\
+SELECT w.teamnr,\
+ROUND(AVG(CAST(w.gewonnen as decimal)),2) as gem_gewonnen,\
+ROUND(AVG(CAST(w.verloren AS decimal)),2) as gem_verloren\
+FROM wedstrijden w\
+GROUP BY w.teamnry\
+ORDER BY w.teamnr\
 :::
 
 ---

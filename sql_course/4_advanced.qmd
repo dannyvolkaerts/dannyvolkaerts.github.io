@@ -131,17 +131,17 @@ HAVING group_condition;
 We willen de managers en het aantal werknemers die aan hen direct rapporteren:
 
 ```{.sql .interactive .hr}
-SELECT manager_id, first_name, last_name, COUNT(employee_id) direct_reports
-FROM employees
-WHERE manager_id IS NOT NULL
-GROUP BY manager_id;
+SELECT e.manager_id, m.first_name,m.last_name, COUNT(e.employee_id) direct_reports
+FROM employees e INNER JOIN employees m on e.manager_id = m.employee_id
+WHERE e.manager_id IS NOT NULL
+GROUP BY e.manager_id,m.first_name,m.last_name
+
 ```
 
 :::{.notes}
 Managers met minstens 5 werknemers die direct aan hun rapporteren:\
 
-HAVING count(employee_id)>5\
-HAVING direct_reports >= 5;\
+HAVING COUNT(e.employee_id) >= 5
 :::
 ---
 
