@@ -9,7 +9,7 @@
 <link href="../site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <link href="../site_libs/quarto-contrib/interactive-sql-1.0.0/interactive-sql.css" rel="stylesheet"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.3.450">
+  <meta name="generator" content="quarto-1.4.555">
 
   <meta name="author" content="Danny Volkaerts">
   <title>Oefeningen DDL - Fietsenwinkel</title>
@@ -157,7 +157,8 @@
   }
 
   .callout.callout-titled .callout-body > .callout-content > :last-child {
-    margin-bottom: 0.5rem;
+    padding-bottom: 0.5rem;
+    margin-bottom: 0;
   }
 
   .callout.callout-titled .callout-icon::before {
@@ -339,7 +340,7 @@ Danny Volkaerts
 </div>
 </div>
 
-  <p class="date">13 May, 2024</p>
+  <p class="date">19 Sep, 2024</p>
 </section>
 <section id="de-fietsenwinkel" class="slide level2">
 <h2>De fietsenwinkel</h2>
@@ -375,20 +376,244 @@ Danny Volkaerts
 <section class="slide level2">
 
 <h3 id="oefening-2">Oefening 2</h3>
-<p>Toon de voornaam, achternaam, productnaam, heoveelheid, prijs en korting van de producten die je zelf hebt gekocht.</p>
+<p>Which state has the most customers?</p>
+<aside class="notes">
+<p>SELECT state, COUNT (customer_id) as nb_customer FROM customers GROUP BY state ORDER BY nb_customer DESC</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section class="slide level2">
 
 <h3 id="oefening-3">Oefening 3</h3>
-<p>Kijk naar je order_id(s). Verwijder jezelf terug uit de databank. Wat gebeurt er met de order(s) die jij gemaakt had in de winkel?</p>
+<p>Which brand has the most products in the store?</p>
+<aside class="notes">
+<p>SELECT COUNT(products.product_id) as product_per_brand, brands.brand_name FROM production.brands<br>
+JOIN production.products ON products.brand_id = brands.brand_id<br>
+GROUP BY brands.brand_id, brands.brand_name ORDER BY product_per_brand DESC<br>
+</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section class="slide level2">
 
 <h3 id="oefening-4">Oefening 4</h3>
-<p>Verzin een vraagstelling en een bijhorende query die horen bij de fietswinkel database.</p>
+<p>Which product is the most ordered? Give me product_id, quantity and product_name</p>
+<aside class="notes">
+<p>SELECT TOP 10 b.product_id, SUM(a.quantity) as quantity, b.product_name FROM sales.order_items a<br>
+JOIN production.products b ON a.product_id = b.product_id<br>
+GROUP BY b.product_id, b.product_name ORDER BY quantity DESC<br>
+</p>
+<p>TotalQuantityOrdered = SUM(order_items[quantity])<br>
+</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2">
 
+<h3 id="oefening-5">Oefening 5</h3>
+<p>Which product is sold out in each store?</p>
+<aside class="notes">
+<p>SELECT stores.store_name, stocks.product_id, products.product_name FROM production.stocks<br>
+JOIN production.products ON stocks.product_id = products.product_id<br>
+JOIN sales.stores ON stocks.store_id = stores.store_id<br>
+WHERE quantity = 0<br>
+</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2">
+
+<h3 id="oefening-6">Oefening 6</h3>
+<p>Which product is the most ordered?</p>
+<aside class="notes">
+<p>WITH price AS (<br>
+SELECT product_id, quantity, list_price, discount, list_price * quantity * (1 - discount) AS final<br>
+FROM sales.order_items<br>
+)<br>
+SELECT a.product_id, a.product_name, SUM(b.final) AS sales_revenue<br>
+FROM price b<br>
+JOIN production.products a<br>
+ON a.product_id = b.product_id<br>
+GROUP BY a.product_id, a.product_name<br>
+ORDER BY sales_revenue DESC;<br>
+</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2">
+
+<h3 id="oefening-7">Oefening 7</h3>
+<p>Calculate the average bike price for each model year</p>
+<aside class="notes">
+<p>SELECT model_year, AVG(list_price) AS avg_price FROM production.products GROUP BY model_year</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2">
+
+<h3 id="oefening-8">Oefening 8</h3>
+<p>How many staffs are active in all stores?</p>
+<aside class="notes">
+
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2">
+
+<h3 id="oefening-9">Oefening 9</h3>
+<p>Which store has the most late-shipped orders?</p>
+<aside class="notes">
+<p>WITH status AS (SELECT order_id, required_date, shipped_date,<br>
+CASE<br>
+WHEN required_date &lt;= shipped_date THEN 0<br>
+ELSE 1<br>
+END AS late_shipping, store_id<br>
+FROM orders<br>
+WHERE shipped_date IS NOT NULL AND late_shipping = 1)<br>
+SELECT store_id, COUNT(late_shipping) as nb_late_shipping<br>
+FROM status GROUP BY store_id</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2">
+
+<h3 id="oefening-10">Oefening 10</h3>
+<p>Which product is the most ordered?</p>
+<aside class="notes">
+<p>SELECT<br>
+YEAR(o.order_date) AS order_year,<br>
+FORMAT(o.order_date, ‘MM’) AS order_month,<br>
+p.category_id,<br>
+c.category_name,<br>
+AVG(oi.quantity * oi.list_price * (1 - oi.discount)) AS avg_monthly_sales<br>
+FROM<br>
+sales.order_items oi<br>
+JOIN<br>
+production.products p ON oi.product_id = p.product_id<br>
+JOIN<br>
+sales.orders o ON oi.order_id = o.order_id<br>
+JOIN<br>
+production.categories c ON c.category_id = p.category_id<br>
+GROUP BY<br>
+YEAR(o.order_date) AS order_year,<br>
+FORMAT(o.order_date, ‘MM’),<br>
+p.category_id,<br>
+c.category_name<br>
+ORDER BY order_year,order_month;<br>
+</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2">
+
+<h3 id="oefening-11">Oefening 11</h3>
+<p>Percentage of late shipments per store. Give store_id, total_late, total, percentage_late.</p>
+<aside class="notes">
+<p>WITH late AS(SELECT store_id,<br>
+CASE<br>
+WHEN required_date &lt;= shipped_date THEN 0<br>
+ELSE 1<br>
+END AS late_shipping FROM sales.orders WHERE shipped_date IS NOT NULL)<br>
+SELECT store_id, SUM(late_shipping) AS late, COUNT(late_shipping) AS total, CAST(100*SUM(late_shipping)/COUNT(late_shipping) AS FLOAT) AS percent_late_shipping<br>
+FROM late GROUP BY store_id<br>
+</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+
+<div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
+</div>
 </div>
 <sqlime-db name="tennis" path="https://raw.githubusercontent.com/dannyvolkaerts/something/main/tennis.sql"></sqlime-db>
 <sqlime-examples db="tennis" selector="div.interactive-sql pre.tennis code" editable=""></sqlime-examples>
@@ -421,7 +646,6 @@ Danny Volkaerts
       Reveal.initialize({
 'controlsAuto': true,
 'previewLinksAuto': false,
-'smaller': true,
 'pdfSeparateFragments': false,
 'autoAnimateEasing': "ease",
 'autoAnimateDuration': 1,
@@ -682,10 +906,27 @@ Danny Volkaerts
         // clear code selection
         e.clearSelection();
       });
-      function tippyHover(el, contentFn) {
+        var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+        var mailtoRegex = new RegExp(/^mailto:/);
+          var filterRegex = new RegExp('/' + window.location.host + '/');
+        var isInternal = (href) => {
+            return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+        }
+        // Inspect non-navigation links and adorn them if external
+     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+        for (var i=0; i<links.length; i++) {
+          const link = links[i];
+          if (!isInternal(link.href)) {
+            // undo the damage that might have been done by quarto-nav.js in the case of
+            // links that we want to consider external
+            if (link.dataset.originalHref !== undefined) {
+              link.href = link.dataset.originalHref;
+            }
+          }
+        }
+      function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
         const config = {
           allowHTML: true,
-          content: contentFn,
           maxWidth: 500,
           delay: 100,
           arrow: false,
@@ -695,8 +936,17 @@ Danny Volkaerts
           interactive: true,
           interactiveBorder: 10,
           theme: 'light-border',
-          placement: 'bottom-start'
+          placement: 'bottom-start',
         };
+        if (contentFn) {
+          config.content = contentFn;
+        }
+        if (onTriggerFn) {
+          config.onTrigger = onTriggerFn;
+        }
+        if (onUntriggerFn) {
+          config.onUntrigger = onUntriggerFn;
+        }
           config['offset'] = [0,0];
           config['maxWidth'] = 700;
         window.tippy(el, config); 
@@ -710,7 +960,11 @@ Danny Volkaerts
           try { href = new URL(href).hash; } catch {}
           const id = href.replace(/^#\/?/, "");
           const note = window.document.getElementById(id);
-          return note.innerHTML;
+          if (note) {
+            return note.innerHTML;
+          } else {
+            return "";
+          }
         });
       }
       const findCites = (el) => {
