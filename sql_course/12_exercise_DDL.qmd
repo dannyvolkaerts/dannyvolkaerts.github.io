@@ -148,6 +148,13 @@ How many staffs are active in all stores?
 Which store has the most late-shipped orders?
 
 :::{.notes}
+select s.store_name, count(*) as aantal_late_shipped_orders\
+from sales.orders o join sales.stores s on o.store_id = s.store_id\
+where o.shipped_date > o.required_date\
+group by s.store_name\
+order by aantal_late_shipped_orders desc;\
+ 
+ 
 WITH status AS (SELECT order_id, required_date, shipped_date, \
         CASE \
         WHEN required_date <= shipped_date THEN 0\
@@ -204,6 +211,55 @@ WITH late AS(SELECT store_id,\
         FROM late GROUP BY store_id\
 :::
 
+<!-- POWERBI - SQL -->
+
+<!-- 1. Presentatie PowerBI 1 en 2 -->
+<!-- 2. in power_bi -> sql_cursus openen: kort onderstaande query's overlopen -->
+<!-- 3. connectie maken met de bikestore -->
+
+<!-- -- Percentage gewonnen wedstrijden per speler. Geef spelersnr en naam -->
+
+<!-- SELECT  -->
+<!--     s.spelersnr, s.naam, -->
+<!--     (SUM(CASE WHEN gewonnen > verloren THEN 1 ELSE 0 END) * 100.0 / COUNT(*)) AS win_percentage -->
+<!-- FROM  -->
+<!--     wedstrijden INNER JOIN spelers s ON (wedstrijden.SPELERSNR = s.SPELERSNR) -->
+<!-- GROUP BY  -->
+<!--     s.spelersnr,s.naam; -->
+
+<!-- -- Geef per geboortejaar van de spelers het aantal gewonnen wedstrijden en verloren wedstrijden -->
+
+<!-- SELECT -->
+<!--     YEAR(s.GEB_DATUM) AS geboortejaar, -->
+<!--     SUM(CASE WHEN w.GEWONNEN > w.VERLOREN THEN 1 ELSE 0 END) AS gewonnen_wedstrijden, -->
+<!--     SUM(CASE WHEN w.GEWONNEN <= w.VERLOREN THEN 1 ELSE 0 END) AS verloren_wedstrijden -->
+<!-- FROM -->
+<!--     WEDSTRIJDEN w -->
+<!-- JOIN -->
+<!--     SPELERS s ON w.SPELERSNR = s.SPELERSNR -->
+<!-- GROUP BY -->
+<!--     YEAR(s.GEB_DATUM) -->
+<!-- ORDER BY -->
+<!--     geboortejaar; -->
+
+<!-- -- DROP HR database: -->
+<!-- USE fodfin; -->
+<!-- DROP TABLE employees; -> geeft error -->
+<!-- USE fodfin; -->
+<!-- DROP TABLE dependents; -->
+<!-- DROP TABLE employees; -->
+<!-- DROP TABLE departments; -->
+<!-- DROP TABLE locations; -->
+<!-- DROP TABLE countries; -->
+<!-- DROP TABLE regions; -->
+<!-- DROP TABLE jobs; -->
+
+<!-- -- -->
+<!-- select s.store_name, count(*) as aantal_late_shipped_orders -->
+<!-- from sales.orders o join sales.stores s on o.store_id = s.store_id -->
+<!-- where o.shipped_date > o.required_date -->
+<!-- group by s.store_name -->
+<!-- order by aantal_late_shipped_orders desc; -->
 
 
 
