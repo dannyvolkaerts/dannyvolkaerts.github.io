@@ -23,21 +23,20 @@ databases:
 -   WHERE clausule om rijen te filteren
 -   Sorteren van het resultaat met ORDER BY
 
-
 ------------------------------------------------------------------------
 
 ### Basisstructuur
 
-+------------------+---------------+
-| Query            | Uitvoering    |
-+:=================+:==============+
-| **SELECT**\      | FROM\         |
-| FROM\            | WHERE\        |
-| WHERE\           | GROUP BY\     |
-| GROUP BY\        | HAVING\       |
-| HAVING\          | **SELECT**\   |
-| ORDER BY\        | ORDER BY\     |
-+------------------+---------------+
++----------------+---------------+
+| Query          | Uitvoering    |
++:===============+:==============+
+| **SELECT**\    | FROM\         |
+| FROM\          | WHERE\        |
+| WHERE\         | GROUP BY\     |
+| GROUP BY\      | HAVING\       |
+| HAVING\        | **SELECT**\   |
+| ORDER BY\      | ORDER BY\     |
++----------------+---------------+
 
 ------------------------------------------------------------------------
 
@@ -60,6 +59,12 @@ De '\*' instructie wordt gebruikt om de volledige inhoud van de tabel te bekijke
 SELECT * 
 FROM regions;
 ```
+
+::: notes
+voorbeeld met kolommen\
+Wijzigen kolomnamen in resultaat: 'as'\
+ORDER BY: std ASC, expliciet: DESC, kan met aliassen
+:::
 
 ------------------------------------------------------------------------
 
@@ -95,6 +100,10 @@ FROM employees
 WHERE department_id = '6';
 ```
 
+::: notes
+rijfilter, conditie per rij
+:::
+
 ------------------------------------------------------------------------
 
 ### WHERE - combineren
@@ -114,8 +123,13 @@ AND salary < 18000;
 
 ### WHERE - operatoren
 
-=  !=   \>=   \>\
-IN    LIKE    IS NULL    IS NOT NULL\
+|                   |      |         |             |     |
+|-------------------|------|---------|-------------|-----|
+| =                 | !=   | \<\>    | \>=         | \>  |
+| IN                | LIKE | IS NULL | IS NOT NULL |     |
+| BETWEEN... AND... |      |         |             |     |
+|                   |      |         |             |     |
+| AND               | OR   | NOT     |             |     |
 
 ``` {.sql .interactive .hr}
 SELECT first_name, last_name, salary
@@ -123,12 +137,12 @@ FROM employees
 WHERE last_name LIKE 'Ma%'
 ```
 
-
-:::{.notes}
-SELECT *\
+:::{notes}
+SELECT \*\
 FROM employees\
 WHERE phone_number IS NULL\
 :::
+
 ------------------------------------------------------------------------
 
 ### SELECT DISTINCT
@@ -137,6 +151,10 @@ WHERE phone_number IS NULL\
 SELECT DISTINCT salary
 FROM employees
 ```
+
+::: {notes}
+beperken van dubbele rijen: 'distinct' (altijd vlak achter SELECT, voor alle kolommen toegepast)\
+:::
 
 ------------------------------------------------------------------------
 
@@ -161,17 +179,19 @@ FROM employees
 WHERE department_id = '6' 
 ```
 
-:::{.notes}
-
+::: notes
 SELECT department_id\
 FROM employees\
 WHERE department_id = '6'\
 
-SELECT department_id, count(*) as aantal\
+SELECT department_id, count(\*) as aantal\
 FROM employees\
 WHERE department_id = '6'\
+
+LIMIT\
+of TOP\
 :::
 
----
+------------------------------------------------------------------------
 
 ### Oefeningen

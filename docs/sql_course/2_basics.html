@@ -9,7 +9,7 @@
 <link href="../site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <link href="../site_libs/quarto-contrib/interactive-sql-1.0.0/interactive-sql.css" rel="stylesheet"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.3.450">
+  <meta name="generator" content="quarto-1.4.555">
 
   <meta name="author" content="Danny Volkaerts">
   <title>Basis van SQL</title>
@@ -32,7 +32,7 @@
     }
     /* CSS for syntax highlighting */
     pre > code.sourceCode { white-space: pre; position: relative; }
-    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span { line-height: 1.25; }
     pre > code.sourceCode > span:empty { height: 1.2em; }
     .sourceCode { overflow: visible; }
     code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -222,7 +222,8 @@
   }
 
   .callout.callout-titled .callout-body > .callout-content > :last-child {
-    margin-bottom: 0.5rem;
+    padding-bottom: 0.5rem;
+    margin-bottom: 0;
   }
 
   .callout.callout-titled .callout-icon::before {
@@ -404,7 +405,7 @@ Danny Volkaerts
 </div>
 </div>
 
-  <p class="date">20 Apr, 2024</p>
+  <p class="date">26 Sep, 2024</p>
 </section>
 <section class="slide level2">
 
@@ -419,9 +420,9 @@ Danny Volkaerts
 <section class="slide level2">
 
 <h3 id="basisstructuur">Basisstructuur</h3>
-<table style="width:49%;">
+<table class="caption-top" style="width:46%;">
 <colgroup>
-<col style="width: 26%">
+<col style="width: 23%">
 <col style="width: 22%">
 </colgroup>
 <thead>
@@ -454,17 +455,32 @@ ORDER BY<br>
 
 <h3 id="select-statement">SELECT Statement</h3>
 <p>De SELECT-instructie wordt gebruikt om gegevens uit een database te selecteren. De geretourneerde gegevens worden opgeslagen in een resultatentabel, ook wel de result-set genoemd.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource sql number-lines code-with-copy"><code class="sourceCode sql"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">SELECT</span> column1, column2 </span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="kw">FROM</span> table_name;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource sql number-lines code-with-copy"><code class="sourceCode sql"><span id="cb1-1"><a></a><span class="kw">SELECT</span> column1, column2 </span>
+<span id="cb1-2"><a></a><span class="kw">FROM</span> table_name;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section class="slide level2">
 
 <h3 id="select">SELECT *</h3>
 <p>De ‘*’ instructie wordt gebruikt om de volledige inhoud van de tabel te bekijken.</p>
 <div class="interactive-sql">
-<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource sql interactive hr number-lines code-with-copy"><code class="sourceCode sql"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">SELECT</span> <span class="op">*</span> </span>
-<span id="cb2-2"><a href="#cb2-2"></a><span class="kw">FROM</span> regions;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource sql interactive hr number-lines code-with-copy"><code class="sourceCode sql"><span id="cb2-1"><a></a><span class="kw">SELECT</span> <span class="op">*</span> </span>
+<span id="cb2-2"><a></a><span class="kw">FROM</span> regions;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<aside class="notes">
+<p>voorbeeld met kolommen<br>
+Wijzigen kolomnamen in resultaat: ‘as’<br>
+ORDER BY: std ASC, expliciet: DESC, kan met aliassen</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section class="slide level2">
 
@@ -473,9 +489,9 @@ ORDER BY<br>
 </p>
 <p>Voorbeeld: ik wil de werknemers (employees) met een salaris hoger dan 16000 euro.</p>
 <div class="interactive-sql">
-<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource sql interactive hr number-lines code-with-copy"><code class="sourceCode sql"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">SELECT</span> <span class="op">*</span> </span>
-<span id="cb3-2"><a href="#cb3-2"></a><span class="kw">FROM</span> employees</span>
-<span id="cb3-3"><a href="#cb3-3"></a><span class="kw">WHERE</span> salary <span class="op">&gt;</span> <span class="dv">16000</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource sql interactive hr number-lines code-with-copy"><code class="sourceCode sql"><span id="cb3-1"><a></a><span class="kw">SELECT</span> <span class="op">*</span> </span>
+<span id="cb3-2"><a></a><span class="kw">FROM</span> employees</span>
+<span id="cb3-3"><a></a><span class="kw">WHERE</span> salary <span class="op">&gt;</span> <span class="dv">16000</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <aside class="notes">
 <p>first_name as voornaam, last_name as achternaam, salary as salaris</p>
@@ -496,43 +512,16 @@ ORDER BY<br>
 <h3 id="where-voorbeeld">WHERE voorbeeld</h3>
 <p>Ik wil een overzicht van de werknemers (employees) die werken in het IT departement.</p>
 <div class="interactive-sql">
-<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource sql interactive hr number-lines code-with-copy"><code class="sourceCode sql"><span id="cb4-1"><a href="#cb4-1"></a><span class="co">-- we zoeken eerst de code voor het IT-departement</span></span>
-<span id="cb4-2"><a href="#cb4-2"></a><span class="kw">SELECT</span> <span class="op">*</span></span>
-<span id="cb4-3"><a href="#cb4-3"></a><span class="kw">FROM</span> departments;</span>
-<span id="cb4-4"><a href="#cb4-4"></a><span class="co">-- daarna zoeken we de werknemers die binnen dit departement werken</span></span>
-<span id="cb4-5"><a href="#cb4-5"></a><span class="kw">SELECT</span> first_name, last_name, department_id</span>
-<span id="cb4-6"><a href="#cb4-6"></a><span class="kw">FROM</span> employees</span>
-<span id="cb4-7"><a href="#cb4-7"></a><span class="kw">WHERE</span> department_id <span class="op">=</span> <span class="st">'6'</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section class="slide level2">
-
-<h3 id="where---combineren">WHERE - combineren</h3>
-<p>Combineren van filters kan met ‘AND’, ‘OR’, ‘NOT’</p>
-<p>Voorbeeld: Ik zoek de werknemers (employees) die werken in het IT departement EN een salaris hebben lager dan 18000 euro.</p>
-<div class="interactive-sql">
-<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource sql interactive hr number-lines code-with-copy"><code class="sourceCode sql"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw">SELECT</span> first_name, last_name, department_id, salary</span>
-<span id="cb5-2"><a href="#cb5-2"></a><span class="kw">FROM</span> employees</span>
-<span id="cb5-3"><a href="#cb5-3"></a><span class="kw">WHERE</span> department_id <span class="op">=</span> <span class="st">'6'</span> </span>
-<span id="cb5-4"><a href="#cb5-4"></a><span class="kw">AND</span> salary <span class="op">&lt;</span> <span class="dv">18000</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section class="slide level2">
-
-<h3 id="where---operatoren">WHERE - operatoren</h3>
-<p>= != &gt;= &gt;<br>
-IN LIKE IS NULL IS NOT NULL<br>
-</p>
-<div class="interactive-sql">
-<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource sql interactive hr number-lines code-with-copy"><code class="sourceCode sql"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw">SELECT</span> first_name, last_name, salary</span>
-<span id="cb6-2"><a href="#cb6-2"></a><span class="kw">FROM</span> employees</span>
-<span id="cb6-3"><a href="#cb6-3"></a><span class="kw">WHERE</span> last_name <span class="kw">LIKE</span> <span class="st">'Ma%'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource sql interactive hr number-lines code-with-copy"><code class="sourceCode sql"><span id="cb4-1"><a></a><span class="co">-- we zoeken eerst de code voor het IT-departement</span></span>
+<span id="cb4-2"><a></a><span class="kw">SELECT</span> <span class="op">*</span></span>
+<span id="cb4-3"><a></a><span class="kw">FROM</span> departments;</span>
+<span id="cb4-4"><a></a><span class="co">-- daarna zoeken we de werknemers die binnen dit departement werken</span></span>
+<span id="cb4-5"><a></a><span class="kw">SELECT</span> first_name, last_name, department_id</span>
+<span id="cb4-6"><a></a><span class="kw">FROM</span> employees</span>
+<span id="cb4-7"><a></a><span class="kw">WHERE</span> department_id <span class="op">=</span> <span class="st">'6'</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <aside class="notes">
-<p>SELECT *<br>
-FROM employees<br>
-WHERE phone_number IS NULL<br>
-</p>
+<p>rijfilter, conditie per rij</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -547,16 +536,86 @@ WHERE phone_number IS NULL<br>
 </section>
 <section class="slide level2">
 
+<h3 id="where---combineren">WHERE - combineren</h3>
+<p>Combineren van filters kan met ‘AND’, ‘OR’, ‘NOT’</p>
+<p>Voorbeeld: Ik zoek de werknemers (employees) die werken in het IT departement EN een salaris hebben lager dan 18000 euro.</p>
+<div class="interactive-sql">
+<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource sql interactive hr number-lines code-with-copy"><code class="sourceCode sql"><span id="cb5-1"><a></a><span class="kw">SELECT</span> first_name, last_name, department_id, salary</span>
+<span id="cb5-2"><a></a><span class="kw">FROM</span> employees</span>
+<span id="cb5-3"><a></a><span class="kw">WHERE</span> department_id <span class="op">=</span> <span class="st">'6'</span> </span>
+<span id="cb5-4"><a></a><span class="kw">AND</span> salary <span class="op">&lt;</span> <span class="dv">18000</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section class="slide level2">
+
+<h3 id="where---operatoren">WHERE - operatoren</h3>
+<table class="caption-top">
+<tbody>
+<tr class="odd">
+<td>=</td>
+<td>!=</td>
+<td>&lt;&gt;</td>
+<td>&gt;=</td>
+<td>&gt;</td>
+</tr>
+<tr class="even">
+<td>IN</td>
+<td>LIKE</td>
+<td>IS NULL</td>
+<td>IS NOT NULL</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>BETWEEN… AND…</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>AND</td>
+<td>OR</td>
+<td>NOT</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<div class="interactive-sql">
+<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource sql interactive hr number-lines code-with-copy"><code class="sourceCode sql"><span id="cb6-1"><a></a><span class="kw">SELECT</span> first_name, last_name, salary</span>
+<span id="cb6-2"><a></a><span class="kw">FROM</span> employees</span>
+<span id="cb6-3"><a></a><span class="kw">WHERE</span> last_name <span class="kw">LIKE</span> <span class="st">'Ma%'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="{notes}">
+<p>SELECT *<br>
+FROM employees<br>
+WHERE phone_number IS NULL<br>
+</p>
+</div>
+</section>
+<section class="slide level2">
+
 <h3 id="select-distinct">SELECT DISTINCT</h3>
 <div class="interactive-sql">
-<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource sql interactive hr number-lines code-with-copy"><code class="sourceCode sql"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw">SELECT</span> <span class="kw">DISTINCT</span> salary</span>
-<span id="cb7-2"><a href="#cb7-2"></a><span class="kw">FROM</span> employees</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource sql interactive hr number-lines code-with-copy"><code class="sourceCode sql"><span id="cb7-1"><a></a><span class="kw">SELECT</span> <span class="kw">DISTINCT</span> salary</span>
+<span id="cb7-2"><a></a><span class="kw">FROM</span> employees</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="{notes}">
+<p>beperken van dubbele rijen: ‘distinct’ (altijd vlak achter SELECT, voor alle kolommen toegepast)<br>
+</p>
 </div>
 </section>
 <section class="slide level2">
 
 <h3 id="select-functies">SELECT functies</h3>
-<table>
+<table class="caption-top">
 <thead>
 <tr class="header">
 <th>Operatie</th>
@@ -588,9 +647,9 @@ WHERE phone_number IS NULL<br>
 <h3 id="select-functies-voorbeeld">SELECT functies voorbeeld</h3>
 <p>Hoeveel werknemers in het IT departement?</p>
 <div class="interactive-sql">
-<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource sql interactive hr number-lines code-with-copy"><code class="sourceCode sql"><span id="cb8-1"><a href="#cb8-1"></a><span class="kw">SELECT</span> department_id, <span class="fu">count</span>(<span class="op">*</span>)</span>
-<span id="cb8-2"><a href="#cb8-2"></a><span class="kw">FROM</span> employees</span>
-<span id="cb8-3"><a href="#cb8-3"></a><span class="kw">WHERE</span> department_id <span class="op">=</span> <span class="st">'6'</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource sql interactive hr number-lines code-with-copy"><code class="sourceCode sql"><span id="cb8-1"><a></a><span class="kw">SELECT</span> department_id, <span class="fu">count</span>(<span class="op">*</span>)</span>
+<span id="cb8-2"><a></a><span class="kw">FROM</span> employees</span>
+<span id="cb8-3"><a></a><span class="kw">WHERE</span> department_id <span class="op">=</span> <span class="st">'6'</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <aside class="notes">
 <p>SELECT department_id<br>
@@ -600,6 +659,9 @@ WHERE department_id = ‘6’<br>
 <p>SELECT department_id, count(*) as aantal<br>
 FROM employees<br>
 WHERE department_id = ‘6’<br>
+</p>
+<p>LIMIT<br>
+of TOP<br>
 </p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -617,8 +679,10 @@ WHERE department_id = ‘6’<br>
 
 <h3 id="oefeningen">Oefeningen</h3>
 
+<div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
+</div>
 </div>
 <sqlime-db name="hr" path="https://raw.githubusercontent.com/dannyvolkaerts/something/main/hr.sql"></sqlime-db>
 <sqlime-examples db="hr" selector="div.interactive-sql pre.hr code" editable=""></sqlime-examples>
@@ -651,7 +715,6 @@ WHERE department_id = ‘6’<br>
       Reveal.initialize({
 'controlsAuto': true,
 'previewLinksAuto': false,
-'smaller': false,
 'pdfSeparateFragments': false,
 'autoAnimateEasing': "ease",
 'autoAnimateDuration': 1,
@@ -912,10 +975,27 @@ WHERE department_id = ‘6’<br>
         // clear code selection
         e.clearSelection();
       });
-      function tippyHover(el, contentFn) {
+        var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+        var mailtoRegex = new RegExp(/^mailto:/);
+          var filterRegex = new RegExp('/' + window.location.host + '/');
+        var isInternal = (href) => {
+            return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+        }
+        // Inspect non-navigation links and adorn them if external
+     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+        for (var i=0; i<links.length; i++) {
+          const link = links[i];
+          if (!isInternal(link.href)) {
+            // undo the damage that might have been done by quarto-nav.js in the case of
+            // links that we want to consider external
+            if (link.dataset.originalHref !== undefined) {
+              link.href = link.dataset.originalHref;
+            }
+          }
+        }
+      function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
         const config = {
           allowHTML: true,
-          content: contentFn,
           maxWidth: 500,
           delay: 100,
           arrow: false,
@@ -925,8 +1005,17 @@ WHERE department_id = ‘6’<br>
           interactive: true,
           interactiveBorder: 10,
           theme: 'light-border',
-          placement: 'bottom-start'
+          placement: 'bottom-start',
         };
+        if (contentFn) {
+          config.content = contentFn;
+        }
+        if (onTriggerFn) {
+          config.onTrigger = onTriggerFn;
+        }
+        if (onUntriggerFn) {
+          config.onUntrigger = onUntriggerFn;
+        }
           config['offset'] = [0,0];
           config['maxWidth'] = 700;
         window.tippy(el, config); 
@@ -940,7 +1029,11 @@ WHERE department_id = ‘6’<br>
           try { href = new URL(href).hash; } catch {}
           const id = href.replace(/^#\/?/, "");
           const note = window.document.getElementById(id);
-          return note.innerHTML;
+          if (note) {
+            return note.innerHTML;
+          } else {
+            return "";
+          }
         });
       }
       const findCites = (el) => {

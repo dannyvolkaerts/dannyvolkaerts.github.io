@@ -80,7 +80,7 @@ PG Admin = client
 
 ### Beroepen gerelateerd aan SQL
 
-- **Data-analist:** gebruikt SQL om databases te doorzoeken en inzichten te extraheren.
+- **Data analist:** gebruikt SQL om databases te doorzoeken en inzichten te extraheren.
 - **Data engineer:** ontwerpt en onderhoudt databasemanagementsystemen, gebruikt SQL om datapijplijnen te creëren.
 - **Data scientist:** gebruikt SQL om gegevens voor te bereiden en op te schonen voor analyse.
 - **Databaseontwikkelaar:** creëert en optimaliseert databases, schrijft stored procedures en complexe queries.
@@ -124,6 +124,7 @@ ERD: Entity-relationship diagram
 SELECT *
 FROM regions;
 ```
+
 
 ---
 
