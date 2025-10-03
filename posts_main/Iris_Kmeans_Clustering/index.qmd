@@ -1,0 +1,201 @@
+---
+title: "Iris K-Means Clustering"
+format: 
+  html:
+    page-layout: article
+    code-fold: true
+    code-tools: true
+---
+
+## Introduction
+
+This analysis demonstrates k-means clustering on the famous iris dataset. We'll explore how different variables cluster together and visualize the results with various cluster counts.
+
+```{r setup, message=FALSE}
+library(ggplot2)
+library(dplyr)
+library(patchwork)
+
+# Load the iris dataset
+data(iris)
+```
+
+## Data Overview
+
+The iris dataset contains measurements for 150 flowers from three species of iris:
+
+```{r data-overview}
+# Display structure of the data
+str(iris)
+
+# Summary statistics
+summary(iris)
+```
+
+## K-Means Clustering Analysis
+
+Let's perform k-means clustering using different variable combinations and cluster counts.
+
+### Sepal Length vs Sepal Width
+
+```{r sepal-analysis}
+# Prepare data for clustering (Sepal Length vs Sepal Width)
+sepal_data <- iris[, c("Sepal.Length", "Sepal.Width")]
+
+# Perform k-means with different cluster counts
+set.seed(123)
+k2_sepal <- kmeans(sepal_data, centers = 2)
+k3_sepal <- kmeans(sepal_data, centers = 3)
+k4_sepal <- kmeans(sepal_data, centers = 4)
+
+# Create plotting function
+create_cluster_plot <- function(data, clusters, title, x_var, y_var) {
+  # Create data frame with cluster assignments
+  plot_data <- data.frame(
+    x = data[, 1],
+    y = data[, 2],
+    cluster = as.factor(clusters$cluster),
+    species = iris$Species
+  )
+  
+  # Create centers data frame
+  centers_data <- data.frame(
+    x = clusters$centers[, 1],
+    y = clusters$centers[, 2]
+  )
+  
+  ggplot(plot_data, aes(x = x, y = y)) +
+    geom_point(aes(color = cluster, shape = species), size = 3, alpha = 0.7) +
+    geom_point(data = centers_data, aes(x = x, y = y), 
+               color = "black", shape = 4, size = 4, stroke = 2) +
+    labs(title = title,
+         x = x_var,
+         y = y_var,
+         color = "Cluster",
+         shape = "Species") +
+    theme_minimal() +
+    scale_color_brewer(type = "qual", palette = "Set1")
+}
+
+# Create plots for different cluster counts
+p1 <- create_cluster_plot(sepal_data, k2_sepal, "K=2", "Sepal Length", "Sepal Width")
+p2 <- create_cluster_plot(sepal_data, k3_sepal, "K=3", "Sepal Length", "Sepal Width")
+p3 <- create_cluster_plot(sepal_data, k4_sepal, "K=4", "Sepal Length", "Sepal Width")
+
+# Combine plots
+p1 / p2 / p3
+```
+
+### Petal Length vs Petal Width
+
+```{r petal-analysis}
+# Prepare data for clustering (Petal Length vs Petal Width)
+petal_data <- iris[, c("Petal.Length", "Petal.Width")]
+
+# Perform k-means with different cluster counts
+set.seed(123)
+k2_petal <- kmeans(petal_data, centers = 2)
+k3_petal <- kmeans(petal_data, centers = 3)
+k4_petal <- kmeans(petal_data, centers = 4)
+
+# Create plots for different cluster counts
+p4 <- create_cluster_plot(petal_data, k2_petal, "K=2", "Petal Length", "Petal Width")
+p5 <- create_cluster_plot(petal_data, k3_petal, "K=3", "Petal Length", "Petal Width")
+p6 <- create_cluster_plot(petal_data, k4_petal, "K=4", "Petal Length", "Petal Width")
+
+# Combine plots
+p4 / p5 / p6
+```
+
+## Cluster Quality Assessment
+
+Let's evaluate how well our clusters match the actual species:
+
+```{r cluster-evaluation}
+# Function to calculate cluster purity
+calculate_purity <- function(clusters, species) {
+  cluster_species <- table(clusters$cluster, species)
+  purity <- sum(apply(cluster_species, 1, max)) / sum(cluster_species)
+  return(purity)
+}
+
+# Calculate purity for different analyses
+sepal_purity <- data.frame(
+  k = c(2, 3, 4),
+  purity = c(
+    calculate_purity(k2_sepal, iris$Species),
+    calculate_purity(k3_sepal, iris$Species),
+    calculate_purity(k4_sepal, iris$Species)
+  ),
+  variables = "Sepal Length vs Width"
+)
+
+petal_purity <- data.frame(
+  k = c(2, 3, 4),
+  purity = c(
+    calculate_purity(k2_petal, iris$Species),
+    calculate_purity(k3_petal, iris$Species),
+    calculate_purity(k4_petal, iris$Species)
+  ),
+  variables = "Petal Length vs Width"
+)
+
+# Combine and display results
+purity_results <- rbind(sepal_purity, petal_purity)
+print(purity_results)
+
+# Plot purity comparison
+ggplot(purity_results, aes(x = k, y = purity, color = variables)) +
+  geom_line(size = 1.2) +
+  geom_point(size = 3) +
+  labs(title = "Cluster Purity by Variable Combination",
+       x = "Number of Clusters (k)",
+       y = "Purity Score",
+       color = "Variables") +
+  theme_minimal() +
+  scale_x_continuous(breaks = c(2, 3, 4)) +
+  scale_y_continuous(limits = c(0, 1))
+```
+
+## Within-Cluster Sum of Squares (WCSS)
+
+```{r wcss-analysis}
+# Function to calculate WCSS for different k values
+calculate_wcss <- function(data, max_k = 10) {
+  wcss <- numeric(max_k)
+  for (i in 1:max_k) {
+    set.seed(123)
+    kmeans_result <- kmeans(data, centers = i)
+    wcss[i] <- kmeans_result$tot.withinss
+  }
+  return(wcss)
+}
+
+# Calculate WCSS for both variable combinations
+wcss_sepal <- calculate_wcss(sepal_data)
+wcss_petal <- calculate_wcss(petal_data)
+
+# Create elbow plot
+elbow_data <- data.frame(
+  k = rep(1:10, 2),
+  wcss = c(wcss_sepal, wcss_petal),
+  variables = rep(c("Sepal Length vs Width", "Petal Length vs Width"), each = 10)
+)
+
+ggplot(elbow_data, aes(x = k, y = wcss, color = variables)) +
+  geom_line(size = 1.2) +
+  geom_point(size = 3) +
+  labs(title = "Elbow Method for Optimal k",
+       x = "Number of Clusters (k)",
+       y = "Within-Cluster Sum of Squares",
+       color = "Variables") +
+  theme_minimal() +
+  scale_x_continuous(breaks = 1:10)
+```
+
+## Conclusions
+
+- **Petal measurements** show much clearer clustering patterns than sepal measurements
+- The optimal number of clusters appears to be **k=3**, which matches the number of species
+- Petal length vs width achieves higher purity scores, indicating better separation between species
+- The elbow method suggests k=3 as the optimal number of clusters for both variable combinations

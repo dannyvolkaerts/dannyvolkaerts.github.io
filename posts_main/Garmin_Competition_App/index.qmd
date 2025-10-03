@@ -1,0 +1,75 @@
+---
+title: "Interactive Garmin Mini Competition Dashboard"
+description: "Explore fitness data through an interactive Shiny application"
+author: "Danny Volkaerts"
+date: "2024-10-03"
+categories: [shiny, fitness, data-visualization, interactive]
+image: "thumbnail.jpg"
+format: 
+  html:
+    page-layout: article
+---
+
+## About This Application
+
+This interactive dashboard showcases fitness and activity data through a comprehensive Shiny application. The app provides various visualizations and analytics tools to explore patterns in Garmin fitness tracker data from a mini competition.
+
+### Features
+
+- **Interactive Data Exploration**: Dynamic filtering and visualization options
+- **Performance Analytics**: Track and compare fitness metrics
+- **User-Friendly Interface**: Intuitive design for easy navigation
+- **Real-Time Updates**: Live data visualization capabilities
+
+## Live Application
+
+Explore the interactive dashboard below. The application is fully functional and hosted on our Posit Connect server:
+
+<div style="border: 2px solid #ddd; border-radius: 8px; overflow: hidden; margin: 20px 0; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+  <iframe 
+    src="https://rstudio-connect.ds.ucll.be/mini_competition_garmin/" 
+    width="100%" 
+    height="800px" 
+    frameborder="0"
+    style="display: block;">
+  </iframe>
+</div>
+
+<div style="text-align: center; margin-top: 10px; font-size: 0.9em; color: #666;">
+  <a href="https://rstudio-connect.ds.ucll.be/mini_competition_garmin/" target="_blank" style="text-decoration: none;">
+    🔗 Open in New Tab
+  </a>
+</div>
+
+## Technical Implementation
+
+This Shiny application demonstrates several key technologies:
+
+- **R Shiny**: Reactive web application framework
+- **Interactive Visualizations**: Dynamic plots and charts
+- **Data Processing**: Real-time data manipulation and analysis
+- **Responsive Design**: Optimized for various screen sizes
+
+## Learning Objectives
+
+By exploring this application, you can learn about:
+
+1. **Shiny Architecture**: Understanding reactive programming concepts
+2. **Data Visualization**: Creating engaging and informative charts
+3. **User Interface Design**: Building intuitive web applications
+4. **Performance Optimization**: Efficient data handling techniques
+
+## Getting Started
+
+Simply interact with the application above to:
+
+- Filter data by different criteria
+- Explore various visualization options  
+- Analyze patterns in the fitness data
+- Compare performance metrics
+
+The application is fully interactive - click, filter, and explore to discover insights in the data!
+
+---
+
+*This application is hosted on Posit Connect and demonstrates the power of R Shiny for creating interactive data applications.*

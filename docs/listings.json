@@ -2,7 +2,9 @@
   {
     "listing": "/posts_main.html",
     "items": [
-      "/posts_main/DuckDB/index.html"
+      "/posts_main/Garmin_Competition_App/index.html",
+      "/posts_main/DuckDB/index.html",
+      "/posts_main/Iris_Kmeans_Clustering/index.html"
     ]
   }
 ]

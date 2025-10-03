@@ -23,6 +23,8 @@ project:
     - "posts_main/posts_main.qmd"
     - "posts_main/DuckDB/index.qmd"
     - "posts_main/Introduction_datascience/index.qmd"
+    - "posts_main/Iris_Kmeans_Clustering/index.qmd"
+    - "posts_main/Garmin_Competition_App/index.qmd"
 
 website:
   title: ""

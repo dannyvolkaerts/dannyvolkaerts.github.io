@@ -6,8 +6,11 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Danny Volkaerts">
+<meta name="dcterms.date" content="2024-10-03">
+<meta name="description" content="Explore fitness data through an interactive Shiny application">
 
-<title>Articles</title>
+<title>Interactive Garmin Mini Competition Dashboard</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,24 +26,22 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-listing/list.min.js"></script>
-<script src="site_libs/quarto-listing/quarto-listing.js"></script>
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-ddd961a2510921635943dfbbd19534c4.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-ddd961a2510921635943dfbbd19534c4.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -68,67 +69,9 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script>
 
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
 
-    const options = {
-      valueNames: ['listing-title','listing-author','listing-date','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      
-      searchColumns: ["listing-title","listing-author","listing-date","listing-image","listing-description","listing-categories"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
-
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
-
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="../../styles.css">
 </head>
 
 <body class="nav-fixed">
@@ -144,15 +87,15 @@ window.Quarto = {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./index.html"> 
+    <a class="nav-link" href="../../index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./posts_main.html" aria-current="page"> 
+    <a class="nav-link" href="../../posts_main.html"> 
 <span class="menu-text">Articles</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./courses.html"> 
+    <a class="nav-link" href="../../courses.html"> 
 <span class="menu-text">Courses</span></a>
   </li>  
 </ul>
@@ -167,21 +110,57 @@ window.Quarto = {
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(3)</span></div><div class="category" data-category="QW5hbHl0aWNz">Analytics <span class="quarto-category-count">(1)</span></div><div class="category" data-category="RGF0YSUyMFNjaWVuY2U=">Data Science <span class="quarto-category-count">(1)</span></div><div class="category" data-category="RHVja0RC">DuckDB <span class="quarto-category-count">(1)</span></div><div class="category" data-category="UHl0aG9u">Python <span class="quarto-category-count">(1)</span></div><div class="category" data-category="ZGF0YS12aXN1YWxpemF0aW9u">data-visualization <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Zml0bmVzcw==">fitness <span class="quarto-category-count">(1)</span></div><div class="category" data-category="aW50ZXJhY3RpdmU=">interactive <span class="quarto-category-count">(1)</span></div><div class="category" data-category="c2hpbnk=">shiny <span class="quarto-category-count">(1)</span></div></div></div>
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#about-this-application" id="toc-about-this-application" class="nav-link active" data-scroll-target="#about-this-application">About This Application</a>
+  <ul class="collapse">
+  <li><a href="#features" id="toc-features" class="nav-link" data-scroll-target="#features">Features</a></li>
+  </ul></li>
+  <li><a href="#live-application" id="toc-live-application" class="nav-link" data-scroll-target="#live-application">Live Application</a></li>
+  <li><a href="#technical-implementation" id="toc-technical-implementation" class="nav-link" data-scroll-target="#technical-implementation">Technical Implementation</a></li>
+  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link" data-scroll-target="#learning-objectives">Learning Objectives</a></li>
+  <li><a href="#getting-started" id="toc-getting-started" class="nav-link" data-scroll-target="#getting-started">Getting Started</a></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Articles</h1>
-</div>
+<h1 class="title">Interactive Garmin Mini Competition Dashboard</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">shiny</div>
+    <div class="quarto-category">fitness</div>
+    <div class="quarto-category">data-visualization</div>
+    <div class="quarto-category">interactive</div>
+  </div>
+  </div>
 
+<div>
+  <div class="description">
+    Explore fitness data through an interactive Shiny application
+  </div>
+</div>
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Danny Volkaerts </p>
+          </div>
+  </div>
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">October 3, 2024</p>
+    </div>
+  </div>
   
     
   </div>
@@ -191,115 +170,67 @@ window.Quarto = {
 </header>
 
 
+<section id="about-this-application" class="level2">
+<h2 class="anchored" data-anchor-id="about-this-application">About This Application</h2>
+<p>This interactive dashboard showcases fitness and activity data through a comprehensive Shiny application. The app provides various visualizations and analytics tools to explore patterns in Garmin fitness tracker data from a mini competition.</p>
+<section id="features" class="level3">
+<h3 class="anchored" data-anchor-id="features">Features</h3>
+<ul>
+<li><strong>Interactive Data Exploration</strong>: Dynamic filtering and visualization options</li>
+<li><strong>Performance Analytics</strong>: Track and compare fitness metrics</li>
+<li><strong>User-Friendly Interface</strong>: Intuitive design for easy navigation</li>
+<li><strong>Real-Time Updates</strong>: Live data visualization capabilities</li>
+</ul>
+</section>
+</section>
+<section id="live-application" class="level2">
+<h2 class="anchored" data-anchor-id="live-application">Live Application</h2>
+<p>Explore the interactive dashboard below. The application is fully functional and hosted on our Posit Connect server:</p>
+<div style="border: 2px solid #ddd; border-radius: 8px; overflow: hidden; margin: 20px 0; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+<p><iframe src="https://rstudio-connect.ds.ucll.be/mini_competition_garmin/" width="100%" height="800px" frameborder="0" style="display: block;"> </iframe></p>
+</div>
+<div style="text-align: center; margin-top: 10px; font-size: 0.9em; color: #666;">
+<p><a href="https://rstudio-connect.ds.ucll.be/mini_competition_garmin/" target="_blank" style="text-decoration: none;"> 🔗 Open in New Tab </a></p>
+</div>
+</section>
+<section id="technical-implementation" class="level2">
+<h2 class="anchored" data-anchor-id="technical-implementation">Technical Implementation</h2>
+<p>This Shiny application demonstrates several key technologies:</p>
+<ul>
+<li><strong>R Shiny</strong>: Reactive web application framework</li>
+<li><strong>Interactive Visualizations</strong>: Dynamic plots and charts</li>
+<li><strong>Data Processing</strong>: Real-time data manipulation and analysis</li>
+<li><strong>Responsive Design</strong>: Optimized for various screen sizes</li>
+</ul>
+</section>
+<section id="learning-objectives" class="level2">
+<h2 class="anchored" data-anchor-id="learning-objectives">Learning Objectives</h2>
+<p>By exploring this application, you can learn about:</p>
+<ol type="1">
+<li><strong>Shiny Architecture</strong>: Understanding reactive programming concepts</li>
+<li><strong>Data Visualization</strong>: Creating engaging and informative charts</li>
+<li><strong>User Interface Design</strong>: Building intuitive web applications</li>
+<li><strong>Performance Optimization</strong>: Efficient data handling techniques</li>
+</ol>
+</section>
+<section id="getting-started" class="level2">
+<h2 class="anchored" data-anchor-id="getting-started">Getting Started</h2>
+<p>Simply interact with the application above to:</p>
+<ul>
+<li>Filter data by different criteria</li>
+<li>Explore various visualization options<br>
+</li>
+<li>Analyze patterns in the fitness data</li>
+<li>Compare performance metrics</li>
+</ul>
+<p>The application is fully interactive - click, filter, and explore to discover insights in the data!</p>
+<hr>
+<p><em>This application is hosted on Posit Connect and demonstrates the power of R Shiny for creating interactive data applications.</em></p>
 
 
+</section>
 
-
-<div class="quarto-listing quarto-listing-container-grid" id="listing-listing">
-<div class="list grid quarto-listing-cols-3">
-<div class="g-col-1" data-index="0" data-categories="c2hpbnklMkNmaXRuZXNzJTJDZGF0YS12aXN1YWxpemF0aW9uJTJDaW50ZXJhY3RpdmU=" data-listing-date-sort="1727906400000" data-listing-file-modified-sort="1759497974508" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="279">
-<a href="./posts_main/Garmin_Competition_App/index.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top">
-<img loading="lazy" src="./posts_main/Garmin_Competition_App/thumbnail.jpg" class="thumbnail-image card-img" style="height: 150px;">
-</p>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-Interactive Garmin Mini Competition Dashboard
-</h5>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('c2hpbnk='); return false;">
-shiny
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('Zml0bmVzcw=='); return false;">
-fitness
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('ZGF0YS12aXN1YWxpemF0aW9u'); return false;">
-data-visualization
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('aW50ZXJhY3RpdmU='); return false;">
-interactive
-</div>
-</div>
-<div class="card-text listing-description">
-Explore fitness data through an interactive Shiny application
-</div>
-<div class="card-attribution card-text-small justify">
-<div class="listing-author">
-Danny Volkaerts
-</div>
-<div class="listing-date">
-Oct 3, 2024
-</div>
-</div>
-</div>
-</div>
-</a>
-</div>
-<div class="g-col-1" data-index="1" data-categories="RHVja0RCJTJDUHl0aG9uJTJDRGF0YSUyMFNjaWVuY2UlMkNBbmFseXRpY3M=" data-listing-date-sort="1746568800000" data-listing-file-modified-sort="1759496750147" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="11" data-listing-word-count-sort="2173">
-<a href="./posts_main/DuckDB/index.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top">
-<img loading="lazy" src="https://picsum.photos/200/300" class="thumbnail-image card-img" style="height: 150px;">
-</p>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-Introduction to DuckDB
-</h5>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('RHVja0RC'); return false;">
-DuckDB
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('UHl0aG9u'); return false;">
-Python
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('RGF0YSUyMFNjaWVuY2U='); return false;">
-Data Science
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('QW5hbHl0aWNz'); return false;">
-Analytics
-</div>
-</div>
-<div class="card-text listing-description">
-A comprehensive guide to DuckDB: an analytical database designed for seamless data analysis with Python
-</div>
-<div class="card-attribution card-text-small justify">
-<div class="listing-author">
-Danny Volkaerts
-</div>
-<div class="listing-date">
-May 7, 2025
-</div>
-</div>
-</div>
-</div>
-</a>
-</div>
-<div class="g-col-1" data-index="2" data-listing-file-modified-sort="1759497287957" data-listing-reading-time-sort="5" data-listing-word-count-sort="842">
-<a href="./posts_main/Iris_Kmeans_Clustering/index.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top"><img src="posts_main\Iris_Kmeans_Clustering\index_files\figure-html\sepal-analysis-1.png" style="height: 150px;"  class="thumbnail-image card-img"/></p>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-Iris K-Means Clustering
-</h5>
-<div class="card-text listing-description">
-This analysis demonstrates k-means clustering on the famous iris dataset. We’ll explore how different variables cluster together and visualize the results with various…
-</div>
-<div class="card-attribution card-text-small start">
-<div class="listing-author">
-
-</div>
-</div>
-</div>
-</div>
-</a>
-</div>
-</div>
-<div class="listing-no-matching d-none">
-No matching items
-</div>
-</div></main> <!-- /main -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

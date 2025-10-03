@@ -226,7 +226,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="what-is-duckdb">What is DuckDB?</h2>
 <p>DuckDB is a <strong>high-performance analytical database</strong> specifically engineered to operate seamlessly within your applications. By default, DuckDB operates with an <strong>in-memory database</strong> that maintains global state within the Python module when utilizing <code>duckdb.sql()</code>. This design choice means that no persistent tables are stored on disk unless explicitly configured otherwise.</p>
 <p>However, DuckDB also provides the flexibility to establish connections with <strong>persistent databases</strong> by specifying a filename through <code>duckdb.connect(dbname)</code>. All data written to these connections remains persistent and can be reloaded by reconnecting to the same file, whether from Python or other DuckDB clients.</p>
-<p>DuckDB demonstrates remarkable versatility through its support for an <strong>extensive range of Client APIs</strong>, including: * <strong>C</strong> - Low-level systems programming * <strong>C++</strong> - High-performance applications * <strong>CLI</strong> (Command Line Interface) - Interactive database operations * <strong>Dart</strong> - Mobile and web application development * <strong>Go</strong> - Concurrent and scalable applications * <strong>Java (JDBC)</strong> - Enterprise Java applications * <strong>Julia</strong> - High-performance scientific computing * <strong>Node.js</strong> - Server-side JavaScript applications * <strong>ODBC</strong> - Universal database connectivity * <strong>Python</strong> - Data science and analytics workflows * <strong>R</strong> - Statistical computing and data analysis * <strong>Rust</strong> - Systems programming with memory safety * <strong>Swift</strong> - iOS and macOS applications * <strong>WebAssembly (Wasm)</strong> - Browser-based applications</p>
+<p>DuckDB demonstrates remarkable versatility through its support for an <strong>extensive range of Client APIs</strong>, including: * <strong>C</strong> - Low-level systems programming</p>
+<ul>
+<li><p><strong>C++</strong> - High-performance applications</p></li>
+<li><p><strong>CLI</strong> (Command Line Interface) - Interactive database operations</p></li>
+<li><p><strong>Dart</strong> - Mobile and web application development</p></li>
+<li><p><strong>Go</strong> - Concurrent and scalable applications</p></li>
+<li><p><strong>Java (JDBC)</strong> - Enterprise Java applications</p></li>
+<li><p><strong>Julia</strong> - High-performance scientific computing</p></li>
+<li><p><strong>Node.js</strong> - Server-side JavaScript applications</p></li>
+<li><p><strong>ODBC</strong> - Universal database connectivity</p></li>
+<li><p><strong>Python</strong> - Data science and analytics workflows</p></li>
+<li><p><strong>R</strong> - Statistical computing and data analysis</p></li>
+<li><p><strong>Rust</strong> - Systems programming with memory safety</p></li>
+<li><p><strong>Swift</strong> - iOS and macOS applications</p></li>
+<li><p><strong>WebAssembly (Wasm)</strong> - Browser-based applications</p></li>
+</ul>
 <p>The database engine provides comprehensive <strong>SQL functionality</strong>, encompassing essential statements such as <code>SELECT</code>, <code>INSERT</code>, <code>CREATE TABLE</code>, <code>ALTER TABLE</code>, <code>DELETE</code>, <code>UPDATE</code>, and <code>COPY</code>. It includes advanced query syntax capabilities, diverse data types (Array, Boolean, Date, Numeric, Text, Timestamp), sophisticated expressions, and an extensive collection of functions including Aggregate, Date, Numeric, Text, and Window Functions.</p>
 </section>
 <section id="what-makes-duckdb-exceptional" class="level2">

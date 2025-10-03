@@ -23,18 +23,31 @@ However, DuckDB also provides the flexibility to establish connections with **pe
 
 DuckDB demonstrates remarkable versatility through its support for an **extensive range of Client APIs**, including:
 *   **C** - Low-level systems programming
+
 *   **C++** - High-performance applications
+
 *   **CLI** (Command Line Interface) - Interactive database operations
+
 *   **Dart** - Mobile and web application development
+
 *   **Go** - Concurrent and scalable applications
+
 *   **Java (JDBC)** - Enterprise Java applications
+
 *   **Julia** - High-performance scientific computing
+
 *   **Node.js** - Server-side JavaScript applications
+
 *   **ODBC** - Universal database connectivity
+
 *   **Python** - Data science and analytics workflows
+
 *   **R** - Statistical computing and data analysis
+
 *   **Rust** - Systems programming with memory safety
+
 *   **Swift** - iOS and macOS applications
+
 *   **WebAssembly (Wasm)** - Browser-based applications
 
 The database engine provides comprehensive **SQL functionality**, encompassing essential statements such as `SELECT`, `INSERT`, `CREATE TABLE`, `ALTER TABLE`, `DELETE`, `UPDATE`, and `COPY`. It includes advanced query syntax capabilities, diverse data types (Array, Boolean, Date, Numeric, Text, Timestamp), sophisticated expressions, and an extensive collection of functions including Aggregate, Date, Numeric, Text, and Window Functions.
