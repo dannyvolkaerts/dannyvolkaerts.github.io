@@ -9,6 +9,7 @@ categories: [Data Science, Analytics, Beginner Guide] # self-defined categories
 citation: 
     url: https://dannyvolkaerts.github.io/introduction_datascience/ 
 image: https://picsum.photos/200/300
+draft: true
 ---
 
 # Introduction to Data Science
