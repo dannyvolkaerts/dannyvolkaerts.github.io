@@ -5,6 +5,4 @@ description: "Explore our available courses"
 
 # Courses
 
-Welcome to the course page:
-
 - [SQL Course](sql_course/index_sql.qmd): Learn the basics of SQL
