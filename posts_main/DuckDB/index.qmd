@@ -9,7 +9,6 @@ categories: [DuckDB, Python, Data Science, Analytics] # self-defined categories
 citation: 
   url: https://dannyvolkaerts.github.io/posts/2022-10-24-my-blog-post/ 
 image: https://picsum.photos/200/300
-draft: true # setting this to `true` will prevent your post from appearing on your listing page until you're ready!
 ---
 
 # Introduction to DuckDB

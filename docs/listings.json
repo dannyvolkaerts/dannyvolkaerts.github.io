@@ -1,6 +1,9 @@
 [
   {
     "listing": "/posts_main.html",
-    "items": []
+    "items": [
+      "/posts_main/DuckDB/index.html",
+      "/posts_main/Introduction_datascience/index.html"
+    ]
   }
 ]
