@@ -81,7 +81,7 @@
     "href": "sql_course/1_introduction.html#inleiding-tot-sql-and-databases",
     "title": "Introductie SQL",
     "section": "Inleiding tot SQL and Databases",
-    "text": "Inleiding tot SQL and Databases\n\nhttps://dannyvolkaerts.github.io/\nManier van werken: 1. EERD graag afdrukken of naast je houden op ander scherm 2. Interactie via Wooclap -&gt; ik ben mee met het verhaal of niet, eventueel enkele tussenvragen om te pijlen hoe ze mee zijn\nOefeningen via Azure Data Studio: New connection - Microsoft SQL Server\nI created two databases DV_first_group and DV_second_group in the database. Here are the login details :\n\nExtentions links - MySQL -&gt; installeren"
+    "text": "Inleiding tot SQL and Databases\n\nhttps://dannyvolkaerts.github.io/\nManier van werken: 1. EERD graag afdrukken of naast je houden op ander scherm 2. Interactie via Wooclap -&gt; ik ben mee met het verhaal of niet, eventueel enkele tussenvragen om te pijlen hoe ze mee zijn\nOefeningen via Azure Data Studio: New connection - Microsoft SQL Server\nExtentions links - MySQL -&gt; installeren"
   },
   {
     "objectID": "sql_course/1_introduction.html#sql-in-actie",
@@ -93,9 +93,9 @@
   {
     "objectID": "posts_main.html",
     "href": "posts_main.html",
-    "title": "My Blog",
+    "title": "Articles",
     "section": "",
-    "text": "Introduction to DuckDB\n\n\n\nDuckDB\n\n\nPython\n\n\nData Science\n\n\nAnalytics\n\n\n\nA comprehensive guide to DuckDB: an analytical database designed for seamless data analysis with Python\n\n\n\nDanny Volkaerts\n\n\nMay 7, 2025\n\n\n\n\n\n\n\n\nNo matching items"
+    "text": "No matching items"
   },
   {
     "objectID": "index.html",
@@ -121,9 +121,9 @@
   {
     "objectID": "sql_course/index_sql.html",
     "href": "sql_course/index_sql.html",
-    "title": "SQL Cursus",
+    "title": "SQL Course",
     "section": "",
-    "text": "SQL - Structured Query Language - is een fundamenteel hulpmiddel voor iedereen die geïnteresseerd is in opslag, verwerking of data analyse. Met de exponentiële groei van gegevens in de huidige digitale wereld is het essentieel om deze gegevens efficiënt te kunnen bevragen, manipuleren en analyseren. SQL is de standaardtaal voor relationele databasemanagementsystemen en stelt gebruikers in staat om op een eenvoudige en efficiënte manier met databases om te gaan. Kennis van SQL stelt dataprofielen in staat om zinvolle inzichten te halen uit grote datasets, gegevensanalyses uit te voeren en gegevens in te voeren in hun modellen voor machine learning. Inzicht in SQL opent mogelijkheden in data-analyse, data-engineering en daarbuiten, waardoor het een essentiële vaardigheid is voor elk aspirant-dataprofiel."
+    "text": "SQL, or Structured Query Language, is a standardized programming language used to manage and manipulate relational databases. Understanding SQL opens opportunities in data analysis, data engineering, and beyond, making it an essential skill for any aspiring data professional. It enables data professionals to derive meaningful insights from large datasets, perform data analyses, and input data into their machine learning models.\nSQL was developed in the 1970s and has since become the universal language for relational database management systems (RDBMS) like MySQL, PostgreSQL, SQLite, and Microsoft SQL Server. It is widely used in data science, software development, and business intelligence for tasks such as:\nData Retrieval: Extracting specific information from large datasets using SELECT statements.\nData Manipulation: Modifying data with commands like INSERT, UPDATE, and DELETE.\nData Definition: Creating and managing database structures with CREATE, ALTER, and DROP.\nData Analysis: Aggregating and analyzing data using functions like GROUP BY, HAVING, and COUNT.\nSQL’s simplicity and power make it an indispensable tool for professionals working with data, enabling efficient data management and analysis across industries."
   },
   {
     "objectID": "sql_course/index_sql.html#hoofdstukken",
@@ -186,6 +186,13 @@
     "href": "courses.html",
     "title": "Courses",
     "section": "",
-    "text": "Courses\nWelcome to the courses page! Below is a list of available courses:\n\nSQL Course: Learn SQL from basics to advanced topics, including joins, subqueries, and more."
+    "text": "Courses\nWelcome to the course page:\n\nSQL Course: Learn the basics of SQL"
+  },
+  {
+    "objectID": "sql_course/index_sql.html#chapters",
+    "href": "sql_course/index_sql.html#chapters",
+    "title": "SQL Course",
+    "section": "Chapters",
+    "text": "Chapters\n\nIntroduction to SQL and Databases\nOverview of SQL, databases, and how they are used in data science.\n\n\n\nBasic SQL Queries  Learning SELECT statements and filtering data with WHERE clauses.\n\n\n\nWorking with Table Joins\nIntroduction to JOIN operations and their importance.\n\n\n\nAdvanced Data Manipulation\nUsing GROUP BY, HAVING, and aggregate functions.\n\n\n\nSubqueries, Nested Queries, and Views\nExtending queries with subqueries for more complex data retrieval.\n\n\n\nData Definition Language (DDL) & Data Manipulation Language (DML)\nUnderstanding how to create a database and insert, update, and delete data in the database.\n\n\n\nSQL and PowerBI\nExtracting insights from data by combining the power of SQL with PowerBI.\n\n\n\nExercises Chapter 1 and 2\nExercises for chapters 1 and 2.\n\n\n\nExercises Chapter 3\nExercises for chapter 3 - joins.\n\n\n\nExercises Chapter 4\nExercises for chapter 4 - GROUP BY, HAVING, etc.\n\n\n\nExercises Chapter 5\nExercises for chapter 5 - subqueries.\n\n\n\nExercises Chapter 6\nExercises for DDL - the bike shop."
   }
 ]

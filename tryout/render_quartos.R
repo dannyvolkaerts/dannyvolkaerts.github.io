@@ -2,6 +2,7 @@
 
 # Use functions below to render to correct folder:
 quarto::quarto_render(input = "index.qmd")
+quarto::quarto_render(input = "courses.qmd")
 quarto::quarto_render(input="sql_course/index_sql.qmd")
 quarto::quarto_render(input="sql_course/1_introduction.qmd")
 quarto::quarto_render(input="sql_course/2_basics.qmd")
