@@ -1,0 +1,312 @@
+---
+title: "Introduction to DuckDB"
+description: "A comprehensive guide to DuckDB: an analytical database designed for seamless data analysis with Python"
+author:
+  - name: Danny Volkaerts
+    url: https://dannyvolkaerts.github.io/
+date: 17-07-2024
+categories: [DuckDB, Python, Data Science, Analytics] # self-defined categories
+citation: 
+  url: https://dannyvolkaerts.github.io/posts/2022-10-24-my-blog-post/ 
+image: https://picsum.photos/200/300
+draft: true # setting this to `true` will prevent your post from appearing on your listing page until you're ready!
+---
+
+# Introduction to DuckDB
+
+This document provides a comprehensive overview of DuckDB, exploring its fundamental concepts, key strengths, and practical applications. We'll demonstrate its capabilities through a detailed example using the Titanic dataset, imported directly from Kaggle using their API.
+
+## What is DuckDB?
+
+DuckDB is a **high-performance analytical database** specifically engineered to operate seamlessly within your applications. By default, DuckDB operates with an **in-memory database** that maintains global state within the Python module when utilizing `duckdb.sql()`. This design choice means that no persistent tables are stored on disk unless explicitly configured otherwise.
+
+However, DuckDB also provides the flexibility to establish connections with **persistent databases** by specifying a filename through `duckdb.connect(dbname)`. All data written to these connections remains persistent and can be reloaded by reconnecting to the same file, whether from Python or other DuckDB clients.
+
+DuckDB demonstrates remarkable versatility through its support for an **extensive range of Client APIs**, including:
+*   **C** - Low-level systems programming
+*   **C++** - High-performance applications
+*   **CLI** (Command Line Interface) - Interactive database operations
+*   **Dart** - Mobile and web application development
+*   **Go** - Concurrent and scalable applications
+*   **Java (JDBC)** - Enterprise Java applications
+*   **Julia** - High-performance scientific computing
+*   **Node.js** - Server-side JavaScript applications
+*   **ODBC** - Universal database connectivity
+*   **Python** - Data science and analytics workflows
+*   **R** - Statistical computing and data analysis
+*   **Rust** - Systems programming with memory safety
+*   **Swift** - iOS and macOS applications
+*   **WebAssembly (Wasm)** - Browser-based applications
+
+The database engine provides comprehensive **SQL functionality**, encompassing essential statements such as `SELECT`, `INSERT`, `CREATE TABLE`, `ALTER TABLE`, `DELETE`, `UPDATE`, and `COPY`. It includes advanced query syntax capabilities, diverse data types (Array, Boolean, Date, Numeric, Text, Timestamp), sophisticated expressions, and an extensive collection of functions including Aggregate, Date, Numeric, Text, and Window Functions.
+
+## What Makes DuckDB Exceptional?
+
+DuckDB's distinctive strengths establish it as a powerful tool for data analysis and processing, particularly when integrated with Python ecosystems:
+
+### Comprehensive Data Ingestion and Direct Querying Capabilities
+DuckDB excels in its ability to ingest data from a **diverse array of formats**, supporting both disk-based and in-memory operations. The database natively supports CSV, Parquet, and JSON file formats. One of its most compelling features is the capability to **query these files directly using SQL** as if they were traditional database tables. For instance, you can execute `SELECT * FROM 'example.csv'` without any preliminary data loading steps.
+
+### Seamless Integration with Python Data Structures
+DuckDB provides **native support for querying Pandas DataFrames, Polars DataFrames, and PyArrow tables** directly. This integration represents a significant advantage, enabling analysts to leverage SQL queries on existing Python data structures without requiring conversion or loading into separate database systems. It's important to note that these direct queries operate in **read-only mode**.
+
+### Efficient Result Conversion and Interoperability
+Query results can be efficiently transformed into various Python objects and popular data formats. The system supports seamless conversion to Pandas DataFrames (`.df()`), Polars DataFrames (`.pl()`), Arrow Tables (`.arrow()`), and NumPy Arrays (`.fetchnumpy()`), facilitating smooth workflow integration across different data processing libraries.
+
+### Flexible Storage Architecture
+DuckDB offers users the choice between **in-memory databases** for rapid, temporary analyses and **persistent storage** solutions for data preservation. This flexibility allows for optimal performance tuning based on specific use case requirements.
+
+### Advanced Data Export Capabilities
+Query results (Relation objects) can be written directly to disk in formats such as Parquet and CSV, or you can utilize the SQL `COPY` statement for more complex export operations. This functionality streamlines data pipeline workflows.
+
+### Developer-Friendly API Design
+The `duckdb` module and connection objects (`duckdb.connect()`) support identical methods, providing implementation flexibility. For package development, connection objects are recommended to prevent potential conflicts with shared global in-memory databases.
+
+### Extensible Architecture
+DuckDB supports the **installation and loading of extensions**, such as the `spatial` extension for geospatial data analysis or `httpfs` for accessing HTTP(S) and S3-based files. The platform also supports **community-developed extensions** through the `repository="community"` parameter.
+
+### Optimized Query Execution
+Queries return **Relation objects**, which serve as symbolic representations of the query. The actual execution occurs only when results are explicitly requested or displayed, contributing to overall system efficiency through lazy evaluation.
+
+## Practical Example: Analyzing the Titanic Dataset with DuckDB and Kaggle API
+
+This comprehensive example demonstrates how to leverage DuckDB's capabilities by importing the famous Titanic dataset directly from Kaggle using their API, then performing sophisticated data analysis using SQL queries.
+
+### Prerequisites and Setup
+
+Before proceeding, ensure you have the following requirements:
+
+1. **Python 3.9 or newer** - DuckDB requires a modern Python version
+2. **Kaggle API credentials** - You'll need a Kaggle account and API key
+3. **Required packages** - Install via `pip install duckdb kaggle pandas`
+
+### Step 1: Kaggle API Configuration
+
+First, let's set up the Kaggle API to download the Titanic dataset:
+
+```python
+#| echo: true
+#| output: false
+import os
+import zipfile
+import pandas as pd
+import duckdb
+from kaggle.api.kaggle_api_extended import KaggleApi
+
+# Initialize and authenticate Kaggle API
+# Note: Make sure you have ~/.kaggle/kaggle.json with your credentials
+# or set KAGGLE_USERNAME and KAGGLE_KEY environment variables
+api = KaggleApi()
+api.authenticate()
+
+# Download the Titanic dataset from Kaggle
+print("Downloading Titanic dataset from Kaggle...")
+api.competition_download_files('titanic', path='.', quiet=False)
+
+# Extract the downloaded zip file
+with zipfile.ZipFile('titanic.zip', 'r') as zip_ref:
+    zip_ref.extractall('.')
+
+print("Dataset downloaded and extracted successfully!")
+
+# List the extracted files
+extracted_files = [f for f in os.listdir('.') if f.endswith('.csv')]
+print(f"Available CSV files: {extracted_files}")
+```
+
+### Step 2: Advanced Data Analysis with DuckDB
+
+Now let's perform comprehensive analysis using DuckDB's powerful SQL capabilities:
+
+```python
+#| echo: true
+import duckdb
+
+# Connect to DuckDB (in-memory database)
+conn = duckdb.connect(':memory:')
+
+print("=== TITANIC DATASET ANALYSIS WITH DUCKDB ===\n")
+
+# Query 1: Basic dataset overview
+print("1. Dataset Overview - First 5 rows:")
+overview_query = """
+    SELECT * 
+    FROM 'train.csv' 
+    LIMIT 5
+"""
+result = conn.execute(overview_query)
+result.df().head()
+
+print("\n2. Dataset Dimensions and Basic Statistics:")
+stats_query = """
+    SELECT 
+        COUNT(*) as total_passengers,
+        COUNT(DISTINCT Pclass) as passenger_classes,
+        COUNT(DISTINCT Sex) as gender_categories,
+        COUNT(DISTINCT Embarked) as embarkation_ports,
+        AVG(Age) as average_age,
+        MIN(Age) as youngest_passenger,
+        MAX(Age) as oldest_passenger,
+        AVG(Fare) as average_fare
+    FROM 'train.csv'
+"""
+stats_result = conn.execute(stats_query).df()
+print(stats_result.to_string(index=False))
+
+print("\n3. Survival Analysis by Demographics:")
+survival_demographics = """
+    SELECT 
+        Sex,
+        Pclass,
+        COUNT(*) as total_passengers,
+        SUM(Survived) as survivors,
+        ROUND(AVG(Survived) * 100, 2) as survival_rate_percent,
+        ROUND(AVG(Age), 1) as avg_age,
+        ROUND(AVG(Fare), 2) as avg_fare
+    FROM 'train.csv'
+    WHERE Age IS NOT NULL
+    GROUP BY Sex, Pclass
+    ORDER BY Sex, Pclass
+"""
+demographics_result = conn.execute(survival_demographics).df()
+print(demographics_result.to_string(index=False))
+
+print("\n4. Advanced Analysis: Survival by Age Groups:")
+age_group_analysis = """
+    SELECT 
+        CASE 
+            WHEN Age < 18 THEN 'Child (0-17)'
+            WHEN Age >= 18 AND Age < 35 THEN 'Young Adult (18-34)'
+            WHEN Age >= 35 AND Age < 55 THEN 'Middle Age (35-54)'
+            WHEN Age >= 55 THEN 'Senior (55+)'
+            ELSE 'Unknown'
+        END as age_group,
+        COUNT(*) as total_passengers,
+        SUM(Survived) as survivors,
+        ROUND(AVG(Survived) * 100, 2) as survival_rate_percent,
+        ROUND(AVG(Fare), 2) as avg_fare_paid
+    FROM 'train.csv'
+    WHERE Age IS NOT NULL
+    GROUP BY age_group
+    ORDER BY 
+        CASE 
+            WHEN age_group = 'Child (0-17)' THEN 1
+            WHEN age_group = 'Young Adult (18-34)' THEN 2
+            WHEN age_group = 'Middle Age (35-54)' THEN 3
+            WHEN age_group = 'Senior (55+)' THEN 4
+            ELSE 5
+        END
+"""
+age_analysis_result = conn.execute(age_group_analysis).df()
+print(age_analysis_result.to_string(index=False))
+
+print("\n5. Family Size Impact on Survival:")
+family_analysis = """
+    SELECT 
+        (SibSp + Parch) as family_size,
+        CASE 
+            WHEN (SibSp + Parch) = 0 THEN 'Alone'
+            WHEN (SibSp + Parch) BETWEEN 1 AND 3 THEN 'Small Family (1-3)'
+            WHEN (SibSp + Parch) BETWEEN 4 AND 6 THEN 'Medium Family (4-6)'
+            ELSE 'Large Family (7+)'
+        END as family_category,
+        COUNT(*) as passenger_count,
+        SUM(Survived) as survivors,
+        ROUND(AVG(Survived) * 100, 2) as survival_rate_percent
+    FROM 'train.csv'
+    GROUP BY family_size, family_category
+    ORDER BY family_size
+"""
+family_result = conn.execute(family_analysis).df()
+print(family_result.to_string(index=False))
+
+print("\n6. Port of Embarkation Analysis:")
+embarkation_analysis = """
+    SELECT 
+        CASE 
+            WHEN Embarked = 'C' THEN 'Cherbourg'
+            WHEN Embarked = 'Q' THEN 'Queenstown'
+            WHEN Embarked = 'S' THEN 'Southampton'
+            ELSE 'Unknown'
+        END as port_of_embarkation,
+        COUNT(*) as passenger_count,
+        SUM(Survived) as survivors,
+        ROUND(AVG(Survived) * 100, 2) as survival_rate_percent,
+        ROUND(AVG(Fare), 2) as avg_fare,
+        ROUND(AVG(Age), 1) as avg_age
+    FROM 'train.csv'
+    WHERE Embarked IS NOT NULL
+    GROUP BY Embarked, port_of_embarkation
+    ORDER BY survival_rate_percent DESC
+"""
+embarkation_result = conn.execute(embarkation_analysis).df()
+print(embarkation_result.to_string(index=False))
+
+# Demonstrate DuckDB's ability to export results
+print("\n7. Exporting Analysis Results:")
+# Export the demographic analysis to a new CSV file
+conn.execute("""
+    COPY (
+        SELECT 
+            Sex,
+            Pclass,
+            COUNT(*) as total_passengers,
+            SUM(Survived) as survivors,
+            ROUND(AVG(Survived) * 100, 2) as survival_rate_percent
+        FROM 'train.csv'
+        GROUP BY Sex, Pclass
+        ORDER BY Sex, Pclass
+    ) TO 'titanic_survival_analysis.csv' (HEADER, DELIMITER ',')
+""")
+print("Results exported to 'titanic_survival_analysis.csv'")
+
+# Demonstrate conversion to different Python data structures
+print("\n8. Converting Results to Different Data Structures:")
+sample_result = conn.execute("SELECT * FROM 'train.csv' LIMIT 3")
+
+# Convert to Pandas DataFrame
+pandas_df = sample_result.df()
+print(f"Pandas DataFrame shape: {pandas_df.shape}")
+
+# Convert to Arrow Table
+arrow_table = sample_result.arrow()
+print(f"Arrow Table schema: {arrow_table.schema}")
+
+# Convert to NumPy array (for numerical columns only)
+numeric_result = conn.execute("SELECT Age, Fare FROM 'train.csv' WHERE Age IS NOT NULL LIMIT 5")
+numpy_array = numeric_result.fetchnumpy()
+print(f"NumPy arrays: {list(numpy_array.keys())}")
+
+# Close the connection
+conn.close()
+print("\nAnalysis complete! DuckDB connection closed.")
+```
+
+### Key Takeaways from this Example
+
+This example demonstrates several powerful DuckDB features:
+
+1. **Direct CSV querying** without loading data into memory first
+2. **Complex SQL analytics** with window functions and case statements
+3. **Efficient data type handling** and NULL value management
+4. **Seamless integration** with Python data science ecosystem
+5. **Multiple export formats** and data structure conversions
+6. **Performance optimization** through lazy evaluation
+
+The combination of Kaggle's API and DuckDB's analytical capabilities showcases how modern data science workflows can be streamlined and made more efficient. DuckDB's SQL-first approach allows for complex analytical queries while maintaining the flexibility to integrate with existing Python data science libraries.
+
+### Cleanup
+
+```python
+#| echo: true
+#| output: false
+# Clean up downloaded files (optional)
+import os
+files_to_remove = ['titanic.zip', 'train.csv', 'test.csv', 'gender_submission.csv', 'titanic_survival_analysis.csv']
+for file in files_to_remove:
+    if os.path.exists(file):
+        os.remove(file)
+        print(f"Removed: {file}")
+```
+
+This comprehensive example illustrates how DuckDB can serve as a powerful analytical engine for data science workflows, combining the familiarity of SQL with the flexibility of Python data processing libraries.

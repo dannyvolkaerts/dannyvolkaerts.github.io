@@ -4,6 +4,7 @@ project:
   render: 
     - "index.qmd"
     - "posts_main.qmd"
+    - "courses.qmd"
     - "sql_course/index_sql.qmd"
     - "sql_course/1_introduction.qmd"
     - "sql_course/2_basics.qmd"
@@ -19,7 +20,9 @@ project:
     - "sql_course/11_exercises_subqueries.qmd"
     - "sql_course/12_exercise_DDL.qmd"
     - "sql_course/Bikestore_uitleg.qmd"
-    - "posts_main/2024_05_18_My_first_blog/index.qmd"
+    - "posts_main/posts_main.qmd"
+    - "posts_main/DuckDB/index.qmd"
+    - "posts_main/Introduction_datascience/index.qmd"
 
 website:
   title: ""
@@ -27,10 +30,10 @@ website:
     left:
       - href: index.qmd
         text: Home
-      - href: sql_course/index_sql.qmd
-        text: "SQL cursus"
-      # - href: posts_main.qmd
-      #   text: "Blog"
+      - href: posts_main.qmd
+        text: "Articles"
+      - href: courses.qmd
+        text: "Courses"
 format:
   html:
     theme: cosmo

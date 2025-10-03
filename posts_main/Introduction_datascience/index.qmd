@@ -1,0 +1,181 @@
+---
+title: "Introduction to Data Science"
+description: "A beginner-friendly guide to understanding the fundamentals of data science with the help of practical examples."
+author:
+    - name: Danny Volkaerts
+      url: https://dannyvolkaerts.github.io/
+date: "`r Sys.Date()`"
+categories: [Data Science, Analytics, Beginner Guide] # self-defined categories
+citation: 
+    url: https://dannyvolkaerts.github.io/introduction_datascience/ 
+image: https://picsum.photos/200/300
+draft: true # setting this to `true` will prevent your post from appearing on your listing page until you're ready!
+---
+
+# Introduction to Data Science
+
+Data Science is the interdisciplinary field that combines **statistics**, **programming**, and **domain knowledge** to extract meaningful insights from data. It bridges the gap between raw data and actionable knowledge.
+
+## Importance
+
+Data Science enables organizations to make **data-driven decisions**, improving efficiency, accuracy, and innovation. From predicting customer behavior to optimizing healthcare outcomes, its applications are transformative.
+
+## Definition
+
+Data Science = 📊 Statistics + 💻 Programming + 🌍 Domain Knowledge
+
+### Comparison with related fields:
+
+- 📈 **Data Analytics**: Focuses on analyzing historical data
+- 🧑‍🔬 **Data Science**: Includes predictive modeling and machine learning
+- ⚙️ **Machine Learning**: Subset of AI focused on algorithms
+- 🤖 **AI**: Broader field including robotics and natural language processing
+
+#### Importance of data-driven decisions:
+
+Data Science empowers organizations to make informed decisions, reducing risks and uncovering opportunities.
+
+#### Visual Tip:
+
+A Venn diagram showing the overlap between computer science, statistics, and domain expertise.
+
+## Why Data Science Matters
+
+### Data explosion:
+
+From kilobytes to zettabytes, the world is generating data at an unprecedented rate.
+
+### Applications:
+
+- **Business**: Netflix recommendation system
+- **Healthcare**: Smart (personal) diabetes assistant advising persons with type 1 diabetes on insulin administration in specific cases
+- **Sports**: Soccer field tactics optimization for a specific opponent
+
+*Where have you seen data science in action?*
+
+
+## Core Components & Tools
+
+### Key skills:
+
+- **Statistics**: Both for data understanding and the backbone of many machine learning algorithms
+- **Programming**: The process of writing code to create software applications, automate tasks, and solve problems
+- **Data Wrangling**: Cleaning and preparing data for analysis or machine learning
+
+### Tools:
+
+- **Programming**: R, Python,...
+- **Machine Learning libraries**: Pandas, NumPy, Scikit-learn, tidymodels,...
+- **Visualization libraries**: ggplot2, Matplotlib,...
+- **Databases**: SQL, MongoDB,...
+- **Data Science Platforms**: Kaggle, Google Colab,...
+
+## Data Science Workflow
+
+### Steps:
+
+1. **Problem Definition**
+2. **Data Collection**
+3. **Data Cleaning**
+4. **Exploratory Data Analysis (EDA)**
+5. **Model Building**
+6. **Evaluation**
+7. **Deployment**
+
+*Use the crisp data mining lifecycle diagram or flowchart to illustrate the iterative and non-linear nature of the process.*
+
+## Applications of Data Science
+
+*Example here?*
+
+
+## Careers in Data Science
+
+Duration: 5 minutes
+
+### Job roles:
+
+- **Data Scientist**
+- **Data Analyst**
+- **Machine Learning Engineer**
+- **AI Researcher**
+
+### Career trends:
+
+Data Science is one of the fastest-growing fields, with high demand and competitive salaries.
+
+---
+
+### Example Using R with the Pokémon Dataset
+
+#### Problem definition
+
+> Can we predict the pokemon type of a pokemon based on its battle specifications?\
+
+First, we need to talk to domain experts (pokemon trainers, professor Oak,..) to know what the pokemon type is, and how this is related to the respective pokemon battle specifications. A data science project can only be successful if you have enough domain expertise involved in the project (either gathered by yourself as a data scientist or by consulting domain experts).\
+After consulting, we know that pokemon can have two types and that the type of a pokemon is mostly represented in the weakness and strengths against other pokemon types, and not so much in the numerical statistics (defense, attack,..).\
+
+Having this info, we need to ask for clarification on the 'predict the pokemon type'. We need to predict the type1 of a pokemon.\
+
+Let's investigate!
+
+#### Data import
+```{r, echo=FALSE}
+renv::activate()
+```
+
+Let's first get data of Pokemon to know more about them.
+
+```{r}
+# Load necessary library
+library(readr)
+
+# Define the raw URL of the GitHub Gist
+url <- "https://raw.githubusercontent.com/dannyvolkaerts/something/refs/heads/main/pokemon_full.csv"
+
+# Read CSV directly from the URL
+pokemon_df <- read_csv(url)
+
+# Display the first few rows
+head(pokemon_df)
+``` 
+
+You can see the first rows of our pokemon dataset? What do you see? There is no information on the 
+
+
+#### Data Exploration
+
+Using the Pokémon dataset, we can calculate summary statistics like average height and weight.
+
+**Output:**
+
+```
+Average Height: 1.2 meters
+Average Weight: 35.5 kilograms
+```
+
+#### Example 2: Top 5 Pokémon by Base Stats
+
+**Output:**
+
+```
+1. Mewtwo
+2. Dragonite
+3. Tyranitar
+4. Charizard
+5. Garchomp
+```
+
+#### Example 3: Distribution of Pokémon Types
+
+**Output:**
+
+```
+Water: 120
+Fire: 80
+Grass: 95
+Electric: 70
+Psychic: 60
+```
+
+These examples demonstrate how R can be used to analyze and visualize data effectively.

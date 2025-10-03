@@ -4,4 +4,6 @@
 .Ruserdata
 
 /.quarto/
-
+/docs/site_libs/
+renv/
+renv

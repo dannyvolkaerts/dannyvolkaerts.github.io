@@ -33,8 +33,6 @@ Manier van werken:
 Oefeningen via Azure Data Studio:
 New connection - Microsoft SQL Server
 
-I created two databases `DV_first_group` and `DV_second_group` in the database. Here are the login details :\
-
 
 Extentions links - MySQL -> installeren
 
