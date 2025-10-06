@@ -349,7 +349,7 @@ ORDER BY 1
 
 ### Oefening 18
 
-Geef van elke speler geboren in Rijswijk het spelersnr, de naam , de lijst met boetebedragen en de lijst met teams waarvoor hij of zij een wedstrijd heeft gespeeld.
+Geef van elke speler wonende in Rijswijk het spelersnr, de naam , de lijst met boetebedragen en de lijst met teams waarvoor hij of zij een wedstrijd heeft gespeeld.
 
 ``` {.sql .interactive .tennis}
 
