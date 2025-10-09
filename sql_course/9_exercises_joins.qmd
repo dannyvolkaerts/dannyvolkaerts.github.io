@@ -240,11 +240,21 @@ Geef de nummers van de spelers die ouder zijn dan R.Permentier
 ```
 
 :::{.notes}
-SELECT s.spelersnr\
-FROM spelers as s, spelers as p
-WHERE p.naam = 'Permentier'\
-AND p.voorletters = 'R'\
-AND s.geb_datum < p.geb_datum
+--SELECT s.spelersnr
+--FROM spelers s
+--WHERE s.geb_datum < (SELECT s2.geb_datum FROM spelers s2 WHERE s2.naam = 'Permentier' AND s2.voorletters = 'R')
+--ORDER BY s.spelersnr;
+
+--SELECT s.spelersnr
+--FROM spelers s INNER JOIN spelers s2 ON s2.naam = 'Permentier' AND s2.voorletters = 'R'
+--WHERE s.geb_datum < s2.geb_Datum
+
+--=
+
+SELECT s.spelersnr
+FROM spelers s, spelers s2 
+WHERE s2.naam = 'Permentier' AND s2.voorletters = 'R'
+AND s.geb_datum < s2.geb_Datum
 :::
 
 ---
@@ -277,16 +287,11 @@ Geef het nummer en de naam van elke wedstrijdspeler alsmede het nummer en de naa
 ```
 
 :::{.notes}
-SELECT DISTINCT S.SPELERSNR AS SPELERS_SPELERSNR,\
-S.NAAM AS SPELERS_NAAM,\
-AANV.SPELERSNR AS AANVOERDER_SPELERSNR,\
-AANV.NAAM AS AANVOERDER_NAAM\
-FROM SPELERS AS S, SPELERS AS AANV,\
-WEDSTRIJDEN AS W, TEAMS AS T\
-WHERE W.SPELERSNR = S.SPELERSNR\
-AND T.TEAMNR = W.TEAMNR\
-AND W.SPELERSNR <> T.SPELERSNR\
-AND AANV.SPELERSNR = T.SPELERSNR\
+SELECT DISTINCT w.spelersnr, s.naam spelersnaam, t.teamnr, sp.spelersnr aanv_nr, sp.naam aanv_naam, sp.voorletters aanv_voorl
+FROM wedstrijden w INNER JOIN spelers s on w.spelersnr = s.spelersnr
+INNER JOIN teams t ON w.teamnr = t.teamnr
+INNER JOIN spelers sp ON t.spelersnr = sp.spelersnr
+WHERE sp.spelersnr <> w.spelersnr
 :::
 
 ---
@@ -300,11 +305,18 @@ Geef de nummers van de boetes die qua boetebedrag gelijk zijn aan een boetebedra
 ```
 
 :::{.notes}
-SELECT B1.BETALINGSNR, B1.SPELERSNR\
-FROM BOETES AS B1, BOETES AS B2\
-WHERE B1.BEDRAG = B2.BEDRAG\
-AND B2.SPELERSNR = 44\
-AND B1.SPELERSNR <> 44\
+SELECT b.betalingsnr,b.spelersnr
+FROM boetes b 
+WHERE b.bedrag IN( SELECT b2.bedrag FROM boetes b2 WHERE b2.spelersnr = 44)
+AND b.spelersnr <> 44
+
+SELECT b.betalingsnr, b.spelersnr
+FROM boetes b INNER JOIN boetes b2 ON b2.spelersnr = 44
+WHERE b.bedrag = b2.bedrag AND b.spelersnr != 44;
+
+SELECT b.betalingsnr, b.spelersnr
+FROM boetes b, boetes b2 
+WHERE b2.spelersnr = 44 AND b.bedrag = b2.bedrag AND b.spelersnr != 44;
 :::
 
 ---

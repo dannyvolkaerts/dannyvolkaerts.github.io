@@ -167,7 +167,7 @@ ORDER BY SUM(salary);
 \
 \
 \
-Jullie kunnen nu een eenvoudige VOLLEDIGE query uitvoeren!
+Jullie kunnen nu een enkelvoudige VOLLEDIGE query uitvoeren!
 
 ---
 
