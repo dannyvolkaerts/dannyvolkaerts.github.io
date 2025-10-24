@@ -56,13 +56,19 @@ Which state has the most customers?
 :::{.notes}
 SELECT state, COUNT (customer_id) as nb_customer FROM customers GROUP BY state ORDER BY nb_customer DESC
 
+SELECT COUNT(customer_id) customer_amount, state\
+FROM customers\
+GROUP BY state\
+HAVING COUNT(customer_id) = (SELECT COUNT(customer_id) cc FROM customers GROUP BY state ORDER BY cc DESC LIMIT 1)\
+ORDER BY customer_amount desc;
+
 :::
 
 ---
 
 ### Oefening 3
 
-Which brand has the most products in the store?
+Which brand has the highest amount of different products in the database?
 
 :::{.notes}
 SELECT COUNT(products.product_id) as product_per_brand, brands.brand_name FROM production.brands \
@@ -74,6 +80,22 @@ SELECT COUNT(products.product_id) as product_per_brand, brands.brand_name FROM p
 ---
 
 ### Oefening 4
+
+Which brand has the most products in stock of our stores?
+
+:::{.notes}
+set search_path TO sales,production; --Postgresql
+
+SELECT COUNT(p.product_id) aantal_producten, b.brand_name as brand 
+FROM products p JOIN brands b ON p.brand_id = b.brand_id
+GROUP BY b.brand_id
+ORDER BY 1 desc
+LIMIT 5;
+:::
+
+---
+
+### Oefening 
 
 Which product is the most ordered? Give me product_id, quantity and product_name
 
@@ -125,10 +147,15 @@ ORDER BY sales_revenue DESC;\
 
 ### Oefening 7
 
-Calculate the average bike price for each model year
+exercise 7
 
 :::{.notes}
-SELECT model_year, AVG(list_price) AS avg_price FROM production.products GROUP BY model_year
+SELECT b.brand_name, SUM(s.quantity) as totaal_aantal_product\
+FROM products p INNER JOIN brands b ON b.brand_id = p.brand_id\
+INNER JOIN stocks s ON p.product_id = s.product_id\
+GROUP BY b.brand_id\
+ORDER BY 2 DESC\
+
 :::
 
 ---

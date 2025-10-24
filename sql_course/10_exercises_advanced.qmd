@@ -190,15 +190,11 @@ voorwaarde mee in de output.
 ```
 
 :::{.notes}
-SELECT teams.divisie, COUNT(*) AS aantal\
-FROM wedstrijden, teams\
-WHERE wedstrijden.teamnr = teams.teamnr\
-AND wedstrijden.verloren > wedstrijden.gewonnen\
-AND NOT (wedstrijden.verloren = 3 AND\
-wedstrijden.gewonnen = 0)\
-GROUP BY teams.divisie\
-ORDER BY aantal, SUM(wedstrijden.gewonnen) DESC,\
-teams.divisie;\
+SELECT w.teamnr, COUNT(*) as verloren_wedst, SUM(w.gewonnen) AS aantal_gew_sets,t.divisie
+FROM wedstrijden w JOIN teams t ON t.teamnr = w.teamnr
+WHERE w.gewonnen < w.verloren AND w.verloren -w.gewonnen < 3
+GROUP BY w.teamnr,t.divisie
+ORDER BY verloren_wedst, aantal_gew_sets DESC, t.divisie
 :::
 
 ---
